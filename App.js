@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from './reducers/user'
@@ -62,10 +64,10 @@ export default function App() {
 
   const notificationListener = useRef('');
   const responseListener = useRef('');
-  
 
-  
-  useEffect(()=>{
+
+
+  useEffect(() => {
 
 
     // Écoute et enregistrement des notifactions. Démontage des listeners
@@ -84,10 +86,9 @@ export default function App() {
       responseListener.current &&
         Notifications.removeNotificationSubscription(responseListener.current);
     };
-  },[])
+  }, [])
 
 
-  
   return (
     <Provider store={store}>
       <NavigationContainer>
