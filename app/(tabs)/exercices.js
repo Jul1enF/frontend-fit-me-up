@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native'
 
-export default function ExercicesScreen ({navigation}) {
+export default function Exercices () {
 
     return (
         <View>

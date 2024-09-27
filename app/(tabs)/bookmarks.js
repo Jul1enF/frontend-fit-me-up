@@ -2,7 +2,7 @@ import {View, Text, TextInput, Button, Platform} from 'react-native'
 import { useState } from 'react';
 
 
-export default function BookmarksScreen ({navigation}) {
+export default function Bookmarks () {
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 

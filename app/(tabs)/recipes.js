@@ -3,12 +3,14 @@ import { registerForPushNotificationsAsync } from "../../modules/registerForPush
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback } from 'react'
 
+import { router } from 'expo-router'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../reducers/user'
 
 
 
-export default function RecipesScreen({ navigation }) {
+export default function Recipes() {
 
     const user = useSelector((state) => state.user.value)
     const dispatch = useDispatch()
@@ -25,7 +27,7 @@ export default function RecipesScreen({ navigation }) {
 
         if (!pushTokenInfos) {
             dispatch(logout())
-            navigation.navigate('Home')
+            router.push('/')
         }
         if (pushTokenInfos.change || pushTokenInfos.change === "") {
             dispatch(changePushToken(pushTokenInfos.change))

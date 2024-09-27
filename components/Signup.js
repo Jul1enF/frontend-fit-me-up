@@ -1,7 +1,8 @@
 import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../../reducers/user';
+import {login} from '../reducers/user'
+import { router } from 'expo-router';
 
 
 const screenHeight = Dimensions.get('window').height;
@@ -65,7 +66,7 @@ export default function Signup(props) {
                     push_token : "",
                 }))
                 props.closeModal1()
-                props.navigation.navigate('TabNavigator')
+                router.push("/recipes")
                 
             }
         }
