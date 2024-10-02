@@ -1,7 +1,8 @@
 import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {login} from '../reducers/user'
+import { login } from '../reducers/user'
 import { router } from 'expo-router';
 
 
@@ -61,13 +62,13 @@ export default function Signup(props) {
             }
             else {
                 dispatch(login({
-                    firstname : data.firstname,
-                    token : data.jwtToken,
-                    push_token : "",
+                    firstname: data.firstname,
+                    token: data.jwtToken,
+                    push_token: "",
                 }))
-                props.closeModal1()
+                props.closeModal2()
                 router.push("/recipes")
-                
+
             }
         }
     }
@@ -78,8 +79,15 @@ export default function Signup(props) {
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={-RPH(12)} style={styles.body}>
                 <View style={styles.contentBody}>
                     <View style={styles.closeContainer}>
-                        <Text onPress={() => props.closeModal1()}>X</Text>
+                        <Text style={styles.cross} onPress={() => props.closeModal2()}>X</Text>
                     </View>
+
+                    <LinearGradient
+                        style={styles.input}
+                        colors={['rgb(65,21,143)', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}></LinearGradient>
                     <TextInput style={styles.input} onChangeText={(e) => {
                         setFirstname(e)
                         setError('')
@@ -116,23 +124,46 @@ export default function Signup(props) {
 
 const styles = StyleSheet.create({
     body: {
-        width: "100%",
-        height: "100%",
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "transparent",
+        paddingTop: RPH(4)
     },
     contentBody: {
-        width: "80%",
-        height: RPH(50),
-        backgroundColor: "grey",
+        width: RPW(80),
+        height: RPH(75),
+        backgroundColor: "#252525",
+        alignItems: "center",
+        borderRadius: 10,
+    },
+    closeContainer: {
+        width: "90%",
+        alignItems: "flex-end",
+        paddingTop: RPH(1.5),
+        paddingBottom: RPH(1.5)
+    },
+    cross: {
+        color: "white",
+        fontSize: RPH(2.8),
+        fontWeight: "600",
     },
     input: {
         backgroundColor: "white",
-        marginBottom: 30,
+        marginBottom: RPH(5),
+        width: "90%",
+        height: RPH(7),
+        borderRadius: 10,
+        backgroundColor: '#0a0081'
+    },
+    passwordContainer: {
+        width: "90%",
+        height: RPH(7),
+        marginBottom: RPH(5),
+        backgroundColor: '#0a0081',
+        borderRadius: 10,
     },
     password: {
-        backgroundColor: "white",
-        marginBottom: 30,
+        width: "70%"
     }
 })

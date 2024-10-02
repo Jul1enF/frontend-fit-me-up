@@ -39,7 +39,11 @@
     },
     "scheme": "fit-me-up",
     "plugins": [
-      "expo-router"
+      "expo-router",
+      ["expo-font",
+      {
+        "fonts": ["./assets/fonts/HandoTrial-Black.otf", ".assets/fonts/HandoTrial-Bold.otf", ".assets/fonts/HandoTrial-Regular.otf"]
+      }]
     ]
   }
 }

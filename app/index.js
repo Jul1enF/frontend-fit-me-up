@@ -1,9 +1,8 @@
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import Signup from '../components/Signup'
+import { LinearGradient } from 'expo-linear-gradient'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import * as WebBrowser from 'expo-web-browser'
-import * as Google from 'expo-auth-session/providers/google'
-WebBrowser.maybeCompleteAuthSession()
 
 import { useState, useEffect } from 'react';
 import { router } from 'expo-router'
@@ -45,33 +44,89 @@ export default function Index() {
 
     // Fonction envoyée en IDF à Signup et Signin pour fermer modal après login
 
-    const closeModal1 = () => {
-        setModal1VIsible(false)
+    const closeModal2 = () => {
+        setModal2VIsible(false)
     }
 
-   
+
 
     return (
-        <View style={styles.body}>
-            <View style={styles.header}>
+        <View style={styles.body} >
+            <LinearGradient style={styles.header}
+                // colors={['#ffd500', '#fd8600']}
+                //  colors={['#97002e', '#450150']}
+                colors={['#7700a4', '#0a0081']}
+                locations={[0, 0.9]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+            >
                 <Text style={styles.title}>
-                    Fit me up !
+                    FIT ME UP
                 </Text>
+            </LinearGradient>
+
+            <View style={styles.mainContainer}>
+                <View style={styles.signContainer}>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}>
+                        <TouchableOpacity style={styles.iconContainer}
+                        onPress={()=>setModal1VIsible(true)}
+                        >
+                            <FontAwesome5 name="user-edit" style={styles.icon} size={RPH(5)} />
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn}
+                    >
+                        <TouchableOpacity style={styles.btn} onPress={() => setModal1VIsible(true)}>
+                            <Text style={styles.signText}>Se connecter</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
+
+                <View style={styles.signContainer}>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}>
+                        <TouchableOpacity style={styles.iconContainer}
+                        onPress={() => setModal2VIsible(true)}
+                        >
+                            <FontAwesome5 name="user-plus" style={styles.icon} size={RPH(5)} />
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn}
+                    >
+                        <TouchableOpacity style={styles.btn} onPress={() => setModal2VIsible(true)}>
+                            <Text style={styles.signText}>S'inscrire</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
             </View>
-            <TouchableOpacity style={styles.btn} onPress={() => setModal1VIsible(true)}>
-                <Text>S'inscrire</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={() => setModal2VIsible(true)}>
-                <Text>Se connecter</Text>
-            </TouchableOpacity>
+
             <Modal
-                visible={modal1Visible}
-                onRequestClose={() => setModal1VIsible(false)}
+                visible={modal2Visible}
+                onRequestClose={() => setModal2VIsible(false)}
                 style={styles.modal}
                 animationType='slide'
                 transparent={true}
             >
-                <Signup closeModal1={closeModal1}/>
+                <Signup closeModal2={closeModal2} />
             </Modal>
         </View>
     )
@@ -81,15 +136,68 @@ const styles = StyleSheet.create({
     body: {
         height: RPH(100),
         width: RPW(100),
+        backgroundColor: "black"
     },
-    header : {
-        height : 80,
-        justifyContent : "center",
-        alignItems : "center",
+    header: {
+        height: RPH(13),
+        paddingTop: RPH(4),
+        justifyContent: "center",
+        alignItems: "center",
     },
-    title : {
-        fontSize : 30,
-        fontWeight : "800"
+    title: {
+        fontSize: RPH(4.5),
+        color: "white",
+        letterSpacing: 2.5,
+        fontWeight: "600",
+    },
+    mainContainer: {
+        width: "100%",
+        height: RPH(87),
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        backgroundColor: "black",
+        paddingBottom: RPH(0),
+        paddingTop: RPH(1)
+    },
+    signContainer: {
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: RPH(23),
+    },
+    gradientContainer: {
+        width: RPH(14),
+        height: RPH(14),
+        borderRadius: RPH(7),
+    },
+    iconContainer: {
+        width: RPH(14),
+        height: RPH(14),
+        borderRadius: RPH(7),
+        justifyContent: "center",
+        alignItems: "center",
+        paddingLeft: RPH(1.5),
+    },
+    icon: {
+        color: "white",
+    },
+    gradientBtn: {
+        width: RPH(26),
+        height: RPH(6.5),
+        borderRadius: 10,
+    },
+    btn: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: "black",
+        margin: 2,
+        borderRadius: 10,
+    },
+    signText: {
+        color: "white",
+        fontSize: RPH(3),
+        fontWeight: "500",
+        letterSpacing: 1,
     }
 
 })

@@ -22,7 +22,8 @@ export default function Header (){
 
 const styles = StyleSheet.create({
     body : {
-        height : 80,
+        height: RPH(14),
+        paddingTop: RPH(3),
         width : "100%",
         backgroundColor : "red",
         padding:0,
