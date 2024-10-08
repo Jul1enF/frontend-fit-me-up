@@ -3,6 +3,7 @@ import { Stack } from "expo-router";
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from '../reducers/user'
+import testArticles from '../reducers/testArticles'
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -12,8 +13,9 @@ SplashScreen.preventAutoHideAsync();
 
 import * as Notifications from 'expo-notifications';
 
+
 const store = configureStore({
-    reducer: { user },
+    reducer: { user, testArticles },
 })
 
 export default function RootLayout() {

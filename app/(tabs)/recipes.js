@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback } from 'react'
@@ -23,8 +23,6 @@ export default function Recipes() {
  
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
-        console.log(pushTokenInfos)
-
         if (!pushTokenInfos) {
             dispatch(logout())
             router.push('/')
@@ -39,8 +37,16 @@ export default function Recipes() {
     },[user]))
 
     return (
-        <View>
+        <View style={styles.body}>
             <Text> HELLO IT'S RECIPES</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    body : {
+        backgroundColor : "black",
+        flex : 1,
+    }
+
+})

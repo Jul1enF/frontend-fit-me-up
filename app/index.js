@@ -25,7 +25,7 @@ const RPW = (percentage) => {
 export default function Index() {
 
 
-    // Si user connecté avec push token, redirection vers 1ère page Tab
+    // Si user connecté, redirection vers 1ère page Tab
 
     const user = useSelector((state) => state.user.value)
 
@@ -64,6 +64,7 @@ export default function Index() {
                     FIT ME UP
                 </Text>
             </LinearGradient>
+            <View style={styles.headerLigne}></View>
 
             <View style={styles.mainContainer}>
                 <View style={styles.signContainer}>
@@ -76,7 +77,7 @@ export default function Index() {
                         <TouchableOpacity style={styles.iconContainer}
                         onPress={()=>setModal1VIsible(true)}
                         >
-                            <FontAwesome5 name="user-edit" style={styles.icon} size={RPH(5)} />
+                            <FontAwesome5 name="user-edit" style={styles.icon} size={RPH(4.5)} />
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
@@ -102,7 +103,7 @@ export default function Index() {
                         <TouchableOpacity style={styles.iconContainer}
                         onPress={() => setModal2VIsible(true)}
                         >
-                            <FontAwesome5 name="user-plus" style={styles.icon} size={RPH(5)} />
+                            <FontAwesome5 name="user-plus" style={styles.icon} size={RPH(4.5)} />
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
@@ -139,10 +140,14 @@ const styles = StyleSheet.create({
         backgroundColor: "black"
     },
     header: {
-        height: RPH(13),
+        height: RPH(14),
         paddingTop: RPH(4),
         justifyContent: "center",
         alignItems: "center",
+    },
+    headerLigne : {
+    borderBottomColor : "#878787",
+    borderBottomWidth : RPH(0.1)
     },
     title: {
         fontSize: RPH(4.5),
@@ -152,7 +157,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         width: "100%",
-        height: RPH(87),
+        height: RPH(86),
         justifyContent: "space-evenly",
         alignItems: "center",
         backgroundColor: "black",
@@ -162,17 +167,15 @@ const styles = StyleSheet.create({
     signContainer: {
         alignItems: "center",
         justifyContent: "space-between",
-        height: RPH(23),
+        height: RPH(21.5),
     },
     gradientContainer: {
-        width: RPH(14),
-        height: RPH(14),
+        width: RPH(13),
+        height: RPH(13),
         borderRadius: RPH(7),
     },
     iconContainer: {
-        width: RPH(14),
-        height: RPH(14),
-        borderRadius: RPH(7),
+        flex : 1,
         justifyContent: "center",
         alignItems: "center",
         paddingLeft: RPH(1.5),
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
     },
     signText: {
         color: "white",
-        fontSize: RPH(3),
+        fontSize: RPH(2.5),
         fontWeight: "500",
         letterSpacing: 1,
     }
