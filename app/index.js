@@ -75,7 +75,7 @@ export default function Index() {
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
                         <TouchableOpacity style={styles.iconContainer}
-                        onPress={()=>setModal1VIsible(true)}
+                            onPress={() => setModal1VIsible(true)}
                         >
                             <FontAwesome5 name="user-edit" style={styles.icon} size={RPH(4.5)} />
                         </TouchableOpacity>
@@ -101,7 +101,7 @@ export default function Index() {
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
                         <TouchableOpacity style={styles.iconContainer}
-                        onPress={() => setModal2VIsible(true)}
+                            onPress={() => setModal2VIsible(true)}
                         >
                             <FontAwesome5 name="user-plus" style={styles.icon} size={RPH(4.5)} />
                         </TouchableOpacity>
@@ -145,9 +145,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    headerLigne : {
-    borderBottomColor : "#878787",
-    borderBottomWidth : RPH(0.1)
+    headerLigne: {
+        borderBottomColor: "#878787",
+        borderBottomWidth: RPH(0.1)
     },
     title: {
         fontSize: RPH(4.5),
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         borderRadius: RPH(7),
     },
     iconContainer: {
-        flex : 1,
+        flex: 1,
         justifyContent: "center",
         alignItems: "center",
         paddingLeft: RPH(1.5),

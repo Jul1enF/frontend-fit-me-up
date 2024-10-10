@@ -5,14 +5,19 @@ const initialState = {
 }
 
 export const testArticlesSlice = createSlice({
-    name : 'testArticles',
+    name : 'testArticle',
     initialState,
     reducers : {
         addTestArticle : (state, action)=>{
+            state.value = []
             state.value.push(action.payload)
+            state.value.push(action.payload)
+        },
+        deleteTestArticle : (state) => {
+            state.value = []
         },
     }
 })
 
-export const { addTestArticle } = testArticlesSlice.actions
+export const { addTestArticle, deleteTestArticle } = testArticlesSlice.actions
 export default testArticlesSlice.reducer

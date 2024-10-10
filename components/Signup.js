@@ -112,7 +112,7 @@ export default function Signup(props) {
                             value={firstname}
                             placeholder='Prénom'
                             placeholderTextColor='rgba(255,255,255,0.4)'
-                            onPress={() => setOffsetKeyboard(-RPH(2))}>
+                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -131,7 +131,7 @@ export default function Signup(props) {
                             value={name}
                             placeholder='Nom'
                             placeholderTextColor='rgba(255,255,255,0.4)'
-                            onPress={() => setOffsetKeyboard(-RPH(2))}>
+                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -152,7 +152,7 @@ export default function Signup(props) {
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             keyboardType='email-address'
                             autoCapitalize='none'
-                            onPress={() => setOffsetKeyboard(-RPH(2))}>
+                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -172,7 +172,7 @@ export default function Signup(props) {
                             placeholder='Mot de passe'
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             secureTextEntry={!passwordVisible}
-                            onPress={() => setOffsetKeyboard(-RPH(2))} >
+                            onFocus={() => setOffsetKeyboard(-RPH(2))} >
                         </TextInput>
                         <FontAwesome
                             name={passwordVisible ? "eye-slash" : "eye"} color="rgba(255,255,255,0.4)" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>

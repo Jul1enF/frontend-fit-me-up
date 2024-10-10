@@ -1,0 +1,112 @@
+import { View, Text, StyleSheet, Dimensions, Image, ImageBackground } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient';
+
+import moment from 'moment/min/moment-with-locales'
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+
+const RPH = (percentage) => {
+    return (percentage / 100) * screenHeight;
+};
+
+const RPW = (percentage) => {
+    return (percentage / 100) * screenWidth;
+};
+
+export default function FirstArticle(props) {
+
+    let optionnalSubTitle = ""
+    if (!props.sub_title && props.text) {
+        optionnalSubTitle = <Text style={styles.subTitle}>{props.text}</Text>
+    }
+
+    moment.locale('fr')
+    const lastingTime = moment(props.createdAt).fromNow()
+
+    return (
+        <View style={styles.body}>
+            <View style={styles.imgContainer}>
+                <Image style={styles.image} source={{
+                    uri: props.pictureUri,
+                }}></Image>
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.title}>{props.title}</Text>
+                <LinearGradient
+                    colors={['#7700a4', '#0a0081']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={styles.gradientLine}
+                >
+                </LinearGradient>
+                {props.sub_title && <Text style={styles.subTitle}>{props.sub_title}</Text>}
+                {optionnalSubTitle}
+            </View>
+            <Text style={styles.date}>Posté {lastingTime}</Text>
+            <LinearGradient
+                colors={['#7700a4', '#0a0081']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientLine2}
+            >
+            </LinearGradient>
+        </View>
+    )
+}  
+
+const styles = StyleSheet.create({
+    body: {
+        width: RPW(100),
+    },
+    imgContainer: {
+        width: RPW(100),
+        height: RPW(55),
+        overflow: "hidden",
+        borderColor: "grey",
+        borderWidth: 0
+    },
+    image: {
+        height: RPW(100),
+        width: RPW(100),
+    },
+    textContainer: {
+        paddingLeft: RPW(3),
+        paddingTop: RPW(3),
+        paddingRight: RPW(3),
+        maxHeight : 156,
+        overflow : "hidden",
+        marginBottom: 18,
+    },
+    title: {
+        color: "#e0e0e0",
+        fontSize: 27,
+        fontWeight: "450",
+        marginBottom: 12,
+    },
+    gradientLine: {
+        width: "90%",
+        height: 5,
+        marginBottom: 15,
+        borderRadius: 15,
+    },
+    subTitle: {
+        color: "#e0e0e0",
+        fontSize: 15,
+        fontWeight: "300",
+    },
+    date : {
+        color: "#e0e0e0",
+        fontSize : 12,
+        marginLeft : RPW(3),
+        marginBottom : 18,
+        fontWeight : "300"
+    },
+    gradientLine2: {
+        width: "100%",
+        height: 1,
+        borderRadius: 15,
+    },
+})

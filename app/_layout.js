@@ -3,7 +3,7 @@ import { Stack } from "expo-router";
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from '../reducers/user'
-import testArticles from '../reducers/testArticles'
+import testArticle from '../reducers/testArticle'
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -15,7 +15,9 @@ import * as Notifications from 'expo-notifications';
 
 
 const store = configureStore({
-    reducer: { user, testArticles },
+    reducer: { user, testArticle },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false })
 })
 
 export default function RootLayout() {
@@ -43,15 +45,15 @@ export default function RootLayout() {
     // Paramétrage des custom fonts
     const [loaded, error] = useFonts({
         'HandoTrial-Black': require('../assets/fonts/HandoTrial-Black.otf'),
-        'HandoTrial-Bold' : require('../assets/fonts/HandoTrial-Bold.otf'),
-        'HandoTrial-Regular' : require('../assets/fonts/HandoTrial-Regular.otf'),
-      });
+        'HandoTrial-Bold': require('../assets/fonts/HandoTrial-Bold.otf'),
+        'HandoTrial-Regular': require('../assets/fonts/HandoTrial-Regular.otf'),
+    });
 
     useEffect(() => {
         // Custom Fonts
         if (loaded || error) {
             SplashScreen.hideAsync();
-          }
+        }
 
         // Écoute et enregistrement des notifactions. Démontage des listeners
 
@@ -75,7 +77,7 @@ export default function RootLayout() {
     // Ne pas charger la page si les polices n'ont pas été chargées
     if (!loaded && !error) {
         return null;
-      }
+    }
 
     return (
         <Provider store={store}>

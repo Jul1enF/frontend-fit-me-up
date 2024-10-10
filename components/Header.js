@@ -82,26 +82,21 @@ export default function Header() {
                 onBackdropPress={() => setMenuVisible(!menuVisible)}
             >
                 <View style={styles.modalBody}>
-                    <TouchableOpacity style={styles.linkContainer}>
+                    <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Mes informations</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.linkContainer} onPress={()=>logoutPress()}>
+                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={()=>logoutPress()}>
                         <Text style={styles.link}>Se déconnecter</Text>
                     </TouchableOpacity>
                     {user.is_admin &&
-                        <TouchableOpacity style={styles.linkContainer} onPress={() => {
+                        <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
                             setMenuVisible(false)
                             router.push('/redaction')
                         }}>
-                            <Text style={styles.link}>Écrire un article</Text>
+                            <Text style={styles.link}>Écrire / Modifier un article</Text>
                         </TouchableOpacity>
                     }
-                    {user.is_admin &&
-                        <TouchableOpacity style={styles.linkContainer}>
-                            <Text style={styles.link}>Poster un article</Text>
-                        </TouchableOpacity>
-                    }
-                    <TouchableOpacity style={styles.linkContainer}>
+                    <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Contacts</Text>
                     </TouchableOpacity>
                 </View>
@@ -153,13 +148,13 @@ const styles = StyleSheet.create({
     },
     headerLigne: {
         borderBottomColor: "#878787",
-        borderBottomWidth: RPH(0.05)
+        borderBottomWidth: 1.5
     },
     modalBody: {
         height: RPH(76),
         width: RPW(80),
         backgroundColor: "#2e2e2e",
-        left: -RPW(5),
+        left: -RPW(5.2),
         top: RPH(2),
     },
     linkContainer: {
@@ -172,7 +167,7 @@ const styles = StyleSheet.create({
     },
     link: {
         color: "white",
-        fontSize: RPH(3),
+        fontSize: RPW(6.5),
         fontWeight: "200"
     },
 })

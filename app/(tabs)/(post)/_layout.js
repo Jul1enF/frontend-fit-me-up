@@ -6,7 +6,6 @@ export default function RootLayout() {
             headerShown: false,
         }}>
             <Stack.Screen name="redaction" />
-            <Stack.Screen name="validation" />
         </Stack>
     )
 }

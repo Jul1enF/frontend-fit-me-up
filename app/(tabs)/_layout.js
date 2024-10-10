@@ -42,7 +42,7 @@ export default function TabsLayout() {
 
             tabBarActiveTintColor: '#ff00e8',
             tabBarInactiveTintColor: 'white',
-            tabBarLabelStyle : { fontSize : RPH(1.7) },
+            tabBarLabelStyle : { fontSize : RPW(3.8) },
             tabBarBackground : ()=>(
                 <LinearGradient
                   colors={['#7700a4', '#0a0081']}
@@ -51,7 +51,7 @@ export default function TabsLayout() {
                     style={{height : 150}}
                   ></LinearGradient>
               ),
-              tabBarStyle: { height : RPH(10), paddingBottom : RPH(1), paddingTop : RPH(1), borderTopWidth : RPH(0.05) },
+              tabBarStyle: { height : RPH(10.5), paddingBottom : RPH(2), paddingTop : RPH(1), borderTopWidth : RPH(0.05) },
               header: (props) => <Header {...props} />,
           })}
         >
@@ -68,7 +68,7 @@ export default function TabsLayout() {
                 title : "Favoris"
             }} />
              <Tabs.Screen name="(post)" options={{
-                tabBarItemStyle : { display : "none"}
+                tabBarItemStyle : { display : "none"},
             }}/>
         </Tabs>
     )
