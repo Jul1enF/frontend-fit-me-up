@@ -18,19 +18,18 @@ export default function Article(props) {
 
     moment.locale('fr')
     const lastingTime = moment(props.createdAt).fromNow()
-    console.log("lasting time :", lastingTime)
 
     return (
         <View style={styles.body}>
             <View style={styles.row}>
                 <View style={styles.column1}>
-                    <Text style={styles.title}>{props.title}</Text>
+                    <Text numberOfLines={4} style={styles.title}>{props.title}</Text>
                     <Text style={styles.date}>Posté {lastingTime}</Text>
                 </View>
                 <View style={styles.column2}>
                     <View style={styles.imgContainer}>
                         <Image style={styles.image} source={{
-                            uri: props.pictureUri,
+                            uri: props.img_link,
                         }}></Image>
                     </View>
                 </View>

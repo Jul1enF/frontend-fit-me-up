@@ -26,7 +26,7 @@ export default function TabsLayout() {
               let color = ""
               color = focused ? "#ff00e8" : "white"
 
-              if (route.name === 'recipes') {
+              if (route.name === '(recipes)') {
                 iconName = 'pot-mix';
               } else if (route.name === 'exercices') {
                 iconName = 'weight-lifter';
@@ -51,11 +51,11 @@ export default function TabsLayout() {
                     style={{height : 150}}
                   ></LinearGradient>
               ),
-              tabBarStyle: { height : RPH(10.5), paddingBottom : RPH(2), paddingTop : RPH(1), borderTopWidth : RPH(0.05) },
-              header: (props) => <Header {...props} />,
+            tabBarStyle: { height : RPH(10.5), paddingBottom : RPH(2), paddingTop : RPH(1), borderTopWidth : RPH(0.05) },
+            header: (props) => <Header {...props} />,
           })}
         >
-            <Tabs.Screen name="recipes" options={{
+            <Tabs.Screen name="(recipes)" options={{
                 title : "Recettes",
             }} />
             <Tabs.Screen name="exercices" options={{

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from '../reducers/user'
 import testArticle from '../reducers/testArticle'
+import articles from '../reducers/articles'
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -15,7 +16,7 @@ import * as Notifications from 'expo-notifications';
 
 
 const store = configureStore({
-    reducer: { user, testArticle },
+    reducer: { user, testArticle, articles },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false })
 })

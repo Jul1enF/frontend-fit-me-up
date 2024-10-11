@@ -18,7 +18,7 @@ export default function FirstArticle(props) {
 
     let optionnalSubTitle = ""
     if (!props.sub_title && props.text) {
-        optionnalSubTitle = <Text style={styles.subTitle}>{props.text}</Text>
+        optionnalSubTitle = <Text numberOfLines={3} style={styles.subTitle}>{props.text}</Text>
     }
 
     moment.locale('fr')
@@ -28,7 +28,7 @@ export default function FirstArticle(props) {
         <View style={styles.body}>
             <View style={styles.imgContainer}>
                 <Image style={styles.image} source={{
-                    uri: props.pictureUri,
+                    uri: props.img_link,
                 }}></Image>
             </View>
             <View style={styles.textContainer}>
@@ -41,7 +41,7 @@ export default function FirstArticle(props) {
                     style={styles.gradientLine}
                 >
                 </LinearGradient>
-                {props.sub_title && <Text style={styles.subTitle}>{props.sub_title}</Text>}
+                {props.sub_title && <Text numberOfLines={3} style={styles.subTitle}>{props.sub_title}</Text>}
                 {optionnalSubTitle}
             </View>
             <Text style={styles.date}>Posté {lastingTime}</Text>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         paddingLeft: RPW(3),
         paddingTop: RPW(3),
         paddingRight: RPW(3),
-        maxHeight : 156,
+        maxHeight : 160,
         overflow : "hidden",
         marginBottom: 18,
     },
