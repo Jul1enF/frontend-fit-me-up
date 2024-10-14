@@ -55,10 +55,6 @@ export default function Redaction() {
 
     const [error, setError]=useState('')
 
-    const [offsetKeyboard, setOffsetKeyboard] = useState(0)
-    const [toolbarVisible, setToolbarVisible] = useState(false)
-
-
     // Fonction appelée en cliquant sur Choisir une image
 
     const choosePicture = async () => {
@@ -171,18 +167,13 @@ export default function Redaction() {
 
 
     return (
-        // <KeyboardAvoidingView
-        //     behavior="height" style={styles.body} keyboardVerticalOffset={offsetKeyboard} >
         <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.body} keyboardVerticalOffset={RPH(14.5)} >
-            {/* <ScrollView contentContainerStyle={{ flex: 1, justifyContent: "center", alignItems: "center" }}> */}
             <ScrollView style={{flex:1}} contentContainerStyle={{alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}>
                 <TextInput style={styles.smallInput}
                     placeholder="Titre de l'article"
                     onChangeText={(e) => setTitle(e)}
-                    value={title}
-                    onFocus={() => setOffsetKeyboard(-RPH(15))}
-                    onBlur={() => setOffsetKeyboard(0)}>
+                    value={title}>
                 </TextInput>
                 <TextInput multiline={true}
                     textAlignVertical="top"
@@ -190,8 +181,6 @@ export default function Redaction() {
                     placeholder="Sous-Titre de l'article"
                     onChangeText={(e) => setSubTitle(e)}
                     value={subTitle}
-                    onFocus={() => setOffsetKeyboard(-RPH(15))}
-                    onBlur={() => setOffsetKeyboard(0)}
                     blurOnSubmit={true}>
                 </TextInput>
                 <TextInput multiline={true}
@@ -200,29 +189,17 @@ export default function Redaction() {
                     placeholder="Texte de l'article"
                     onChangeText={(e) => setText(e)}
                     value={text}
-                    onFocus={() => {
-                        setOffsetKeyboard(RPH(8))
-                        setToolbarVisible(true)
-                    }}
-                    onBlur={() => {
-                        setOffsetKeyboard(0)
-                        setToolbarVisible(false)
-                    }}
                     returnKeyType='next'>
                 </TextInput>
                 <TextInput style={styles.smallInput}
                     placeholder="Auteur"
                     onChangeText={(e) => setAuthor(e)}
-                    value={author}
-                    onFocus={() => setOffsetKeyboard(-RPH(15))}
-                    onBlur={() => setOffsetKeyboard(0)}>
+                    value={author}>
                 </TextInput>
                 <TextInput style={styles.smallInput}
                     placeholder="ID Youtube de la vidéo"
                     onChangeText={(e) => setVideoId(e)}
                     value={videoId}
-                    onFocus={() => setOffsetKeyboard(-RPH(1))}
-                    onBlur={() => setOffsetKeyboard(0)}
                 >
                 </TextInput>
 
@@ -326,13 +303,6 @@ export default function Redaction() {
 
                 <Text style={{color : 'red'}}>{error}</Text>
 
-                {/* Keyboard Toolbar */}
-                {/* <KeyboardAvoidingView behavior='position' style={{ width: RPW(100) }} keyboardVerticalOffset={RPH(10)}>
-                    <View style={[styles.toolbar, !toolbarVisible && { display: "none" }]}>
-                        <Text style={styles.toolbarText}> Retour </Text>
-                    </View>
-                </KeyboardAvoidingView> */}
-
             </ScrollView>
         </KeyboardAvoidingView>
     )
@@ -434,20 +404,4 @@ const styles = StyleSheet.create({
         height: "100%",
         resizeMode: "contain",
     },
-    // toolbar: {
-    //     height: RPH(8),
-    //     width: RPW(100),
-    //     backgroundColor: '#eeeeee',
-    //     position: "absolute",
-    //     bottom: RPH(25),
-    //     flexDirection: "row",
-    //     justifyContent: "center",
-    // },
-    // toolbarText: {
-    //     fontSize: RPH(2.8),
-    //     fontWeight: "600",
-    //     color: "black",
-    //     padding: RPH(2)
-    // }
-
 })

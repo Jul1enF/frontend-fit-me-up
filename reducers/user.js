@@ -17,8 +17,14 @@ export const userSlice = createSlice({
         changePushToken : (state, action)=>{
             state.value.push_token = action.payload
         },
+        addBookmark  : (state, action)=>{
+            state.value.bookmarks.push(action.payload)
+        },
+        removeBookmark : (state, action)=>{
+            state.value.bookmarks = state.value.bookmarks.filter(e=> e!== action.payload)
+        },
     }
 })
 
-export const { login, changePushToken, logout } = userSlice.actions
+export const { login, changePushToken, logout, addBookmark, removeBookmark } = userSlice.actions
 export default userSlice.reducer

@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Modal from "react-native-modal"
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -28,27 +28,60 @@ export default function Header() {
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
 
+    // useEffect et variables pour ajuster la taille de la modale si l'on est sur la page d'un article
+
+    const pathName = usePathname()
+
+    const [articlePage, setArticlePage] = useState(false)
+
+    useEffect(() => {
+        if (pathName.includes('-article')) {
+            setArticlePage(true)
+        }
+        else {
+            setArticlePage(false)
+        }
+    }, [pathName])
+
+
+    // États pour l'affichage et l'enregistrement de la recherche
+
+    const [searchVisible, setSearchVisible] = useState(false)
+    const [searchText, setSearchText] = useState('')
+
+
     // Fonction appelée en cliquant sur Se déconnecter
 
-    const logoutPress = async ()=>{
+    const logoutPress = async () => {
         console.log('hello')
         // Effacement du push token en bdd
         const response = await fetch(`${url}/userModifications/changePushToken`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              token : user.token,
-              push_token : "",
+                token: user.token,
+                push_token: "",
             })
-          })
-          const data = await response.json()
-          console.log(data)
+        })
+        const data = await response.json()
+        console.log(data)
 
-          // Reducer logout, fermeture du menu et push vers page d'accueil
-          dispatch(logout())
-          setMenuVisible(false)
-          router.push('/')
+        // Reducer logout, fermeture du menu et push vers page d'accueil
+        dispatch(logout())
+        setMenuVisible(false)
+        router.push('/')
     }
+
+
+    // Fonction appelée en soumettant une recherche
+
+    const submitSearch = () => {
+        router.push(`/searches/${searchText}`)
+        setSearchText('')
+        setSearchVisible(false)
+    }
+
+
 
     return (
         <View style={styles.body}>
@@ -67,25 +100,57 @@ export default function Header() {
                     </Text>
                 </View>
                 <View style={styles.searchIconContainer}>
-                    <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(3.5)} />
+                    <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(3.5)} onPress={() => setSearchVisible(!searchVisible)} />
                 </View>
             </LinearGradient>
             <View style={styles.headerLigne}></View>
 
-            
+
+            <Modal
+                isVisible={searchVisible}
+                style={styles.modal}
+                backdropColor="transparent"
+                animationIn="fadeInDown"
+                animationOut="fadeOutUp"
+                onBackButtonPress={() => setSearchVisible(!searchVisible)}
+                onBackdropPress={() => setSearchVisible(!searchVisible)}
+            >
+                <LinearGradient style={styles.searchContainer}
+                    colors={['#7700a4', '#0a0081']}
+                    locations={[0, 0.9]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                >
+                    <TextInput
+                        style={styles.search}
+                        placeholder="Rechercher..."
+                        onChangeText={(e) => setSearchText(e)}
+                        value={searchText}
+                        returnKeyType="send"
+                        placeholderTextColor={"rgba(255,255,255,0.85)"}
+                        autoCapitalize="none"
+                        onSubmitEditing={() => submitSearch()}
+                    ></TextInput>
+                    <FontAwesome6 name="chevron-up" style={styles.icon} size={RPH(2.8)} onPress={() => setSearchVisible(!searchVisible)} />
+
+                </LinearGradient>
+            </Modal>
+
+
             <Modal
                 isVisible={menuVisible}
+                style={styles.modal}
                 backdropColor="transparent"
                 animationIn="slideInLeft"
                 animationOut="slideOutLeft"
                 onBackButtonPress={() => setMenuVisible(!menuVisible)}
                 onBackdropPress={() => setMenuVisible(!menuVisible)}
             >
-                <View style={styles.modalBody}>
+                <View style={!articlePage ? styles.modalBody : styles.modalBody2}>
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Mes informations</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={()=>logoutPress()}>
+                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
                         <Text style={styles.link}>Se déconnecter</Text>
                     </TouchableOpacity>
                     {user.is_admin &&
@@ -148,18 +213,51 @@ const styles = StyleSheet.create({
     },
     headerLigne: {
         borderBottomColor: "#878787",
-        borderBottomWidth: 1.5
+        borderBottomWidth: RPH(0.2)
+    },
+    searchContainer: {
+        position: "absolute",
+        top: RPH(14),
+        height: RPH(6),
+        width: RPW(100),
+        backgroundColor: "#2e2e2e",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingLeft: RPW(4),
+        paddingRight: RPW(4),
+    },
+    search: {
+        color: "white",
+        fontSize: RPH(2.3),
+        fontWeight: "500",
+        borderBottomColor: "white",
+        borderBottomWidth: 0.5,
+        width: RPW(50),
+        paddingBottom: RPH(1),
+        marginTop : RPH(0.5)
+    },
+    modal: {
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        margin: 0,
     },
     modalBody: {
-        height: RPH(76),
+        height: RPH(75.6),
         width: RPW(80),
         backgroundColor: "#2e2e2e",
-        left: -RPW(5.2),
-        top: RPH(2),
+        position: "absolute",
+        top: RPH(13.9),
+    },
+    modalBody2: {
+        height: RPH(70.5),
+        width: RPW(75),
+        backgroundColor: "#2e2e2e",
+        position: "absolute",
+        top: RPH(19),
     },
     linkContainer: {
         height: RPH(13),
-        width : RPW(80),
         borderTopWidth: 0.5,
         borderTopColor: "white",
         justifyContent: "center",
@@ -167,7 +265,7 @@ const styles = StyleSheet.create({
     },
     link: {
         color: "white",
-        fontSize: RPW(6.5),
+        fontSize: RPW(6.3),
         fontWeight: "200"
     },
 })

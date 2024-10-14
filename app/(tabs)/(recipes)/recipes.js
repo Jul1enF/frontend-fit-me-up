@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 import FirstArticle from '../../../components/FirstArticle'
 import Article from '../../../components/Article'
@@ -53,9 +53,9 @@ export default function Recipes() {
 
             if (data.result) {
                 dispatch(fillWithArticles(data.articles))
-                
-                let recipesArticles = data.articles.filter(e=>e.category === 'recipes')
-                
+
+                let recipesArticles = data.articles.filter(e => e.category === 'recipes')
+
                 recipesArticles.reverse()
 
                 setArticlesInfos(recipesArticles)
@@ -70,7 +70,7 @@ export default function Recipes() {
         checkPushTokenChanges()
         loadArticles()
     }, [user, testArticle]))
-
+    
 
     // Fonction appelée en cliquant sur un article
 
@@ -79,28 +79,20 @@ export default function Recipes() {
     }
 
 
-    // Préparation des composants affichant les articles
-
-    let articlesToDisplay
-
-    if (articlesInfos) {
-        articlesToDisplay = <FlatList
-            data={articlesInfos}
-            renderItem={({ item, index }) => {
-                if (index === 0) {
-                    return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} /></TouchableOpacity>
-                }
-                else {
-                    return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><Article {...item} /></TouchableOpacity>
-                }
-            }}
-            contentContainerStyle={{ alignItems: 'center' }}
-        />
-    }
-
     return (
         <View style={styles.body} contentContainerStyle={styles.contentBody}>
-            {articlesToDisplay}
+            <FlatList
+                data={articlesInfos}
+                renderItem={({ item, index }) => {
+                    if (index === 0) {
+                        return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} /></TouchableOpacity>
+                    }
+                    else {
+                        return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><Article {...item} /></TouchableOpacity>
+                    }
+                }}
+                contentContainerStyle={{ alignItems: 'center' }}
+            />
         </View>
     )
 }
@@ -109,6 +101,5 @@ const styles = StyleSheet.create({
     body: {
         backgroundColor: "black",
         flex: 1,
-        // paddingTop : 10,
     },
 })

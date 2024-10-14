@@ -20,7 +20,6 @@ const RPW = (percentage) => {
 
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
-
 export default function Signup(props) {
 
     const dispatch = useDispatch()
@@ -81,6 +80,7 @@ export default function Signup(props) {
                     is_admin: data.is_admin,
                     push_token: "",
                     appCode,
+                    bookmarks : []
                 }))
                 props.closeModal2()
                 router.push("/recipes")

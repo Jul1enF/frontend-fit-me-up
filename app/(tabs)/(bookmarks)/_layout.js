@@ -6,10 +6,10 @@ export default function RootLayout() {
             headerShown: false,
           
         }}>
-            <Stack.Screen name="recipes" options={{
-                title : "Recettes",
+            <Stack.Screen name="bookmarks" options={{
+                title : "Favoris",
             }} />
-            <Stack.Screen name="recipe-article/[...recipe]" options={{
+            <Stack.Screen name="bookmark-article/[...bookmark]" options={{
             }}/>
         </Stack>
     )
