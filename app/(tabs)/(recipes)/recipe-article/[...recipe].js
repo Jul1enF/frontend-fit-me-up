@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Dimensions, ScrollView, Image, TouchableOpacity } from "react-native";
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
+import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../../../../reducers/user";
 
@@ -49,10 +50,16 @@ export default function Article() {
             articles.map(e => {
                 e._id === _id && setArticle(e)
             })
-
-            user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
         }
-    }, [])
+    }, [user])
+
+
+     // useFocusEffect pour vérifier si l'article est en favoris
+
+     useFocusEffect(useCallback(() => {
+        user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
+    }, [user]))
+
 
     // Fonction appelée en cliquant sur l'icone favoris
     const bookmarkPress = async () => {

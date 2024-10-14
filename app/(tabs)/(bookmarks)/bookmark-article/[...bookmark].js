@@ -55,7 +55,7 @@ export default function Article() {
         articles.map(e => {
             e._id === _id && setArticle(e)
         })
-    }, [bookmark])
+    }, [])
 
     // Affichage conditionnel du nom de la catégory
     let category
