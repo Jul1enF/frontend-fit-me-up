@@ -53,7 +53,6 @@ export default function Header() {
     // Fonction appelée en cliquant sur Se déconnecter
 
     const logoutPress = async () => {
-        console.log('hello')
         // Effacement du push token en bdd
         const response = await fetch(`${url}/userModifications/changePushToken`, {
             method: 'PUT',
@@ -250,11 +249,11 @@ const styles = StyleSheet.create({
         top: RPH(13.9),
     },
     modalBody2: {
-        height: RPH(70.5),
-        width: RPW(75),
+        height: RPH(69.5),
+        width: RPW(80),
         backgroundColor: "#2e2e2e",
         position: "absolute",
-        top: RPH(19),
+        top: RPH(20),
     },
     linkContainer: {
         height: RPH(13),

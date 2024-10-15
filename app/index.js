@@ -1,11 +1,12 @@
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import Signup from '../components/Signup'
+import Signin from '../components/Signin';
 import { LinearGradient } from 'expo-linear-gradient'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 
-import { useState, useEffect } from 'react';
-import { router } from 'expo-router'
+import { useState, useCallback } from 'react';
+import { router, useFocusEffect } from 'expo-router'
 import { useSelector } from 'react-redux'
 
 
@@ -29,10 +30,10 @@ export default function Index() {
 
     const user = useSelector((state) => state.user.value)
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         user.firstname && router.push('/recipes')
 
-    }, [])
+    }, []))
 
 
 
@@ -43,6 +44,10 @@ export default function Index() {
 
 
     // Fonction envoyée en IDF à Signup et Signin pour fermer modal après login
+
+    const closeModal1 = () => {
+        setModal1VIsible(false)
+    }
 
     const closeModal2 = () => {
         setModal2VIsible(false)
@@ -120,6 +125,15 @@ export default function Index() {
                 </View>
             </View>
 
+            <Modal
+                visible={modal1Visible}
+                onRequestClose={() => setModal1VIsible(false)}
+                style={styles.modal}
+                animationType='slide'
+                transparent={true}
+            >
+                <Signin closeModal1={closeModal1} />
+            </Modal>
             <Modal
                 visible={modal2Visible}
                 onRequestClose={() => setModal2VIsible(false)}

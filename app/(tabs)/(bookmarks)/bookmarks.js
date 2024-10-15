@@ -76,7 +76,7 @@ export default function Recipes() {
     // useFocusEffect
 
     useFocusEffect(useCallback(() => {
-        checkPushTokenChanges()
+        // checkPushTokenChanges()
         loadArticles()
     }, [user, articles]))
 

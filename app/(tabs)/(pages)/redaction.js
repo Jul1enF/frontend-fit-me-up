@@ -6,6 +6,9 @@ import { addTestArticle, deleteTestArticle } from "../../../reducers/testArticle
 
 import * as ImagePicker from 'expo-image-picker'
 
+import JWT, { SupportedAlgorithms } from 'expo-jwt';
+const jwtKey = process.env.EXPO_PUBLIC_JWT_KEY
+
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
@@ -100,7 +103,7 @@ export default function Redaction() {
     }
 
 
-    // Fonction appelée en cliquant sur poster
+    // Fonction appelée en cliquant sur Poster
 
     const postPress = async () => {
         if (!title || !category || !pictureUri) {
@@ -109,6 +112,7 @@ export default function Redaction() {
             return 
         }
 
+        // Mise en forme des inputs pour leur envoi
         const _id = testArticle.length>0 ? testArticle[0]._id : "testArticleId"
         const date = testArticle.length>0 ? testArticle[0].createdAt : new Date()
         const uri = pictureUri
@@ -124,13 +128,28 @@ export default function Redaction() {
             type : 'image/jpeg',
         })
 
-        const response = await fetch(`${url}/articles/save-article/${title}/${subTitle}/${text}/${author}/${videoId}/${category}/${date}/${_id}/${user.token}/${localPic}`, {
+        // Encodage en jwt pour obtenir un string à passer en param, garder des types booléens etc... et gérer les cas où les inputs n'ont pas été remplis
+
+        const articleData = JWT.encode({
+            title,
+            sub_title : subTitle,
+            text,
+            author,
+            video_id : videoId,
+            category,
+            date,
+            _id,
+            jwtToken : user.token,
+            localPic,
+        }, jwtKey)
+
+        const response = await fetch(`${url}/articles/save-article/${articleData}`, {
             method: 'POST',
             body: formData,
         })
   
         const data = await response.json()
-
+        console.log("response : ", response)
         if (data.result){
             setTitle('')
             setSubTitle('')
@@ -146,7 +165,7 @@ export default function Redaction() {
             setTimeout(()=> setError(''), "4000")
         }
         else {
-            setError(data.err)
+            setError("Problème de connexion, merci de voir avec le webmaster")
             setTimeout(()=> setError(''), "4000")
         }
     }

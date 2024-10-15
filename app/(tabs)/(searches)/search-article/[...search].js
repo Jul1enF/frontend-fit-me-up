@@ -27,6 +27,7 @@ export default function Article() {
 
     const { search } = useLocalSearchParams()
     const _id = search[0]
+    const searchText = search[1]
 
     const dispatch = useDispatch()
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
@@ -117,9 +118,9 @@ export default function Article() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/bookmarks')}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate(`/searches/${searchText}`)}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
-                    <Text style={styles.headerText} >Favoris</Text>
+                    <Text style={styles.headerText} >Recherche</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: "white",
         fontWeight: "500",
-        fontSize: RPH(2.1)
+        fontSize: RPH(2.3)
     },
     contentBody: {
         paddingTop: RPH(1),

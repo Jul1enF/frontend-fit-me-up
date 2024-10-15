@@ -54,16 +54,18 @@ export default function Article() {
     }, [user])
 
 
-     // useFocusEffect pour vérifier si l'article est en favoris
+    // useFocusEffect pour vérifier si l'article est en favoris et naviguer vers recette si l'article test a été supprimé
 
-     useFocusEffect(useCallback(() => {
+    useFocusEffect(useCallback(() => {
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
-    }, [user]))
+
+        if (_id === "test" && testArticle.length === 0) { router.navigate('/recipes') }
+    }, [user, testArticle]))
 
 
     // Fonction appelée en cliquant sur l'icone favoris
     const bookmarkPress = async () => {
-        if (_id === "test"){
+        if (_id === "test") {
             return
         }
         if (!isBookmarked) {
@@ -77,9 +79,9 @@ export default function Article() {
             })
             const data = await response.json()
 
-            if (!data.result){
+            if (!data.result) {
                 setError(data.error)
-                setTimeout(()=>setError(''), "4000")
+                setTimeout(() => setError(''), "4000")
             }
             else {
                 setIsBookmarked(true)
@@ -97,9 +99,9 @@ export default function Article() {
             })
             const data = await response.json()
 
-            if (!data.result){
+            if (!data.result) {
                 setError(data.error)
-                setTimeout(()=>setError(''), "4000")
+                setTimeout(() => setError(''), "4000")
             }
             else {
                 setIsBookmarked(false)
@@ -133,7 +135,7 @@ export default function Article() {
             </LinearGradient>
 
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
-            
+
             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}>
                 <Text style={styles.categoryTitle}>Recette</Text>
                 <Text style={styles.title}>{article.title}</Text>
@@ -164,11 +166,13 @@ export default function Article() {
                     </LinearGradient>
                 </View>
                 {article.text && <Text style={styles.text}>{article.text}</Text>}
-                <YoutubePlayer
-                    height={RPW(56)}
-                    width={RPW(98)}
-                    videoId={article.video_id}
-                />
+                <View style={[styles.youtubeContainer, !article.video_id && {display : "none"}]}>
+                    <YoutubePlayer
+                        height={RPW(56)}
+                        width={RPW(98)}
+                        videoId={article.video_id}
+                    />
+                </View>
             </ScrollView>
         </View>
     )
@@ -194,8 +198,8 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center"
     },
-    icon : {
-        marginRight : RPW(3)
+    icon: {
+        marginRight: RPW(3)
     },
     headerSection2: {
         width: RPW(40),
@@ -203,13 +207,13 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         alignItems: "center"
     },
-    icon2 : {
-        marginLeft : RPW(3)
+    icon2: {
+        marginLeft: RPW(3)
     },
     headerText: {
         color: "white",
         fontWeight: "500",
-        fontSize: RPH(2.1)
+        fontSize: RPH(2.3)
     },
     contentBody: {
         paddingTop: RPH(1),

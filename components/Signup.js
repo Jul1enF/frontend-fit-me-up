@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user'
 import { router } from 'expo-router';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 
 const screenHeight = Dimensions.get('window').height;
@@ -80,7 +81,7 @@ export default function Signup(props) {
                     is_admin: data.is_admin,
                     push_token: "",
                     appCode,
-                    bookmarks : []
+                    bookmarks: []
                 }))
                 props.closeModal2()
                 router.push("/recipes")
@@ -90,11 +91,11 @@ export default function Signup(props) {
     }
 
 
-return (
-    <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={offsetKeyboard} style={styles.body} >
+    return (
+        <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={offsetKeyboard} style={styles.body} >
             <View style={styles.contentBody}>
                 <View style={styles.closeContainer}>
-                    <Text style={styles.cross} onPress={() => props.closeModal2()}>X</Text>
+                    <Icon name="close" onPress={() => props.closeModal2()} color="white" size={RPH(4)} ></Icon>
                 </View>
 
                 <LinearGradient
@@ -238,78 +239,78 @@ return (
                 </LinearGradient>
                 <Text style={styles.error}>{error}</Text>
             </View>
-    </KeyboardAvoidingView>
-)
+        </KeyboardAvoidingView>
+    )
 }
 
 const styles = StyleSheet.create({
-body: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
-},
-contentBody: {
-    width: RPW(85),
-    minHeight: RPH(80),
-    marginTop: RPH(12),
-    backgroundColor: "#1c1c1c",
-    alignItems: "center",
-    borderRadius: 10,
-},
-closeContainer: {
-    width: "90%",
-    alignItems: "flex-end",
-    paddingTop: RPH(1.5),
-    paddingBottom: RPH(1.5)
-},
-cross: {
-    color: "white",
-    fontSize: RPH(2.8),
-    fontWeight: "400",
-},
-gradientContainer: {
-    marginBottom: RPH(3),
-    width: "90%",
-    height: RPH(7),
-    borderRadius: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingRight: RPW(4)
-},
-input: {
-    flex: 1,
-    paddingLeft: RPW(4),
-    color: "white",
-    fontSize: RPH(2.5)
-},
-password: {
-    width: "85%",
-    height: "100%",
-    paddingLeft: RPW(4),
-    color: "white",
-    fontSize: RPH(2.5)
-},
-registerContainer: {
-    width: "90%",
-    height: RPH(7),
-    borderRadius: 10,
-    marginBottom: RPH(2)
-},
-registerBtn: {
-    flex: 1,
-    backgroundColor: "#1c1c1c",
-    margin: 2,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center"
-},
-registerSentence: {
-    color: "white",
-    fontSize: RPH(2.5)
-},
-error: {
-    color: "white",
-}
+    body: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "transparent",
+    },
+    contentBody: {
+        width: RPW(85),
+        minHeight: RPH(80),
+        marginTop: RPH(12),
+        backgroundColor: "#1c1c1c",
+        alignItems: "center",
+        borderRadius: 10,
+    },
+    closeContainer: {
+        width: "90%",
+        alignItems: "flex-end",
+        paddingTop: RPH(1.5),
+        paddingBottom: RPH(1.5)
+    },
+    cross: {
+        color: "white",
+        fontSize: RPH(2.8),
+        fontWeight: "400",
+    },
+    gradientContainer: {
+        marginBottom: RPH(3),
+        width: "90%",
+        height: RPH(7),
+        borderRadius: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingRight: RPW(4)
+    },
+    input: {
+        flex: 1,
+        paddingLeft: RPW(4),
+        color: "white",
+        fontSize: RPH(2.5)
+    },
+    password: {
+        width: "85%",
+        height: "100%",
+        paddingLeft: RPW(4),
+        color: "white",
+        fontSize: RPH(2.5)
+    },
+    registerContainer: {
+        width: "90%",
+        height: RPH(7),
+        borderRadius: 10,
+        marginBottom: RPH(2)
+    },
+    registerBtn: {
+        flex: 1,
+        backgroundColor: "#1c1c1c",
+        margin: 2,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    registerSentence: {
+        color: "white",
+        fontSize: RPH(2.5)
+    },
+    error: {
+        color: "white",
+    }
 })

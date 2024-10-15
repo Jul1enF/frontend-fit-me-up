@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     headerText: {
         color: "white",
         fontWeight: "500",
-        fontSize: RPH(2.1)
+        fontSize: RPH(2.3)
     },
     contentBody: {
         paddingTop: RPH(1),

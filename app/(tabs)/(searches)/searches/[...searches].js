@@ -63,7 +63,7 @@ export default function Recipes() {
     // Fonction appelée en cliquant sur un article
 
     const articlePress = (_id) => {
-        router.push(`/search-article/${_id}`)
+        router.push(`/search-article/${_id}/${searchText}`)
     }
 
 
