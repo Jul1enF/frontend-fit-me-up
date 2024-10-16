@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState, useEffect } from 'react'
@@ -73,6 +73,7 @@ export default function Recipes() {
     }, [user, testArticle]))
     
 
+
     // Fonction appelée en cliquant sur un article
 
     const articlePress = (_id, test) => {
@@ -80,10 +81,23 @@ export default function Recipes() {
     }
 
 
+
+    // Composant pour rafraichir la page
+
+    const [isRefreshing, setIsRefreshing]=useState(false)
+
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={()=>{
+        setIsRefreshing(true)
+        setTimeout(()=>setIsRefreshing(false), "500")
+        loadArticles()
+    }} />
+
+
     return (
         <View style={styles.body} contentContainerStyle={styles.contentBody}>
             <FlatList
                 data={articlesInfos}
+                refreshControl={refreshComponent}
                 renderItem={({ item, index }) => {
                     if (index === 0 || Number.isInteger((index)/3) ) {
                         return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} /></TouchableOpacity>
