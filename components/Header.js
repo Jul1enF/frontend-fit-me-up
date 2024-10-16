@@ -71,6 +71,7 @@ export default function Header() {
         router.push('/')
     }
 
+    
 
     // Fonction appelée en soumettant une recherche
 
@@ -120,16 +121,19 @@ export default function Header() {
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
                 >
-                    <TextInput
-                        style={styles.search}
-                        placeholder="Rechercher..."
-                        onChangeText={(e) => setSearchText(e)}
-                        value={searchText}
-                        returnKeyType="send"
-                        placeholderTextColor={"rgba(255,255,255,0.85)"}
-                        autoCapitalize="none"
-                        onSubmitEditing={() => submitSearch()}
-                    ></TextInput>
+                    <View style={styles.searchInputContainer}>
+                        <TextInput
+                            style={styles.search}
+                            placeholder="Rechercher..."
+                            onChangeText={(e) => setSearchText(e)}
+                            value={searchText}
+                            returnKeyType="send"
+                            placeholderTextColor={"rgba(255,255,255,0.85)"}
+                            autoCapitalize="none"
+                            onSubmitEditing={() => submitSearch()}
+                        ></TextInput>
+                         <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(1.9)} onPress={() => submitSearch()} />
+                    </View>
                     <FontAwesome6 name="chevron-up" style={styles.icon} size={RPH(2.8)} onPress={() => setSearchVisible(!searchVisible)} />
 
                 </LinearGradient>
@@ -226,15 +230,22 @@ const styles = StyleSheet.create({
         paddingLeft: RPW(4),
         paddingRight: RPW(4),
     },
-    search: {
-        color: "white",
-        fontSize: RPH(2.3),
-        fontWeight: "500",
+    searchInputContainer : {
         borderBottomColor: "white",
         borderBottomWidth: 0.5,
         width: RPW(50),
         paddingBottom: RPH(1),
-        marginTop : RPH(0.5)
+        paddingRight : RPW(1),
+        marginTop: RPH(0.5),
+        flexDirection : 'row',
+        justifyContent : "space-between",
+        alignItems : "center",
+    },
+    search: {
+        color: "white",
+        fontSize: RPH(2.3),
+        fontWeight: "500",
+        width : "90%",
     },
     modal: {
         alignItems: "flex-start",

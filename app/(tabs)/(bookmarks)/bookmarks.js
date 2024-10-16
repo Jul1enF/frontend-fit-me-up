@@ -27,7 +27,7 @@ const RPW = (percentage) => {
 
 
 
-export default function Recipes() {
+export default function Bookmarks() {
 
     const user = useSelector((state) => state.user.value)
     const articles = useSelector((state) => state.articles.value)
@@ -76,7 +76,7 @@ export default function Recipes() {
     // useFocusEffect
 
     useFocusEffect(useCallback(() => {
-        // checkPushTokenChanges()
+        checkPushTokenChanges()
         loadArticles()
     }, [user, articles]))
 

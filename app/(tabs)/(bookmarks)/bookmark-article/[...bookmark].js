@@ -24,7 +24,7 @@ const RPW = (percentage) => {
 };
 
 
-export default function Article() {
+export default function BookmarkArticle() {
 
     const { bookmark } = useLocalSearchParams()
     const _id = bookmark[0]
@@ -178,10 +178,10 @@ const styles = StyleSheet.create({
         marginRight: RPW(3)
     },
     headerSection2: {
-        width: RPW(40),
+        width: RPW(55),
         flexDirection: "row",
         justifyContent: "flex-end",
-        alignItems: "center"
+        alignItems: "center",
     },
     icon2: {
         marginLeft: RPW(3)

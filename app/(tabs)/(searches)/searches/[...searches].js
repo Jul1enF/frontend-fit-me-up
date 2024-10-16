@@ -25,10 +25,11 @@ const RPW = (percentage) => {
 
 
 
-export default function Recipes() {
+export default function Searches() {
 
     const { searches } = useLocalSearchParams()
     const searchText = searches[0]
+    console.log(searchText)
 
     const articles = useSelector((state) => state.articles.value)
 

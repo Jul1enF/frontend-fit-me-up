@@ -60,6 +60,7 @@ export default function FirstArticle(props) {
 const styles = StyleSheet.create({
     body: {
         width: RPW(100),
+        marginBottom: 14,
     },
     imgContainer: {
         width: RPW(100),

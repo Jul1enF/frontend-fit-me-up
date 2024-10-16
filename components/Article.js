@@ -49,7 +49,7 @@ export default function Article(props) {
 const styles = StyleSheet.create({
     body: {
         width: RPW(100),
-        paddingTop: 14,
+        marginBottom: 14,
         paddingRight: RPW(3),
         paddingLeft: RPW(3),
     },

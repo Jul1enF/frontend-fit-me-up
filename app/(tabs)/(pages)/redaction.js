@@ -40,6 +40,7 @@ export default function Redaction() {
             setCategory(testArticle[0].category)
             setPictureUri(testArticle[0].img_link)
             setAuthor(testArticle[0].author)
+            setImgPublicId(testArticle[0].img_public_id)
         }
     }, [testArticle])
 
@@ -53,10 +54,12 @@ export default function Redaction() {
     const [videoId, setVideoId] = useState('')
     const [category, setCategory] = useState('')
     const [pictureUri, setPictureUri] = useState("")
+    const [imgPublicId, setImgPublicId] = useState('')
 
     // Ètat pour l'erreur et keyboard
 
     const [error, setError]=useState('')
+
 
     // Fonction appelée en cliquant sur Choisir une image
 
@@ -75,9 +78,10 @@ export default function Redaction() {
     };
 
 
+
     // Fonction appelée en cliquant sur Enregistrer
 
-    const registerPress = () => {
+    const testPress = () => {
         if (!title || !category || !pictureUri) {
             setError('Erreur : titre, catégorie et photo obligatoires.')
             setTimeout(()=> setError(''), "4000")
@@ -94,18 +98,20 @@ export default function Redaction() {
             video_id : videoId,
             category,
             img_link : pictureUri,
+            img_public_id : imgPublicId,
             createdAt : date,
             _id,
-            test : true,
             author,
+            // test : true => Un article déjà posté n'a pas un _id "testArticleId" mais peut être mis en test. C'est donc cet indicateur qui sert à savoir ensuite si l'on affiche la page détaillée d'un article en test ou en BDD
             test : true,
         }))
     }
 
 
+
     // Fonction appelée en cliquant sur Poster
 
-    const postPress = async () => {
+    const publishPress = async () => {
         if (!title || !category || !pictureUri) {
             setError('Erreur : titre, catégorie et photo obligatoires.')
             setTimeout(()=> setError(''), "4000")
@@ -118,7 +124,6 @@ export default function Redaction() {
         const uri = pictureUri
 
         const localPic = pictureUri.includes('https') ? false : true
-        console.log(localPic)
 
         const formData = new FormData()
 
@@ -141,6 +146,8 @@ export default function Redaction() {
             _id,
             jwtToken : user.token,
             localPic,
+            img_link : pictureUri,
+            img_public_id : imgPublicId,
         }, jwtKey)
 
         const response = await fetch(`${url}/articles/save-article/${articleData}`, {
@@ -158,6 +165,7 @@ export default function Redaction() {
             setPictureUri('')
             setVideoId('')
             setAuthor('')
+            setImgPublicId('')
             dispatch(deleteTestArticle())
         } 
         else if (data.error) {
@@ -181,6 +189,7 @@ export default function Redaction() {
         setPictureUri('')
         setVideoId('')
         setAuthor('')
+        setImgPublicId('')
         dispatch(deleteTestArticle())
     }
 
@@ -291,8 +300,8 @@ export default function Redaction() {
                             end={{ x: 1, y: 0.5 }}
                             style={styles.gradientBtn2}
                         >
-                            <TouchableOpacity style={styles.btn2} onPress={() => registerPress()}>
-                                <Text style={styles.btnText}>Enregistrer</Text>
+                            <TouchableOpacity style={styles.btn2} onPress={() => testPress()}>
+                                <Text style={styles.btnText}>Tester</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient
@@ -302,8 +311,8 @@ export default function Redaction() {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn2}
                     >
-                        <TouchableOpacity style={styles.btn2} onPress={()=>postPress()}>
-                            <Text style={styles.btnText}>Poster</Text>
+                        <TouchableOpacity style={styles.btn2} onPress={()=>publishPress()}>
+                            <Text style={styles.btnText}>Publier</Text>
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient

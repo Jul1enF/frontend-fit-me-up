@@ -76,7 +76,7 @@ export default function Recipes() {
     // Fonction appelée en cliquant sur un article
 
     const articlePress = (_id, test) => {
-        test ? router.push(`/recipe-article/test`) : router.push(`/recipe-article/${_id}`)
+        test ? router.push(`/recipe-article/testArticleId`) : router.push(`/recipe-article/${_id}`)
     }
 
 
@@ -85,7 +85,7 @@ export default function Recipes() {
             <FlatList
                 data={articlesInfos}
                 renderItem={({ item, index }) => {
-                    if (index === 0) {
+                    if (index === 0 || Number.isInteger((index)/3) ) {
                         return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} /></TouchableOpacity>
                     }
                     else {

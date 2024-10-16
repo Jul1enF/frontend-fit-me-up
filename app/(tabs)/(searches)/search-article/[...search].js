@@ -23,7 +23,7 @@ const RPW = (percentage) => {
 };
 
 
-export default function Article() {
+export default function SearchArticle() {
 
     const { search } = useLocalSearchParams()
     const _id = search[0]
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
         marginRight: RPW(3)
     },
     headerSection2: {
-        width: RPW(40),
+        width: RPW(55),
         flexDirection: "row",
         justifyContent: "flex-end",
         alignItems: "center"
