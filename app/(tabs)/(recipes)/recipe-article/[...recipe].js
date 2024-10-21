@@ -68,7 +68,6 @@ export default function Article() {
     }, [user, testArticle]))
 
 
-
     // Fonction appelée en cliquant sur l'icone favoris
     const bookmarkPress = async () => {
         if (_id === "testArticleId") {
@@ -128,6 +127,9 @@ export default function Article() {
             video_id: article.video_id,
             category: article.category,
             img_link: article.img_link,
+            img_margin_top : article.img_margin_top,
+            img_margin_left : article.img_margin_left,
+            img_zoom : article.img_zoom,
             img_public_id : article.img_public_id,
             createdAt: article.createdAt,
             _id: article._id,
@@ -203,7 +205,7 @@ export default function Article() {
     const hour = moment(article.createdAt).format('LT')
 
 
-
+    if (!article){return <View></View>}
 
     return (
         <View style={styles.body}>
@@ -239,11 +241,18 @@ export default function Article() {
                 >
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
-                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]}>
-                    <Image style={styles.image} source={{
-                        uri: article.img_link,
-                    }}></Image>
+               
+                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
+                    <Image
+                        style={[styles.image, {
+                            width: RPW(98 * article.img_zoom),
+                            marginTop: RPW(article.img_margin_top * 0.98),
+                            marginLeft: RPW(article.img_margin_left * 0.98)
+                        }]}
+                        source={{ uri: article.img_link }}
+                    />
                 </View>
+                
                 <View style={styles.lineContainer}>
                     {article.author && <Text style={styles.date}>par {article.author}</Text>}
                     <LinearGradient
@@ -386,13 +395,14 @@ const styles = StyleSheet.create({
     },
     imgContainer: {
         width: RPW(98),
-        height: RPW(55),
+        height: RPW(54),
         overflow: "hidden",
+        justifyContent: "center",
         marginBottom: 12,
     },
     image: {
-        height: RPW(100),
-        width: RPW(100),
+        height: RPW(1000),
+        resizeMode: "contain",
     },
     lineContainer: {
         alignItems: "flex-end",

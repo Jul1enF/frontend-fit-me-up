@@ -27,10 +27,15 @@ export default function Article(props) {
                     <Text style={styles.date}>Posté {lastingTime}</Text>
                 </View>
                 <View style={styles.column2}>
-                    <View style={styles.imgContainer}>
-                        <Image style={styles.image} source={{
-                            uri: props.img_link,
-                        }}></Image>
+                    <View style={styles.imgContainer} >
+                        <Image
+                            style={[styles.image, {
+                                width: RPW(41 * props.img_zoom),
+                                marginTop: RPW(props.img_margin_top * 0.41),
+                                marginLeft: RPW(props.img_margin_left * 0.41)
+                            }]}
+                            source={{ uri: props.img_link, }}
+                        />
                     </View>
                 </View>
             </View>
@@ -61,13 +66,13 @@ const styles = StyleSheet.create({
     column1: {
         width: RPW(51),
         height: RPH(17),
-        justifyContent : "space-evenly",
+        justifyContent: "space-evenly",
     },
     title: {
         color: "#e0e0e0",
         fontSize: 22,
         fontWeight: "450",
-        marginBottom : 5
+        marginBottom: 5
     },
     date: {
         color: "#e0e0e0",
@@ -77,17 +82,18 @@ const styles = StyleSheet.create({
     column2: {
         width: RPW(41),
         height: RPH(17),
-        alignItems : "center",
-        justifyContent : 'center',
+        alignItems: "center",
+        justifyContent: 'center',
     },
     imgContainer: {
         width: RPW(41),
         height: RPW(22.5),
-        overflow : "hidden",
+        overflow: "hidden",
+        justifyContent: "center",
     },
     image: {
-        width : RPW(41),
-        height : RPW(41),
+        height: RPW(1000),
+        resizeMode: "contain",
     },
     gradientLine2: {
         width: "100%",

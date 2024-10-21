@@ -26,10 +26,15 @@ export default function FirstArticle(props) {
 
     return (
         <View style={styles.body}>
-            <View style={styles.imgContainer}>
-                <Image style={styles.image} source={{
-                    uri: props.img_link,
-                }}></Image>
+            <View style={styles.imgContainer} >
+                <Image
+                    style={[styles.image, {
+                        width: RPW(100 * props.img_zoom),
+                        marginTop: RPW(props.img_margin_top),
+                        marginLeft: RPW(props.img_margin_left)
+                    }]}
+                    source={{ uri: props.img_link, }}
+                />
             </View>
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{props.title}</Text>
@@ -55,7 +60,7 @@ export default function FirstArticle(props) {
             </LinearGradient>
         </View>
     )
-}  
+}
 
 const styles = StyleSheet.create({
     body: {
@@ -66,19 +71,18 @@ const styles = StyleSheet.create({
         width: RPW(100),
         height: RPW(55),
         overflow: "hidden",
-        borderColor: "grey",
-        borderWidth: 0
+        justifyContent: "center"
     },
     image: {
-        height: RPW(100),
-        width: RPW(100),
+        height: RPW(1000),
+        resizeMode: "contain",
     },
     textContainer: {
         paddingLeft: RPW(3),
         paddingTop: RPW(3),
         paddingRight: RPW(3),
-        maxHeight : 160,
-        overflow : "hidden",
+        maxHeight: 160,
+        overflow: "hidden",
         marginBottom: 18,
     },
     title: {
@@ -98,12 +102,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "300",
     },
-    date : {
+    date: {
         color: "#e0e0e0",
-        fontSize : 12,
-        marginLeft : RPW(3),
-        marginBottom : 18,
-        fontWeight : "300"
+        fontSize: 12,
+        marginLeft: RPW(3),
+        marginBottom: 18,
+        fontWeight: "300"
     },
     gradientLine2: {
         width: "100%",

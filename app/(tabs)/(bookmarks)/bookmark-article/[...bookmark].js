@@ -60,9 +60,9 @@ export default function BookmarkArticle() {
     // Affichage conditionnel du nom de la catégory
     let category
 
-    if(article.category === "recipes"){category = "Recette"}
-    else if (article.category === "exercices"){category = "Exercice"}
-    else if (article.category === "events"){category= "Évènement"}
+    if (article.category === "recipes") { category = "Recette" }
+    else if (article.category === "exercices") { category = "Exercice" }
+    else if (article.category === "events") { category = "Évènement" }
 
 
     // Fonction appelée en cliquant sur retirer des favoris
@@ -92,6 +92,8 @@ export default function BookmarkArticle() {
     moment.locale('fr')
     const date = moment(article.createdAt).format('LL')
     const hour = moment(article.createdAt).format('LT')
+
+    if (!article){return <View></View>}
 
     return (
         <View style={styles.body}>
@@ -127,11 +129,18 @@ export default function BookmarkArticle() {
                 >
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
-                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]}>
-                    <Image style={styles.image} source={{
-                        uri: article.img_link,
-                    }}></Image>
+
+                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
+                    <Image
+                        style={[styles.image, {
+                            width: RPW(98 * article.img_zoom),
+                            marginTop: RPW(article.img_margin_top * 0.98),
+                            marginLeft: RPW(article.img_margin_left * 0.98)
+                        }]}
+                        source={{ uri: article.img_link, }}
+                    />
                 </View>
+
                 <View style={styles.lineContainer}>
                     {article.author && <Text style={styles.date}>par {article.author}</Text>}
                     <LinearGradient
@@ -229,13 +238,14 @@ const styles = StyleSheet.create({
     },
     imgContainer: {
         width: RPW(98),
-        height: RPW(55),
+        height: RPW(54),
         overflow: "hidden",
+        justifyContent: "center",
         marginBottom: 12,
     },
     image: {
-        height: RPW(100),
-        width: RPW(100),
+        height: RPW(1000),
+        resizeMode: "contain",
     },
     lineContainer: {
         alignItems: "flex-end",
