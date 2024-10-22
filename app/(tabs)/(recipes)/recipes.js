@@ -68,12 +68,12 @@ export default function Recipes() {
     // useFocusEffect
 
     useFocusEffect(useCallback(() => {
-        checkPushTokenChanges()
+        // checkPushTokenChanges()
         loadArticles()
     }, [user, testArticle]))
     
 
-
+    
     // Fonction appelée en cliquant sur un article
 
     const articlePress = (_id, test) => {

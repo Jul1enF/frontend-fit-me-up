@@ -48,7 +48,7 @@ export default function Signin(props) {
         const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
         if (!email || !password ) {
-            setError("Merci de remplir tous les champs ci dessus !")
+            setError("Merci de remplir tous les champs ci dessous !")
         }
         else {
             const response = await fetch(`${url}/users/signin`, {
@@ -89,6 +89,7 @@ return (
                     <Icon name="close" onPress={() => props.closeModal1()} color="white" size={RPH(4)} ></Icon>
                 </View>
 
+                <Text style={styles.error}>{error}</Text>
                 <LinearGradient
                     style={styles.gradientContainer}
                     colors={['#49158f', '#0a0081']}
@@ -148,7 +149,7 @@ return (
                         value={appCode}
                         placeholder="Code de l'application (optionnel)"
                         placeholderTextColor='rgba(255,255,255,0.4)'
-                        onFocus={() => setOffsetKeyboard(RPH(30))}
+                        onFocus={() => setOffsetKeyboard(RPH(5))}
                         onBlur={() => setOffsetKeyboard(0)}>
                     </TextInput>
                 </LinearGradient>
@@ -166,7 +167,6 @@ return (
                         </Text>
                     </TouchableOpacity>
                 </LinearGradient>
-                <Text style={styles.error}>{error}</Text>
             </View>
     </KeyboardAvoidingView>
 )
@@ -183,6 +183,7 @@ contentBody: {
     width: RPW(85),
     height : RPH(62),
     marginTop: RPH(12),
+    paddingBottom : RPH(4),
     backgroundColor: "#1c1c1c",
     alignItems: "center",
     justifyContent : "space-between",
@@ -242,5 +243,7 @@ connectSentence: {
 },
 error: {
     color: "white",
+    position : "absolute",
+    marginTop : RPH(6)
 }
 })

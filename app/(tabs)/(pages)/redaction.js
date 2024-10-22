@@ -45,11 +45,11 @@ export default function Redaction() {
             setTitle(testArticle[0].title)
             testArticle[0].sub_title && setSubTitle(testArticle[0].sub_title)
             testArticle[0].text && setText(testArticle[0].text)
-            testArticle[0].video_id && setVideoId(testArticle[0].video_id)
+            testArticle[0].video_id && setVideoLink(`https://youtu.be/${testArticle[0].video_id}`)
             setCategory(testArticle[0].category)
             setPictureUri(testArticle[0].img_link)
-            setAuthor(testArticle[0].author)
-            setImgPublicId(testArticle[0].img_public_id)
+            testArticle[0].author && setAuthor(testArticle[0].author)
+            testArticle[0].img_public_id && setImgPublicId(testArticle[0].img_public_id)
             setImgMarginTop(testArticle[0].img_margin_top)
             setImgMarginLeft(testArticle[0].img_margin_left)
             setImgZoom(testArticle[0].img_zoom)
@@ -63,7 +63,7 @@ export default function Redaction() {
     const [subTitle, setSubTitle] = useState('')
     const [text, setText] = useState('')
     const [author, setAuthor] = useState('')
-    const [videoId, setVideoId] = useState('')
+    const [videoLink, setVideoLink] = useState('')
     const [category, setCategory] = useState('')
     const [pictureUri, setPictureUri] = useState("")
     const [imgPublicId, setImgPublicId] = useState('')
@@ -92,6 +92,24 @@ export default function Redaction() {
 
 
 
+    // Fonction appelée en cliquant sur Annuler recadrage pour reseter les états et refs
+
+    const cancelResizingPress = () => {
+        resizingRef.current = false
+        setResizing(false)
+        imgMarginTopRef.current = 0
+        imgMarginLeftRef.current = 0
+        fingerDistanceRef.current = 0
+        imgZoomRef.current = 1
+        finalImgZoomRef.current = 1
+        setImgMarginTop(0)
+        setImgMarginLeft(0)
+        setImgZoom(1)
+    }
+
+
+
+
     // Fonction appelée en cliquant sur Choisir une image
 
     const choosePicture = async () => {
@@ -106,17 +124,7 @@ export default function Redaction() {
         if (!result.canceled) {
             setPictureUri(result.assets[0].uri);
             // Remise à zéro des états et ref pour recadrage
-            imgMarginTopRef.current = 0
-            imgMarginLeftRef.current = 0
-            fingerDistanceRef.current = 0
-            imgZoomRef.current = 1
-            finalImgZoomRef.current = 1
-            setImgMarginTop(0)
-            setImgMarginLeft(0)
-            setImgZoom(1)
-
-            resizingRef.current = false
-            setResizing(false)
+            cancelResizingPress()
         }
     };
 
@@ -176,23 +184,17 @@ export default function Redaction() {
 
 
 
+    // Récupération de l'id de la vidéo Youtube grâce au lien
 
-    // Fonction appelée en cliquant sur Annuler recadrage
+    let video_id
 
-    const cancelResizingPress = () => {
-        resizingRef.current = false
-        setResizing(false)
-        imgMarginTopRef.current = 0
-        imgMarginLeftRef.current = 0
-        fingerDistanceRef.current = 0
-        imgZoomRef.current = 1
-        finalImgZoomRef.current = 1
-        setImgMarginTop(0)
-        setImgMarginLeft(0)
-        setImgZoom(1)
+    if (videoLink){
+        if (videoLink.includes("youtu.be/")){
+            video_id = videoLink.slice(17, 28)
+        }else{
+            video_id = videoLink.slice(30,41)
+        }
     }
-
-
 
     // Fonction appelée en cliquant sur Tester
 
@@ -210,7 +212,7 @@ export default function Redaction() {
             title,
             sub_title: subTitle,
             text,
-            video_id: videoId,
+            video_id,
             category,
             img_link: pictureUri,
             img_margin_top: imgMarginTop,
@@ -238,7 +240,7 @@ export default function Redaction() {
         setText('')
         setCategory('')
         setPictureUri('')
-        setVideoId('')
+        setVideoLink('')
         setAuthor('')
         setImgPublicId('')
         imgMarginTopRef.current = 0
@@ -287,7 +289,7 @@ export default function Redaction() {
             sub_title: subTitle,
             text,
             author,
-            video_id: videoId,
+            video_id,
             category,
             date,
             _id,
@@ -353,9 +355,9 @@ export default function Redaction() {
                     value={author}>
                 </TextInput>
                 <TextInput style={styles.smallInput}
-                    placeholder="ID Youtube de la vidéo"
-                    onChangeText={(e) => setVideoId(e)}
-                    value={videoId}
+                    placeholder="Lien de la vidéo Youtube"
+                    onChangeText={(e) => setVideoLink(e)}
+                    value={videoLink}
                 >
                 </TextInput>
 
