@@ -76,7 +76,7 @@ export default function Bookmarks() {
     // useFocusEffect
 
     useFocusEffect(useCallback(() => {
-        // checkPushTokenChanges()
+        checkPushTokenChanges()
         loadArticles()
     }, [user, articles]))
 
