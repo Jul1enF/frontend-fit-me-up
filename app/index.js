@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, StyleSheet, Dimensions, StatusBar, Platform } from 'react-native'
 import Signup from '../components/Signup'
 import Signin from '../components/Signin';
 import { LinearGradient } from 'expo-linear-gradient'
@@ -10,7 +10,7 @@ import { router, useFocusEffect } from 'expo-router'
 import { useSelector } from 'react-redux'
 
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const RPH = (percentage) => {
@@ -149,8 +149,7 @@ export default function Index() {
 
 const styles = StyleSheet.create({
     body: {
-        height: RPH(100),
-        width: RPW(100),
+       flex : 1,
         backgroundColor: "black"
     },
     header: {

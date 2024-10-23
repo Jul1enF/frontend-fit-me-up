@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Image, StatusBar, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import moment from 'moment/min/moment-with-locales'
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const RPH = (percentage) => {

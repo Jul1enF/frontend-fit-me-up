@@ -1,12 +1,14 @@
 import { Tabs } from "expo-router";
 import Header from "../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { keyboardVisible } from "../../modules/keyboardVisible";
 
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
+const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
 const RPH = (percentage) => {
   return (percentage / 100) * screenHeight;
@@ -20,7 +22,7 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={({ route }) => ({
-
+        keyboardHidesTabBar: true,
         tabBarIcon: ({ focused }) => {
           let iconName = '';
           let color = ""
@@ -51,7 +53,10 @@ export default function TabsLayout() {
             style={{ height: 150 }}
           ></LinearGradient>
         ),
-        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1), borderTopWidth: RPH(0.05) },
+        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1)},
+        // marginBottom : keyboardVisible() ? -300 : 0
+        //  borderTopWidth: RPH(0.05), position : "absolute", top : RPH(89.5) 
+        tabBarHideOnKeyboard : true,
         header: (props) => <Header {...props} />,
       })}
     >

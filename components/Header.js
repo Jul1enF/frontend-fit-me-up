@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,8 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { router, usePathname } from "expo-router";
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
+const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
 const RPH = (percentage) => {
     return (percentage / 100) * screenHeight;
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         position: "absolute",
-        top: RPH(14),
+        top: RPH(14) - statusHeight,
         height: RPH(6),
         width: RPW(100),
         backgroundColor: "#2e2e2e",
@@ -257,14 +258,14 @@ const styles = StyleSheet.create({
         width: RPW(80),
         backgroundColor: "#2e2e2e",
         position: "absolute",
-        top: RPH(13.9),
+        top: RPH(13.9) - statusHeight,
     },
     modalBody2: {
         height: RPH(69.5),
         width: RPW(80),
         backgroundColor: "#2e2e2e",
         position: "absolute",
-        top: RPH(20),
+        top: RPH(20) - statusHeight,
     },
     linkContainer: {
         height: RPH(13),

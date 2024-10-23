@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, TouchableOpacity, Image, Platform, ScrollView, PanResponder } from "react-native";
+import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, TouchableOpacity, Image, Platform, ScrollView, PanResponder, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from "react-redux";
@@ -6,12 +6,11 @@ import { addTestArticle, deleteTestArticle } from "../../../reducers/testArticle
 import { router, useFocusEffect } from 'expo-router'
 
 import * as ImagePicker from 'expo-image-picker'
-import Slider from '@react-native-community/slider'
 
 import JWT, { SupportedAlgorithms } from 'expo-jwt';
 const jwtKey = process.env.EXPO_PUBLIC_JWT_KEY
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const RPH = (percentage) => {

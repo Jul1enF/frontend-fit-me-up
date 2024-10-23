@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Dimensions, ScrollView, Image, TouchableOpacity, Platform, StatusBar } from "react-native";
 import { useEffect, useState, useCallback } from 'react'
 import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import YoutubePlayer from "react-native-youtube-iframe";
 import moment from 'moment/min/moment-with-locales'
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const RPH = (percentage) => {

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, StatusBar, Platform } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState, useEffect } from 'react'
@@ -14,7 +14,7 @@ import { logout, changePushToken } from '../../../reducers/user'
 
 
 
-const screenHeight = Dimensions.get('window').height;
+const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 
 const RPH = (percentage) => {
