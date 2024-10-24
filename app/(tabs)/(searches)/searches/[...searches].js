@@ -91,6 +91,7 @@ export default function Searches() {
     if (!articlesInfos) {
         return (
             <View style={styles.body2} >
+                <StatusBar translucent={true} barStyle="light"/>
                 <Text style={styles.title2}>Aucun résultat pour votre recherche « {searchText} ».</Text>
                 <LinearGradient
                     colors={['#7700a4', '#0a0081']}
@@ -108,6 +109,7 @@ export default function Searches() {
 
     return (
         <View style={styles.body} >
+            <StatusBar translucent={true} barStyle="light"/>
             <FlatList
                 data={articlesInfos}
                 ListHeaderComponent={headerFlatlist}

@@ -7,6 +7,7 @@ import testArticle from '../reducers/testArticle'
 import articles from '../reducers/articles'
 
 import { useEffect, useRef, useState } from 'react';
+// import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -18,7 +19,7 @@ import * as Notifications from 'expo-notifications';
 const store = configureStore({
     reducer: { user, testArticle, articles },
     middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false })
+        getDefaultMiddleware({ serializableCheck: false })
 })
 
 export default function RootLayout() {
@@ -82,14 +83,16 @@ export default function RootLayout() {
 
     return (
         <Provider store={store}>
-            <Stack >
-                <Stack.Screen name="index" options={{
-                    headerShown: false,
-                }} />
-                <Stack.Screen name="(tabs)" options={{
-                    headerShown: false,
-                }} />
-            </Stack>
+            {/* <KeyboardProvider> */}
+                <Stack >
+                    <Stack.Screen name="index" options={{
+                        headerShown: false,
+                    }} />
+                    <Stack.Screen name="(tabs)" options={{
+                        headerShown: false,
+                    }} />
+                </Stack>
+            {/* </KeyboardProvider> */}
         </Provider>
     )
 }

@@ -4,7 +4,6 @@ import Signin from '../components/Signin';
 import { LinearGradient } from 'expo-linear-gradient'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-
 import { useState, useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router'
 import { useSelector } from 'react-redux'
@@ -57,6 +56,7 @@ export default function Index() {
 
     return (
         <View style={styles.body} >
+            <StatusBar translucent={true} barStyle="light"/>
             <LinearGradient style={styles.header}
                 // colors={['#ffd500', '#fd8600']}
                 //  colors={['#97002e', '#450150']}

@@ -209,6 +209,7 @@ export default function Article() {
 
     return (
         <View style={styles.body}>
+            <StatusBar translucent={true} barStyle="light"/>
             <LinearGradient
                 colors={['#7700a4', '#0a0081']}
                 locations={[0.05, 1]}

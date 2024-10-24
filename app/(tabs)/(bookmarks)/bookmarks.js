@@ -93,6 +93,7 @@ export default function Bookmarks() {
     if (!articlesInfos) {
         return (
             <View style={styles.body2} >
+                <StatusBar translucent={true} barStyle="light"/>
                 <Text style={styles.title}>Aucun article enregistré.</Text>
                 <LinearGradient
                     colors={['#7700a4', '#0a0081']}
@@ -111,6 +112,7 @@ export default function Bookmarks() {
 
     return (
         <View style={styles.body} contentContainerStyle={styles.contentBody}>
+            <StatusBar translucent={true} barStyle="light"/>
             <FlatList
                 data={articlesInfos}
                 renderItem={({ item, index }) => {

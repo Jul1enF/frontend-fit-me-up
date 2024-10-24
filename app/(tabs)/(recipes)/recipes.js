@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, StatusBar } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState, useEffect } from 'react'
@@ -95,6 +95,7 @@ export default function Recipes() {
 
     return (
         <View style={styles.body} contentContainerStyle={styles.contentBody}>
+            <StatusBar translucent={true} barStyle="light"/>
             <FlatList
                 data={articlesInfos}
                 refreshControl={refreshComponent}
