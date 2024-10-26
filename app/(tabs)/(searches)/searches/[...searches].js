@@ -6,22 +6,11 @@ import { useState, useEffect } from 'react'
 
 import FirstArticle from '../../../../components/FirstArticle'
 import Article from '../../../../components/Article'
+import { RPH, RPW } from "../../../../modules/dimensions"
 
 import { router, useLocalSearchParams } from 'expo-router'
 
 import { useSelector } from 'react-redux'
-
-
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 
 

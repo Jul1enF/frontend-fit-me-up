@@ -6,21 +6,11 @@ import { login } from '../reducers/user'
 import { router } from 'expo-router';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import { RPH, RPW} from "../modules/dimensions"
 
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 
-
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 

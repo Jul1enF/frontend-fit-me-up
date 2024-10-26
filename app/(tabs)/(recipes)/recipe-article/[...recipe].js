@@ -4,6 +4,7 @@ import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../../../../reducers/user";
 import { addTestArticle } from "../../../../reducers/testArticle";
+import { RPH, RPW} from "../../../../modules/dimensions"
 
 import { useLocalSearchParams, router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -13,17 +14,6 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import YoutubePlayer from "react-native-youtube-iframe";
 import moment from 'moment/min/moment-with-locales'
-
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 
 export default function Article() {

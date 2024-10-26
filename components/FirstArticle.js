@@ -1,18 +1,9 @@
 import { View, Text, StyleSheet, Dimensions, Image, Platform, StatusBar } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
+import {RPH, RPW} from "../modules/dimensions"
 
 import moment from 'moment/min/moment-with-locales'
 
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 export default function FirstArticle(props) {
 

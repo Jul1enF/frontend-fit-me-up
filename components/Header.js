@@ -8,18 +8,10 @@ import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { router, usePathname } from "expo-router";
+import {RPH, RPW } from "../modules/dimensions"
 
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
+
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 export default function Header() {
 
@@ -86,6 +78,7 @@ export default function Header() {
 
     return (
         <View style={styles.body}>
+             <StatusBar translucent={true} barStyle="light"/>
             <LinearGradient style={styles.header}
                 colors={['#7700a4', '#0a0081']}
                 locations={[0, 0.9]}
@@ -176,12 +169,14 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     body: {
+        // borderTopWidth : 4,
+        // borderTopColor : "green",
         height: RPH(14),
         width: RPW(100),
     },
     header: {
-        flex: 1,
-        paddingTop: RPH(4),
+       flex : 1,
+        paddingTop: RPH(4) - (statusHeight/2),
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",

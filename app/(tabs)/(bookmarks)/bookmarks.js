@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity, Dimensions, StatusB
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState, useEffect } from 'react'
+import {RPH, RPW} from "../../../modules/dimensions"
 
 import FirstArticle from '../../../components/FirstArticle'
 import Article from '../../../components/Article'
@@ -14,18 +15,6 @@ import { logout, changePushToken } from '../../../reducers/user'
 
 
 
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
-
-
 
 export default function Bookmarks() {
 
@@ -34,7 +23,6 @@ export default function Bookmarks() {
     const dispatch = useDispatch()
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
-
 
     // Fonction pour gérer les potentiels changement de push token
 
@@ -76,7 +64,7 @@ export default function Bookmarks() {
     // useFocusEffect
 
     useFocusEffect(useCallback(() => {
-        checkPushTokenChanges()
+        // checkPushTokenChanges()
         loadArticles()
     }, [user, articles]))
 

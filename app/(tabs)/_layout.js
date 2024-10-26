@@ -3,19 +3,9 @@ import Header from "../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions, Platform, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
+import {RPH, RPW, getNavigationHeight } from "../../modules/dimensions"
 
 
-
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-  return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-  return (percentage / 100) * screenWidth;
-};
 
 export default function TabsLayout() {
   return (
@@ -52,8 +42,9 @@ export default function TabsLayout() {
             style={{ height: 150 }}
           ></LinearGradient>
         ),
-        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1)},
-        tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
+        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1) },
+        // tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
+        tabBarHideOnKeyboard : Platform.OS === 'android' ? true : false,
         header: (props) => <Header {...props} />,
       })}
     >

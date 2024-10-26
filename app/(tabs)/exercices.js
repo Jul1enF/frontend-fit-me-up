@@ -1,4 +1,5 @@
 import {View, Text} from 'react-native'
+import {RPH, RPW} from "../../modules/dimensions"
 
 export default function Exercices () {
 
@@ -7,4 +8,5 @@ export default function Exercices () {
         <Text> HELLO IT'S EXERCICES !!</Text>
         </View>
     )
+
 }

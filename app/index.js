@@ -7,23 +7,12 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { useState, useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router'
 import { useSelector } from 'react-redux'
+import { RPH, RPW } from '../modules/dimensions'
 
-
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 
 
 export default function Index() {
-
 
     // Si user connecté, redirection vers 1ère page Tab
 
@@ -51,7 +40,6 @@ export default function Index() {
     const closeModal2 = () => {
         setModal2VIsible(false)
     }
-
 
 
     return (

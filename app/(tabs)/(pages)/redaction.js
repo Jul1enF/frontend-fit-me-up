@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { addTestArticle, deleteTestArticle } from "../../../reducers/testArticle";
 import { router, useFocusEffect } from 'expo-router'
+import {RPH, RPW} from "../../../modules/dimensions"
 
 import * as ImagePicker from 'expo-image-picker'
 
@@ -12,16 +13,6 @@ import * as ImagePicker from 'expo-image-picker'
 import JWT, { SupportedAlgorithms } from 'expo-jwt';
 const jwtKey = process.env.EXPO_PUBLIC_JWT_KEY
 
-const screenHeight = Platform.OS === 'android' ? Dimensions.get('window').height + StatusBar.currentHeight : Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-
-const RPH = (percentage) => {
-    return (percentage / 100) * screenHeight;
-};
-
-const RPW = (percentage) => {
-    return (percentage / 100) * screenWidth;
-};
 
 export default function Redaction() {
 
