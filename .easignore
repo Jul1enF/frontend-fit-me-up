@@ -36,8 +36,3 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# firebase private key
-fit-me-up-94720-firebase-adminsdk-zc0ys-1fe8110af0.json
-
-# fichier google services pour firebase
-google-services.json

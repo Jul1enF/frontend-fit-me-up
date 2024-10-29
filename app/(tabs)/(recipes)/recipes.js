@@ -32,13 +32,12 @@ export default function Recipes() {
 
         if (!pushTokenInfos) {
             dispatch(logout())
-            router.push('/')
+            router.navigate('/')
         }
         if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
             dispatch(changePushToken(pushTokenInfos.change))
         }
     }
-
 
     //  État et fonction pour charger les articles
 
@@ -94,7 +93,7 @@ export default function Recipes() {
 
 
     return (
-        <View style={styles.body} contentContainerStyle={styles.contentBody}>
+        <View style={styles.body} >
             <StatusBar translucent={true} barStyle="light"/>
             <FlatList
                 data={articlesInfos}

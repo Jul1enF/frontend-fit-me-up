@@ -59,9 +59,9 @@ export default function Header() {
         console.log(data)
 
         // Reducer logout, fermeture du menu et push vers page d'accueil
-        dispatch(logout())
         setMenuVisible(false)
-        router.push('/')
+        dispatch(logout())
+        router.navigate('/')
     }
 
     
@@ -86,7 +86,7 @@ export default function Header() {
                 end={{ x: 1, y: 0.5 }}
             >
                 <View style={styles.menuIconContainer}>
-                    <FontAwesome name="navicon" style={styles.icon} size={RPH(3.8)} onPress={() => setMenuVisible(!menuVisible)} />
+                    <FontAwesome name="navicon" style={styles.icon} size={RPW(7)} onPress={() => setMenuVisible(!menuVisible)} />
                 </View>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
@@ -94,7 +94,7 @@ export default function Header() {
                     </Text>
                 </View>
                 <View style={styles.searchIconContainer}>
-                    <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(3.5)} onPress={() => setSearchVisible(!searchVisible)} />
+                    <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPW(6.5)} onPress={() => setSearchVisible(!searchVisible)} />
                 </View>
             </LinearGradient>
             <View style={styles.headerLigne}></View>
@@ -158,6 +158,14 @@ export default function Header() {
                             <Text style={styles.link}>Écrire / Modifier un article</Text>
                         </TouchableOpacity>
                     }
+                     {user.is_admin &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
+                            setMenuVisible(false)
+                            router.push('/notifications')
+                        }}>
+                            <Text style={styles.link}>Notifications</Text>
+                        </TouchableOpacity>
+                    }
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Contacts</Text>
                     </TouchableOpacity>
@@ -195,7 +203,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        fontSize: RPH(4.5),
+        // fontSize: RPH(4.5),
+        fontSize: RPW(8.5),
         color: "white",
         letterSpacing: 2.5,
         fontWeight: "600",

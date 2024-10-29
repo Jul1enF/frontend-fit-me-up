@@ -447,7 +447,7 @@ const styles = StyleSheet.create({
         borderRadius : 10,
         paddingTop : RPH(4),
         paddingBottom : RPH(4),
-        backgroundColor: "#2e2e2e",
+        backgroundColor: "#222222",
         position: "absolute",
         bottom: RPH(11),
         justifyContent : "space-between"

@@ -9,8 +9,7 @@ export default function RootLayout() {
             <Stack.Screen name="bookmarks" options={{
                 title : "Favoris",
             }} />
-            <Stack.Screen name="bookmark-article/[...bookmark]" options={{
-            }}/>
+            <Stack.Screen name="bookmark-article/[...bookmark]"/>
         </Stack>
     )
 }

@@ -32,7 +32,7 @@ export default function Bookmarks() {
 
         if (!pushTokenInfos) {
             dispatch(logout())
-            router.push('/')
+            router.navigate('/')
         }
         if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
             dispatch(changePushToken(pushTokenInfos.change))
@@ -99,7 +99,7 @@ export default function Bookmarks() {
 
 
     return (
-        <View style={styles.body} contentContainerStyle={styles.contentBody}>
+        <View style={styles.body} >
             <StatusBar translucent={true} barStyle="light"/>
             <FlatList
                 data={articlesInfos}

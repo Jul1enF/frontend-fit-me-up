@@ -5,6 +5,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import user from '../reducers/user'
 import testArticle from '../reducers/testArticle'
 import articles from '../reducers/articles'
+import cronsNotifications from "../reducers/cronsNotifications";
 
 import { useEffect, useRef, useState } from 'react';
 // import { KeyboardProvider } from "react-native-keyboard-controller";
@@ -17,7 +18,7 @@ import * as Notifications from 'expo-notifications';
 
 
 const store = configureStore({
-    reducer: { user, testArticle, articles },
+    reducer: { user, testArticle, articles, cronsNotifications },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({ serializableCheck: false })
 })

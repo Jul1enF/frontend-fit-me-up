@@ -81,7 +81,9 @@ export default function Redaction() {
     const [resizing, setResizing] = useState(false)
     const [scrollable, setScrollable] = useState(true)
 
+    // État pour désactiver le bouton publier en attendant la fin de la requête
 
+    const [publishEnabled, setPublishEnabled]=useState(true)
 
 
     // Fonction appelée en cliquant sur Annuler recadrage pour reseter les états et refs
@@ -188,6 +190,7 @@ export default function Redaction() {
         }
     }
 
+
     // Fonction appelée en cliquant sur Tester
 
     const testPress = () => {
@@ -259,6 +262,9 @@ export default function Redaction() {
             return
         }
 
+        if (!publishEnabled){ return }
+        setPublishEnabled(false)
+
         // Mise en forme des inputs pour leur envoi
         const _id = testArticle.length > 0 ? testArticle[0]._id : "testArticleId"
         const date = testArticle.length > 0 ? testArticle[0].createdAt : new Date()
@@ -302,14 +308,18 @@ export default function Redaction() {
         const data = await response.json()
 
         if (data.result) {
+            router.push(`/${category}`)
             cancelPress()
+            setPublishEnabled(true)
         }
         else if (data.error) {
             setError(data.error)
+            setPublishEnabled(true)
             setTimeout(() => setError(''), "4000")
         }
         else {
             setError("Problème de connexion, merci de voir avec le webmaster")
+            setPublishEnabled(true)
             setTimeout(() => setError(''), "4000")
         }
     }
@@ -439,6 +449,7 @@ export default function Redaction() {
                 >
                     <TouchableOpacity style={resizing ? styles.btn2 : styles.btn} onPress={() => {
                         resizingRef.current = !resizingRef.current
+                        resizing && setScrollable(true)
                         setResizing(!resizing)
                     }}>
                         <Text style={styles.btn2Text}> Recadrer l'image</Text>

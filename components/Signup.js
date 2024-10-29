@@ -32,6 +32,8 @@ export default function Signup(props) {
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [password2Visible, setPassword2Visible] = useState(false)
 
+    const [registerEnabled, setRegisterEnabled] = useState(true)
+
     const [offsetKeyboard, setOffsetKeyboard] = useState(-RPH(2))
 
 
@@ -53,8 +55,12 @@ export default function Signup(props) {
             setError("Adresse mail non valide !")
         }
         else {
+            // Désactivation du bouton en cas de temps d'attente pour éviter double click / double post 
+            if (!registerEnabled){ return}
+            setRegisterEnabled(false)
+
             const response = await fetch(`${url}/users/signup`, {
-                method: 'POST',
+                method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     name,
@@ -67,6 +73,7 @@ export default function Signup(props) {
 
             if (!data.result) {
                 setError(data.error)
+                setRegisterEnabled(true)
             }
             else {
                 dispatch(login({
@@ -79,6 +86,7 @@ export default function Signup(props) {
                 }))
                 props.closeModal2()
                 router.push("/recipes")
+                setRegisterEnabled(true)
             }
         }
     }
