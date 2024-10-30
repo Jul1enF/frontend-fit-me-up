@@ -9,7 +9,7 @@ export default function CronNotification(props) {
 
     let month = props.month.replace("12", "Décembre").replace("11", "Novembre").replace("10", "Octobre").replace("9", "Septembre").replace("8", "Août").replace("7", "Juillet").replace("6", "Juin").replace("5", "Mai").replace("4", "Avril").replace("3", "Mars").replace("2", "Février").replace("1", "Janvier").replace(",", ", ")
 
-    month = month + "."
+    month = month + ","
 
     let monthDesignation = ""
 
@@ -59,7 +59,7 @@ export default function CronNotification(props) {
                 <View style={styles.row2}>
                 <Text style={styles.text2}>Envoyée : </Text>
                     <Text style={styles.text3}>
-                        À {props.hour}:{props.minute.length==1 && "0"}{props.minute} tous les {props.day} {monthDesignation} {month}
+                        À {props.hour}:{props.minute.length==1 && "0"}{props.minute} tous les {props.day} {monthDesignation} {month} tous les ans.
                     </Text>
                 </View>
                 <View style={styles.btnContainer}>
@@ -71,7 +71,7 @@ export default function CronNotification(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.btnGradientContainer}
                     >
-                        <Text style={styles.text2}>Modifier</Text>
+                        <Text style={styles.text4}>Modifier</Text>
                     </LinearGradient>
                     </TouchableOpacity>
                 </View>
@@ -131,14 +131,19 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     btnTouchable : {
-        width : RPW(26),
-        height : RPW(8),
-        marginTop : 8
+        width: RPW(29),
+        height: RPW(9),
+        marginTop : 10
     },
     btnGradientContainer : {
         flex : 1,
-        borderRadius : 5,
+        borderRadius : 10,
         alignItems : "center",
         justifyContent : "center"
-    }
+    },
+    text4 : {
+        color: "#e0e0e0",
+        fontSize: RPW(4.8),
+        fontWeight: "600",
+    },
 })

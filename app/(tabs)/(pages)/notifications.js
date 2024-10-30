@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Modal from "react-native-modal"
 
 import { useFocusEffect } from 'expo-router'
-import { useCallback, useState } from 'react'
+import { useCallback, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCronsNotifications } from '../../../reducers/cronsNotifications'
 
@@ -63,11 +63,11 @@ export default function Notifications() {
 
     // Fonction appelée en cliquant sur Poster (définitif) et État pour la désactiver en attendant la validation
 
-    const [postEnabled, setPostEnabled] = useState(true)
+    const postRef = useRef(true)
 
     const finalPostPress = async () => {
-        if (!postEnabled){ return }
-        setPostEnabled(false)
+        if (!postRef.current){ return }
+        postRef.current = false
 
         const response = await fetch(`${url}/notifications/send-notification`, {
             method: 'PUT',
@@ -78,19 +78,22 @@ export default function Notifications() {
             })
         })
         const data = await response.json()
+        console.log("data :", data)
 
         if (data.result){
             setModalVisible(false)
-            setPostEnabled(true)
             setTitle('')
             setMessage('')
+
+            postRef.current = true
 
             setError("Message posté !")
             setTimeout(() => setError(''), "2000")
         }
         else{
             setModalVisible(false)
-            setPostEnabled(true)
+            
+            postRef.current = true
 
             setError("Erreur lors de l'envoi de la notification. Contactez le webmaster")
             setTimeout(() => setError(''), "3000")
@@ -168,7 +171,7 @@ export default function Notifications() {
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientLine}
+                    style={styles.gradientLine3}
                 >
                 </LinearGradient>
 
@@ -292,8 +295,8 @@ const styles = StyleSheet.create({
     btnContainer: {
         width: "100%",
         alignItems: "center",
-        marginTop: 10,
-        marginBottom: 45,
+        marginTop: 5,
+        marginBottom: 50,
     },
     btnTouchable: {
         width: RPW(30),
@@ -307,8 +310,13 @@ const styles = StyleSheet.create({
     },
     text1: {
         color: "#e0e0e0",
-        fontSize: 20,
+        fontSize: RPW(5.4),
         fontWeight: "600",
+    },
+    gradientLine3: {
+        width: "90%",
+        height: 4,
+        marginBottom: 20,
     },
     modal: {
         alignItems: "center"

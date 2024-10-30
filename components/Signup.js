@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform, StatusBar, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user'
 import { router } from 'expo-router';
@@ -32,13 +32,13 @@ export default function Signup(props) {
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [password2Visible, setPassword2Visible] = useState(false)
 
-    const [registerEnabled, setRegisterEnabled] = useState(true)
-
     const [offsetKeyboard, setOffsetKeyboard] = useState(-RPH(2))
 
 
 
     // Fonction appelée au click sur s'inscrire
+
+    const registerRef = useRef(true)
 
     const registerClick = async () => {
         Keyboard.dismiss()
@@ -56,8 +56,8 @@ export default function Signup(props) {
         }
         else {
             // Désactivation du bouton en cas de temps d'attente pour éviter double click / double post 
-            if (!registerEnabled){ return}
-            setRegisterEnabled(false)
+            if (!registerRef.current){ return}
+            registerRef.current = false
 
             const response = await fetch(`${url}/users/signup`, {
                 method: 'PUT',
@@ -73,7 +73,7 @@ export default function Signup(props) {
 
             if (!data.result) {
                 setError(data.error)
-                setRegisterEnabled(true)
+                registerRef.current = true
             }
             else {
                 dispatch(login({
@@ -86,7 +86,7 @@ export default function Signup(props) {
                 }))
                 props.closeModal2()
                 router.push("/recipes")
-                setRegisterEnabled(true)
+                registerRef.current = true
             }
         }
     }
