@@ -6,7 +6,7 @@ import { login } from '../reducers/user'
 import { router } from 'expo-router';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import { RPH, RPW} from "../modules/dimensions"
+import { RPH, RPW } from "../modules/dimensions"
 
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
@@ -56,7 +56,7 @@ export default function Signup(props) {
         }
         else {
             // Désactivation du bouton en cas de temps d'attente pour éviter double click / double post 
-            if (!registerRef.current){ return}
+            if (!registerRef.current) { return }
             registerRef.current = false
 
             const response = await fetch(`${url}/users/signup`, {
@@ -99,155 +99,159 @@ export default function Signup(props) {
         //     bottomOffset={RPH(3)}
         // >
 
-            <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={offsetKeyboard} style={styles.body}>
+
+
                 <View style={styles.contentBody}>
-            <View style={styles.closeContainer}>
-                <Icon name="close" onPress={() => props.closeModal2()} color="white" size={RPH(4)} ></Icon>
-            </View>
+                    <View style={styles.closeContainer}>
+                        <Icon name="close" onPress={() => props.closeModal2()} color="white" size={RPH(4)} ></Icon>
+                    </View>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.input}
-                    onChangeText={(e) => {
-                        setFirstname(e)
-                        setError('')
-                    }}
-                    value={firstname}
-                    placeholder='Prénom'
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    onFocus={() => setOffsetKeyboard(RPH(3))}>
-                </TextInput>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.input}
+                            onChangeText={(e) => {
+                                setFirstname(e)
+                                setError('')
+                            }}
+                            value={firstname}
+                            placeholder='Prénom'
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            onFocus={() => setOffsetKeyboard(RPH(3))}>
+                        </TextInput>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.input}
-                    onChangeText={(e) => {
-                        setName(e)
-                        setError('')
-                    }}
-                    value={name}
-                    placeholder='Nom'
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    onFocus={() => setOffsetKeyboard(-RPH(2))}>
-                </TextInput>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.input}
+                            onChangeText={(e) => {
+                                setName(e)
+                                setError('')
+                            }}
+                            value={name}
+                            placeholder='Nom'
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
+                        </TextInput>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.input}
-                    onChangeText={(e) => {
-                        setEmail(e)
-                        setError('')
-                    }}
-                    value={email}
-                    placeholder='Email'
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                    onFocus={() => setOffsetKeyboard(-RPH(2))}>
-                </TextInput>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.input}
+                            onChangeText={(e) => {
+                                setEmail(e)
+                                setError('')
+                            }}
+                            value={email}
+                            placeholder='Email'
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            keyboardType='email-address'
+                            autoCapitalize='none'
+                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
+                        </TextInput>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.password}
-                    onChangeText={(e) => {
-                        setPassword(e)
-                        setError('')
-                    }}
-                    value={password}
-                    placeholder='Mot de passe'
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    secureTextEntry={!passwordVisible}
-                    onFocus={() => setOffsetKeyboard(-RPH(2))} >
-                </TextInput>
-                <FontAwesome
-                    name={passwordVisible ? "eye-slash" : "eye"} color="rgba(255,255,255,0.4)" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
-                </FontAwesome>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.password}
+                            onChangeText={(e) => {
+                                setPassword(e)
+                                setError('')
+                            }}
+                            value={password}
+                            placeholder='Mot de passe'
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            secureTextEntry={!passwordVisible}
+                            onFocus={() => setOffsetKeyboard(-RPH(2))} >
+                        </TextInput>
+                        <FontAwesome
+                            name={passwordVisible ? "eye-slash" : "eye"} color="rgba(255,255,255,0.4)" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
+                        </FontAwesome>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.password}
-                    onChangeText={(e) => {
-                        setPassword2(e)
-                        setError('')
-                    }}
-                    value={password2}
-                    placeholder='Confirmation mot de passe'
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    secureTextEntry={!password2Visible}
-                    onFocus={() => setOffsetKeyboard(RPH(23))}
-                    onBlur={() => setOffsetKeyboard(0)} >
-                </TextInput>
-                <FontAwesome
-                    name={password2Visible ? "eye-slash" : "eye"} color="rgba(255,255,255,0.4)" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
-                </FontAwesome>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.password}
+                            onChangeText={(e) => {
+                                setPassword2(e)
+                                setError('')
+                            }}
+                            value={password2}
+                            placeholder='Confirmation mot de passe'
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            secureTextEntry={!password2Visible}
+                            onFocus={() => setOffsetKeyboard(RPH(23))}
+                            onBlur={() => setOffsetKeyboard(0)} >
+                        </TextInput>
+                        <FontAwesome
+                            name={password2Visible ? "eye-slash" : "eye"} color="rgba(255,255,255,0.4)" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
+                        </FontAwesome>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.gradientContainer}
-                colors={['#49158f', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TextInput style={styles.input}
-                    onChangeText={(e) => {
-                        setAppCode(e)
-                        setError('')
-                    }}
-                    value={appCode}
-                    placeholder="Code de l'application (optionnel)"
-                    placeholderTextColor='rgba(255,255,255,0.4)'
-                    onFocus={() => setOffsetKeyboard(RPH(30))}
-                    onBlur={() => setOffsetKeyboard(0)}
-                >
-                </TextInput>
-            </LinearGradient>
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.input}
+                            onChangeText={(e) => {
+                                setAppCode(e)
+                                setError('')
+                            }}
+                            value={appCode}
+                            placeholder="Code de l'application (optionnel)"
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            onFocus={() => setOffsetKeyboard(RPH(30))}
+                            onBlur={() => setOffsetKeyboard(0)}
+                        >
+                        </TextInput>
+                    </LinearGradient>
 
-            <LinearGradient
-                style={styles.registerContainer}
-                colors={['#7700a4', '#0a0081']}
-                locations={[0, 0.9]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-            >
-                <TouchableOpacity style={styles.registerBtn} onPress={() => registerClick()}>
-                    <Text style={styles.registerSentence}>
-                        S'inscrire
-                    </Text>
-                </TouchableOpacity>
-            </LinearGradient>
-            <Text style={styles.error}>{error}</Text>
-            </View>
+                    <LinearGradient
+                        style={styles.registerContainer}
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TouchableOpacity style={styles.registerBtn} onPress={() => registerClick()}>
+                            <Text style={styles.registerSentence}>
+                                S'inscrire
+                            </Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <Text style={styles.error}>{error}</Text>
+                </View>
+
+                
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
 

@@ -7,10 +7,10 @@ export default function Months(props) {
 
     const monthPress = () => {
         if (props.isSelected){
-            props.removeOneMonth(`${props.i +1}`)
+            props.removeOneMonth(props.i +1)
         }
         else{
-            props.addOneMonth(`${props.i +1}`)
+            props.addOneMonth(props.i +1)
         }
     }
 

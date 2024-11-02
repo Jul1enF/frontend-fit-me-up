@@ -1,7 +1,8 @@
-import { Text, View, StyleSheet, FlatList, RefreshControl, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity, StatusBar, Platform } from 'react-native'
+import { Text, View, StyleSheet, FlatList, RefreshControl, TextInput, Keyboard, TouchableOpacity, StatusBar, Platform } from 'react-native'
 import CronNotification from '../../../components/CronNotification'
 import { LinearGradient } from 'expo-linear-gradient'
 import Modal from "react-native-modal"
+import { router } from 'expo-router'
 
 import { useFocusEffect } from 'expo-router'
 import { useCallback, useState, useRef } from 'react'
@@ -12,10 +13,13 @@ import { RPH, RPW } from '../../../modules/dimensions'
 
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
+
+
 export default function Notifications() {
 
     const dispatch = useDispatch()
     const cronsNotifications = useSelector((state) => state.cronsNotifications.value)
+    console.log(cronsNotifications)
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
@@ -26,12 +30,12 @@ export default function Notifications() {
     const [modalVisible, setModalVisible] = useState(false)
 
 
-
     // Fonction pour télécharger la liste des notifications programmées depuis la bdd
 
     const loadCronsNotifications = async () => {
         const response = await fetch(`${url}/notifications/get-crons-notifications`)
         const data = await response.json()
+ 
         if (data.result) {
             dispatch(addCronsNotifications(data.cronsNotifications))
         }
@@ -50,7 +54,8 @@ export default function Notifications() {
 
     const [error, setError]=useState("")
 
-    const firstPostPress = () => {
+    const firstPostPress = async () => {
+        await Keyboard.dismiss()
         if (!title || !message){
             setError('Erreur : titre ou message manquant.')
             return
@@ -66,6 +71,7 @@ export default function Notifications() {
     const postRef = useRef(true)
 
     const finalPostPress = async () => {
+
         if (!postRef.current){ return }
         postRef.current = false
 
@@ -78,7 +84,6 @@ export default function Notifications() {
             })
         })
         const data = await response.json()
-        console.log("data :", data)
 
         if (data.result){
             setModalVisible(false)
@@ -111,14 +116,13 @@ export default function Notifications() {
     const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), "500")
-        loadCronsNotifications()
+        loadCronsNotifications() 
     }} />
 
 
     // Composants au dessus de la FLatlist
 
     const topComponents = (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.topContainer}>
                 <Text style={styles.title}>Poster une notification :</Text>
                 <LinearGradient
@@ -130,8 +134,9 @@ export default function Notifications() {
                 >
                 </LinearGradient>
                 <TextInput style={styles.input}
-                    onChangeText={(value) => {setTitle(value)
-                        setError('')
+                    onChangeText={(value) => {
+                        setTitle(value)
+                        if (value !== ""){setError("")}
                     }}
                     value={title}
                     placeholder="Titre"
@@ -139,8 +144,8 @@ export default function Notifications() {
                     maxLength={28}>
                 </TextInput>
                 <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
-                    onChangeText={(value) =>{ 
-                        setError("")
+                    onChangeText={(value) =>{
+                        if (value !== ""){setError("")}
                         setMessage(value)}}
                     value={message}
                     placeholder="Message"
@@ -174,6 +179,8 @@ export default function Notifications() {
                     style={styles.gradientLine3}
                 >
                 </LinearGradient>
+                
+
 
 
                 <Modal
@@ -238,20 +245,42 @@ export default function Notifications() {
                     </View>
                 </Modal>
 
-
             </View>
-        </TouchableWithoutFeedback>
+
     )
 
 
 
+
+    // Composants / Bouton à afficher en bas de la flatlist
+
+    const bottomComponents =  <View style={styles.btnContainer3}>
+    <TouchableOpacity style={styles.btnTouchable2} activeOpacity={0.8} onPress={() => router.push("/cron-notification-page/new")}>
+        <LinearGradient
+            colors={['#7700a4', '#0a0081']}
+            locations={[0.05, 1]}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
+            style={styles.btnGradientContainer2}
+        >
+            <Text style={styles.text2}>Ajouter une notification</Text>
+            <Text style={styles.text2}>programmée</Text>
+        </LinearGradient>
+    </TouchableOpacity>
+</View>
+
+
+
     return (
+
         <FlatList
             data={cronsNotifications}
             ListHeaderComponent={topComponents}
+            ListFooterComponent={bottomComponents}
             refreshControl={refreshComponent}
-            renderItem={({ item }) => {
-                return <CronNotification {...item} />
+            keyboardShouldPersistTaps="handled"
+            renderItem={({ item, index }) => {
+                if(cronsNotifications.length>0) {return <CronNotification {...item} number={index + 1} />}
             }}
             contentContainerStyle={{ alignItems: 'center' }}
             style={{ flex: 1, backgroundColor: "black" }}
@@ -269,8 +298,9 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
-        paddingTop: RPW(4),
+        paddingTop: RPW(6),
         marginBottom: 9,
+        justifyContent : "flex-start"
     },
     title: {
         color: "#e0e0e0",
@@ -296,7 +326,7 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         marginTop: 5,
-        marginBottom: 50,
+        marginBottom: 30,
     },
     btnTouchable: {
         width: RPW(30),
@@ -318,6 +348,29 @@ const styles = StyleSheet.create({
         height: 4,
         marginBottom: 20,
     },
+    btnContainer3: {
+        width: "100%",
+        alignItems: "center",
+        marginTop: 5,
+        marginBottom: 28,
+    },
+    btnTouchable2: {
+        width: RPW(65),
+        height: RPW(18),
+    },
+    btnGradientContainer2: {
+        flex: 1,
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: "center",
+   
+    },
+    text2: {
+        color: "#e0e0e0",
+        fontSize: RPW(5.4),
+        fontWeight: "600",
+        textAlign : "center"
+    },
     modal: {
         alignItems: "center"
     },
@@ -337,7 +390,7 @@ const styles = StyleSheet.create({
     },
     modalText: {
         color: "#e0e0e0",
-        fontSize: RPW(5),
+        fontSize: RPW(6),
         fontWeight: "600",
         textAlign: "center",
         paddingLeft: RPW(5),
@@ -356,13 +409,13 @@ const styles = StyleSheet.create({
     },
     modalText2: {
         color: "#e0e0e0",
-        fontSize: RPW(4.4),
+        fontSize: RPW(5),
         fontWeight: "700",
         marginRight: RPW(2),
     },
     modalText3: {
         color: "#e0e0e0",
-        fontSize: RPW(4),
+        fontSize: RPW(4.5),
         fontWeight: "400",
         flexWrap: "wrap",
         flexShrink: 1
@@ -371,5 +424,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         width: "100%"
-    }
+    },
+    
 })

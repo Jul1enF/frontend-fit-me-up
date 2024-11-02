@@ -81,10 +81,6 @@ export default function Redaction() {
     const [resizing, setResizing] = useState(false)
     const [scrollable, setScrollable] = useState(true)
 
-    // État pour désactiver le bouton publier en attendant la fin de la requête
-
-    const [publishEnabled, setPublishEnabled]=useState(true)
-
 
     // Fonction appelée en cliquant sur Annuler recadrage pour reseter les états et refs
 
@@ -255,6 +251,8 @@ export default function Redaction() {
 
     // Fonction appelée en cliquant sur Publier
 
+    const publishRef = useRef(false)
+
     const publishPress = async () => {
         if (!title || !category || !pictureUri) {
             setError('Erreur : titre, catégorie et photo obligatoires.')
@@ -262,8 +260,8 @@ export default function Redaction() {
             return
         }
 
-        if (!publishEnabled){ return }
-        setPublishEnabled(false)
+        if (!publishRef.current){ return }
+        publishRef.current = false
 
         // Mise en forme des inputs pour leur envoi
         const _id = testArticle.length > 0 ? testArticle[0]._id : "testArticleId"
@@ -310,16 +308,16 @@ export default function Redaction() {
         if (data.result) {
             router.push(`/${category}`)
             cancelPress()
-            setPublishEnabled(true)
+            publishRef.current = true
         }
         else if (data.error) {
             setError(data.error)
-            setPublishEnabled(true)
+            publishRef.current = true
             setTimeout(() => setError(''), "4000")
         }
         else {
             setError("Problème de connexion, merci de voir avec le webmaster")
-            setPublishEnabled(true)
+            publishRef.current = true
             setTimeout(() => setError(''), "4000")
         }
     }

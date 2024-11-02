@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform, StatusBar, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user'
 import { router } from 'expo-router';
@@ -31,7 +31,9 @@ export default function Signin(props) {
 
 
 
-    // Fonction appelée au click sur s'inscrire
+    // Fonction appelée au click sur se connecter
+
+    const connectRef = useRef(true)
 
     const connectClick = async () => {
         Keyboard.dismiss()
@@ -42,6 +44,9 @@ export default function Signin(props) {
             setError("Merci de remplir tous les champs ci dessous !")
         }
         else {
+            if (!connectRef.current) { return }
+            connectRef.current = false
+
             const response = await fetch(`${url}/users/signin`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -55,6 +60,7 @@ export default function Signin(props) {
 
             if (!data.result) {
                 setError(data.error)
+                connectRef.current = true
             }
             else {
                 dispatch(login({
@@ -65,6 +71,7 @@ export default function Signin(props) {
                     appCode,
                     bookmarks: data.bookmarks
                 }))
+                connectRef.current = true
                 props.closeModal1()
                 router.push("/recipes")
 

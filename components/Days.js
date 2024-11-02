@@ -7,10 +7,10 @@ export default function Days(props) {
 
     const numberPress = () => {
         if (props.isSelected){
-            props.removeOneDay(`${props.i +1}`)
+            props.removeOneDay(props.i +1)
         }
         else{
-            props.addOneDay(`${props.i +1}`)
+            props.addOneDay(props.i +1)
         }
     }
 

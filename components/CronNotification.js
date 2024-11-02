@@ -7,17 +7,23 @@ import { RPH, RPW } from "../modules/dimensions"
 
 export default function CronNotification(props) {
 
-    let month = props.month.replace("12", "Décembre").replace("11", "Novembre").replace("10", "Octobre").replace("9", "Septembre").replace("8", "Août").replace("7", "Juillet").replace("6", "Juin").replace("5", "Mai").replace("4", "Avril").replace("3", "Mars").replace("2", "Février").replace("1", "Janvier").replace(",", ", ")
+    let month = props.month.join(", ")
+
+    month = month.replace("12", "Décembre").replace("11", "Novembre").replace("10", "Octobre").replace("9", "Septembre").replace("8", "Août").replace("7", "Juillet").replace("6", "Juin").replace("5", "Mai").replace("4", "Avril").replace("3", "Mars").replace("2", "Février").replace("1", "Janvier")
 
     month = month + ","
 
+    let day = props.day.join(", ")
+
+    let hour = props.hour[0]
+
+    let minute = props.minute[0].toString()
+
+    if (minute.length == 1){ minute = "0" + minute}
+
     let monthDesignation = ""
 
-    if (!props.month || props.month === "*"){
-        monthDesignation = "tous les mois."
-        month = ""
-    }
-    else if (props.month.includes(",")){
+   if (props.month.length > 1){
         monthDesignation = "des mois de"
     }
     else {
@@ -35,11 +41,11 @@ export default function CronNotification(props) {
             <View style={styles.mainContainer}>
                 <View style={styles.row1}>
                     <Text style={styles.text}>
-                        Notif programmée n° {props.cron_notification_number}
+                        Notif programmée n° {props.number}
                     </Text>
                     <View style={{ flexDirection: "row" }}>
                         <Text style={styles.text}>Statut : </Text>
-                        <Text style={[styles.text, props.is_active ? { color: "#00b60e" } : { color: "rgba(219,0,43,1)" }]}>
+                        <Text style={[styles.text, props.is_active ? { color: "rgba(0,182,14,0.8)" } : { color: "rgba(219,0,43,0.8)" }]}>
                             {props.is_active ? "Activée" : "Désactivée"}
                         </Text>
                     </View>
@@ -59,11 +65,11 @@ export default function CronNotification(props) {
                 <View style={styles.row2}>
                 <Text style={styles.text2}>Envoyée : </Text>
                     <Text style={styles.text3}>
-                        À {props.hour}:{props.minute.length==1 && "0"}{props.minute} tous les {props.day} {monthDesignation} {month} tous les ans.
+                        À {hour}:{minute} tous les {day} {monthDesignation} {month} tous les ans.
                     </Text>
                 </View>
                 <View style={styles.btnContainer}>
-                    <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={()=>router.push(`/cron-notification-page/${props.cron_notification_number}`)}>
+                    <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={()=>router.push(`/cron-notification-page/${props._id}`)}>
                     <LinearGradient
                         colors={['#7700a4', '#0a0081']}
                         locations={[0.05, 1]}

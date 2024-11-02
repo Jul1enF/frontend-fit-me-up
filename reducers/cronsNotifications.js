@@ -12,15 +12,21 @@ export const cronsNotificationsSlice = createSlice({
             state.value = []
             state.value = action.payload
         },
+        addOneCronNotification : (state, action)=>{
+            state.value.push(action.payload)
+        },
         modifyCronNotification : (state, action) => {
             state.value = state.value.map(e=> {
-                if (e.cron_notification_number === action.payload.cron_notification_number){
+                if (e._id === action.payload._id){
                     return action.payload
                 }else { return e }
             })
         },
+        deleteCronNotification : (state, action)=>{
+            state.value = state.value.filter(e => e._id !== action.payload)
+        },
     }
 })
 
-export const { addCronsNotifications, modifyCronNotification } = cronsNotificationsSlice.actions
+export const { addCronsNotifications, modifyCronNotification,  addOneCronNotification, deleteCronNotification } = cronsNotificationsSlice.actions
 export default cronsNotificationsSlice.reducer

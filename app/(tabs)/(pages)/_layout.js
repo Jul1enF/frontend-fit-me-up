@@ -7,7 +7,7 @@ export default function RootLayout() {
         }}>
             <Stack.Screen name="redaction" />
             <Stack.Screen name="notifications" />
-            <Stack.Screen name="cron-notification-page/[cronNumber]" />
+            <Stack.Screen name="cron-notification-page/[cronId]" />
         </Stack>
     )
 }
