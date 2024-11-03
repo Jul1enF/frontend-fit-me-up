@@ -10,7 +10,7 @@ import { router } from 'expo-router'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../../reducers/user'
-import { fillWithArticles } from '../../../reducers/articles'
+import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 
 
 
@@ -48,7 +48,9 @@ export default function Recipes() {
             setArticlesInfos(testArticle)
         }
         else {
-            const response = await fetch(`${url}/articles/getArticles`)
+            const response = await fetch(`${url}/articles/getArticles/${user.token}`)
+
+            
             const data = await response.json()
 
             if (data.result) {
@@ -59,6 +61,9 @@ export default function Recipes() {
                 recipesArticles.reverse()
 
                 setArticlesInfos(recipesArticles)
+            }
+            else if (!data.result && data.error == "Utilisateur bloqué"){
+                dispatch(suppressArticles())
             }
         }
     }
@@ -87,7 +92,7 @@ export default function Recipes() {
 
     const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={()=>{
         setIsRefreshing(true)
-        setTimeout(()=>setIsRefreshing(false), "500")
+        setTimeout(()=>setIsRefreshing(false), 1000)
         loadArticles()
     }} />
 

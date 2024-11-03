@@ -18,6 +18,7 @@ const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 export default function Notifications() {
 
     const dispatch = useDispatch()
+    const user = useSelector((state)=>state.user.value)
     const cronsNotifications = useSelector((state) => state.cronsNotifications.value)
     console.log(cronsNotifications)
 
@@ -81,6 +82,7 @@ export default function Notifications() {
             body: JSON.stringify({
                 title,
                 message,
+                jwtToken : user.token,
             })
         })
         const data = await response.json()
@@ -93,7 +95,15 @@ export default function Notifications() {
             postRef.current = true
 
             setError("Message posté !")
-            setTimeout(() => setError(''), "2000")
+            setTimeout(() => setError(''), 2000)
+        }
+        else if (data.error){
+            setModalVisible(false)
+            
+            postRef.current = true
+
+            setError(data.error)
+            setTimeout(() => setError(''), 3000)
         }
         else{
             setModalVisible(false)
@@ -101,7 +111,7 @@ export default function Notifications() {
             postRef.current = true
 
             setError("Erreur lors de l'envoi de la notification. Contactez le webmaster")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
         }
 
     }
@@ -115,7 +125,7 @@ export default function Notifications() {
 
     const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={() => {
         setIsRefreshing(true)
-        setTimeout(() => setIsRefreshing(false), "500")
+        setTimeout(() => setIsRefreshing(false), 1000)
         loadCronsNotifications() 
     }} />
 
@@ -153,6 +163,7 @@ export default function Notifications() {
                     maxLength={144}
                     multiline
                     blurOnSubmit
+                    textAlignVertical='top'
                 >
                 </TextInput>
                 <View style={styles.btnContainer}>

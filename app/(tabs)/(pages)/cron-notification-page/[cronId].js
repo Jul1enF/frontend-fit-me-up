@@ -129,28 +129,28 @@ export default function CronNotificationPage() {
         // Vérification ques les inputs sont bien renseignés ou au bon format
         if (!title || !message) {
             setError("Erreur : Titre ou Message manquant !")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
             return
         }
         if (!hour || !minute) {
             setError("Erreur : Horaire incomplet !")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
             return
         }
 
         if (hour < 0 || hour > 23 || isNaN(hour) || minute < 0 || minute > 59 || isNaN(minute)) {
             setError("Erreur : format de l'heure incorrect !")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
             return
         }
         if (daysSelected.length == 0) {
             setError("Erreur : aucun jour sélectionné !")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
             return
         }
         if (monthsSelected.length == 0) {
             setError("Erreur : aucun mois sélectionné !")
-            setTimeout(() => setError(''), "3000")
+            setTimeout(() => setError(''), 3000)
             return
         }
 
@@ -158,13 +158,13 @@ export default function CronNotificationPage() {
 
         if (daysSelected.includes(31) && monthsSelected.some(e => e == 2 || e == 4 || e == 6 || e == 9 || e == 11)) {
             setError("Erreur : certain mois sélectionnés n'ont pas 31 jours !")
-            setTimeout(() => setError(''), "5000")
+            setTimeout(() => setError(''), 5000)
             return
         }
 
         if (monthsSelected.includes(2) && daysSelected.some(e => e == 29 || e == 30)) {
             setError("Erreur : certain jours sélectionnés n'existent pas en Février")
-            setTimeout(() => setError(''), "5000")
+            setTimeout(() => setError(''), 5000)
             return
         }
 
@@ -203,12 +203,12 @@ export default function CronNotificationPage() {
 
             if (!data.result && data.error) {
                 setError(data.error)
-                setTimeout(() => setError(''), "6000")
+                setTimeout(() => setError(''), 6000)
                 registerRef.current = true
             }
             else if (!data.result) {
                 setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-                setTimeout(() => setError(''), "6000")
+                setTimeout(() => setError(''), 6000)
                 registerRef.current = true
             }
             else {
@@ -243,12 +243,12 @@ export default function CronNotificationPage() {
 
             if (!data.result && data.error) {
                 setError(data.error)
-                setTimeout(() => setError(''), "6000")
+                setTimeout(() => setError(''), 6000)
                 registerRef.current = true
             }
             else if (!data.result) {
                 setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-                setTimeout(() => setError(''), "6000")
+                setTimeout(() => setError(''), 6000)
                 registerRef.current = true
             }
             else {
@@ -277,12 +277,12 @@ export default function CronNotificationPage() {
 
         if (!data.result && data.error) {
             setError(data.error)
-            setTimeout(() => setError(''), "5000")
+            setTimeout(() => setError(''), 5000)
             pressRef.current = true
         }
         else if (!data.result) {
             setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-            setTimeout(() => setError(''), "5000")
+            setTimeout(() => setError(''), 5000)
             pressRef.current = true
         }
         else {
@@ -640,7 +640,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     daysItemContainer: {
-        width: RPW(84),
+        width: RPW(86),
         flexDirection: "row",
         justifyContent: "flex-start",
         flexWrap: "wrap",

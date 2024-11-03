@@ -70,7 +70,7 @@ export default function BookmarkArticle() {
 
         if (!data.result) {
             setError(data.error)
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
         }
         else {
             dispatch(removeBookmark(_id))

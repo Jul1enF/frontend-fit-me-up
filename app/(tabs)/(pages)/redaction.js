@@ -108,7 +108,7 @@ export default function Redaction() {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: false,
             aspect: [1, 1],
-            quality: 0.75,
+            quality: 0.3,
         });
 
         if (!result.canceled) {
@@ -192,7 +192,7 @@ export default function Redaction() {
     const testPress = () => {
         if (!title || !category || !pictureUri) {
             setError('Erreur : titre, catégorie et photo obligatoires.')
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
             return
         }
 
@@ -251,12 +251,12 @@ export default function Redaction() {
 
     // Fonction appelée en cliquant sur Publier
 
-    const publishRef = useRef(false)
+    const publishRef = useRef(true)
 
     const publishPress = async () => {
         if (!title || !category || !pictureUri) {
             setError('Erreur : titre, catégorie et photo obligatoires.')
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
             return
         }
 
@@ -313,12 +313,12 @@ export default function Redaction() {
         else if (data.error) {
             setError(data.error)
             publishRef.current = true
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
         }
         else {
             setError("Problème de connexion, merci de voir avec le webmaster")
             publishRef.current = true
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
         }
     }
 

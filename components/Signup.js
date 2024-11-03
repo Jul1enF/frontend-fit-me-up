@@ -28,6 +28,7 @@ export default function Signup(props) {
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
     const [appCode, setAppCode] = useState('')
+    const [coach, setCoach] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
     const [password2Visible, setPassword2Visible] = useState(false)
@@ -45,7 +46,7 @@ export default function Signup(props) {
 
         const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
-        if (!firstname || !name || !email || !password || !password2) {
+        if (!firstname || !name || !email || !password || !password2 || !appCode || !coach) {
             setError("Merci de remplir tous les champs ci dessus !")
         }
         else if (password !== password2) {
@@ -67,6 +68,8 @@ export default function Signup(props) {
                     firstname,
                     email,
                     password,
+                    appCode,
+                    coach,
                 })
             })
             const data = await response.json()
@@ -78,10 +81,12 @@ export default function Signup(props) {
             else {
                 dispatch(login({
                     firstname: data.firstname,
+                    name : data.name,
+                    email : data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
+                    is_allowed : data.is_allowed,
                     push_token: "",
-                    appCode,
                     bookmarks: []
                 }))
                 props.closeModal2()
@@ -123,7 +128,7 @@ export default function Signup(props) {
                             value={firstname}
                             placeholder='Prénom'
                             placeholderTextColor='rgba(255,255,255,0.4)'
-                            onFocus={() => setOffsetKeyboard(RPH(3))}>
+                            onFocus={() => setOffsetKeyboard(RPH(-16))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -142,7 +147,7 @@ export default function Signup(props) {
                             value={name}
                             placeholder='Nom'
                             placeholderTextColor='rgba(255,255,255,0.4)'
-                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
+                            onFocus={() => setOffsetKeyboard(RPH(-16))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -163,7 +168,7 @@ export default function Signup(props) {
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             keyboardType='email-address'
                             autoCapitalize='none'
-                            onFocus={() => setOffsetKeyboard(-RPH(2))}>
+                            onFocus={() => setOffsetKeyboard(RPH(-2))}>
                         </TextInput>
                     </LinearGradient>
 
@@ -223,11 +228,33 @@ export default function Signup(props) {
                     >
                         <TextInput style={styles.input}
                             onChangeText={(e) => {
+                                setCoach(e)
+                                setError('')
+                            }}
+                            value={coach}
+                            placeholder="Nom de votre coach"
+                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            onFocus={() => setOffsetKeyboard(RPH(30))}
+                            onBlur={() => setOffsetKeyboard(0)}
+                        >
+                        </TextInput>
+                    </LinearGradient>
+
+
+                    <LinearGradient
+                        style={styles.gradientContainer}
+                        colors={['#49158f', '#0a0081']}
+                        locations={[0, 0.9]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                    >
+                        <TextInput style={styles.input}
+                            onChangeText={(e) => {
                                 setAppCode(e)
                                 setError('')
                             }}
                             value={appCode}
-                            placeholder="Code de l'application (optionnel)"
+                            placeholder="Code de l'application"
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             onFocus={() => setOffsetKeyboard(RPH(30))}
                             onBlur={() => setOffsetKeyboard(0)}
@@ -264,12 +291,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "transparent",
+        backgroundColor: "rgba(0,0,0,0)",
     },
     contentBody: {
         width: RPW(85),
         minHeight: RPH(80),
-        marginTop: RPH(12),
+        marginTop: RPH(8),
         backgroundColor: "#1c1c1c",
         alignItems: "center",
         borderRadius: 10,
@@ -328,7 +355,8 @@ const styles = StyleSheet.create({
     },
     error: {
         color: "white",
-        fontSize: RPW(3.5),
-        fontWeight: "600"
+        fontSize: RPW(4),
+        fontWeight: "600",
+        marginBottom : RPH(2)
     }
 })

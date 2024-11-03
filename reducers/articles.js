@@ -11,8 +11,11 @@ export const articlesSlice = createSlice({
         fillWithArticles : (state, action)=>{
             state.value = action.payload
         },
+        suppressArticles : (state)=>{
+            state.value = []
+        },
     }
 })
 
-export const { fillWithArticles } = articlesSlice.actions
+export const { fillWithArticles, suppressArticles } = articlesSlice.actions
 export default articlesSlice.reducer

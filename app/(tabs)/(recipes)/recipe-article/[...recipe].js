@@ -76,7 +76,7 @@ export default function Article() {
 
             if (!data.result) {
                 setError(data.error)
-                setTimeout(() => setError(''), "4000")
+                setTimeout(() => setError(''), 4000)
             }
             else {
                 setIsBookmarked(true)
@@ -96,7 +96,7 @@ export default function Article() {
 
             if (!data.result) {
                 setError(data.error)
-                setTimeout(() => setError(''), "4000")
+                setTimeout(() => setError(''), 4000)
             }
             else {
                 setIsBookmarked(false)
@@ -142,11 +142,11 @@ export default function Article() {
 
         if (!data.result && data.error){
             setError(data.error)
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
         }
         else if (!data.result){
             setError("Problème de connexion à la base de donnée, merci de contacter le webmaster.")
-            setTimeout(() => setError(''), "4000")
+            setTimeout(() => setError(''), 4000)
         }
         else {
             setModalVisible(false)

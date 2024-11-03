@@ -23,7 +23,6 @@ export default function Signin(props) {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [appCode, setAppCode] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
 
@@ -65,10 +64,12 @@ export default function Signin(props) {
             else {
                 dispatch(login({
                     firstname: data.firstname,
+                    name : data.name,
+                    email : data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
+                    is_allowed : data.is_allowed,
                     push_token: data.push_token,
-                    appCode,
                     bookmarks: data.bookmarks
                 }))
                 connectRef.current = true
@@ -134,26 +135,6 @@ export default function Signin(props) {
                     </LinearGradient>
 
                     <LinearGradient
-                        style={styles.gradientContainer}
-                        colors={['#49158f', '#0a0081']}
-                        locations={[0, 0.9]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                    >
-                        <TextInput style={styles.input}
-                            onChangeText={(e) => {
-                                setAppCode(e)
-                                setError('')
-                            }}
-                            value={appCode}
-                            placeholder="Code de l'application (optionnel)"
-                            placeholderTextColor='rgba(255,255,255,0.4)'
-                            onFocus={() => setOffsetKeyboard(RPH(6))}
-                            onBlur={() => setOffsetKeyboard(0)}>
-                        </TextInput>
-                    </LinearGradient>
-
-                    <LinearGradient
                         style={styles.connectContainer}
                         colors={['#7700a4', '#0a0081']}
                         locations={[0, 0.9]}
@@ -177,12 +158,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "transparent",
+        backgroundColor: "rgba(0,0,0,0.7)",
     },
     contentBody: {
         width: RPW(85),
-        height: RPH(62),
-        marginTop: RPH(12),
+        height: RPH(50),
+        marginTop: RPH(16),
         paddingBottom: RPH(4),
         backgroundColor: "#1c1c1c",
         alignItems: "center",

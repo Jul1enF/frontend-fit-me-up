@@ -51,12 +51,12 @@ export default function Header() {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                token: user.token,
-                push_token: "",
+                jwtToken : user.token,
+                push_token : "",
             })
         })
         const data = await response.json()
-        console.log(data)
+        console.log("DATA :", data)
 
         // Reducer logout, fermeture du menu et push vers page d'accueil
         setMenuVisible(false)
@@ -166,6 +166,14 @@ export default function Header() {
                             <Text style={styles.link}>Notifications</Text>
                         </TouchableOpacity>
                     }
+                        {user.is_admin &&
+                        <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
+                            setMenuVisible(false)
+                            router.push('/users')
+                        }}>
+                            <Text style={styles.link}>Utilisateurs</Text>
+                        </TouchableOpacity>
+                    }
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Contacts</Text>
                     </TouchableOpacity>
@@ -272,7 +280,7 @@ const styles = StyleSheet.create({
         top: RPH(20) - statusHeight,
     },
     linkContainer: {
-        height: RPH(13),
+        height: RPH(12.6),
         borderTopWidth: 0.5,
         borderTopColor: "white",
         justifyContent: "center",
