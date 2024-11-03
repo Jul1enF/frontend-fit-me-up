@@ -23,8 +23,13 @@ export const userSlice = createSlice({
         removeBookmark : (state, action)=>{
             state.value.bookmarks = state.value.bookmarks.filter(e=> e!== action.payload)
         },
+        changeUserInfos : (state, action)=>{
+            state.value.firstname = action.payload.firstname
+            state.value.name = action.payload.name
+            state.value.email = action.payload.email
+        },
     }
 })
 
-export const { login, changePushToken, logout, addBookmark, removeBookmark } = userSlice.actions
+export const { login, changePushToken, logout, addBookmark, removeBookmark, changeUserInfos } = userSlice.actions
 export default userSlice.reducer

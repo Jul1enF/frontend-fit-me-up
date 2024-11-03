@@ -379,7 +379,6 @@ const styles = StyleSheet.create({
     gradientLine2: {
         width: "90%",
         height: 4,
-
     },
 
 

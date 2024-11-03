@@ -62,8 +62,9 @@ export default function Recipes() {
 
                 setArticlesInfos(recipesArticles)
             }
-            else if (!data.result && data.error == "Utilisateur bloqué"){
+            else if (!data.result && data.error == "Utilisateur bloqué."){
                 dispatch(suppressArticles())
+                setArticlesInfos("")
             }
         }
     }
