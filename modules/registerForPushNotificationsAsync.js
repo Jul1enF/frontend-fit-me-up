@@ -34,7 +34,7 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            token : userToken,
+            jwtToken : userToken,
             push_token : "",
           })
         })
@@ -60,12 +60,15 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
         })
       ).data;
 
+  
       if (!userPushToken || userPushToken !== pushTokenString ){
+        console.log("PUSH USER TOKEN :", userToken)
+
         const response = await fetch(`${url}/userModifications/changePushToken`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            token : userToken,
+            jwtToken : userToken,
             push_token : pushTokenString,
           })
         })

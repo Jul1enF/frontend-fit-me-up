@@ -36,9 +36,10 @@ export default function Recipes() {
 
     // Fonction pour gérer les potentiels changement de push token
 
-    const checkPushTokenChanges = async () => {
-
-        const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
+    const checkPushTokenChanges = async (pushToken, token) => {
+        console.log("TOKEN :", token)
+        console.log("PUSH TOKEN :", pushToken)
+        const pushTokenInfos = await registerForPushNotificationsAsync(pushToken, token)
 
         if (!pushTokenInfos) {
             dispatch(logout())
@@ -96,7 +97,7 @@ export default function Recipes() {
     // useFocusEffect pour vérifier si les notifs sont toujours autorisées
 
     useFocusEffect(useCallback(() => {
-        checkPushTokenChanges()
+       user.token && checkPushTokenChanges(user.push_token, user.token)
     }, [user]))
     
 
