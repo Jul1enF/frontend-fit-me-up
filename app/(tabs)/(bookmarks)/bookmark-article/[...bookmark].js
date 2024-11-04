@@ -121,16 +121,25 @@ export default function BookmarkArticle() {
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
 
-                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
-                    <Image
-                        style={[styles.image, {
-                            width: RPW(98 * article.img_zoom),
-                            marginTop: RPW(article.img_margin_top * 0.98),
-                            marginLeft: RPW(article.img_margin_left * 0.98)
-                        }]}
-                        source={{ uri: article.img_link, }}
+                <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 25 }]}>
+                    <YoutubePlayer
+                        height={RPW(56)}
+                        width={RPW(98)}
+                        videoId={article.video_id}
                     />
                 </View>
+
+                {!article.video_id &&
+                    <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
+                        <Image
+                            style={[styles.image, {
+                                width: RPW(98 * article.img_zoom),
+                                marginTop: RPW(article.img_margin_top * 0.98),
+                                marginLeft: RPW(article.img_margin_left * 0.98)
+                            }]}
+                            source={{ uri: article.img_link }}
+                        />
+                    </View>}
 
                 <View style={styles.lineContainer}>
                     {article.author && <Text style={styles.date}>par {article.author}</Text>}
@@ -144,11 +153,7 @@ export default function BookmarkArticle() {
                     </LinearGradient>
                 </View>
                 {article.text && <Text style={styles.text}>{article.text}</Text>}
-                <YoutubePlayer
-                    height={RPW(56)}
-                    width={RPW(98)}
-                    videoId={article.video_id}
-                />
+        
             </ScrollView>
         </View>
     )
@@ -237,6 +242,9 @@ const styles = StyleSheet.create({
     image: {
         height: RPW(1000),
         resizeMode: "contain",
+    },
+    youtubeContainer :{
+        marginBottom : 5,
     },
     lineContainer: {
         alignItems: "flex-end",

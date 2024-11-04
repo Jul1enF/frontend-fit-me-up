@@ -4,6 +4,8 @@ import Signin from '../components/Signin';
 import { LinearGradient } from 'expo-linear-gradient'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+import Modal2 from "react-native-modal"
+
 import { useState, useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router'
 import { useSelector } from 'react-redux'
@@ -44,7 +46,7 @@ export default function Index() {
 
     return (
         <View style={styles.body} >
-            <StatusBar translucent={true} barStyle="light"/>
+            <StatusBar translucent={true} barStyle="light" />
             <LinearGradient style={styles.header}
                 // colors={['#ffd500', '#fd8600']}
                 //  colors={['#97002e', '#450150']}
@@ -113,7 +115,7 @@ export default function Index() {
                 </View>
             </View>
 
-            <Modal
+            {/* <Modal
                 visible={modal1Visible}
                 onRequestClose={() => setModal1VIsible(false)}
                 style={styles.modal}
@@ -121,24 +123,37 @@ export default function Index() {
                 transparent={true}
             >
                 <Signin closeModal1={closeModal1} />
-            </Modal>
-            <Modal
-                visible={modal2Visible}
-                onRequestClose={() => setModal2VIsible(false)}
+            </Modal> */}
+
+            <Modal2
+                isVisible={modal1Visible}
                 style={styles.modal}
-                animationType='slide'
-                transparent={true}
+                backdropColor="rgba(0,0,0,0.7)"
+                animationIn="slideInUp"
+                animationOut="slideOutDown"
+                onBackButtonPress={() => setModal1VIsible(!modal1Visible)}
+                onBackdropPress={() => setModal1VIsible(!modal1Visible)}
             >
-                <Signup closeModal2={closeModal2} />
-            </Modal>
+                <Signin closeModal1={closeModal1} />
+            </Modal2>
+
+
+                <Modal
+                    visible={modal2Visible}
+                    onRequestClose={() => setModal2VIsible(false)}
+                    animationType='slide'
+                    transparent={true}
+                >
+                    <Signup closeModal2={closeModal2} />
+                </Modal>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     body: {
-       flex : 1,
-        backgroundColor: "black"
+        flex: 1,
+        backgroundColor: "black",
     },
     header: {
         height: RPH(14),
@@ -202,6 +217,9 @@ const styles = StyleSheet.create({
         fontSize: RPH(2.5),
         fontWeight: "500",
         letterSpacing: 1,
+    },
+    modal : {
+      flex :1
     }
 
 })

@@ -83,7 +83,7 @@ export default function Signin(props) {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={offsetKeyboard} style={styles.body} >
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(6)} style={styles.body} >
                 <View style={styles.contentBody}>
                     <View style={styles.closeContainer}>
                         <Icon name="close" onPress={() => props.closeModal1()} color="white" size={RPH(4)} ></Icon>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.7)",
+        backgroundColor: "rgba(0,0,0,0)",
     },
     contentBody: {
         width: RPW(85),
@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
         marginTop: RPH(16),
         paddingBottom: RPH(4),
         backgroundColor: "#1c1c1c",
+        justifyContent : "center",
         alignItems: "center",
         justifyContent: "space-between",
         borderRadius: 10,

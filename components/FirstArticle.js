@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         paddingRight: RPW(3),
         maxHeight: 160,
         overflow: "hidden",
-        marginBottom: 18,
+        marginBottom: 12,
     },
     title: {
         color: "#e0e0e0",

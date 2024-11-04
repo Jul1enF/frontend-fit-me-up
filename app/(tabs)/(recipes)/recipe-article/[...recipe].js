@@ -4,7 +4,7 @@ import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../../../../reducers/user";
 import { addTestArticle } from "../../../../reducers/testArticle";
-import { RPH, RPW} from "../../../../modules/dimensions"
+import { RPH, RPW } from "../../../../modules/dimensions"
 
 import { useLocalSearchParams, router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -117,10 +117,10 @@ export default function Article() {
             video_id: article.video_id,
             category: article.category,
             img_link: article.img_link,
-            img_margin_top : article.img_margin_top,
-            img_margin_left : article.img_margin_left,
-            img_zoom : article.img_zoom,
-            img_public_id : article.img_public_id,
+            img_margin_top: article.img_margin_top,
+            img_margin_left: article.img_margin_left,
+            img_zoom: article.img_zoom,
+            img_public_id: article.img_public_id,
             createdAt: article.createdAt,
             _id: article._id,
             author: article.author,
@@ -136,15 +136,15 @@ export default function Article() {
     // Fonction appelée en cliquant sur Supprimer
 
     const deletePress = async () => {
-        const response  = await fetch(`${url}/articles/delete-article/${user.token}/${article._id}`, { method: 'DELETE' })
+        const response = await fetch(`${url}/articles/delete-article/${user.token}/${article._id}`, { method: 'DELETE' })
 
         const data = await response.json()
 
-        if (!data.result && data.error){
+        if (!data.result && data.error) {
             setError(data.error)
             setTimeout(() => setError(''), 4000)
         }
-        else if (!data.result){
+        else if (!data.result) {
             setError("Problème de connexion à la base de donnée, merci de contacter le webmaster.")
             setTimeout(() => setError(''), 4000)
         }
@@ -195,11 +195,11 @@ export default function Article() {
     const hour = moment(article.createdAt).format('LT')
 
 
-    if (!article){return <View></View>}
+    if (!article) { return <View></View> }
 
     return (
         <View style={styles.body}>
-            <StatusBar translucent={true} barStyle="light"/>
+            <StatusBar translucent={true} barStyle="light" />
             <LinearGradient
                 colors={['#7700a4', '#0a0081']}
                 locations={[0.05, 1]}
@@ -232,18 +232,27 @@ export default function Article() {
                 >
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
-               
-                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
-                    <Image
-                        style={[styles.image, {
-                            width: RPW(98 * article.img_zoom),
-                            marginTop: RPW(article.img_margin_top * 0.98),
-                            marginLeft: RPW(article.img_margin_left * 0.98)
-                        }]}
-                        source={{ uri: article.img_link }}
+
+                <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 25 }]}>
+                    <YoutubePlayer
+                        height={RPW(56)}
+                        width={RPW(98)}
+                        videoId={article.video_id}
                     />
                 </View>
-                
+
+                {!article.video_id &&
+                    <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
+                        <Image
+                            style={[styles.image, {
+                                width: RPW(98 * article.img_zoom),
+                                marginTop: RPW(article.img_margin_top * 0.98),
+                                marginLeft: RPW(article.img_margin_left * 0.98)
+                            }]}
+                            source={{ uri: article.img_link }}
+                        />
+                    </View>}
+
                 <View style={styles.lineContainer}>
                     {article.author && <Text style={styles.date}>par {article.author}</Text>}
                     <LinearGradient
@@ -256,13 +265,6 @@ export default function Article() {
                     </LinearGradient>
                 </View>
                 {article.text && <Text style={styles.text}>{article.text}</Text>}
-                <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }]}>
-                    <YoutubePlayer
-                        height={RPW(56)}
-                        width={RPW(98)}
-                        videoId={article.video_id}
-                    />
-                </View>
 
                 <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
 
@@ -395,6 +397,9 @@ const styles = StyleSheet.create({
         height: RPW(1000),
         resizeMode: "contain",
     },
+    youtubeContainer :{
+        marginBottom : 5,
+    },
     lineContainer: {
         alignItems: "flex-end",
         width: "100%",
@@ -438,27 +443,27 @@ const styles = StyleSheet.create({
         fontSize: RPW(4.8),
         fontWeight: "500",
     },
-    modal : {
-        alignItems : "center"
+    modal: {
+        alignItems: "center"
     },
-    modalBody : {
+    modalBody: {
         height: RPH(27),
         width: RPW(90),
-        borderRadius : 10,
-        paddingTop : RPH(4),
-        paddingBottom : RPH(4),
+        borderRadius: 10,
+        paddingTop: RPH(4),
+        paddingBottom: RPH(4),
         backgroundColor: "#222222",
         position: "absolute",
         bottom: RPH(11),
-        justifyContent : "space-between"
+        justifyContent: "space-between"
     },
-    modalText : {
-        color : "white",
-        fontSize : RPW(4.5),
-        fontWeight : "600",
-        textAlign : "center",
-        paddingLeft : RPW(6),
-        paddingRight : RPW(6),
-        lineHeight : RPH(4)
+    modalText: {
+        color: "white",
+        fontSize: RPW(4.5),
+        fontWeight: "600",
+        textAlign: "center",
+        paddingLeft: RPW(6),
+        paddingRight: RPW(6),
+        lineHeight: RPH(4)
     }
 })

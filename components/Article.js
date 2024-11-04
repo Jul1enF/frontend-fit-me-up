@@ -15,6 +15,7 @@ export default function Article(props) {
             <View style={styles.row}>
                 <View style={styles.column1}>
                     <Text numberOfLines={4} style={styles.title}>{props.title}</Text>
+                    {props.sub_title && <Text numberOfLines={3} style={styles.subTitle}>{props.sub_title}</Text>}
                     <Text style={styles.date}>Posté {lastingTime}</Text>
                 </View>
                 <View style={styles.column2}>
@@ -63,7 +64,13 @@ const styles = StyleSheet.create({
         color: "#e0e0e0",
         fontSize: 22,
         fontWeight: "450",
-        marginBottom: 5
+        marginBottom: 10
+    },
+    subTitle: {
+        color: "#e0e0e0",
+        fontSize: 14,
+        fontWeight: "400",
+        marginBottom : 10,
     },
     date: {
         color: "#e0e0e0",

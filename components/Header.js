@@ -188,8 +188,6 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     body: {
-        // borderTopWidth : 4,
-        // borderTopColor : "green",
         height: RPH(14),
         width: RPW(100),
     },
@@ -214,7 +212,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        // fontSize: RPH(4.5),
         fontSize: RPW(8.5),
         color: "white",
         letterSpacing: 2.5,
