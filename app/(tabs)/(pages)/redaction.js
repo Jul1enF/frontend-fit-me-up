@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, TouchableOpacity, Image, Platform, ScrollView, PanResponder, StatusBar} from "react-native";
+import { View, Text, StyleSheet, Dimensions, TextInput, KeyboardAvoidingView, TouchableOpacity, Image, Platform, ScrollView, PanResponder, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { addTestArticle, deleteTestArticle } from "../../../reducers/testArticle";
+import { addOneArticle, modifyArticle, deleteHomeContent } from "../../../reducers/articles";
 import { router, useFocusEffect } from 'expo-router'
-import {RPH, RPW} from "../../../modules/dimensions"
+import { RPH, RPW } from "../../../modules/dimensions"
 
 import * as ImagePicker from 'expo-image-picker'
 
@@ -258,19 +259,19 @@ export default function Redaction() {
 
     const publishPress = async () => {
 
-        if (!title || !category ) {
+        if (!title || !category) {
             setError('Erreur : titre et catégorie obligatoires.')
             setTimeout(() => setError(''), 4000)
             return
         }
 
-        if (!pictureUri && !videoLink){
+        if (!pictureUri && !videoLink) {
             setError('Erreur : merci de mettre une photo ou un lien youtube.')
             setTimeout(() => setError(''), 4000)
             return
         }
 
-        if (!publishRef.current){ return }
+        if (!publishRef.current) { return }
         publishRef.current = false
 
 
@@ -281,11 +282,11 @@ export default function Redaction() {
         const uri = pictureUri
 
         let localPic
-        
-        if (!pictureUri || pictureUri.includes('https')){
+
+        if (!pictureUri || pictureUri.includes('https')) {
             localPic = false
         }
-        else{
+        else {
             localPic = true
         }
 
@@ -325,6 +326,14 @@ export default function Redaction() {
         const data = await response.json()
 
         if (data.result) {
+            if (data.articleSaved){
+                category == "home" && dispatch(deleteHomeContent())
+                dispatch(addOneArticle(data.articleSaved))
+            }
+            if (data.articleModified){
+                dispatch(modifyArticle(data.articleModified))
+            }
+
             router.push(`/${category}`)
             cancelPress()
             publishRef.current = true
@@ -345,195 +354,210 @@ export default function Redaction() {
 
     return (
         <>
-        {/* <KeyboardAwareScrollView
+            {/* <KeyboardAwareScrollView
             style={{ flex: 1, backgroundColor: "black" }}
             contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
             scrollEnabled={scrollable}
             bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
         > */}
 
-             <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.body} keyboardVerticalOffset={RPH(14.5)}  >
-            <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }} scrollEnabled={scrollable} >
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.body} keyboardVerticalOffset={RPH(14.5)}  >
+                <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }} scrollEnabled={scrollable} >
 
-            <StatusBar translucent={true} barStyle="light" />
-            <TextInput style={styles.smallInput}
-                placeholder="Titre de l'article"
-                onChangeText={(e) => setTitle(e)}
-                value={title}>
-            </TextInput>
-            <TextInput multiline={true}
-                textAlignVertical="top"
-                style={styles.mediumInput}
-                placeholder="Sous-Catégorie/Sous-Titre de l'article"
-                onChangeText={(e) => setSubTitle(e)}
-                value={subTitle}
-                blurOnSubmit={true}>
-            </TextInput>
-            <TextInput multiline={true}
-                textAlignVertical="top"
-                style={styles.largeInput}
-                placeholder="Texte de l'article"
-                onChangeText={(e) => setText(e)}
-                value={text}
-                returnKeyType='next'>
-            </TextInput>
-            <TextInput style={styles.smallInput}
-                placeholder="Auteur"
-                onChangeText={(e) => setAuthor(e)}
-                value={author}>
-            </TextInput>
-            <TextInput style={styles.smallInput}
-                placeholder="Lien de la vidéo Youtube"
-                onChangeText={(e) => setVideoLink(e)}
-                value={videoLink}
-                autoCapitalize="none"
-            >
-            </TextInput>
-
-
-
-            <View style={styles.row}>
-                <Text style={styles.categoryText}>Type :</Text>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn1}
-                >
-                    <TouchableOpacity style={[styles.btn, category === "recipes" && { backgroundColor: "transparent" }]} onPress={() => setCategory("recipes")}>
-                        <Text style={styles.categoryText}>Recette</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn1}
-                >
-                    <TouchableOpacity style={[styles.btn, category === "exercices" && { backgroundColor: "transparent" }]} onPress={() => setCategory("exercices")}>
-                        <Text style={styles.categoryText}>Exercice</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn1}
-                >
-                    <TouchableOpacity style={[styles.btn, category === "events" && { backgroundColor: "transparent" }]} onPress={() => setCategory("events")}>
-                        <Text style={styles.categoryText}>Évènement</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-            </View>
-
-
-            <LinearGradient
-                colors={['#7700a4', '#0a0081']}
-                locations={[0.05, 1]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
-                style={styles.gradientBtn2}
-            >
-                <TouchableOpacity style={styles.btn2} onPress={() => choosePicture()}>
-                    <Text style={styles.btnText}>Choisir une image</Text>
-                </TouchableOpacity>
-            </LinearGradient>
-
-
-            <View style={[styles.imgContainer, resizing && { borderColor: "white" }]} {...panResponder.panHandlers} >
-                {pictureUri &&
-                    <Image
-                        style={[styles.image, {
-                            width: RPW(95 * imgZoom),
-                            marginTop: RPW(imgMarginTop * 0.95),
-                            marginLeft: RPW(imgMarginLeft * 0.95)
-                        }]}
-                        source={{ uri: pictureUri }}
-                    />
-                }
-            </View>
-
-            <View style={styles.row}>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn4}
-                >
-                    <TouchableOpacity style={resizing ? styles.btn2 : styles.btn} onPress={() => {
-                        resizingRef.current = !resizingRef.current
-                        resizing && setScrollable(true)
-                        setResizing(!resizing)
-                    }}>
-                        <Text style={styles.btn2Text}> Recadrer l'image</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn4}
-                >
-                    <TouchableOpacity style={styles.btn} onPress={() =>{
-                        cancelResizingPress()
-                        setPictureUri('')
-                    } }>
-                        <Text style={styles.btn2Text}> Enlever l'image</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-            </View>
-
-
-            <View style={styles.row}>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn3}
-                >
-                    <TouchableOpacity style={styles.btn2} onPress={() => testPress()}>
-                        <Text style={styles.btnText}>Tester</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn3}
-                >
-                    <TouchableOpacity style={styles.btn2} onPress={() => publishPress()}>
-                        <Text style={styles.btnText}>Publier</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn3}
-                >
-                    <TouchableOpacity style={styles.btn2} onPress={() => cancelPress()}>
-                        <Text style={styles.btnText}>Annuler</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-            </View>
+                    <StatusBar translucent={true} barStyle="light" />
+                    <TextInput style={styles.smallInput}
+                        placeholder="Titre de l'article"
+                        onChangeText={(e) => setTitle(e)}
+                        value={title}>
+                    </TextInput>
+                    <TextInput multiline={true}
+                        textAlignVertical="top"
+                        style={styles.mediumInput}
+                        placeholder="Sous-Catégorie/Sous-Titre de l'article"
+                        onChangeText={(e) => setSubTitle(e)}
+                        value={subTitle}
+                        blurOnSubmit={true}>
+                    </TextInput>
+                    <TextInput multiline={true}
+                        textAlignVertical="top"
+                        style={styles.largeInput}
+                        placeholder="Texte de l'article"
+                        onChangeText={(e) => setText(e)}
+                        value={text}
+                        returnKeyType='next'>
+                    </TextInput>
+                    <TextInput style={styles.smallInput}
+                        placeholder="Auteur"
+                        onChangeText={(e) => setAuthor(e)}
+                        value={author}>
+                    </TextInput>
+                    <TextInput style={[styles.smallInput, { marginBottom: 30 }]}
+                        placeholder="Lien de la vidéo Youtube"
+                        onChangeText={(e) => setVideoLink(e)}
+                        value={videoLink}
+                        autoCapitalize="none"
+                    >
+                    </TextInput>
 
 
 
-            <Text style={{ color: 'red' }}>{error}</Text>
+                    <View style={[styles.row3, { marginBottom: 13 }]}>
+                        <View style={styles.underline}>
+                            <Text style={styles.categoryText1}>Catégorie :</Text>
+                        </View>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn1}
+                        >
+                            <TouchableOpacity style={[styles.btn, category === "events" && { backgroundColor: "transparent" }]} onPress={() => setCategory("events")}>
+                                <Text style={styles.categoryText2}>Évènement</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn1}
+                        >
+                            <TouchableOpacity style={[styles.btn, category === "recipes" && { backgroundColor: "transparent" }]} onPress={() => setCategory("recipes")}>
+                                <Text style={styles.categoryText2}>Recette</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                    </View>
+                    <View style={styles.row3}>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn1}
+                        >
+                            <TouchableOpacity style={[styles.btn, category === "exercices" && { backgroundColor: "transparent" }]} onPress={() => setCategory("exercices")}>
+                                <Text style={styles.categoryText2}>Exercice</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn1}
+                        >
+                            <TouchableOpacity style={[styles.btn, category === "home" && { backgroundColor: "transparent" }]} onPress={() => setCategory("home")}>
+                                <Text style={styles.categoryText2}>Accueil</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                    </View>
 
-                 </ScrollView>
+
+                    <LinearGradient
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn2}
+                    >
+                        <TouchableOpacity style={styles.btn2} onPress={() => choosePicture()}>
+                            <Text style={styles.btnText}>Choisir une image</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+
+
+                    <View style={[styles.imgContainer, resizing && { borderColor: "white" }]} {...panResponder.panHandlers} >
+                        {pictureUri &&
+                            <Image
+                                style={[styles.image, {
+                                    width: RPW(95 * imgZoom),
+                                    marginTop: RPW(imgMarginTop * 0.95),
+                                    marginLeft: RPW(imgMarginLeft * 0.95)
+                                }]}
+                                source={{ uri: pictureUri }}
+                            />
+                        }
+                    </View>
+
+                    <View style={styles.row}>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn4}
+                        >
+                            <TouchableOpacity style={resizing ? styles.btn2 : styles.btn3} onPress={() => {
+                                resizingRef.current = !resizingRef.current
+                                resizing && setScrollable(true)
+                                setResizing(!resizing)
+                            }}>
+                                <Text style={styles.btn2Text}> Recadrer l'image</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn4}
+                        >
+                            <TouchableOpacity style={styles.btn3} onPress={() => {
+                                cancelResizingPress()
+                                setPictureUri('')
+                            }}>
+                                <Text style={styles.btn2Text}> Enlever l'image</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                    </View>
+
+
+                    <View style={styles.row}>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn3}
+                        >
+                            <TouchableOpacity style={styles.btn2} onPress={() => testPress()}>
+                                <Text style={styles.btnText}>Tester</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn3}
+                        >
+                            <TouchableOpacity style={styles.btn2} onPress={() => publishPress()}>
+                                <Text style={styles.btnText}>Publier</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientBtn3}
+                        >
+                            <TouchableOpacity style={styles.btn2} onPress={() => cancelPress()}>
+                                <Text style={styles.btnText}>Annuler</Text>
+                            </TouchableOpacity>
+                        </LinearGradient>
+                    </View>
+
+
+
+                    <Text style={{ color: 'red' }}>{error}</Text>
+
+                </ScrollView>
             </KeyboardAvoidingView>
-        
-        {/* </KeyboardAwareScrollView>
+
+            {/* </KeyboardAwareScrollView>
         {Platform.OS === "ios" && <KeyboardToolbar doneText="Fermer" style={{height : 100, backgroundColor : "green"}}/>} */}
         </>
     )
@@ -579,15 +603,33 @@ const styles = StyleSheet.create({
         width: RPW(90),
         marginBottom: 18,
     },
-    categoryText: {
+    row3: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: RPW(90),
+        marginBottom: 30,
+    },
+    categoryText1: {
+        color: "white",
+        fontSize: RPW(4.3),
+        fontWeight: "600",
+    },
+    underline: {
+        borderBottomColor: "white",
+        borderBottomWidth: 1.5,
+        marginRight: RPW(7),
+        paddingBottom : 5
+    },
+    categoryText2: {
         color: "white",
         fontSize: RPW(4.2),
-        fontWeight: "500"
+        fontWeight: "500",
     },
     gradientBtn1: {
-        width: "27%",
-        height: 45,
+        height: RPW(10),
         borderRadius: 10,
+        marginRight: RPW(7),
     },
     btn: {
         flex: 1,
@@ -596,6 +638,8 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         margin: 2,
         borderRadius: 10,
+        paddingRight: RPW(4),
+        paddingLeft: RPW(4)
     },
     btnText: {
         color: "white",
@@ -624,6 +668,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    btn3: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: "black",
+        margin: 2,
+        borderRadius: 10,
     },
     gradientBtn3: {
         width: "30%",

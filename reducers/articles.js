@@ -14,8 +14,22 @@ export const articlesSlice = createSlice({
         suppressArticles : (state, action)=>{
             state.value = []
         },
+        addOneArticle : (state, action)=>{
+            state.value.push(action.payload)
+        },
+        modifyArticle : (state, action)=>{
+            state.value = state.value.map(e=>{
+                if (e._id == action.payload._id){
+                    e = action.payload
+                }
+                return e
+            })
+        },
+        deleteHomeContent : (state, action)=>{
+            state.value = state.value.filter(e=> e.category !== "home")
+        }
     }
 })
 
-export const { fillWithArticles, suppressArticles } = articlesSlice.actions
+export const { fillWithArticles, suppressArticles, addOneArticle, modifyArticle, deleteHomeContent } = articlesSlice.actions
 export default articlesSlice.reducer

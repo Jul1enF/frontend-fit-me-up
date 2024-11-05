@@ -10,6 +10,7 @@ export default function RootLayout() {
             <Stack.Screen name="cron-notification-page/[cronId]" />
             <Stack.Screen name="users" />
             <Stack.Screen name="user-informations" />
+            <Stack.Screen name="home" />
         </Stack>
     )
 }

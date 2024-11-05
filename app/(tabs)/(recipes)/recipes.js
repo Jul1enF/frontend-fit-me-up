@@ -37,8 +37,6 @@ export default function Recipes() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async (pushToken, token) => {
-        console.log("TOKEN :", token)
-        console.log("PUSH TOKEN :", pushToken)
         const pushTokenInfos = await registerForPushNotificationsAsync(pushToken, token)
 
         if (!pushTokenInfos) {
@@ -102,7 +100,6 @@ export default function Recipes() {
     
 
     useEffect(()=>{
-        console.log("USEEFFECT")
         loadArticles()
     },[testArticle])
 

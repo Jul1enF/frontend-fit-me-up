@@ -74,7 +74,7 @@ export default function Signin(props) {
                 }))
                 connectRef.current = true
                 props.closeModal1()
-                router.push("/recipes")
+                router.push("/home")
 
             }
         }

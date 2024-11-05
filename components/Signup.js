@@ -89,7 +89,7 @@ export default function Signup(props) {
                     bookmarks: []
                 }))
                 props.closeModal2()
-                router.push("/recipes")
+                router.push("/home")
                 registerRef.current = true
             }
         }

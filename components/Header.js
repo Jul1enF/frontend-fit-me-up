@@ -144,6 +144,12 @@ export default function Header() {
                 onBackdropPress={() => setMenuVisible(!menuVisible)}
             >
                 <View style={!articlePage ? styles.modalBody : styles.modalBody2}>
+                <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={()=> {
+                        setMenuVisible(false)
+                        router.navigate('/home')
+                        }}>
+                        <Text style={styles.link}>Accueil</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={()=> {
                         setMenuVisible(false)
                         router.navigate('/user-informations')
@@ -174,9 +180,6 @@ export default function Header() {
                             <Text style={styles.link}>Utilisateurs</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
-                        <Text style={styles.link}>Contacts</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
                         <Text style={styles.link}>Se déconnecter</Text>
                     </TouchableOpacity>
