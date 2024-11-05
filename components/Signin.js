@@ -83,8 +83,11 @@ export default function Signin(props) {
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(6)} style={styles.body} >
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'position'} keyboardVerticalOffset={Platform.OS === "ios" ? RPH(6) : RPH(-8)} style={styles.body} >
                 <View style={styles.contentBody}>
+
+
+
                     <View style={styles.closeContainer}>
                         <Icon name="close" onPress={() => props.closeModal1()} color="white" size={RPH(4)} ></Icon>
                     </View>
@@ -103,6 +106,7 @@ export default function Signin(props) {
                                 setError('')
                             }}
                             value={email}
+                            autoCorrect={false}
                             placeholder='Email'
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             keyboardType='email-address'
@@ -147,9 +151,13 @@ export default function Signin(props) {
                             </Text>
                         </TouchableOpacity>
                     </LinearGradient>
+
+
+
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
+        
     )
 }
 
@@ -166,7 +174,6 @@ const styles = StyleSheet.create({
         marginTop: RPH(16),
         paddingBottom: RPH(4),
         backgroundColor: "#1c1c1c",
-        justifyContent : "center",
         alignItems: "center",
         justifyContent: "space-between",
         borderRadius: 10,

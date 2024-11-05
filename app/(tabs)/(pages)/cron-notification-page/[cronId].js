@@ -58,7 +58,7 @@ export default function CronNotificationPage() {
         setTitle(cron.notification_title)
         setMessage(cron.notification_message)
         setHour(cron.hour[0].toString())
-        setMinute(cron.minute[0].length == 1 ? "0" + cron.minute[0].toString() : cron.minute[0].toString())
+        setMinute(cron.minute[0]<10 ? "0" + cron.minute[0].toString() : cron.minute[0].toString())
         setIsActive(cron.is_active)
     }
 
@@ -338,15 +338,16 @@ export default function CronNotificationPage() {
 
 
 
-    return (
-        // <KeyboardAwareScrollView
-        //     style={{ flex: 1 }}
-        //     contentContainerStyle={[styles.contentBody, { marginLeft: RPW(7.5), marginTop: RPH(15) }]}
-        //     bottomOffset={RPH(3)}
-        // >
+    return (<>
+        {/* <KeyboardAwareScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={[styles.contentBody]}
+            bottomOffset={RPH(3)}
+            stickyHeaderIndices={[0]}
+        > */}
 
 
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody} stickyHeaderIndices={[0]} >
 
                 <CronHeader />
@@ -522,11 +523,12 @@ export default function CronNotificationPage() {
                 </Modal>
 
 
-            </ScrollView>
-        </KeyboardAvoidingView>
+             </ScrollView>
+         </KeyboardAvoidingView>
 
-        // </KeyboardAwareScrollView>
-    )
+        {/* </KeyboardAwareScrollView> */}
+
+        </>)
 }
 
 
@@ -573,6 +575,7 @@ const styles = StyleSheet.create({
         paddingRight: RPW(4),
         paddingBottom: RPW(3),
         alignItems: "center",
+        backgroundColor: "black",
     },
     text1: {
         color: "white",

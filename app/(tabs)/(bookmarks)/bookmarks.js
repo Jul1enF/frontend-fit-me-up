@@ -37,7 +37,6 @@ export default function Bookmarks() {
     const [subcategoriesList, setSubcategoriesList] = useState("")
 
 
-
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
@@ -201,7 +200,7 @@ export default function Bookmarks() {
     const subcategoryPress = (subcategory) => {
         setChosenSubcategory(subcategory)
 
-        if (subcategory === subcategoriesList[0]) {
+        if (subcategory === subcategoriesList[0].name) {
             setArticlesToDisplay(allBookmarkedArticles.filter(e => e.category === chosenCategory))
         }
         else {
@@ -250,17 +249,17 @@ export default function Bookmarks() {
             <FlatList
                 data={categoriesList}
                 horizontal={true}
-                style={{ height: RPW(14), maxHeight: RPW(14), margin : 0 }}
+                style={{ minHeight : RPW(16), maxHeight : RPW(16), width : RPW(100) }}
                 renderItem={({ item }) => {
                     return <CategoryItem {...item} />
                 }}
                 contentContainerStyle={[{ alignItems: 'center', paddingLeft: RPW(2) }, chosenCategory === "Tous mes favoris" && { borderBottomColor: "#878787", borderBottomWidth: 0.5 }]}
             />
-
+            
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={[{ height: RPW(12), maxHeight: RPW(12), margin : 0 }, chosenCategory === "Tous mes favoris" && {display : "none"}]}
+                style={[{ height: RPW(12), maxHeight: RPW(12), margin : 0, width : RPW(100) }, chosenCategory === "Tous mes favoris" && {display : "none"}]}
                 renderItem={({ item }) => {
                     return <SubcategoryItem {...item} />
                 }}
@@ -315,19 +314,19 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     gradientBtn1: {
-        height: RPW(8),
+        height : RPW(8.5),
         borderRadius: 10,
-        marginRight: RPW(2)
+        marginRight : RPW(2.3)
     },
     btn: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "black",
-        margin: 2.5,
+        margin: 2,
         borderRadius: 10,
-        paddingLeft: RPW(2),
-        paddingRight: RPW(2),
+        paddingLeft : RPW(2),
+        paddingRight : RPW(2),
     },
     btnText: {
         color: "white",

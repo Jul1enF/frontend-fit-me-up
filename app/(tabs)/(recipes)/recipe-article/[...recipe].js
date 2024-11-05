@@ -150,7 +150,7 @@ export default function Article() {
         }
         else {
             setModalVisible(false)
-            router.navigate('/recipes')
+            router.push(`/${article.category}`)
         }
     }
 

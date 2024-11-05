@@ -172,7 +172,7 @@ export default function Recipes() {
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={{height : RPW(15), maxHeight : RPW(15)}}
+                style={{minHeight : RPW(16), maxHeight : RPW(16), width : RPW(100)}}
                 renderItem={({ item }) => {
                   return <SubcategoryItem {...item}/>
                 }}
@@ -202,16 +202,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     gradientBtn1: {
-        height : RPW(8),
+        height : RPW(8.5),
         borderRadius: 10,
-        marginRight : RPW(2)
+        marginRight : RPW(2.3)
     },
     btn: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: "black",
-        margin: 2.5,
+        margin: 2,
         borderRadius: 10,
         paddingLeft : RPW(2),
         paddingRight : RPW(2),

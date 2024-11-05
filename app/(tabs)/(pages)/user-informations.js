@@ -141,16 +141,16 @@ export default function UserInformations() {
 
 
 
-    return (
-        // <KeyboardAwareScrollView
-        //     style={{ flex: 1 }}
-        //     contentContainerStyle={[styles.contentBody, { marginLeft: RPW(7.5), marginTop: RPH(15) }]}
-        //     bottomOffset={RPH(3)}
-        // >
+    return (<>
+        {/* <KeyboardAwareScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={[styles.contentBody ]}
+            bottomOffset={RPH(14)}
+        > */}
 
 
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
+         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
 
                 <View style={styles.topContainer}>
                     <Text style={styles.title}>Mes informations</Text>
@@ -337,11 +337,12 @@ export default function UserInformations() {
 
 
             </ScrollView>
-        </KeyboardAvoidingView>
+         </KeyboardAvoidingView>
 
 
-        // </KeyboardAwareScrollView>
+        {/* </KeyboardAwareScrollView> */}
 
+        </>
     )
 }
 
@@ -357,6 +358,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPW(6),
         paddingTop: RPW(5),
         alignItems: "center",
+        backgroundColor : "black",
     },
     topContainer: {
         alignItems: "flex-start",

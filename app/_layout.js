@@ -8,7 +8,10 @@ import articles from '../reducers/articles'
 import cronsNotifications from "../reducers/cronsNotifications";
 
 import { useEffect, useRef, useState } from 'react';
+
+
 // import { KeyboardProvider } from "react-native-keyboard-controller";
+
 
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';

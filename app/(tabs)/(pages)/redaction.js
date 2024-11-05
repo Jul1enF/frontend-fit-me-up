@@ -108,7 +108,7 @@ export default function Redaction() {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: false,
             aspect: [1, 1],
-            quality: 0.3,
+            quality: 0.2,
         });
 
         if (!result.canceled) {
@@ -187,6 +187,7 @@ export default function Redaction() {
     }
 
 
+
     // Fonction appelée en cliquant sur Tester
 
     const testPress = () => {
@@ -223,6 +224,7 @@ export default function Redaction() {
 
 
 
+
     // Fonction appelée en cliquant sur Annuler (ou juste pour annuler)
 
     const cancelPress = () => {
@@ -249,13 +251,21 @@ export default function Redaction() {
 
 
 
+
     // Fonction appelée en cliquant sur Publier
 
     const publishRef = useRef(true)
 
     const publishPress = async () => {
-        if (!title || !category || !pictureUri) {
-            setError('Erreur : titre, catégorie et photo obligatoires.')
+
+        if (!title || !category ) {
+            setError('Erreur : titre et catégorie obligatoires.')
+            setTimeout(() => setError(''), 4000)
+            return
+        }
+
+        if (!pictureUri && !videoLink){
+            setError('Erreur : merci de mettre une photo ou un lien youtube.')
             setTimeout(() => setError(''), 4000)
             return
         }
@@ -263,16 +273,25 @@ export default function Redaction() {
         if (!publishRef.current){ return }
         publishRef.current = false
 
+
         // Mise en forme des inputs pour leur envoi
         const _id = testArticle.length > 0 ? testArticle[0]._id : "testArticleId"
+
         const date = testArticle.length > 0 ? testArticle[0].createdAt : new Date()
         const uri = pictureUri
 
-        const localPic = pictureUri.includes('https') ? false : true
+        let localPic
+        
+        if (!pictureUri || pictureUri.includes('https')){
+            localPic = false
+        }
+        else{
+            localPic = true
+        }
 
         const formData = new FormData()
-
-        formData.append('articlePicture', {
+        console.log("LOCAL PIC :", localPic)
+        uri && formData.append('articlePicture', {
             uri,
             name: 'photo.jpg',
             type: 'image/jpeg',
@@ -346,7 +365,7 @@ export default function Redaction() {
             <TextInput multiline={true}
                 textAlignVertical="top"
                 style={styles.mediumInput}
-                placeholder="Sous-Titre de l'article"
+                placeholder="Sous-Catégorie/Sous-Titre de l'article"
                 onChangeText={(e) => setSubTitle(e)}
                 value={subTitle}
                 blurOnSubmit={true}>
@@ -368,6 +387,7 @@ export default function Redaction() {
                 placeholder="Lien de la vidéo Youtube"
                 onChangeText={(e) => setVideoLink(e)}
                 value={videoLink}
+                autoCapitalize="none"
             >
             </TextInput>
 
@@ -460,8 +480,11 @@ export default function Redaction() {
                     end={{ x: 1, y: 0.5 }}
                     style={styles.gradientBtn4}
                 >
-                    <TouchableOpacity style={styles.btn} onPress={() => cancelResizingPress()}>
-                        <Text style={styles.btn2Text}> Cadre original</Text>
+                    <TouchableOpacity style={styles.btn} onPress={() =>{
+                        cancelResizingPress()
+                        setPictureUri('')
+                    } }>
+                        <Text style={styles.btn2Text}> Enlever l'image</Text>
                     </TouchableOpacity>
                 </LinearGradient>
             </View>

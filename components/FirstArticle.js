@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Dimensions, Image, Platform, StatusBar } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import {RPH, RPW} from "../modules/dimensions"
+import { RPH, RPW } from "../modules/dimensions"
+
+import YoutubePlayer from "react-native-youtube-iframe";
 
 import moment from 'moment/min/moment-with-locales'
 
@@ -17,7 +19,7 @@ export default function FirstArticle(props) {
 
     return (
         <View style={styles.body}>
-            <View style={styles.imgContainer} >
+            {props.img_link && <View style={styles.imgContainer} >
                 <Image
                     style={[styles.image, {
                         width: RPW(100 * props.img_zoom),
@@ -26,7 +28,15 @@ export default function FirstArticle(props) {
                     }]}
                     source={{ uri: props.img_link, }}
                 />
-            </View>
+            </View>}
+            {!props.img_link && <View style={{ width : RPW(100), height : RPW(57)}} pointerEvents="none" >
+                <YoutubePlayer
+                    width={RPW(100)}
+                    height={RPW(57)}
+                    videoId={props.video_id}
+                />
+                </ View>
+            }
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{props.title}</Text>
                 <LinearGradient

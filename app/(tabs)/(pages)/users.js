@@ -80,7 +80,7 @@ export default function Users() {
 
 const topComponents  = (
     <View style={styles.topContainer}>
-          <Text style={styles.title}>Liste des utilisateurs :</Text>
+          <Text style={styles.title}>Liste des {users.length.toString()} utilisateurs :</Text>
                 <LinearGradient
                     colors={['#7700a4', '#0a0081']}
                     locations={[0.05, 1]}

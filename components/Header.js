@@ -28,7 +28,7 @@ export default function Header() {
     const [articlePage, setArticlePage] = useState(false)
 
     useEffect(() => {
-        if (pathName.includes('-article')) {
+        if (pathName.includes('-article') || pathName.includes('notification-page')) {
             setArticlePage(true)
         }
         else {
@@ -150,9 +150,6 @@ export default function Header() {
                         }}>
                         <Text style={styles.link}>Mes informations</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
-                        <Text style={styles.link}>Se déconnecter</Text>
-                    </TouchableOpacity>
                     {user.is_admin &&
                         <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
                             setMenuVisible(false)
@@ -179,6 +176,9 @@ export default function Header() {
                     }
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6}>
                         <Text style={styles.link}>Contacts</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
+                        <Text style={styles.link}>Se déconnecter</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
@@ -280,7 +280,7 @@ const styles = StyleSheet.create({
         top: RPH(20) - statusHeight,
     },
     linkContainer: {
-        height: RPH(12.6),
+        height: RPH(11.5),
         borderTopWidth: 0.5,
         borderTopColor: "white",
         justifyContent: "center",

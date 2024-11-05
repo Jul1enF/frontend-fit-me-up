@@ -87,6 +87,10 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
       console.log(e);
     }
   }
+  // Si sur emulator
+  else {
+    return true
+  }
 }
 
 module.exports = { registerForPushNotificationsAsync }
