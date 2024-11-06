@@ -124,6 +124,7 @@ export default function Header() {
                             returnKeyType="send"
                             placeholderTextColor={"rgba(255,255,255,0.85)"}
                             autoCapitalize="none"
+                            autoCorrect={false}
                             onSubmitEditing={() => submitSearch()}
                         ></TextInput>
                          <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(1.9)} onPress={() => submitSearch()} />

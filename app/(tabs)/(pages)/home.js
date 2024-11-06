@@ -174,8 +174,8 @@ export default function Article() {
 
             <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 25 }]}>
                 <YoutubePlayer
-                    height={RPW(56)}
-                    width={RPW(98)}
+                    height={RPW(54.5)}
+                    width={RPW(96)}
                     videoId={article.video_id}
                 />
             </View>
@@ -206,6 +206,24 @@ export default function Article() {
 
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
 
+            <View style={styles.legalContainer1}>
+                <TouchableOpacity style={styles.legalBth}>
+                    <Text style={styles.legalText}>
+                        Contacts
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.legalBth}>
+                    <Text style={styles.legalText}>
+                        Mentions légales
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.legalBth}>
+                    <Text style={styles.legalText}>
+                        CGU
+                    </Text>
+                </TouchableOpacity>
+            </View>
+
             {modifications}
         </ScrollView>
 
@@ -219,8 +237,8 @@ const styles = StyleSheet.create({
     },
     contentBody: {
         paddingTop: RPH(2),
-        paddingLeft: RPW(1),
-        paddingRight: RPW(1),
+        paddingLeft: RPW(2),
+        paddingRight: RPW(2),
         paddingBottom: 10,
     },
     categoryTitle: {
@@ -284,7 +302,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     btnContainer: {
-        marginTop: 35,
+        marginTop: 10,
         marginBottom: 20,
         flexDirection: "row",
         justifyContent: "center"
@@ -303,5 +321,22 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: RPW(4.8),
         fontWeight: "500",
+    },
+    legalContainer1: {
+        paddingRight : RPW(7),
+        paddingLeft : RPW(7),
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "100%",
+        marginBottom : 30,
+        marginTop : 30
+    },
+    legalBth: {
+        borderBottomColor: "grey",
+        borderBottomWidth: 1,
+        paddingBottom : 2,
+    },
+    legalText: {
+        color: "grey",
     },
 })

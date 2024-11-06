@@ -249,24 +249,24 @@ export default function Bookmarks() {
             <FlatList
                 data={categoriesList}
                 horizontal={true}
-                style={{ minHeight : RPW(16), maxHeight : RPW(16), width : RPW(100) }}
+                style={[{ minHeight : RPW(16), maxHeight : RPW(16), minWidth : RPW(100) }, chosenCategory === "Tous mes favoris" && { borderBottomColor: "#878787", borderBottomWidth: 0.5 }]}
                 renderItem={({ item }) => {
                     return <CategoryItem {...item} />
                 }}
-                contentContainerStyle={[{ alignItems: 'center', paddingLeft: RPW(2) }, chosenCategory === "Tous mes favoris" && { borderBottomColor: "#878787", borderBottomWidth: 0.5 }]}
+                contentContainerStyle={{ alignItems: 'center', paddingLeft: RPW(2) }}
             />
             
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={[{ height: RPW(12), maxHeight: RPW(12), margin : 0, width : RPW(100) }, chosenCategory === "Tous mes favoris" && {display : "none"}]}
+                style={[{ 
+                    height: RPW(12), maxHeight: RPW(12), margin : 0, width : RPW(100), minWidth : RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5,
+                }, chosenCategory === "Tous mes favoris" && {display : "none"}]}
                 renderItem={({ item }) => {
                     return <SubcategoryItem {...item} />
                 }}
                 contentContainerStyle={{
                     alignItems: 'flex-start', paddingLeft: RPW(2),
-                    borderBottomColor: "#878787",
-                    borderBottomWidth: 0.5,
                 }}
             />
 

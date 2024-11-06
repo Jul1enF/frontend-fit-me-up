@@ -1,9 +1,11 @@
-import { View, StyleSheet, Text, FlatList, RefreshControl } from "react-native";
-import { useFocusEffect } from "expo-router";
-import { useState, useCallback } from "react";
+import { View, StyleSheet, Text, FlatList, RefreshControl, TextInput } from "react-native";
+
+import { useState, useEffect } from "react";
 import { RPH, RPW } from "../../../modules/dimensions"
 import User from "../../../components/User"
 
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useSelector } from "react-redux";
@@ -14,35 +16,58 @@ export default function Users() {
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
-    const [users, setUsers] = useState("")
+    const [allUsers, setAllUsers] = useState("")
+    const [usersToDisplay, setUsersToDisplay] = useState("")
+    const [searchText, setSearchText] = useState("")
+    const [searching, setSearching] = useState(false)
 
     const user = useSelector((state) => state.user.value)
     const jwtToken = user.token
 
 
-    // Fonction et useFocusEffect pour charger les users
+
+    // Fonction et useEffect pour charger les users
 
     const loadUsers = async () => {
+        if (searching){ return }
 
         const response = await fetch(`${url}/users/all-users`)
         const data = await response.json()
 
         if (data.result) {
-            setUsers(data.users)
+            setAllUsers(data.users)
+            setUsersToDisplay(data.users)
         }
     }
 
-    useFocusEffect(useCallback(() => {
+
+    useEffect(()=>{
         loadUsers()
-    }, []))
+    },[])
+
+
 
 
     // Fonction en IDF pour changer is_allowed ici, si modifié dans bdd
 
     const toggleAllowed = (_id) => {
-        setUsers(users.map(e=>{
-            if (e._id == _id){
-                e.is_allowed = !e.is_allowed
+
+        setAllUsers(allUsers.map(e => {
+            if (e._id == _id) {
+                newE = {...e}
+                newE.is_allowed = !newE.is_allowed
+
+                return newE
+            }
+            return e
+        }))
+
+        setUsersToDisplay(usersToDisplay.map(e => {
+            if (e._id == _id) {
+                newE = {...e}
+                newE.is_allowed = !newE.is_allowed
+
+                return newE
             }
             return e
         }))
@@ -53,14 +78,46 @@ export default function Users() {
     // Fonction en IDF pour changer is_admin ici, si modifié dans bdd
 
     const toggleAdmin = (_id) => {
-        setUsers(users.map(e=>{
-            if (e._id == _id){
-                e.is_admin = !e.is_admin
+
+        setAllUsers(allUsers.map(e => {
+            if (e._id == _id) {
+                newE = {...e}
+                newE.is_admin = !newE.is_admin
+
+                return newE
+            }
+            return e
+        }))
+
+        setUsersToDisplay(usersToDisplay.map(e => {
+            if (e._id == _id) {
+                newE = {...e}
+                newE.is_admin = !newE.is_admin
+
+                return newE
             }
             return e
         }))
     }
 
+
+
+    // Fonction appelée en cas de click sur recherche
+
+    const submitSearch = () => {
+        const regex = new RegExp(searchText, 'i')
+    
+        if (!searchText) {
+            setUsersToDisplay(allUsers)
+            setSearching(false)
+            return
+        }
+
+        setSearching(true)
+
+        setUsersToDisplay(allUsers.filter(e => regex.test(e.name) || regex.test(e.firstname) || regex.test(e.email) || regex.test(e.coach)))
+
+    }
 
 
 
@@ -76,27 +133,61 @@ export default function Users() {
 
 
 
-// Composants à afficher en haut
+    // Composants à afficher en haut
 
-const topComponents  = (
-    <View style={styles.topContainer}>
-          <Text style={styles.title}>Liste des {users.length.toString()} utilisateurs :</Text>
-                <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientLine}
-                >
-                </LinearGradient>
-    </View>
-)
+    const topComponents = (
+        <View style={styles.topContainer}>
+            <View style={styles.searchContainer}>
+                <View style={styles.leftSectionContainer}>
+
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.search}
+                            placeholder="Rechercher un utilisateur ..."
+                            onChangeText={(e) => setSearchText(e)}
+                            value={searchText}
+                            returnKeyType="send"
+                            placeholderTextColor={"rgba(255,255,255,0.8)"}
+                            autoCapitalize="none"
+                            onSubmitEditing={() => submitSearch()}
+                            autoCorrect={false}
+                        ></TextInput>
+                        <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPW(4)} onPress={() => submitSearch()} />
+                    </View>
+
+                    <LinearGradient
+                        colors={['#7700a4', '#0a0081']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientLine}
+                    >
+                    </LinearGradient>
+                </View>
+                <FontAwesome5 name="backspace" style={styles.icon} size={RPW(5)} onPress={() => {
+                    setSearchText("")
+                    setSearching(false)
+                    setUsersToDisplay(allUsers)
+                }} />
+            </View>
+
+            <Text style={styles.title}>Liste des {usersToDisplay.length.toString()} utilisateurs :</Text>
+            <LinearGradient
+                colors={['#7700a4', '#0a0081']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientLine2}
+            >
+            </LinearGradient>
+        </View>
+    )
 
 
 
     return (
         <FlatList
-            data={users}
+            data={usersToDisplay}
             refreshControl={refreshComponent}
             showsVerticalScrollIndicator={true}
             indicatorStyle="white"
@@ -104,7 +195,7 @@ const topComponents  = (
             style={styles.body}
             contentContainerStyle={{ alignItems: 'center', paddingTop: RPH(3) }}
             renderItem={({ item }) => {
-                if (users) { return <User {...item} jwtToken={jwtToken} toggleAdmin={toggleAdmin} toggleAllowed={toggleAllowed} /> }
+                if (usersToDisplay) { return <User {...item} jwtToken={jwtToken} toggleAdmin={toggleAdmin} toggleAllowed={toggleAllowed} /> }
             }}>
 
         </FlatList>
@@ -123,7 +214,37 @@ const styles = StyleSheet.create({
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
         marginBottom: 15,
-        justifyContent : "flex-start"
+        justifyContent: "flex-start"
+    },
+    searchContainer: {
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 28,
+    },
+    leftSectionContainer: {
+        width: RPW(64),
+    },
+    inputContainer: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 8,
+    },
+    gradientLine: {
+        width: "100%",
+        height: 2,
+    },
+    search: {
+        color: "white",
+        fontSize: RPW(4.2),
+        fontWeight: "500",
+        width: "90%",
+    },
+    icon: {
+        color: "white",
     },
     title: {
         color: "#e0e0e0",
@@ -131,8 +252,8 @@ const styles = StyleSheet.create({
         fontWeight: "450",
         marginBottom: 9,
     },
-    gradientLine: {
-        width: "90%",
+    gradientLine2: {
+        width: "95%",
         height: 4,
         marginBottom: 15,
     },

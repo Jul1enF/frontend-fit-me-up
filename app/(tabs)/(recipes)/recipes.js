@@ -169,12 +169,11 @@ export default function Recipes() {
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={{minHeight : RPW(16), maxHeight : RPW(16), width : RPW(100)}}
+                style={{minHeight : RPW(16), maxHeight : RPW(16), minWidth : RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5}}
                 renderItem={({ item }) => {
                   return <SubcategoryItem {...item}/>
                 }}
-                contentContainerStyle={{ alignItems: 'center', paddingLeft : RPW(2), borderBottomColor: "#878787",
-                    borderBottomWidth: 0.5 }}
+                contentContainerStyle={{ alignItems: 'center', paddingLeft : RPW(2) }}
             />
             <FlatList
                 data={articlesToDisplay}

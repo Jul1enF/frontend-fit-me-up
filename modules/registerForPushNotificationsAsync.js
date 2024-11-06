@@ -62,7 +62,6 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
 
   
       if (!userPushToken || userPushToken !== pushTokenString ){
-        console.log("PUSH USER TOKEN :", userToken)
 
         const response = await fetch(`${url}/userModifications/changePushToken`, {
           method: 'PUT',

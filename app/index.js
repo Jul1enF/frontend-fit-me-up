@@ -21,7 +21,7 @@ export default function Index() {
     const user = useSelector((state) => state.user.value)
 
     useFocusEffect(useCallback(() => {
-        user.firstname && router.push('/recipes')
+        user.firstname && router.push('/home')
 
     }, []))
 

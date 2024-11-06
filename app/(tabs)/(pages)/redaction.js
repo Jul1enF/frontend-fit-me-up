@@ -15,6 +15,8 @@ import JWT, { SupportedAlgorithms } from 'expo-jwt';
 const jwtKey = process.env.EXPO_PUBLIC_JWT_KEY
 
 
+
+
 export default function Redaction() {
 
     const dispatch = useDispatch()
@@ -192,8 +194,14 @@ export default function Redaction() {
     // Fonction appelée en cliquant sur Tester
 
     const testPress = () => {
-        if (!title || !category || !pictureUri) {
-            setError('Erreur : titre, catégorie et photo obligatoires.')
+        if (!title || !category) {
+            setError('Erreur : titre et catégorie obligatoires.')
+            setTimeout(() => setError(''), 4000)
+            return
+        }
+
+        if (!pictureUri && !videoLink) {
+            setError('Erreur : merci de mettre une photo OU un lien youtube.')
             setTimeout(() => setError(''), 4000)
             return
         }
@@ -266,7 +274,7 @@ export default function Redaction() {
         }
 
         if (!pictureUri && !videoLink) {
-            setError('Erreur : merci de mettre une photo ou un lien youtube.')
+            setError('Erreur : merci de mettre une photo OU un lien youtube.')
             setTimeout(() => setError(''), 4000)
             return
         }
