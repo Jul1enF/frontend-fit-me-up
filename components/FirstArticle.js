@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Dimensions, Image, Platform, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, Image, Platform, StatusBar } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { RPH, RPW } from "../modules/dimensions"
+import { useState, useEffect } from 'react';
 
 import YoutubePlayer from "react-native-youtube-iframe";
 
@@ -9,6 +10,13 @@ import moment from 'moment/min/moment-with-locales'
 
 export default function FirstArticle(props) {
 
+    // État pour afficher un carré noir quand l'image n'a pas fini de charger
+
+    const [imgLoaded, setImgLoaded] = useState(false)
+
+
+
+    // Si pas de sous catégorie / Sous titre, affichage du début du texte
     let optionnalSubTitle = ""
     if (!props.sub_title && props.text) {
         optionnalSubTitle = <Text numberOfLines={3} style={styles.subTitle}>{props.text}</Text>
@@ -19,16 +27,24 @@ export default function FirstArticle(props) {
 
     return (
         <View style={styles.body}>
+
             {props.img_link && <View style={styles.imgContainer} >
+
+                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), }, imgLoaded && {display : "none"}]}></View>
+
                 <Image
                     style={[styles.image, {
                         width: RPW(100 * props.img_zoom),
                         marginTop: RPW(props.img_margin_top),
                         marginLeft: RPW(props.img_margin_left)
-                    }]}
+                    }, ]}
                     source={{ uri: props.img_link, }}
+                    onLoadStart={()=> setImgLoaded(false)}
+                    onLoad={()=> setImgLoaded(true)}
                 />
             </View>}
+
+
             {!props.img_link && <View style={{ width : RPW(100), height : RPW(57)}} pointerEvents="none" >
                 <YoutubePlayer
                     width={RPW(100)}
@@ -37,6 +53,8 @@ export default function FirstArticle(props) {
                 />
                 </ View>
             }
+
+
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{props.title}</Text>
                 <LinearGradient
@@ -50,6 +68,8 @@ export default function FirstArticle(props) {
                 {props.sub_title && <Text numberOfLines={3} style={styles.subTitle}>{props.sub_title}</Text>}
                 {optionnalSubTitle}
             </View>
+
+            
             <Text style={styles.date}>Posté {lastingTime}</Text>
             <LinearGradient
                 colors={['#7700a4', '#0a0081']}

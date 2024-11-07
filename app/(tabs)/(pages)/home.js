@@ -4,7 +4,7 @@ import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { fillWithArticles, suppressArticles } from "../../../reducers/articles";
 import { addTestArticle } from "../../../reducers/testArticle";
-import { logout } from "../../../reducers/user";
+import { logout, changePushToken } from "../../../reducers/user";
 
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
 import { RPH, RPW } from "../../../modules/dimensions"

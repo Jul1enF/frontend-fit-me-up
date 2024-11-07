@@ -63,6 +63,8 @@ export default function Bookmarks() {
     //  Fonction pour charger les articles
 
     const loadArticles = () => {
+        if (!user.bookmarks){ return }
+
         let bookmarkedArticles = []
 
         for (let article of articles) {
@@ -322,8 +324,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
-        margin: 2,
+        backgroundColor: "#2a2a2a",
+        margin: 0,
+        // backgroundColor: "black",
+        // margin: 2,
         borderRadius: 10,
         paddingLeft : RPW(2),
         paddingRight : RPW(2),

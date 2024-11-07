@@ -111,6 +111,7 @@ export default function Signin(props) {
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             keyboardType='email-address'
                             autoCapitalize='none'
+                            autoComplete="email"
                             onFocus={() => setOffsetKeyboard(RPH(6))}>
                         </TextInput>
                     </LinearGradient>
@@ -129,6 +130,7 @@ export default function Signin(props) {
                             }}
                             value={password}
                             placeholder='Mot de passe'
+                            autoComplete="current-password"
                             placeholderTextColor='rgba(255,255,255,0.4)'
                             secureTextEntry={!passwordVisible}
                             onFocus={() => setOffsetKeyboard(RPH(6))} >

@@ -180,7 +180,7 @@ export default function Recipes() {
                 refreshControl={refreshComponent}
                 renderItem={({ item, index }) => {
                     if (index === 0 || Number.isInteger((index)/3) ) {
-                        return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} /></TouchableOpacity>
+                        return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} chosenSubcategory={chosenSubcategory} /></TouchableOpacity>
                     }
                     else {
                         return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><Article {...item} /></TouchableOpacity>
@@ -206,8 +206,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
-        margin: 2,
+        backgroundColor: "#2a2a2a",
+        margin: 0,
+        // backgroundColor : "black",
+        // margin : 2,
         borderRadius: 10,
         paddingLeft : RPW(2),
         paddingRight : RPW(2),
