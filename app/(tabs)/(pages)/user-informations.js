@@ -6,8 +6,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from "expo-linear-gradient";
 
 import { useSelector, useDispatch } from "react-redux";
-import { changeUserInfos } from "../../../reducers/user";
+import { changeUserInfos, logout } from "../../../reducers/user";
 import { useState, useEffect, useRef } from "react";
+
+import { router } from "expo-router";
 
 import Modal from "react-native-modal"
 
@@ -43,6 +45,7 @@ export default function UserInformations() {
 
     const [error, setError] = useState('')
     const [modal1Visible, setModal1Visible] = useState(false)
+    const [modal2Visible, setModal2Visible] = useState(false)
 
     const [oldPasswordVisible, setOldPasswordVisible] = useState(false)
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -84,7 +87,7 @@ export default function UserInformations() {
     const registerRef = useRef(true)
 
     const finalRegisterPress = async () => {
-        if (registerRef.current == false){ return }
+        if (registerRef.current == false) { return }
         registerRef.current = false
 
 
@@ -97,12 +100,12 @@ export default function UserInformations() {
                 email,
                 oldPassword,
                 password,
-                jwtToken : user.token,
+                jwtToken: user.token,
             })
         })
         const data = await response.json()
 
-        if (data.result){
+        if (data.result) {
             setModal1Visible(false)
             dispatch(changeUserInfos({
                 name,
@@ -119,24 +122,62 @@ export default function UserInformations() {
             setError("Modifications enregistrées !")
             setTimeout(() => setError(''), 4000)
         }
-        else if (data.error){
+        else if (data.error) {
             setModal1Visible(false)
-            
+
             registerRef.current = true
 
             setError(data.error)
             setTimeout(() => setError(''), 5000)
         }
-        else{
+        else {
             setModal1Visible(false)
-            
+
             registerRef.current = true
 
-            setError("Problème d'autorisation. Essayez en quittant l'appli et en vous reconnectant.")
+            setError("Problème d'autorisation. Essayez en quittant l'application et en vous reconnectant.")
             setTimeout(() => setError(''), 5000)
+        }
+    }
+
+
+
+
+    // Fonction appelée en se désincrivant
+    const unsuscribeRef = useRef(true)
+
+
+    const unsuscribePress = async () => {
+        if (unsuscribeRef.current = false){ return }
+        unsuscribeRef.current = false
+
+        const response = await fetch(`${url}/userModifications/delete-user/${user.token}`, { method: 'DELETE' })
+
+        const data = await response.json()
+
+        if (!data.result && data.error) {
+            setError(data.error)
+            setTimeout(() => setError(''), 4000)
+            unsuscribeRef.current = true
+        }
+        else if (!data.result) {
+            setError("Erreur : Merci de réessayez après vous être reconnecté ou de contacter l'Éditeur de l'application.")
+            setTimeout(() => setError(''), 4000)
+            unsuscribeRef.current = true
+        }
+        else {
+            setModal2Visible(false)
+            dispatch(logout())
+            router.push(`/`)
+            unsuscribeRef.current = true
         }
 
     }
+
+
+
+
+
 
 
 
@@ -149,8 +190,8 @@ export default function UserInformations() {
         > */}
 
 
-         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
 
                 <View style={styles.topContainer}>
                     <Text style={styles.title}>Mes informations</Text>
@@ -268,7 +309,7 @@ export default function UserInformations() {
                 </View>
 
 
-                <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? {color : "green"} : {color : "red"}]}>{error}</Text>
+                <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error}</Text>
 
                 <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
                     <LinearGradient
@@ -281,6 +322,22 @@ export default function UserInformations() {
                         <Text style={styles.text2}>Enregistrer</Text>
                     </LinearGradient>
                 </TouchableOpacity>
+
+                <Text style={[styles.text1, !error && { display: "none" }]}>{error}</Text>
+
+
+                <LinearGradient
+                    colors={['#7700a4', '#0a0081']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={styles.btnGradientContainer2}
+                >
+                    <TouchableOpacity style={[styles.btnTouchable2,]} activeOpacity={0.8} onPress={() => setModal2Visible(true)}>
+                        <Text style={styles.text2}>Me désinscrire</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
+
 
 
 
@@ -327,22 +384,69 @@ export default function UserInformations() {
                                     <Text style={styles.text2}>Enregistrer</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
-
-
                         </View>
-                        <Text style={[styles.text1, !error && { display: "none" }]}>{error}</Text>
                     </View>
                 </Modal>
 
 
 
+                <Modal
+                    isVisible={modal2Visible}
+                    style={styles.modal}
+                    backdropColor="rgba(0,0,0,0.9)"
+                    animationIn="slideInDown"
+                    animationOut="slideOutUp"
+                    onBackButtonPress={() => setModal2Visible(!modal2Visible)}
+                    onBackdropPress={() => setModal2Visible(!modal2Visible)}
+                >
+                    <View style={styles.modalBody}>
+                        <Text style={styles.text2}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
+                        <LinearGradient
+                            colors={['#7700a4', '#0a0081']}
+                            locations={[0.05, 1]}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={styles.gradientLine2}
+                        >
+                        </LinearGradient>
+                        <View style={styles.row1}>
+                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal2Visible(false)}>
+                                <LinearGradient
+                                    colors={['#7700a4', '#0a0081']}
+                                    locations={[0.05, 1]}
+                                    start={{ x: 0, y: 0.5 }}
+                                    end={{ x: 1, y: 0.5 }}
+                                    style={styles.btnGradientContainer}
+                                >
+                                    <Text style={styles.text2}>Annuler</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => unsuscribePress()}>
+                                <LinearGradient
+                                    colors={['#7700a4', '#0a0081']}
+                                    locations={[0.05, 1]}
+                                    start={{ x: 0, y: 0.5 }}
+                                    end={{ x: 1, y: 0.5 }}
+                                    style={styles.btnGradientContainer}
+                                >
+                                    <Text style={styles.text2}>Confirmer</Text>
+                                </LinearGradient>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </Modal>
+
+
+
+
             </ScrollView>
-         </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
 
 
         {/* </KeyboardAwareScrollView> */}
 
-        </>
+    </>
     )
 }
 
@@ -358,7 +462,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPW(6),
         paddingTop: RPW(5),
         alignItems: "center",
-        backgroundColor : "black",
+        backgroundColor: "black",
     },
     topContainer: {
         alignItems: "flex-start",
@@ -396,12 +500,12 @@ const styles = StyleSheet.create({
     passwordContainer: {
         flexDirection: "row",
         width: "100%",
-        height : RPW(10),
-        paddingRight : RPW(2),
+        height: RPW(10),
+        paddingRight: RPW(2),
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "white",
-        marginBottom : 20,
+        marginBottom: 20,
         borderRadius: 5,
     },
     input2: {
@@ -414,7 +518,6 @@ const styles = StyleSheet.create({
         paddingTop: 7,
     },
     btnTouchable: {
-        width: RPW(37),
         height: RPW(12),
         marginTop: 10,
     },
@@ -422,19 +525,37 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 10,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingLeft: RPW(5),
+        paddingRight: RPW(5),
+        minWidth: RPW(34)
+    },
+    btnTouchable2: {
+        backgroundColor: "black",
+        flex: 1,
+        margin: 2,
+        paddingLeft: RPW(5),
+        paddingRight: RPW(5),
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    btnGradientContainer2: {
+        borderRadius: 10,
+        height: RPW(12),
+        marginTop : 40,
     },
     text2: {
         color: "white",
         fontSize: RPW(5.4),
         fontWeight: "500",
-        textAlign : "center"
+        textAlign: "center"
     },
     modal: {
         alignItems: "center"
     },
     modalBody: {
-        height: RPH(40),
+        height: RPH(35),
         width: RPW(90),
         borderRadius: 10,
         paddingTop: RPH(5),

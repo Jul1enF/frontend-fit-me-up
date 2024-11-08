@@ -115,15 +115,6 @@ export default function Index() {
                 </View>
             </View>
 
-            {/* <Modal
-                visible={modal1Visible}
-                onRequestClose={() => setModal1VIsible(false)}
-                style={styles.modal}
-                animationType='slide'
-                transparent={true}
-            >
-                <Signin closeModal1={closeModal1} />
-            </Modal> */}
 
             <Modal2
                 isVisible={modal1Visible}
@@ -146,6 +137,21 @@ export default function Index() {
                 >
                     <Signup closeModal2={closeModal2} />
                 </Modal>
+
+
+
+                <View style={styles.legalContainer1}>
+                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/contact-index')}>
+                    <Text style={styles.legalText}>
+                        Contact
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/legal-index')}>
+                    <Text style={styles.legalText}>
+                        CGU
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
         backgroundColor: "black",
-        paddingBottom: RPH(0),
+        paddingBottom: RPH(4),
         paddingTop: RPH(1)
     },
     signContainer: {
@@ -220,6 +226,24 @@ const styles = StyleSheet.create({
     },
     modal : {
       flex :1
-    }
+    },
+    legalContainer1: {
+        position : "absolute",
+        bottom : 10,
+        paddingRight : RPW(8),
+        paddingLeft : RPW(8),
+        justifyContent : "space-between",
+        flexDirection: "row",
+        width: "100%",
+    },
+    legalBth: {
+        borderBottomColor: "rgba(255,255,255,0.25)",
+        borderBottomWidth: 1,
+        paddingBottom : 2,
+    },
+    legalText: {
+        color: "rgba(255,255,255,0.25)",
+        fontSize : 12,
+    },
 
 })

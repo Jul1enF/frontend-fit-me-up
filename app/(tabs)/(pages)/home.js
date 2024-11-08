@@ -207,19 +207,14 @@ export default function Article() {
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
 
             <View style={styles.legalContainer1}>
-                <TouchableOpacity style={styles.legalBth}>
+                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/contact')}>
                     <Text style={styles.legalText}>
-                        Contacts
+                        Contact
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.legalBth}>
+                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/legal')}>
                     <Text style={styles.legalText}>
-                        Mentions légales
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.legalBth}>
-                    <Text style={styles.legalText}>
-                        CGU
+                        CGU / Mentions légales
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -332,11 +327,12 @@ const styles = StyleSheet.create({
         marginTop : 30
     },
     legalBth: {
-        borderBottomColor: "grey",
+        borderBottomColor: "rgba(255,255,255,0.25)",
         borderBottomWidth: 1,
         paddingBottom : 2,
     },
     legalText: {
-        color: "grey",
+        color: "rgba(255,255,255,0.25)",
+        fontSize : 12,
     },
 })

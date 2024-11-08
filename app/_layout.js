@@ -7,6 +7,8 @@ import testArticle from '../reducers/testArticle'
 import articles from '../reducers/articles'
 import cronsNotifications from "../reducers/cronsNotifications";
 
+import { LinearGradient } from "expo-linear-gradient";
+
 import { useEffect, useRef, useState } from 'react';
 
 
@@ -91,10 +93,37 @@ export default function RootLayout() {
                 <Stack >
                     <Stack.Screen name="index" options={{
                         headerShown: false,
+                        title : "Connexion",
                     }} />
                     <Stack.Screen name="(tabs)" options={{
                         headerShown: false,
                     }} />
+                       <Stack.Screen name="legal-index" options={{
+                headerShown : true,
+                title : "CGU / Mentions Légales",
+                headerTintColor: 'white',
+                headerBackground: () => (
+                    <LinearGradient
+                      colors={['#7700a4', '#0a0081']}
+                      start={{ x: 0, y: 0.5 }}
+                      end={{ x: 1, y: 0.5 }}
+                      style={{ height: 150 }}
+                    ></LinearGradient>
+                  ),
+            }} />
+            <Stack.Screen name="contact-index" options={{
+                headerShown : true,
+                title : "Contact",
+                headerTintColor: 'white',
+                headerBackground: () => (
+                    <LinearGradient
+                      colors={['#7700a4', '#0a0081']}
+                      start={{ x: 0, y: 0.5 }}
+                      end={{ x: 1, y: 0.5 }}
+                      style={{ height: 150 }}
+                    ></LinearGradient>
+                  ),
+            }}/>
                 </Stack>
             {/* </KeyboardProvider> */}
         </Provider>
