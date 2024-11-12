@@ -68,6 +68,8 @@ export default function Redaction() {
     const [imgMarginLeft, setImgMarginLeft] = useState(0)
     const [imgZoom, setImgZoom] = useState(1)
 
+
+
     // useRef pour valeurs de départs de la marge de l'image et de son agrandissement
 
     const imgMarginTopRef = useRef(0)
@@ -85,6 +87,9 @@ export default function Redaction() {
     const [scrollable, setScrollable] = useState(true)
 
 
+
+
+    
     // Fonction appelée en cliquant sur Annuler recadrage pour reseter les états et refs
 
     const cancelResizingPress = () => {

@@ -8,7 +8,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { router, usePathname } from "expo-router";
-import {RPH, RPW } from "../modules/dimensions"
+import { RPH, RPW } from "../modules/dimensions"
 
 
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -51,8 +51,8 @@ export default function Header() {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                jwtToken : user.token,
-                push_token : "",
+                jwtToken: user.token,
+                push_token: "",
             })
         })
         const data = await response.json()
@@ -64,7 +64,7 @@ export default function Header() {
         router.navigate('/')
     }
 
-    
+
 
     // Fonction appelée en soumettant une recherche
 
@@ -75,10 +75,31 @@ export default function Header() {
     }
 
 
+    // Affichage conditionnel des informations ou d'un renvoie vers la page de connexion
+
+    let informationsOrConnexion
+
+    if (user.token) {
+        informationsOrConnexion = <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={() => {
+            setMenuVisible(false)
+            router.navigate('/user-informations')
+        }}>
+            <Text style={styles.link}>Mes informations</Text>
+        </TouchableOpacity>
+    }
+    else {
+        informationsOrConnexion = <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={() => {
+            setMenuVisible(false)
+            router.navigate('/')
+        }}>
+            <Text style={styles.link}>Se connecter / S'inscrire</Text>
+        </TouchableOpacity>
+    }
+
 
     return (
         <View style={styles.body}>
-             <StatusBar translucent={true} barStyle="light"/>
+            <StatusBar translucent={true} barStyle="light" />
             <LinearGradient style={styles.header}
                 colors={['#7700a4', '#0a0081']}
                 locations={[0, 0.9]}
@@ -127,7 +148,7 @@ export default function Header() {
                             autoCorrect={false}
                             onSubmitEditing={() => submitSearch()}
                         ></TextInput>
-                         <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(1.9)} onPress={() => submitSearch()} />
+                        <FontAwesome6 name="magnifying-glass" style={styles.icon} size={RPH(1.9)} onPress={() => submitSearch()} />
                     </View>
                     <FontAwesome6 name="chevron-up" style={styles.icon} size={RPH(2.8)} onPress={() => setSearchVisible(!searchVisible)} />
 
@@ -145,18 +166,13 @@ export default function Header() {
                 onBackdropPress={() => setMenuVisible(!menuVisible)}
             >
                 <View style={!articlePage ? styles.modalBody : styles.modalBody2}>
-                <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={()=> {
+                    <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={() => {
                         setMenuVisible(false)
                         router.navigate('/home')
-                        }}>
+                    }}>
                         <Text style={styles.link}>Accueil</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={()=> {
-                        setMenuVisible(false)
-                        router.navigate('/user-informations')
-                        }}>
-                        <Text style={styles.link}>Mes informations</Text>
-                    </TouchableOpacity>
+                    {informationsOrConnexion}
                     {user.is_admin &&
                         <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
                             setMenuVisible(false)
@@ -165,7 +181,7 @@ export default function Header() {
                             <Text style={styles.link}>Écrire / Modifier un article</Text>
                         </TouchableOpacity>
                     }
-                     {user.is_admin &&
+                    {user.is_admin &&
                         <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
                             setMenuVisible(false)
                             router.push('/notifications')
@@ -173,7 +189,7 @@ export default function Header() {
                             <Text style={styles.link}>Notifications</Text>
                         </TouchableOpacity>
                     }
-                        {user.is_admin &&
+                    {user.is_admin &&
                         <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => {
                             setMenuVisible(false)
                             router.push('/users')
@@ -181,9 +197,9 @@ export default function Header() {
                             <Text style={styles.link}>Utilisateurs</Text>
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
+                   {user.token && <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
                         <Text style={styles.link}>Se déconnecter</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>}
                 </View>
             </Modal>
         </View>
@@ -196,8 +212,8 @@ const styles = StyleSheet.create({
         width: RPW(100),
     },
     header: {
-       flex : 1,
-        paddingTop: RPH(4) - (statusHeight/2),
+        flex: 1,
+        paddingTop: RPH(4) - (statusHeight / 2),
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
@@ -247,22 +263,22 @@ const styles = StyleSheet.create({
         paddingLeft: RPW(4),
         paddingRight: RPW(4),
     },
-    searchInputContainer : {
+    searchInputContainer: {
         borderBottomColor: "white",
         borderBottomWidth: 0.5,
         width: RPW(50),
         paddingBottom: RPH(1),
-        paddingRight : RPW(1),
+        paddingRight: RPW(1),
         marginTop: RPH(0.5),
-        flexDirection : 'row',
-        justifyContent : "space-between",
-        alignItems : "center",
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     search: {
         color: "white",
         fontSize: RPH(2.3),
         fontWeight: "500",
-        width : "90%",
+        width: "90%",
     },
     modal: {
         alignItems: "flex-start",

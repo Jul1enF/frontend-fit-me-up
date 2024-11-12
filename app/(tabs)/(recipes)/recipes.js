@@ -22,7 +22,7 @@ export default function Recipes() {
     const user = useSelector((state) => state.user.value)
     console.log(user)
     const testArticle = useSelector((state) => state.testArticle.value)
-    const articles = useSelector((state)=>state.articles.value)
+    const articles = useSelector((state) => state.articles.value)
     const dispatch = useDispatch()
 
     const [thisCategoryArticles, setThisCategoryArticles] = useState("")
@@ -36,8 +36,11 @@ export default function Recipes() {
 
     // Fonction pour gérer les potentiels changement de push token
 
-    const checkPushTokenChanges = async (pushToken, token) => {
-        const pushTokenInfos = await registerForPushNotificationsAsync(pushToken, token)
+    const checkPushTokenChanges = async () => {
+        // Si utilisateur pas connecté
+        if (!user.token) { return }
+
+        const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
         if (!pushTokenInfos) {
             dispatch(logout())
@@ -53,13 +56,26 @@ export default function Recipes() {
     //  Fonction pour charger les articles et trier les sous catégories
 
     const loadArticles = async () => {
-        if (user.is_admin && testArticle[0]?.category === "recipes") {
+
+        // S'il y a un article test, chargement de celui ci
+        if (user?.is_admin && testArticle[0]?.category === "recipes") {
             setArticlesToDisplay(testArticle)
         }
+        // Sinon fetch des articles en bdd
+
         else {
-            const response = await fetch(`${url}/articles/getArticles/${user.token}`)
+            // Envoi d'un token ou non en fonction de si l'utilisateur en a un
+            let token = "noToken"
+
+            if (user.token) {
+                token = user.token
+            }
+
+
+            const response = await fetch(`${url}/articles/getArticles/${token}`)
 
             const data = await response.json()
+
 
             if (data.result) {
                 dispatch(fillWithArticles(data.articles))
@@ -68,25 +84,27 @@ export default function Recipes() {
 
                 recipesArticles.reverse()
 
+
                 setThisCategoryArticles(recipesArticles)
                 setArticlesToDisplay(recipesArticles)
 
 
                 // Tri pour les sous catégories
-                let sortedSubcategories = [ {name : "Toutes les recettes"}]
+                let sortedSubcategories = [{ name: "Toutes les recettes" }]
 
-                recipesArticles.map(e=>{
-                    if (e.sub_title && !sortedSubcategories.some(j=> j.name === e.sub_title)){
-                        sortedSubcategories.push({name : e.sub_title})
+                recipesArticles.map(e => {
+                    if (e.sub_title && !sortedSubcategories.some(j => j.name === e.sub_title)) {
+                        sortedSubcategories.push({ name: e.sub_title })
                     }
                 })
                 setSubcategoriesList(sortedSubcategories)
                 setChosenSubcategory("Toutes les recettes")
 
             }
-            else if (!data.result && data.error == "Utilisateur bloqué."){
-                dispatch(suppressArticles())
-                setArticlesToDisplay("")
+            else if (!data.result) {
+                // dispatch(suppressArticles())
+                // setArticlesToDisplay("")
+                return
             }
         }
     }
@@ -95,13 +113,13 @@ export default function Recipes() {
     // useFocusEffect pour vérifier si les notifs sont toujours autorisées
 
     useFocusEffect(useCallback(() => {
-       user.token && checkPushTokenChanges(user.push_token, user.token)
+        checkPushTokenChanges()
     }, [user]))
-    
 
-    useEffect(()=>{
+
+    useEffect(() => {
         loadArticles()
-    },[testArticle])
+    }, [testArticle])
 
 
 
@@ -110,11 +128,11 @@ export default function Recipes() {
     const subcategoryPress = (subcategory) => {
         setChosenSubcategory(subcategory)
 
-        if (subcategory === "Toutes les recettes"){
+        if (subcategory === "Toutes les recettes") {
             setArticlesToDisplay(thisCategoryArticles)
         }
         else {
-            setArticlesToDisplay(thisCategoryArticles.filter(e=> e.sub_title == subcategory))
+            setArticlesToDisplay(thisCategoryArticles.filter(e => e.sub_title == subcategory))
         }
     }
 
@@ -124,18 +142,18 @@ export default function Recipes() {
 
     const SubcategoryItem = (props) => {
 
-        return(
+        return (
             <LinearGradient
-            colors={['#7700a4', '#0a0081']}
-            locations={[0.05, 1]}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            style={styles.gradientBtn1}
-        >
-            <TouchableOpacity style={[styles.btn, chosenSubcategory === props.name && { backgroundColor: "transparent" }]} onPress={() => subcategoryPress(props.name)}>
-                <Text style={styles.btnText}>{props.name}</Text>
-            </TouchableOpacity>
-        </LinearGradient>
+                colors={['#7700a4', '#0a0081']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientBtn1}
+            >
+                <TouchableOpacity style={[styles.btn, chosenSubcategory === props.name && { backgroundColor: "transparent" }]} onPress={() => subcategoryPress(props.name)}>
+                    <Text style={styles.btnText}>{props.name}</Text>
+                </TouchableOpacity>
+            </LinearGradient>
         )
     }
 
@@ -152,11 +170,11 @@ export default function Recipes() {
 
     // Composant pour rafraichir la page
 
-    const [isRefreshing, setIsRefreshing]=useState(false)
+    const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={()=>{
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"black"} tintColor={"white"} onRefresh={() => {
         setIsRefreshing(true)
-        setTimeout(()=>setIsRefreshing(false), 1000)
+        setTimeout(() => setIsRefreshing(false), 1000)
         loadArticles()
     }} />
 
@@ -165,21 +183,21 @@ export default function Recipes() {
 
     return (
         <View style={styles.body} >
-            <StatusBar translucent={true} barStyle="light"/>
+            <StatusBar translucent={true} barStyle="light" />
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={{minHeight : RPW(16), maxHeight : RPW(16), minWidth : RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5}}
+                style={{ minHeight: RPW(16), maxHeight: RPW(16), minWidth: RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5 }}
                 renderItem={({ item }) => {
-                  return <SubcategoryItem {...item}/>
+                    return <SubcategoryItem {...item} />
                 }}
-                contentContainerStyle={{ alignItems: 'center', paddingLeft : RPW(2) }}
+                contentContainerStyle={{ alignItems: 'center', paddingLeft: RPW(2) }}
             />
             <FlatList
                 data={articlesToDisplay}
                 refreshControl={refreshComponent}
                 renderItem={({ item, index }) => {
-                    if (index === 0 || Number.isInteger((index)/3) ) {
+                    if (index === 0 || Number.isInteger((index) / 3)) {
                         return <TouchableOpacity onPress={() => articlePress(item._id, item.test)} ><FirstArticle {...item} chosenSubcategory={chosenSubcategory} /></TouchableOpacity>
                     }
                     else {
@@ -198,9 +216,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     gradientBtn1: {
-        height : RPW(8.5),
+        height: RPW(8.5),
         borderRadius: 10,
-        marginRight : RPW(2.3)
+        marginRight: RPW(2.3)
     },
     btn: {
         flex: 1,
@@ -208,11 +226,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: "#2a2a2a",
         margin: 0,
-        // backgroundColor : "black",
-        // margin : 2,
         borderRadius: 10,
-        paddingLeft : RPW(2),
-        paddingRight : RPW(2),
+        paddingLeft: RPW(2),
+        paddingRight: RPW(2),
     },
     btnText: {
         color: "white",

@@ -50,6 +50,9 @@ export default function Article() {
     // useFocusEffect pour vérifier si l'article est en favoris, naviguer vers recette si l'article test a été supprimé ou si un nouveau a été mis en test
 
     useFocusEffect(useCallback(() => {
+        // Si utilisateur pas connecté
+        if (!user.token){ return }
+
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
         if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/recipes') }
@@ -211,10 +214,10 @@ export default function Article() {
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>Recettes</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
+               { user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
                     <Icon name={isBookmarked ? "heart-remove" : "heart-plus"} size={RPH(2.9)} color={isBookmarked ? "#ff00e8" : "white"} style={styles.icon2} />
-                </TouchableOpacity>
+                </TouchableOpacity>}
             </LinearGradient>
 
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>

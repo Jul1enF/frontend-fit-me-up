@@ -7,7 +7,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Modal2 from "react-native-modal"
 
 import { useState, useCallback } from 'react';
-import { router, useFocusEffect } from 'expo-router'
+import { router, useFocusEffect, Link } from 'expo-router'
 import { useSelector } from 'react-redux'
 import { RPH, RPW } from '../modules/dimensions'
 
@@ -113,6 +113,10 @@ export default function Index() {
                         </TouchableOpacity>
                     </LinearGradient>
                 </View>
+
+                <Link href="/home" style={styles.link}>Accéder à l'application sans se connecter (contenu limité)</Link>
+
+
             </View>
 
 
@@ -183,7 +187,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
         alignItems: "center",
         backgroundColor: "black",
-        paddingBottom: RPH(4),
+        paddingBottom: RPH(0),
         paddingTop: RPH(1)
     },
     signContainer: {
@@ -223,6 +227,16 @@ const styles = StyleSheet.create({
         fontSize: RPH(2.5),
         fontWeight: "500",
         letterSpacing: 1,
+    },
+    link : {
+        color: "white",
+        fontSize: RPW(3.5),
+        fontWeight: "500",
+        letterSpacing: 1,
+        textAlign: "center",
+        width:"100%",
+        paddingLeft : RPW(2),
+        paddingRight : RPW(2),
     },
     modal : {
       flex :1

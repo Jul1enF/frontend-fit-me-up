@@ -32,12 +32,18 @@ export default function Article() {
     // Fonction pour charger le contenu de la page
 
     const loadContent = async () => {
-        if (testArticle.length > 0 && testArticle[0].category === "home" && user.is_admin) {
-            console.log("Hello")
+        if (testArticle.length > 0 && testArticle[0]?.category === "home" && user?.is_admin) {
             setArticle(testArticle[0])
         }
         else {
-            const response = await fetch(`${url}/articles/getArticles/${user.token}`)
+              // Envoi d'un token ou non en fonction de si l'utilisateur en a un
+              let token = "noToken"
+
+              if (user.token) {
+                  token = user.token
+              }
+
+            const response = await fetch(`${url}/articles/getArticles/${token}`)
 
             const data = await response.json()
 
@@ -51,8 +57,7 @@ export default function Article() {
                 })
             }
             else if (!data.result && data.error == "Utilisateur bloqué.") {
-                dispatch(suppressArticles())
-                setArticle("")
+                return
             }
         }
     }
@@ -70,22 +75,25 @@ export default function Article() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async (pushToken, token) => {
-        const pushTokenInfos = await registerForPushNotificationsAsync(pushToken, token)
+         // Si utilisateur pas connecté
+         if (!user.token) { return }
 
-        if (!pushTokenInfos) {
-            dispatch(logout())
-            router.navigate('/')
-        }
-        if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
-            dispatch(changePushToken(pushTokenInfos.change))
-        }
+         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
+
+         if (!pushTokenInfos) {
+             dispatch(logout())
+             router.navigate('/')
+         }
+         if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
+             dispatch(changePushToken(pushTokenInfos.change))
+         }
     }
 
 
     // useFocusEffect pour vérifier si les notifs sont toujours autorisées
 
     useFocusEffect(useCallback(() => {
-        user.token && checkPushTokenChanges(user.push_token, user.token)
+        checkPushTokenChanges()
     }, [user]))
 
 

@@ -40,16 +40,20 @@ export default function Legal() {
 
 
             <Text style={styles.title3}>
-                ARTICLE 3 : accès aux services
+                ARTICLE 3 : Accès aux services
             </Text>
             <Text style={styles.text}>
-                Les présentes conditions s’appliquent aux personnes ayant créé un Compte.
+                Tout Utilisateur ayant accès à internet peut accéder gratuitement et depuis n’importe où à l'application. Les frais supportés par l’Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l’Éditeur.
             </Text><Text style={styles.text}>
+                L’Utilisateur de l'application {appName} a accès aux services suivants sans création de compte :
+                </Text><Text style={styles.text2}>
+                Consulter un échantillon d'articles et de conseils publiés sur l'application {appName}.
+                </Text><Text style={styles.text}>
+                Effectuer une recherche pour trouver l'un de ces articles.
+                </Text><Text style={styles.text}>
                 La création d’un Compte se fait au moyen d’un email, d’un mot de passe, du nom de l'Utilisateur, du prénom de l'Utilisateur, d'un code fourni par un coach sportif et du nom de ce coach.
             </Text><Text style={styles.text}>
                 Le Client s'engage à ne créer qu'un seul Compte correspondant à son profil.
-            </Text><Text style={styles.text}>
-                Tout Utilisateur ayant créé un compte et ayant accès à internet peut accéder gratuitement et depuis n’importe où à l'application. Les frais supportés par l’Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l’Éditeur.
             </Text><Text style={styles.text}>
                 La création d’un compte sur l'application {appName} permet à l'utilisateur de :
             </Text><Text style={styles.text2}>

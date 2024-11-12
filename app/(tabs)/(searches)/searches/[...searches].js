@@ -30,7 +30,9 @@ export default function Searches() {
     const loadArticles = () => {
         const regex = new RegExp(searchText, "i")
 
-        const searchedArticles = articles.filter(e => regex.test(e.title) || regex.test(e.sub_title) || regex.test(e.text))
+        const realArticles = articles.filter(e=> e.category !== "home")
+
+        const searchedArticles = realArticles.filter(e => regex.test(e.title) || regex.test(e.sub_title) || regex.test(e.text))
 
         searchedArticles.reverse()
 

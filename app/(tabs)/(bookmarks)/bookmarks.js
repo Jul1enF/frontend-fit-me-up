@@ -40,6 +40,8 @@ export default function Bookmarks() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
+        // Si utilisateur pas connecté
+        if (!user.token) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
@@ -63,7 +65,7 @@ export default function Bookmarks() {
     //  Fonction pour charger les articles
 
     const loadArticles = () => {
-        if (!user.bookmarks){ return }
+        if (!user.bookmarks) { return }
 
         let bookmarkedArticles = []
 
@@ -222,6 +224,30 @@ export default function Bookmarks() {
 
 
 
+    // Affichage conditionnel si pas connecté
+
+    if (!user.token) {
+        return (
+            <View style={styles.body2} >
+                <StatusBar translucent={true} barStyle="light" />
+                <Text style={styles.title}>Aucun article enregistré.</Text>
+                <LinearGradient
+                    colors={['#7700a4', '#0a0081']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={styles.gradientLine}
+                >
+                </LinearGradient>
+                <Text style={styles.title}>Connectez-vous ou inscrivez-vous pour pouvoir enregistrer des articles en favoris.</Text>
+            </View>
+        )
+    }
+
+
+
+
+
     // Affichage conditionnel si pas de favoris
 
     if (!allBookmarkedArticles) {
@@ -244,6 +270,7 @@ export default function Bookmarks() {
 
 
 
+
     return (
         <View style={styles.body} >
             <StatusBar translucent={true} barStyle="light" />
@@ -251,19 +278,19 @@ export default function Bookmarks() {
             <FlatList
                 data={categoriesList}
                 horizontal={true}
-                style={[{ minHeight : RPW(16), maxHeight : RPW(16), minWidth : RPW(100) }, chosenCategory === "Tous mes favoris" && { borderBottomColor: "#878787", borderBottomWidth: 0.5 }]}
+                style={[{ minHeight: RPW(16), maxHeight: RPW(16), minWidth: RPW(100) }, chosenCategory === "Tous mes favoris" && { borderBottomColor: "#878787", borderBottomWidth: 0.5 }]}
                 renderItem={({ item }) => {
                     return <CategoryItem {...item} />
                 }}
                 contentContainerStyle={{ alignItems: 'center', paddingLeft: RPW(2) }}
             />
-            
+
             <FlatList
                 data={subcategoriesList}
                 horizontal={true}
-                style={[{ 
-                    height: RPW(12), maxHeight: RPW(12), margin : 0, width : RPW(100), minWidth : RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5,
-                }, chosenCategory === "Tous mes favoris" && {display : "none"}]}
+                style={[{
+                    height: RPW(12), maxHeight: RPW(12), margin: 0, width: RPW(100), minWidth: RPW(100), borderBottomColor: "#878787", borderBottomWidth: 0.5,
+                }, chosenCategory === "Tous mes favoris" && { display: "none" }]}
                 renderItem={({ item }) => {
                     return <SubcategoryItem {...item} />
                 }}
@@ -274,7 +301,7 @@ export default function Bookmarks() {
 
             <FlatList
                 data={articlesToDisplay}
-                style={{flex : 1}}
+                style={{ flex: 1 }}
                 renderItem={({ item, index }) => {
                     if (index === 0) {
                         return <TouchableOpacity onPress={() => articlePress(item._id)} ><FirstArticle {...item} /></TouchableOpacity>
@@ -316,9 +343,9 @@ const styles = StyleSheet.create({
         marginTop: 15
     },
     gradientBtn1: {
-        height : RPW(8.5),
+        height: RPW(8.5),
         borderRadius: 10,
-        marginRight : RPW(2.3)
+        marginRight: RPW(2.3)
     },
     btn: {
         flex: 1,
@@ -326,11 +353,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: "#2a2a2a",
         margin: 0,
-        // backgroundColor: "black",
-        // margin: 2,
         borderRadius: 10,
-        paddingLeft : RPW(2),
-        paddingRight : RPW(2),
+        paddingLeft: RPW(2),
+        paddingRight: RPW(2),
     },
     btnText: {
         color: "white",
