@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "frontendfitmeup.app"
-               BlueprintName = "frontendfitmeup"
-               ReferencedContainer = "container:frontendfitmeup.xcodeproj">
+               BuildableName = "BoostUp.app"
+               BlueprintName = "BoostUp"
+               ReferencedContainer = "container:BoostUp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "frontendfitmeupTests.xctest"
-               BlueprintName = "frontendfitmeupTests"
-               ReferencedContainer = "container:frontendfitmeup.xcodeproj">
+               BuildableName = "BoostUpTests.xctest"
+               BlueprintName = "BoostUpTests"
+               ReferencedContainer = "container:BoostUp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "frontendfitmeup.app"
-            BlueprintName = "frontendfitmeup"
-            ReferencedContainer = "container:frontendfitmeup.xcodeproj">
+            BuildableName = "BoostUp.app"
+            BlueprintName = "BoostUp"
+            ReferencedContainer = "container:BoostUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "frontendfitmeup.app"
-            BlueprintName = "frontendfitmeup"
-            ReferencedContainer = "container:frontendfitmeup.xcodeproj">
+            BuildableName = "BoostUp.app"
+            BlueprintName = "BoostUp"
+            ReferencedContainer = "container:BoostUp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

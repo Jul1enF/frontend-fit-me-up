@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Boost Up",
-    "slug": "boost-up",
+    "slug": "frontend-fit-me-up",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo-boost-up1.png",
@@ -42,7 +42,7 @@
       "expo-router",
       ["expo-font",
       {
-        "fonts": ["./assets/fonts/HandoTrial-Black.otf", ".assets/fonts/HandoTrial-Bold.otf", ".assets/fonts/HandoTrial-Regular.otf"]
+        "fonts": ["./assets/fonts/HandoTrial-Black.otf", "./assets/fonts/HandoTrial-Bold.otf", "./assets/fonts/HandoTrial-Regular.otf"]
       }],
       [
         "expo-image-picker",

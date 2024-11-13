@@ -20,7 +20,6 @@ export default function Notifications() {
     const dispatch = useDispatch()
     const user = useSelector((state)=>state.user.value)
     const cronsNotifications = useSelector((state) => state.cronsNotifications.value)
-    console.log(cronsNotifications)
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 

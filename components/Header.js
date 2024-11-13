@@ -46,18 +46,7 @@ export default function Header() {
     // Fonction appelée en cliquant sur Se déconnecter
 
     const logoutPress = async () => {
-        // Effacement du push token en bdd
-        const response = await fetch(`${url}/userModifications/changePushToken`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                jwtToken: user.token,
-                push_token: "",
-            })
-        })
-        const data = await response.json()
-        console.log("DATA :", data)
-
+      
         // Reducer logout, fermeture du menu et push vers page d'accueil
         setMenuVisible(false)
         dispatch(logout())
