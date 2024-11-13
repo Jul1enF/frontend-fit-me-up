@@ -89,13 +89,13 @@ export default function Signin(props) {
 
 
                     <View style={styles.closeContainer}>
-                        <Icon name="close" onPress={() => props.closeModal1()} color="white" size={RPH(4)} ></Icon>
+                        <Icon name="close" onPress={() => props.closeModal1()} color="#19290a" size={RPH(4)} ></Icon>
                     </View>
 
                     <Text style={styles.error}>{error}</Text>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#49158f', '#045400']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -108,7 +108,7 @@ export default function Signin(props) {
                             value={email}
                             autoCorrect={false}
                             placeholder='Email'
-                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            placeholderTextColor="#fbfff790"
                             keyboardType='email-address'
                             autoCapitalize='none'
                             autoComplete="email"
@@ -118,7 +118,7 @@ export default function Signin(props) {
 
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#49158f', '#045400']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -131,7 +131,7 @@ export default function Signin(props) {
                             value={password}
                             placeholder='Mot de passe'
                             autoComplete="current-password"
-                            placeholderTextColor='rgba(255,255,255,0.4)'
+                            placeholderTextColor="#fbfff790"
                             secureTextEntry={!passwordVisible}
                             onFocus={() => setOffsetKeyboard(RPH(6))} >
                         </TextInput>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         height: RPH(50),
         marginTop: RPH(16),
         paddingBottom: RPH(4),
-        backgroundColor: "#1c1c1c",
+        backgroundColor: "#e6eedd",
         alignItems: "center",
         justifyContent: "space-between",
         borderRadius: 10,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(1.5)
     },
     cross: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.8),
         fontWeight: "400",
     },
@@ -222,18 +222,18 @@ const styles = StyleSheet.create({
     },
     connectBtn: {
         flex: 1,
-        backgroundColor: "#1c1c1c",
+        backgroundColor: "#e6eedd",
         margin: 2,
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center"
     },
     connectSentence: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.5)
     },
     error: {
-        color: "white",
+        color: "red",
         position: "absolute",
         marginTop: RPH(6),
         fontSize : RPW(3.5),

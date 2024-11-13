@@ -215,7 +215,7 @@ export default function UserInformations() {
                     }}
                     value={firstname}
                     placeholder="Prénom"
-                    placeholderTextColor='grey'
+                    placeholderTextColor="#fbfff790"
                     maxLength={28}>
                 </TextInput>
 
@@ -230,7 +230,7 @@ export default function UserInformations() {
                     }}
                     value={name}
                     placeholder="Nom"
-                    placeholderTextColor='grey'
+                 placeholderTextColor="#fbfff790"
                     maxLength={28}>
                 </TextInput>
 
@@ -247,7 +247,7 @@ export default function UserInformations() {
                     keyboardType='email-address'
                     autoCapitalize='none'
                     placeholder="Email"
-                    placeholderTextColor='grey'
+                 placeholderTextColor="#fbfff790"
                     maxLength={28}>
                 </TextInput>
 
@@ -264,12 +264,12 @@ export default function UserInformations() {
                         }}
                         value={oldPassword}
                         placeholder="Ancien mot de passe"
-                        placeholderTextColor='grey'
+                   placeholderTextColor="#fbfff790"
                         secureTextEntry={!oldPasswordVisible}
                         maxLength={28}>
                     </TextInput>
                     <FontAwesome
-                        name={oldPasswordVisible ? "eye-slash" : "eye"} color="#494949" size={RPH(3.8)} onPress={() => setOldPasswordVisible(!oldPasswordVisible)}>
+                        name={oldPasswordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setOldPasswordVisible(!oldPasswordVisible)}>
                     </FontAwesome>
                 </View>
 
@@ -281,12 +281,12 @@ export default function UserInformations() {
                         }}
                         value={password}
                         placeholder="Nouveau mot de passe"
-                        placeholderTextColor='grey'
+                      placeholderTextColor="#fbfff790"
                         secureTextEntry={!passwordVisible}
                         maxLength={28}>
                     </TextInput>
                     <FontAwesome
-                        name={passwordVisible ? "eye-slash" : "eye"} color="#494949" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
+                        name={passwordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
                     </FontAwesome>
                 </View>
 
@@ -299,12 +299,12 @@ export default function UserInformations() {
                         }}
                         value={password2}
                         placeholder="Confirmation mot de passe"
-                        placeholderTextColor='grey'
+                       placeholderTextColor="#fbfff790"
                         secureTextEntry={!password2Visible}
                         maxLength={28}>
                     </TextInput>
                     <FontAwesome
-                        name={password2Visible ? "eye-slash" : "eye"} color="#494949" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
+                        name={password2Visible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
                     </FontAwesome>
                 </View>
 
@@ -323,7 +323,7 @@ export default function UserInformations() {
                     </LinearGradient>
                 </TouchableOpacity>
 
-                <Text style={[styles.text1, !error && { display: "none" }]}>{error}</Text>
+                <Text style={[styles.text1, !error && { display: "none" }, {color : "red"}]}>{error}</Text>
 
 
                 <LinearGradient
@@ -334,7 +334,7 @@ export default function UserInformations() {
                     style={styles.btnGradientContainer2}
                 >
                     <TouchableOpacity style={[styles.btnTouchable2,]} activeOpacity={0.8} onPress={() => setModal2Visible(true)}>
-                        <Text style={styles.text2}>Me désinscrire</Text>
+                        <Text style={styles.text3}>Me désinscrire</Text>
                     </TouchableOpacity>
                 </LinearGradient>
 
@@ -454,7 +454,7 @@ export default function UserInformations() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
     },
     contentBody: {
         paddingLeft: RPW(4),
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPW(6),
         paddingTop: RPW(5),
         alignItems: "center",
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
     },
     topContainer: {
         alignItems: "flex-start",
@@ -470,7 +470,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 24,
         fontWeight: "450",
         marginBottom: 9,
@@ -482,14 +482,15 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     text1: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(5),
         fontWeight: "350",
         marginBottom: 13
     },
     input: {
         width: "100%",
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         borderRadius: 5,
         marginBottom: 25,
         paddingLeft: 8,
@@ -504,13 +505,13 @@ const styles = StyleSheet.create({
         paddingRight: RPW(2),
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
         marginBottom: 20,
         borderRadius: 5,
     },
     input2: {
-        width: "90%",
-        backgroundColor: "white",
+        width: "80%",
+        backgroundColor: "#2e6017",
         borderRadius: 5,
         paddingLeft: 8,
         fontSize: RPW(5.3),
@@ -531,7 +532,7 @@ const styles = StyleSheet.create({
         minWidth: RPW(34)
     },
     btnTouchable2: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
         margin: 2,
         paddingLeft: RPW(5),
@@ -551,6 +552,12 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         textAlign: "center"
     },
+    text3: {
+        color: "#19290a",
+        fontSize: RPW(5.4),
+        fontWeight: "500",
+        textAlign: "center"
+    },
     modal: {
         alignItems: "center"
     },
@@ -562,7 +569,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(5),
         paddingLeft: RPW(4),
         paddingRight: RPW(4),
-        backgroundColor: "#222222",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         bottom: RPH(20),
         justifyContent: "space-between",

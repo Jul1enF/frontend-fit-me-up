@@ -27,26 +27,26 @@ export default function Contact () {
 const styles = StyleSheet.create({
     body : {
         flex : 1,
-        backgroundColor : "#fbfff7",
+        backgroundColor : "#f9fff4",
         paddingTop: 30,
         paddingLeft: RPW(2),
         paddingRight: RPW(2),
         paddingBottom: 30,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 25,
         fontWeight: "700",
         paddingBottom : 30,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 15,
         fontWeight: "400",
         paddingBottom: 20,
     },
     text2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 15,
         fontWeight: "400",
         paddingBottom: 30,

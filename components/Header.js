@@ -255,7 +255,6 @@ const styles = StyleSheet.create({
         top: RPH(14) - statusHeight,
         height: RPH(6),
         width: RPW(100),
-        backgroundColor: "#2e2e2e",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -287,26 +286,26 @@ const styles = StyleSheet.create({
     modalBody: {
         height: RPH(75.6),
         width: RPW(80),
-        backgroundColor: "#2e2e2e",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         top: RPH(13.9) - statusHeight,
     },
     modalBody2: {
         height: RPH(69.5),
         width: RPW(80),
-        backgroundColor: "#2e2e2e",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         top: RPH(20) - statusHeight,
     },
     linkContainer: {
         height: RPH(11.5),
         borderTopWidth: 0.5,
-        borderTopColor: "white",
+        borderTopColor: "#19290a",
         justifyContent: "center",
         alignItems: "center",
     },
     link: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(6.3),
         fontWeight: "200"
     },

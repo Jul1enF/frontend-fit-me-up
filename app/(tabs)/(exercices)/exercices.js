@@ -151,7 +151,7 @@ export default function Exercices() {
                 style={styles.gradientBtn1}
             >
                 <TouchableOpacity style={[styles.btn, chosenSubcategory === props.name && { backgroundColor: "transparent" }]} onPress={() => subcategoryPress(props.name)}>
-                    <Text style={styles.btnText}>{props.name}</Text>
+                    <Text style={[styles.btnText, chosenSubcategory !== props.name && { color: "#19290a" }]}>{props.name}</Text>
                 </TouchableOpacity>
             </LinearGradient>
         )
@@ -172,7 +172,7 @@ export default function Exercices() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"#fbfff7"} tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["#19290a"]} progressBackgroundColor={"#white"} tintColor={"#19290a"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadArticles()
@@ -212,7 +212,7 @@ export default function Exercices() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
     },
     gradientBtn1: {
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#2a2a2a",
+        backgroundColor: "#d3dec8",
         margin: 0,
         borderRadius: 10,
         paddingLeft: RPW(2),

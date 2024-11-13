@@ -318,7 +318,7 @@ export default function Article() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
     },
     header: {
         height: RPH(6),
@@ -365,13 +365,13 @@ const styles = StyleSheet.create({
         marginBottom: 2,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 28,
         fontWeight: "600",
         marginBottom: 18,
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 18,
@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
         marginBottom: 12,
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     author: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
         marginBottom: 15,
@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 25,
@@ -454,7 +454,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingTop: RPH(4),
         paddingBottom: RPH(4),
-        backgroundColor: "#222222",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         bottom: RPH(11),
         justifyContent: "space-between"

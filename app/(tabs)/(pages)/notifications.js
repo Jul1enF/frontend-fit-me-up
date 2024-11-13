@@ -122,7 +122,7 @@ export default function Notifications() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["#19290a"]} progressBackgroundColor={"white"} tintColor={"#19290a"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadCronsNotifications() 
@@ -149,7 +149,7 @@ export default function Notifications() {
                     }}
                     value={title}
                     placeholder="Titre"
-                    placeholderTextColor='grey'
+                    placeholderTextColor="#fbfff790"
                     maxLength={28}>
                 </TextInput>
                 <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
@@ -158,7 +158,7 @@ export default function Notifications() {
                         setMessage(value)}}
                     value={message}
                     placeholder="Message"
-                    placeholderTextColor='grey'
+                    placeholderTextColor="#fbfff790"
                     maxLength={144}
                     multiline
                     blurOnSubmit
@@ -177,7 +177,7 @@ export default function Notifications() {
                             <Text style={styles.text1}>Poster</Text>
                         </LinearGradient>
                     </TouchableOpacity>
-                    <Text style={[{marginTop : 10},styles.modalText2, !error && {display : "none"}]}>{error}</Text>
+                    <Text style={[{marginTop : 10, color : "red"},styles.modalText2, !error && {display : "none"}]}>{error}</Text>
                 </View>
                 
                 <Text style={styles.title}>Notifications programmées :</Text>
@@ -293,7 +293,7 @@ export default function Notifications() {
                 if(cronsNotifications.length>0) {return <CronNotification {...item} number={index + 1} />}
             }}
             contentContainerStyle={{ alignItems: 'center' }}
-            style={{ flex: 1, backgroundColor: "#fbfff7" }}
+            style={{ flex: 1, backgroundColor: "#f9fff4" }}
         />
     )
 }
@@ -301,11 +301,11 @@ export default function Notifications() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
     },
     topContainer: {
         width: RPW(100),
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
         paddingTop: RPW(6),
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
         justifyContent : "flex-start"
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 24,
         fontWeight: "450",
         marginBottom: 9,
@@ -324,7 +324,8 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     input: {
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         borderRadius: 5,
         marginBottom: 15,
         paddingLeft: 8,
@@ -349,7 +350,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     text1: {
-        color: "#e0e0e0",
+        color: "white",
         fontSize: RPW(5.4),
         fontWeight: "600",
     },
@@ -376,7 +377,7 @@ const styles = StyleSheet.create({
    
     },
     text2: {
-        color: "#e0e0e0",
+        color: "white",
         fontSize: RPW(5.4),
         fontWeight: "600",
         textAlign : "center"
@@ -392,14 +393,14 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(4),
         paddingLeft: RPW(2),
         paddingRight: RPW(2),
-        backgroundColor: "#222222",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         top: RPH(14) - statusHeight,
         justifyContent: "space-between",
         alignItems: "center"
     },
     modalText: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(6),
         fontWeight: "600",
         textAlign: "center",
@@ -418,13 +419,13 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     modalText2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(5),
         fontWeight: "700",
         marginRight: RPW(2),
     },
     modalText3: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(4.5),
         fontWeight: "400",
         flexWrap: "wrap",

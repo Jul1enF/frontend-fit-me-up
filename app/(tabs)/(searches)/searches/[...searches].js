@@ -120,12 +120,12 @@ export default function Searches() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center"
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 25,
         fontWeight: "300",
         textAlign: "center",
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         margin: 3,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 14,
     },
     body2: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center",
         paddingLeft : RPW(4),
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         paddingTop : 10,
     },
     title2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 23,
         fontWeight: "300",
         textAlign: "center",

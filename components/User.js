@@ -152,7 +152,7 @@ export default function User(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn}
                     >
-                        <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "#fbfff7" }]}
+                        <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "#f9fff4" }]}
                             onPress={() => setModal1Visible(true)} >
                             <Text style={styles.text1}>{props.is_allowed ? "Autorisé" : "Bloqué"}</Text>
                         </TouchableOpacity>
@@ -164,7 +164,7 @@ export default function User(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn}
                     >
-                        <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "#fbfff7" }]}
+                        <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "#f9fff4" }]}
                             onPress={() => setModal2Visible(true)} >
                             <Text style={styles.text1}>{props.is_admin ? "Admin" : "Client"}</Text>
                         </TouchableOpacity>
@@ -219,7 +219,7 @@ export default function User(props) {
                             </LinearGradient>
 
                         </View>
-                        <Text style={[styles.text1, !error && { display: "none" }]}>{error}</Text>
+                        <Text style={[styles.text1, !error && { display: "none" }, {color : "red"}]}>{error}</Text>
                     </View>
                 </Modal>
 
@@ -273,7 +273,7 @@ export default function User(props) {
                             </LinearGradient>
 
                         </View>
-                        <Text style={[styles.text1, !error && { display: "none" }]}>{error}</Text>
+                        <Text style={[styles.text1, !error && { display: "none" },  {color : "red"}]}>{error}</Text>
                     </View>
                 </Modal>
 
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         margin: 2,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 10,
@@ -316,16 +316,16 @@ const styles = StyleSheet.create({
     },
     underline: {
         borderBottomWidth: 1,
-        // borderBottomColor: "#e0e0e0",
+        // borderBottomColor: "#19290a",
         marginRight: RPW(3)
     },
     text1: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.8),
         fontWeight: "700"
     },
     text2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.5),
         fontWeight: "500"
     },
@@ -361,14 +361,14 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(5),
         paddingLeft: RPW(2),
         paddingRight: RPW(2),
-        backgroundColor: "#222222",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         bottom: RPH(35),
         justifyContent: "space-between",
         alignItems: "center"
     },
     text3: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(4.2),
         fontWeight: "700",
         flexWrap: "wrap",

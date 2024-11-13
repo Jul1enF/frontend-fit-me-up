@@ -30,7 +30,7 @@ export default function FirstArticle(props) {
 
             {props.img_link && <View style={styles.imgContainer} >
 
-                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "#fbfff7"}, imgLoaded && {display : "none"}]}></View>
+                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "#f9fff4"}, imgLoaded && {display : "none"}]}></View>
 
                 <Image
                     style={[styles.image, {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 27,
         fontWeight: "450",
         marginBottom: 12,
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 15,
         fontWeight: "300",
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         marginLeft: RPW(3),
         marginBottom: 18,

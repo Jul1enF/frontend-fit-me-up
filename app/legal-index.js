@@ -159,7 +159,7 @@ export default function Legal() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "#fbfff7"
+        backgroundColor: "#f9fff4"
     },
     contentBody: {
         paddingTop: 30,
@@ -168,32 +168,32 @@ const styles = StyleSheet.create({
         paddingBottom: 30,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 25,
         fontWeight: "700"
     },
     title2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 20,
         paddingTop: 30,
         fontWeight: "600",
         paddingBottom: 20,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 15,
         fontWeight: "400",
         paddingBottom: 10,
     },
     title3: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 20,
         paddingTop: 20,
         fontWeight: "600",
         paddingBottom: 20,
     },
     text2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 15,
         fontWeight: "400",
         paddingBottom: 5,

@@ -132,7 +132,7 @@ export default function Bookmarks() {
                 style={styles.gradientBtn1}
             >
                 <TouchableOpacity style={[styles.btn, chosenCategory === props.category && { backgroundColor: "transparent" }]} onPress={() => categoryPress(props.category)}>
-                    <Text style={styles.btnText}>{props.name}</Text>
+                    <Text style={[styles.btnText, chosenCategory !== props.category && { color: "#19290a" }]}>{props.name}</Text>
                 </TouchableOpacity>
             </LinearGradient>
         )
@@ -191,7 +191,7 @@ export default function Bookmarks() {
                 style={styles.gradientBtn1}
             >
                 <TouchableOpacity style={[styles.btn, chosenSubcategory === props.name && { backgroundColor: "transparent" }]} onPress={() => subcategoryPress(props.name)}>
-                    <Text style={styles.btnText}>{props.name}</Text>
+                    <Text style={[styles.btnText, chosenSubcategory !== props.name && { color: "#19290a" }]}>{props.name}</Text>
                 </TouchableOpacity>
             </LinearGradient>
         )
@@ -318,11 +318,11 @@ export default function Bookmarks() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
     },
     body2: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center",
         paddingLeft: RPW(4),
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 23,
         fontWeight: "300",
         textAlign: "center",
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#2a2a2a",
+        backgroundColor: "#d3dec8",
         margin: 0,
         borderRadius: 10,
         paddingLeft: RPW(2),

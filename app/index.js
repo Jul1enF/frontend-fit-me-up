@@ -163,7 +163,7 @@ export default function Index() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
     },
     header: {
         height: RPH(14),
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         height: RPH(86),
         justifyContent: "space-evenly",
         alignItems: "center",
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         paddingBottom: RPH(0),
         paddingTop: RPH(1)
     },
@@ -218,18 +218,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         margin: 2,
         borderRadius: 10,
     },
     signText: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.5),
         fontWeight: "500",
         letterSpacing: 1,
     },
     link : {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(3.5),
         fontWeight: "500",
         letterSpacing: 1,
@@ -251,12 +251,12 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     legalBth: {
-        borderBottomColor: "rgba(255,255,255,0.25)",
+        borderBottomColor: "#19290a",
         borderBottomWidth: 1,
         paddingBottom : 2,
     },
     legalText: {
-        color: "rgba(255,255,255,0.25)",
+        color: "#19290a",
         fontSize : 12,
     },
 

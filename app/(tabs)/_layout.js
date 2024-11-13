@@ -15,7 +15,7 @@ export default function TabsLayout() {
         tabBarIcon: ({ focused }) => {
           let iconName = '';
           let color = ""
-          color = focused ? "#ff00e8" : "white"
+          color = focused ? '#ff8f00' : "white"
 
           if (route.name === '(recipes)') {
             iconName = 'pot-mix';
@@ -31,7 +31,7 @@ export default function TabsLayout() {
           return <Icon name={iconName} size={RPH(3.8)} color={color} />;
         },
 
-        tabBarActiveTintColor: '#ff00e8',
+        tabBarActiveTintColor: '#ff8f00',
         tabBarInactiveTintColor: 'white',
         tabBarLabelStyle: { fontSize: RPW(3.8) },
         tabBarBackground: () => (

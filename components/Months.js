@@ -27,7 +27,7 @@ export default function Months(props) {
         >
             <TouchableOpacity style={[styles.monthBody, props.isSelected && {backgroundColor : "transparent"}]}
             onPress={()=> monthPress() } >
-                <Text style={styles.text}>{monthsNames[props.i]}</Text>
+                <Text style={[styles.text, !props.isSelected && { color: "#19290a" }]}>{monthsNames[props.i]}</Text>
             </TouchableOpacity>
         </LinearGradient>
 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     monthBody : {
         flex : 1,
-        backgroundColor : "#fbfff7",
+        backgroundColor : "#f9fff4",
         margin : 2,
         justifyContent : "center",
         alignItems : "center",

@@ -368,7 +368,7 @@ export default function Redaction() {
     return (
         <>
             {/* <KeyboardAwareScrollView
-            style={{ flex: 1, backgroundColor: "#fbfff7" }}
+            style={{ flex: 1, backgroundColor: "#f9fff4" }}
             contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
             scrollEnabled={scrollable}
             bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
@@ -382,6 +382,7 @@ export default function Redaction() {
                     <TextInput style={styles.smallInput}
                         placeholder="Titre de l'article"
                         onChangeText={(e) => setTitle(e)}
+                          placeholderTextColor="#fbfff790"
                         value={title}>
                     </TextInput>
                     <TextInput multiline={true}
@@ -390,6 +391,7 @@ export default function Redaction() {
                         placeholder="Sous-Catégorie/Sous-Titre de l'article"
                         onChangeText={(e) => setSubTitle(e)}
                         value={subTitle}
+                          placeholderTextColor="#fbfff790"
                         blurOnSubmit={true}>
                     </TextInput>
                     <TextInput multiline={true}
@@ -398,11 +400,13 @@ export default function Redaction() {
                         placeholder="Texte de l'article"
                         onChangeText={(e) => setText(e)}
                         value={text}
+                          placeholderTextColor="#fbfff790"
                         returnKeyType='next'>
                     </TextInput>
                     <TextInput style={styles.smallInput}
                         placeholder="Auteur"
                         onChangeText={(e) => setAuthor(e)}
+                          placeholderTextColor="#fbfff790"
                         value={author}>
                     </TextInput>
                     <TextInput style={[styles.smallInput, { marginBottom: 30 }]}
@@ -410,6 +414,7 @@ export default function Redaction() {
                         onChangeText={(e) => setVideoLink(e)}
                         value={videoLink}
                         autoCapitalize="none"
+                          placeholderTextColor="#fbfff790"
                     >
                     </TextInput>
 
@@ -427,7 +432,7 @@ export default function Redaction() {
                             style={styles.gradientBtn1}
                         >
                             <TouchableOpacity style={[styles.btn, category === "news" && { backgroundColor: "transparent" }]} onPress={() => setCategory("news")}>
-                                <Text style={styles.categoryText2}>News</Text>
+                                <Text style={[styles.categoryText2, category !== "news" && { color: "#19290a" }]}>News</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient
@@ -438,7 +443,7 @@ export default function Redaction() {
                             style={styles.gradientBtn1}
                         >
                             <TouchableOpacity style={[styles.btn, category === "recipes" && { backgroundColor: "transparent" }]} onPress={() => setCategory("recipes")}>
-                                <Text style={styles.categoryText2}>Recette</Text>
+                                <Text style={[styles.categoryText2, category !== "recipes" && { color: "#19290a" }]}>Recette</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                     </View>
@@ -451,7 +456,7 @@ export default function Redaction() {
                             style={styles.gradientBtn1}
                         >
                             <TouchableOpacity style={[styles.btn, category === "exercices" && { backgroundColor: "transparent" }]} onPress={() => setCategory("exercices")}>
-                                <Text style={styles.categoryText2}>Exercice</Text>
+                                <Text style={[styles.categoryText2, category !== "exercices" && { color: "#19290a" }]}>Exercice</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient
@@ -462,7 +467,7 @@ export default function Redaction() {
                             style={styles.gradientBtn1}
                         >
                             <TouchableOpacity style={[styles.btn, category === "home" && { backgroundColor: "transparent" }]} onPress={() => setCategory("home")}>
-                                <Text style={styles.categoryText2}>Accueil</Text>
+                                <Text style={[styles.categoryText2, category !== "home" && { color: "#19290a" }]}>Accueil</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                     </View>
@@ -481,7 +486,7 @@ export default function Redaction() {
                     </LinearGradient>
 
 
-                    <View style={[styles.imgContainer, resizing && { borderColor: "white" }]} {...panResponder.panHandlers} >
+                    <View style={[styles.imgContainer, resizing && { borderColor: "#b60050" }]} {...panResponder.panHandlers} >
                         {pictureUri &&
                             <Image
                                 style={[styles.image, {
@@ -507,7 +512,7 @@ export default function Redaction() {
                                 resizing && setScrollable(true)
                                 setResizing(!resizing)
                             }}>
-                                <Text style={styles.btn2Text}> Recadrer l'image</Text>
+                                <Text style={[styles.categoryText2, !resizing && { color: "#19290a" }]}> Recadrer l'image</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient
@@ -578,12 +583,13 @@ export default function Redaction() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center",
     },
     smallInput: {
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         width: RPW(90),
         height: 35,
         borderRadius: RPW(2.5),
@@ -592,7 +598,8 @@ const styles = StyleSheet.create({
         marginBottom: 22
     },
     mediumInput: {
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         width: RPW(90),
         height: 85,
         borderRadius: RPW(3),
@@ -601,7 +608,8 @@ const styles = StyleSheet.create({
         marginBottom: 22,
     },
     largeInput: {
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         width: RPW(90),
         height: 145,
         borderRadius: RPW(3),
@@ -624,7 +632,7 @@ const styles = StyleSheet.create({
         marginBottom: 30,
     },
     categoryText1: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(4.3),
         fontWeight: "600",
     },
@@ -648,7 +656,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         margin: 2,
         borderRadius: 10,
         paddingRight: RPW(4),
@@ -686,7 +694,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#fbfff7",
+        backgroundColor: "#f9fff4",
         margin: 2,
         borderRadius: 10,
     },
@@ -697,7 +705,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     btn2Text: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(4.5),
         fontWeight: "500",
     },

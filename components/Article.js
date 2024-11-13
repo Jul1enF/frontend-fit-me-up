@@ -74,19 +74,19 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 22,
         fontWeight: "450",
         marginBottom: 10
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 14,
         fontWeight: "400",
         marginBottom: 10,
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "300"
     },
