@@ -50,7 +50,7 @@ export default function Index() {
             <LinearGradient style={styles.header}
                 // colors={['#ffd500', '#fd8600']}
                 //  colors={['#97002e', '#450150']}
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0, 0.9]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -65,7 +65,7 @@ export default function Index() {
                 <View style={styles.signContainer}>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
@@ -76,7 +76,7 @@ export default function Index() {
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -91,7 +91,7 @@ export default function Index() {
                 <View style={styles.signContainer}>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
@@ -102,7 +102,7 @@ export default function Index() {
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}

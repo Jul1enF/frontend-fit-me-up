@@ -118,7 +118,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -138,7 +138,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -158,7 +158,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -180,7 +180,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -204,7 +204,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -228,7 +228,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -250,7 +250,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#49158f', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -271,7 +271,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.registerContainer}
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}

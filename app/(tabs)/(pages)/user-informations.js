@@ -196,7 +196,7 @@ export default function UserInformations() {
                 <View style={styles.topContainer}>
                     <Text style={styles.title}>Mes informations</Text>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -313,7 +313,7 @@ export default function UserInformations() {
 
                 <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -327,7 +327,7 @@ export default function UserInformations() {
 
 
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -353,7 +353,7 @@ export default function UserInformations() {
                     <View style={styles.modalBody}>
                         <Text style={styles.text2}>Êtes vous sûr de vouloir enregistrer ces informations ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -363,7 +363,7 @@ export default function UserInformations() {
                         <View style={styles.row1}>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal1Visible(false)}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -375,7 +375,7 @@ export default function UserInformations() {
 
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalRegisterPress()}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -402,7 +402,7 @@ export default function UserInformations() {
                     <View style={styles.modalBody}>
                         <Text style={styles.text2}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -412,7 +412,7 @@ export default function UserInformations() {
                         <View style={styles.row1}>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal2Visible(false)}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -424,7 +424,7 @@ export default function UserInformations() {
 
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => unsuscribePress()}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}

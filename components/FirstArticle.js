@@ -58,7 +58,7 @@ export default function FirstArticle(props) {
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{props.title}</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -72,7 +72,7 @@ export default function FirstArticle(props) {
             
             <Text style={styles.date}>Posté {lastingTime}</Text>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}

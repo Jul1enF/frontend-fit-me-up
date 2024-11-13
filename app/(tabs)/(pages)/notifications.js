@@ -135,7 +135,7 @@ export default function Notifications() {
             <View style={styles.topContainer}>
                 <Text style={styles.title}>Poster une notification :</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -168,7 +168,7 @@ export default function Notifications() {
                 <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstPostPress()}>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -182,7 +182,7 @@ export default function Notifications() {
                 
                 <Text style={styles.title}>Notifications programmées :</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -205,7 +205,7 @@ export default function Notifications() {
                     <View style={styles.modalBody}>
                         <Text style={styles.modalText}>Êtes vous sûr de vouloir poster cette notification ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -231,7 +231,7 @@ export default function Notifications() {
                         <View style={styles.btnContainer2}>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -242,7 +242,7 @@ export default function Notifications() {
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalPostPress()}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -267,7 +267,7 @@ export default function Notifications() {
     const bottomComponents =  <View style={styles.btnContainer3}>
     <TouchableOpacity style={styles.btnTouchable2} activeOpacity={0.8} onPress={() => router.push("/cron-notification-page/new")}>
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}

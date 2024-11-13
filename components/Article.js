@@ -45,7 +45,7 @@ export default function Article(props) {
                 </View>
             </View>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}

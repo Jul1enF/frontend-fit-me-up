@@ -101,7 +101,7 @@ export default function User(props) {
 
     return (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -146,7 +146,7 @@ export default function User(props) {
                 </View>
                 <View style={styles.row2}>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -158,7 +158,7 @@ export default function User(props) {
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -185,7 +185,7 @@ export default function User(props) {
                     <View style={styles.modalBody}>
                         <Text style={styles.text3}>Êtes vous sûr de vouloir {props.is_allowed ? "bloquer" : "autoriser"} l'utilisateur {props.email} ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -194,7 +194,7 @@ export default function User(props) {
                         </LinearGradient>
                         <View style={styles.row2}>
                             <LinearGradient
-                                colors={['#7700a4', '#0a0081']}
+                                colors={['#9dcb00', '#045400']}
                                 locations={[0.05, 1]}
                                 start={{ x: 0, y: 0.5 }}
                                 end={{ x: 1, y: 0.5 }}
@@ -206,7 +206,7 @@ export default function User(props) {
                                 </TouchableOpacity>
                             </LinearGradient>
                             <LinearGradient
-                                colors={['#7700a4', '#0a0081']}
+                                colors={['#9dcb00', '#045400']}
                                 locations={[0.05, 1]}
                                 start={{ x: 0, y: 0.5 }}
                                 end={{ x: 1, y: 0.5 }}
@@ -239,7 +239,7 @@ export default function User(props) {
                     <View style={styles.modalBody}>
                         <Text style={styles.text3}>Êtes vous sûr de vouloir {props.is_admin ? "retirer" : "ajouter"} le statut d'admin à l'utilisateur {props.email} ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -248,7 +248,7 @@ export default function User(props) {
                         </LinearGradient>
                         <View style={styles.row2}>
                             <LinearGradient
-                                colors={['#7700a4', '#0a0081']}
+                                colors={['#9dcb00', '#045400']}
                                 locations={[0.05, 1]}
                                 start={{ x: 0, y: 0.5 }}
                                 end={{ x: 1, y: 0.5 }}
@@ -260,7 +260,7 @@ export default function User(props) {
                                 </TouchableOpacity>
                             </LinearGradient>
                             <LinearGradient
-                                colors={['#7700a4', '#0a0081']}
+                                colors={['#9dcb00', '#045400']}
                                 locations={[0.05, 1]}
                                 start={{ x: 0, y: 0.5 }}
                                 end={{ x: 1, y: 0.5 }}

@@ -95,7 +95,7 @@ export default function Signin(props) {
                     <Text style={styles.error}>{error}</Text>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#49158f', '#0a0081']}
+                        colors={['#49158f', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -118,7 +118,7 @@ export default function Signin(props) {
 
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#49158f', '#0a0081']}
+                        colors={['#49158f', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -142,7 +142,7 @@ export default function Signin(props) {
 
                     <LinearGradient
                         style={styles.connectContainer}
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}

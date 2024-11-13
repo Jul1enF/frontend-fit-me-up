@@ -63,7 +63,7 @@ export default function Searches() {
 
     const headerFlatlist = (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -85,7 +85,7 @@ export default function Searches() {
                 <StatusBar translucent={true} barStyle="light"/>
                 <Text style={styles.title2}>Aucun résultat pour votre recherche « {searchText} ».</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}

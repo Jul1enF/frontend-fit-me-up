@@ -32,7 +32,7 @@ export default function CronNotification(props) {
 
     return (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -71,7 +71,7 @@ export default function CronNotification(props) {
                 <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={()=>router.push(`/cron-notification-page/${props._id}`)}>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}

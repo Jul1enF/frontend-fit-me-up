@@ -135,7 +135,7 @@ export default function Article() {
         modifications = (
             <View style={styles.btnContainer}>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -172,7 +172,7 @@ export default function Article() {
             <Text style={styles.title}>{article.title}</Text>
             {article.sub_title && <Text style={styles.subTitle}>{article.sub_title}</Text>}
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -202,7 +202,7 @@ export default function Article() {
 
             <View style={styles.lineContainer}>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     categoryTitle: {
-        color: '#7700a4',
+        color: '#9dcb00',
         fontSize: 32,
         fontWeight: "600",
         marginBottom: 3,

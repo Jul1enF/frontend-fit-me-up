@@ -318,7 +318,7 @@ export default function CronNotificationPage() {
     function CronHeader() {
         return (
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -387,7 +387,7 @@ export default function CronNotificationPage() {
                     Statut :
                 </Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -448,7 +448,7 @@ export default function CronNotificationPage() {
 
                 <View style={[styles.row, cronId == "new" && {justifyContent : "center"}]}>
                  { cronId !== "new" &&  <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -461,7 +461,7 @@ export default function CronNotificationPage() {
                     </LinearGradient>}
 
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -488,7 +488,7 @@ export default function CronNotificationPage() {
                     <View style={styles.modalBody}>
                         <Text style={styles.modalText}>Êtes vous sûr de vouloir supprimer cette notification programmée ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -498,7 +498,7 @@ export default function CronNotificationPage() {
                         <View style={styles.btnContainer2}>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -509,7 +509,7 @@ export default function CronNotificationPage() {
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => deletePress()}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}

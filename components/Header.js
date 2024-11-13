@@ -46,7 +46,7 @@ export default function Header() {
     // Fonction appelée en cliquant sur Se déconnecter
 
     const logoutPress = async () => {
-      
+
         // Reducer logout, fermeture du menu et push vers page d'accueil
         setMenuVisible(false)
         dispatch(logout())
@@ -90,8 +90,18 @@ export default function Header() {
         <View style={styles.body}>
             <StatusBar translucent={true} barStyle="light" />
             <LinearGradient style={styles.header}
-                colors={['#7700a4', '#0a0081']}
-                locations={[0, 0.9]}
+                // COULEURS MOINS ÉLOIGNÉES (MOINS DE CONTRASTE)
+                // colors={['#A9dcb00', '#A045400']}
+                // locations={[0, 0.75]}
+                // COULEURS PLUS ÉLOIGNÉES (CHOIX FINAL ???!!!!!)
+                // colors={['#Acbc500', '#A055900']}
+                // colors={['#9dcb00', '#045400']}
+
+                colors={['#9dcb00', '#045400']}
+                locations={[0, 0.75]}
+                // MÊME COULEUR
+                // colors={['#046b00', '#046b00']}
+                // locations={[0, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
             >
@@ -120,7 +130,7 @@ export default function Header() {
                 onBackdropPress={() => setSearchVisible(!searchVisible)}
             >
                 <LinearGradient style={styles.searchContainer}
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -186,7 +196,7 @@ export default function Header() {
                             <Text style={styles.link}>Utilisateurs</Text>
                         </TouchableOpacity>
                     }
-                   {user.token && <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
+                    {user.token && <TouchableOpacity activeOpacity={0.6} style={styles.linkContainer} onPress={() => logoutPress()}>
                         <Text style={styles.link}>Se déconnecter</Text>
                     </TouchableOpacity>}
                 </View>
