@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     },
     link : {
         color: "#19290a",
-        fontSize: RPW(3.5),
+        fontSize: 16,
         fontWeight: "500",
         letterSpacing: 1,
         textAlign: "center",
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     },
     legalText: {
         color: "#19290a",
-        fontSize : 12,
+        fontSize : 16,
     },
 
 })
