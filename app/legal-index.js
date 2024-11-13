@@ -5,7 +5,7 @@ import { RPW, RPH } from "../modules/dimensions"
 
 export default function Legal() {
 
-    const appName = "FIT ME UP"
+    const appName = "Boost Up"
 
     return (
         <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}>

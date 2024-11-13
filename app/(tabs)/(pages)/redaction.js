@@ -426,8 +426,8 @@ export default function Redaction() {
                             end={{ x: 1, y: 0.5 }}
                             style={styles.gradientBtn1}
                         >
-                            <TouchableOpacity style={[styles.btn, category === "events" && { backgroundColor: "transparent" }]} onPress={() => setCategory("events")}>
-                                <Text style={styles.categoryText2}>Évènement</Text>
+                            <TouchableOpacity style={[styles.btn, category === "news" && { backgroundColor: "transparent" }]} onPress={() => setCategory("news")}>
+                                <Text style={styles.categoryText2}>News</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                         <LinearGradient

@@ -56,7 +56,7 @@ export default function Index() {
                 end={{ x: 1, y: 0.5 }}
             >
                 <Text style={styles.title}>
-                    FIT ME UP
+                    BOOST UP
                 </Text>
             </LinearGradient>
             <View style={styles.headerLigne}></View>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: RPH(4.5),
         color: "white",
-        letterSpacing: 2.5,
+        letterSpacing: 1.5,
         fontWeight: "600",
     },
     mainContainer: {

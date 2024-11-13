@@ -111,7 +111,7 @@ export default function Header() {
                 </View>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>
-                        FIT ME UP
+                        BOOST UP
                     </Text>
                 </View>
                 <View style={styles.searchIconContainer}>
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: RPW(8.5),
         color: "white",
-        letterSpacing: 2.5,
+        letterSpacing: 1.5,
         fontWeight: "600",
     },
     searchIconContainer: {

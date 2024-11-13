@@ -18,8 +18,8 @@ import moment from 'moment/min/moment-with-locales'
 
 export default function Article() {
 
-    const { recipe } = useLocalSearchParams()
-    const _id = recipe[0]
+    const { news } = useLocalSearchParams()
+    const _id = news[0]
 
     const dispatch = useDispatch()
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
@@ -47,16 +47,17 @@ export default function Article() {
     }, [user])
 
 
-    // useFocusEffect pour vérifier si l'article est en favoris, naviguer vers recette si l'article test a été supprimé ou si un nouveau a été mis en test
+    // useFocusEffect pour vérifier si l'article est en favoris, naviguer vers news si l'article test a été supprimé ou si un nouveau a été mis en test
 
     useFocusEffect(useCallback(() => {
         // Si utilisateur pas connecté
         if (!user.token){ return }
+        
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
-        if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/recipes') }
+        if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/news') }
 
-        if (testArticle.length > 0 && testArticle[0].category === 'recipes' && _id !== "testArticleId") { router.navigate('/recipes') }
+        if (testArticle.length > 0 && testArticle[0].category === 'news' && _id !== "testArticleId") { router.navigate('/news') }
     }, [user, testArticle]))
 
 
@@ -209,9 +210,9 @@ export default function Article() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/recipes')}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/news')}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
-                    <Text style={styles.headerText}>Recettes</Text>
+                    <Text style={styles.headerText}>News</Text>
                 </TouchableOpacity>
                { user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
@@ -222,7 +223,7 @@ export default function Article() {
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
 
             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}>
-                <Text style={styles.categoryTitle}>Recette</Text>
+                <Text style={styles.categoryTitle}>News</Text>
                 <Text style={styles.title}>{article.title}</Text>
                 {article.sub_title && <Text style={styles.subTitle}>{article.sub_title}</Text>}
                 <LinearGradient

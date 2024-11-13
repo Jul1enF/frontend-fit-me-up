@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "frontend-fit-me-up",
-    "slug": "frontend-fit-me-up",
+    "name": "Boost Up",
+    "slug": "boost-up",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo-boost-up1.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo-boost-up1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
@@ -18,15 +18,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/logo-boost-up1.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.furic.fit.me.up",
       "versionCode": 1,
       "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo-boost-up1.png"
     },
     "extra": {
       "eas": {
@@ -37,7 +37,7 @@
     "updates": {
       "url": "https://u.expo.dev/0148f104-d433-4606-8d3d-030b747d8c33"
     },
-    "scheme": "fit-me-up",
+    "scheme": "boost-up",
     "plugins": [
       "expo-router",
       ["expo-font",

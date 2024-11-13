@@ -10,8 +10,8 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
   const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
   if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('fit-me-up', {
-      name: 'fit-me-up',
+    Notifications.setNotificationChannelAsync('boost-up', {
+      name: 'boost-up',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
       lightColor: '#FF231F7C',

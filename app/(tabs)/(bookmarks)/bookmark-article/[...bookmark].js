@@ -52,7 +52,7 @@ export default function BookmarkArticle() {
 
     if (article.category === "recipes") { category = "Recette" }
     else if (article.category === "exercices") { category = "Exercice" }
-    else if (article.category === "events") { category = "Évènement" }
+    else if (article.category === "news") { category = "News" }
 
 
     // Fonction appelée en cliquant sur retirer des favoris

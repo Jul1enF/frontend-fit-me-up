@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions, Platform, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import {RPH, RPW, getNavigationHeight } from "../../modules/dimensions"
+import { RPH, RPW, getNavigationHeight } from "../../modules/dimensions"
 
 
 
@@ -19,10 +19,10 @@ export default function TabsLayout() {
 
           if (route.name === '(recipes)') {
             iconName = 'pot-mix';
-          } else if (route.name === 'exercices') {
+          } else if (route.name === '(exercices)') {
             iconName = 'weight-lifter';
           }
-          else if (route.name === 'events') {
+          else if (route.name === '(news)') {
             iconName = 'bell';
           }
           else if (route.name === '(bookmarks)') {
@@ -44,18 +44,18 @@ export default function TabsLayout() {
         ),
         tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1) },
         // tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
-        tabBarHideOnKeyboard : Platform.OS === 'android' ? true : false,
+        tabBarHideOnKeyboard: Platform.OS === 'android' ? true : false,
         header: (props) => <Header {...props} />,
       })}
     >
+      <Tabs.Screen name="(news)" options={{
+        title: "News"
+      }} />
       <Tabs.Screen name="(recipes)" options={{
         title: "Recettes",
       }} />
-      <Tabs.Screen name="exercices" options={{
+      <Tabs.Screen name="(exercices)" options={{
         title: "Exercices",
-      }} />
-      <Tabs.Screen name="events" options={{
-        title: "Évènements"
       }} />
       <Tabs.Screen name="(bookmarks)" options={{
         title: "Favoris"

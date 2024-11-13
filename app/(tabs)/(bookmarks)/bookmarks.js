@@ -57,7 +57,7 @@ export default function Bookmarks() {
 
     // Tableau de traduction des catégories en français
 
-    const translation = [{ category: "recipes", name: "Recettes" }, { category: "exercices", name: "Exercices" }, { category: "events", name: "Évènements" }]
+    const translation = [{ category: "recipes", name: "Recettes" }, { category: "exercices", name: "Exercices" }, { category: "news", name: "News" }]
 
 
 
@@ -159,8 +159,8 @@ export default function Bookmarks() {
             if (category === "exercices") {
                 sortedSubcategories = [{ name: "Tous mes exercices" }]
             }
-            if (category === "events") {
-                sortedSubcategories = [{ name: "Tous mes évènements" }]
+            if (category === "news") {
+                sortedSubcategories = [{ name: "Toutes mes news" }]
             }
 
 
