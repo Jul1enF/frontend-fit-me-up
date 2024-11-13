@@ -30,7 +30,7 @@ export default function FirstArticle(props) {
 
             {props.img_link && <View style={styles.imgContainer} >
 
-                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "black"}, imgLoaded && {display : "none"}]}></View>
+                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "#fbfff7"}, imgLoaded && {display : "none"}]}></View>
 
                 <Image
                     style={[styles.image, {

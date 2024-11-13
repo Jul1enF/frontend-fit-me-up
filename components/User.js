@@ -152,7 +152,7 @@ export default function User(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn}
                     >
-                        <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "black" }]}
+                        <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "#fbfff7" }]}
                             onPress={() => setModal1Visible(true)} >
                             <Text style={styles.text1}>{props.is_allowed ? "Autorisé" : "Bloqué"}</Text>
                         </TouchableOpacity>
@@ -164,7 +164,7 @@ export default function User(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn}
                     >
-                        <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "black" }]}
+                        <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "#fbfff7" }]}
                             onPress={() => setModal2Visible(true)} >
                             <Text style={styles.text1}>{props.is_admin ? "Admin" : "Client"}</Text>
                         </TouchableOpacity>
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         margin: 2,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 10,

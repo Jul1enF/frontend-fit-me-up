@@ -172,7 +172,7 @@ export default function News() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"black"} tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"#fbfff7"} tintColor={"white"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadArticles()
@@ -212,7 +212,7 @@ export default function News() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
     },
     gradientBtn1: {

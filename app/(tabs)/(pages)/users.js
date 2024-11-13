@@ -206,11 +206,11 @@ export default function Users() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     topContainer: {
         width: RPW(100),
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
         marginBottom: 15,

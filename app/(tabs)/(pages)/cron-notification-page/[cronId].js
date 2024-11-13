@@ -393,7 +393,7 @@ export default function CronNotificationPage() {
                     end={{ x: 1, y: 0.5 }}
                     style={styles.gradientBtn}
                 >
-                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "black" }]}
+                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "#fbfff7" }]}
                         onPress={() => setIsActive(!isActive)} >
                         <Text style={styles.btnText}>{isActive ? "Activée" : "Désactivée"}</Text>
                     </TouchableOpacity>
@@ -535,7 +535,7 @@ export default function CronNotificationPage() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     header: {
         height: RPH(6),
@@ -575,7 +575,7 @@ const styles = StyleSheet.create({
         paddingRight: RPW(4),
         paddingBottom: RPW(3),
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     text1: {
         color: "white",

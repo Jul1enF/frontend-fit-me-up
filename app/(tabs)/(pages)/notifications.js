@@ -293,7 +293,7 @@ export default function Notifications() {
                 if(cronsNotifications.length>0) {return <CronNotification {...item} number={index + 1} />}
             }}
             contentContainerStyle={{ alignItems: 'center' }}
-            style={{ flex: 1, backgroundColor: "black" }}
+            style={{ flex: 1, backgroundColor: "#fbfff7" }}
         />
     )
 }
@@ -301,11 +301,11 @@ export default function Notifications() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     topContainer: {
         width: RPW(100),
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
         paddingTop: RPW(6),

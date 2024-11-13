@@ -120,7 +120,7 @@ export default function Searches() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
         alignItems: "center"
     },
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         margin: 3,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 14,
     },
     body2: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
         alignItems: "center",
         paddingLeft : RPW(4),

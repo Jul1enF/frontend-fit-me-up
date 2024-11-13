@@ -27,7 +27,7 @@ export default function Contact () {
 const styles = StyleSheet.create({
     body : {
         flex : 1,
-        backgroundColor : "black",
+        backgroundColor : "#fbfff7",
         paddingTop: 30,
         paddingLeft: RPW(2),
         paddingRight: RPW(2),

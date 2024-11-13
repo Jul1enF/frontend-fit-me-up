@@ -318,11 +318,11 @@ export default function Bookmarks() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
     },
     body2: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
         alignItems: "center",
         paddingLeft: RPW(4),

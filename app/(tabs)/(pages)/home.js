@@ -160,7 +160,7 @@ export default function Article() {
         loadContent()
     }} />
 
-    if (!article) { return <ScrollView style={{ flex: 1, backgroundColor: "black" }} refreshControl={refreshComponent}></ScrollView> }
+    if (!article) { return <ScrollView style={{ flex: 1, backgroundColor: "#fbfff7" }} refreshControl={refreshComponent}></ScrollView> }
 
 
 
@@ -236,7 +236,7 @@ export default function Article() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     contentBody: {
         paddingTop: RPH(2),

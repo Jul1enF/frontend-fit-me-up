@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     },
     monthBody : {
         flex : 1,
-        backgroundColor : "black",
+        backgroundColor : "#fbfff7",
         margin : 2,
         justifyContent : "center",
         alignItems : "center",

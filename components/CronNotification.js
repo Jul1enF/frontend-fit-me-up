@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         margin: 2,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 10,

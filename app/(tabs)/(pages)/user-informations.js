@@ -454,7 +454,7 @@ export default function UserInformations() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     contentBody: {
         paddingLeft: RPW(4),
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPW(6),
         paddingTop: RPW(5),
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     topContainer: {
         alignItems: "flex-start",
@@ -531,7 +531,7 @@ const styles = StyleSheet.create({
         minWidth: RPW(34)
     },
     btnTouchable2: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
         margin: 2,
         paddingLeft: RPW(5),

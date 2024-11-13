@@ -159,7 +159,7 @@ export default function Legal() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black"
+        backgroundColor: "#fbfff7"
     },
     contentBody: {
         paddingTop: 30,

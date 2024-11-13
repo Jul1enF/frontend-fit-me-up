@@ -320,7 +320,7 @@ export default function SearchArticle() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     header: {
         height: RPH(6),

@@ -368,7 +368,7 @@ export default function Redaction() {
     return (
         <>
             {/* <KeyboardAwareScrollView
-            style={{ flex: 1, backgroundColor: "black" }}
+            style={{ flex: 1, backgroundColor: "#fbfff7" }}
             contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
             scrollEnabled={scrollable}
             bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
@@ -578,7 +578,7 @@ export default function Redaction() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         flex: 1,
         alignItems: "center",
     },
@@ -648,7 +648,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         margin: 2,
         borderRadius: 10,
         paddingRight: RPW(4),
@@ -686,7 +686,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         margin: 2,
         borderRadius: 10,
     },

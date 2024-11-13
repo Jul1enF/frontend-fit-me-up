@@ -163,7 +163,7 @@ export default function Index() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
     },
     header: {
         height: RPH(14),
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         height: RPH(86),
         justifyContent: "space-evenly",
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         paddingBottom: RPH(0),
         paddingTop: RPH(1)
     },
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
+        backgroundColor: "#fbfff7",
         margin: 2,
         borderRadius: 10,
     },

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     numberBody : {
         flex : 1,
-        backgroundColor : "black",
+        backgroundColor : "#fbfff7",
         margin : 2,
         justifyContent : "center",
         alignItems : "center",
