@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#19290a",
-        fontSize: 27,
+        fontSize: RPW(6.3),
         fontWeight: "450",
         marginBottom: 12,
     },
@@ -120,12 +120,12 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         color: "#19290a",
-        fontSize: 15,
-        fontWeight: "300",
+        fontSize: RPW(3.6),
+        fontWeight: "400",
     },
     date: {
         color: "#19290a",
-        fontSize: 12,
+        fontSize: RPW(3.2),
         marginLeft: RPW(3),
         marginBottom: 18,
         fontWeight: "300"
