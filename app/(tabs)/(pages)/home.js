@@ -154,7 +154,7 @@ export default function Article() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"black"} tintColor={"white"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadContent()
@@ -341,6 +341,6 @@ const styles = StyleSheet.create({
     },
     legalText: {
         color: "rgba(255,255,255,0.25)",
-        fontSize : 12,
+        fontSize : 16,
     },
 })

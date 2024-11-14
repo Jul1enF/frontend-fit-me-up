@@ -33,7 +33,7 @@ export default function Article(props) {
                     </View>}
 
                     {!props.img_link &&
-                        <View style={{ width: RPW(41), height: RPH(17) }} pointerEvents="none" overflow="hidden" justifyContent="center" >
+                        <View style={{ width: RPW(41), height: RPH(12.5) }} pointerEvents="none" overflow="hidden" justifyContent="center" >
                             <YoutubePlayer
                                 width={RPW(41)}
                                 height={RPW(24)}
@@ -70,29 +70,30 @@ const styles = StyleSheet.create({
     },
     column1: {
         width: RPW(51),
-        height: RPH(17),
+        maxHeight: RPH(17),
+        minHeight : RPH(12.5),
         justifyContent: "space-evenly",
     },
     title: {
         color: "#e0e0e0",
-        fontSize: 22,
+        fontSize: RPW(5.2),
         fontWeight: "450",
         marginBottom: 10
     },
     subTitle: {
         color: "#e0e0e0",
-        fontSize: 14,
+        fontSize: RPW(3.6),
         fontWeight: "400",
         marginBottom: 10,
     },
     date: {
         color: "#e0e0e0",
-        fontSize: 12,
+        fontSize: RPW(3.2),
         fontWeight: "300"
     },
     column2: {
         width: RPW(41),
-        height: RPH(17),
+        height: "auto",
         alignItems: "center",
         justifyContent: 'center',
     },
@@ -107,7 +108,8 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     gradientLine2: {
-        width: "100%",
+        width: RPW(100),
+        marginLeft : RPW(-3),
         height: 1,
         borderRadius: 15,
     },
