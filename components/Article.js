@@ -59,7 +59,9 @@ export default function Article(props) {
 const styles = StyleSheet.create({
     body: {
         width: RPW(100),
-        marginBottom: 14,
+        // marginBottom: 14,
+        paddingTop : 4,
+        marginBottom:10,
         paddingRight: RPW(3),
         paddingLeft: RPW(3),
     },
@@ -108,7 +110,8 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     gradientLine2: {
-        width: "100%",
+        width: RPW(100),
+        marginLeft : RPW(-3),
         height: 1,
         borderRadius: 15,
     },
