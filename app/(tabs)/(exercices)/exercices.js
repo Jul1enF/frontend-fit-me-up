@@ -100,9 +100,9 @@ export default function Exercices() {
                 setChosenSubcategory("Tous les exercices")
 
             }
-            else if (!data.result) {
-                // dispatch(suppressArticles())
-                // setArticlesToDisplay("")
+            else if (data.err) {
+                dispatch(logout())
+                router.navigate('/')
                 return
             }
         }

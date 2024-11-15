@@ -100,9 +100,9 @@ export default function Recipes() {
                 setChosenSubcategory("Toutes les recettes")
 
             }
-            else if (!data.result) {
-                // dispatch(suppressArticles())
-                // setArticlesToDisplay("")
+            else if (data.err) {
+                dispatch(logout())
+                router.navigate('/')
                 return
             }
         }

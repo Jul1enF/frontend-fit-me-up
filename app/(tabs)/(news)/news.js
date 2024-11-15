@@ -101,9 +101,9 @@ export default function News() {
                 setChosenSubcategory("Toutes les news")
 
             }
-            else if (!data.result) {
-                // dispatch(suppressArticles())
-                // setArticlesToDisplay("")
+            else if (data.err) {
+                dispatch(logout())
+                router.navigate('/')
                 return
             }
         }
