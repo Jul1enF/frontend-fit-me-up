@@ -63,7 +63,7 @@ export default function Searches() {
 
     const headerFlatlist = (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -85,7 +85,7 @@ export default function Searches() {
                 <StatusBar translucent={true} barStyle="light"/>
                 <Text style={styles.title2}>Aucun résultat pour votre recherche « {searchText} ».</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -120,12 +120,12 @@ export default function Searches() {
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center"
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 25,
         fontWeight: "300",
         textAlign: "center",
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         margin: 3,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 14,
     },
     body2: {
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         flex: 1,
         alignItems: "center",
         paddingLeft : RPW(4),
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         paddingTop : 10,
     },
     title2: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 23,
         fontWeight: "300",
         textAlign: "center",

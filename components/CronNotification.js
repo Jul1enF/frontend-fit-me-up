@@ -32,7 +32,7 @@ export default function CronNotification(props) {
 
     return (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -71,7 +71,7 @@ export default function CronNotification(props) {
                 <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={()=>router.push(`/cron-notification-page/${props._id}`)}>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         margin: 2,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         borderRadius: 10,
         paddingTop: 14,
         paddingBottom: 10,
@@ -105,17 +105,17 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         borderBottomWidth: 1,
-        borderBottomColor: "#e0e0e0",
+        borderBottomColor: "#19290a",
         paddingBottom: 10,
         marginBottom: 14,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(4.1),
         fontWeight: "700"
     },
     text2 : {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(4),
         fontWeight: "600"
     },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 
     },
     text3: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(4),
         fontWeight: "400",
         flexWrap : "wrap",
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         justifyContent : "center"
     },
     text4 : {
-        color: "#e0e0e0",
+        color: "white",
         fontSize: RPW(4.8),
         fontWeight: "600",
     },

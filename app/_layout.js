@@ -104,7 +104,7 @@ export default function RootLayout() {
                 headerTintColor: 'white',
                 headerBackground: () => (
                     <LinearGradient
-                      colors={['#7700a4', '#0a0081']}
+                      colors={['#9dcb00', '#045400']}
                       start={{ x: 0, y: 0.5 }}
                       end={{ x: 1, y: 0.5 }}
                       style={{ height: 150 }}
@@ -117,7 +117,7 @@ export default function RootLayout() {
                 headerTintColor: 'white',
                 headerBackground: () => (
                     <LinearGradient
-                      colors={['#7700a4', '#0a0081']}
+                      colors={['#9dcb00', '#045400']}
                       start={{ x: 0, y: 0.5 }}
                       end={{ x: 1, y: 0.5 }}
                       style={{ height: 150 }}

@@ -50,7 +50,7 @@ export default function Index() {
             <LinearGradient style={styles.header}
                 // colors={['#ffd500', '#fd8600']}
                 //  colors={['#97002e', '#450150']}
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0, 0.9]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -65,7 +65,7 @@ export default function Index() {
                 <View style={styles.signContainer}>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
@@ -76,7 +76,7 @@ export default function Index() {
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -91,7 +91,7 @@ export default function Index() {
                 <View style={styles.signContainer}>
                     <LinearGradient
                         style={styles.gradientContainer}
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0, 0.9]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}>
@@ -102,7 +102,7 @@ export default function Index() {
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -163,7 +163,7 @@ export default function Index() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     header: {
         height: RPH(14),
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
         height: RPH(86),
         justifyContent: "space-evenly",
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         paddingBottom: RPH(0),
         paddingTop: RPH(1)
     },
@@ -218,18 +218,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         margin: 2,
         borderRadius: 10,
     },
     signText: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.5),
         fontWeight: "500",
         letterSpacing: 1,
     },
     link : {
-        color: "white",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         letterSpacing: 1,
@@ -251,12 +251,12 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     legalBth: {
-        borderBottomColor: "rgba(255,255,255,0.25)",
+        borderBottomColor: "#19290a",
         borderBottomWidth: 1,
         paddingBottom : 2,
     },
     legalText: {
-        color: "rgba(255,255,255,0.25)",
+        color: "#19290a",
         fontSize : 16,
     },
 

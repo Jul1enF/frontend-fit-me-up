@@ -135,7 +135,7 @@ export default function Article() {
         modifications = (
             <View style={styles.btnContainer}>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -154,13 +154,13 @@ export default function Article() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"black"} tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["#19290a"]} progressBackgroundColor={"white"} tintColor={"#19290a"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadContent()
     }} />
 
-    if (!article) { return <ScrollView style={{ flex: 1, backgroundColor: "black" }} refreshControl={refreshComponent}></ScrollView> }
+    if (!article) { return <ScrollView style={{ flex: 1, backgroundColor: "#f9fff4" }} refreshControl={refreshComponent}></ScrollView> }
 
 
 
@@ -172,7 +172,7 @@ export default function Article() {
             <Text style={styles.title}>{article.title}</Text>
             {article.sub_title && <Text style={styles.subTitle}>{article.sub_title}</Text>}
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -202,7 +202,7 @@ export default function Article() {
 
             <View style={styles.lineContainer}>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -236,7 +236,7 @@ export default function Article() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     contentBody: {
         paddingTop: RPH(2),
@@ -245,19 +245,19 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     categoryTitle: {
-        color: '#7700a4',
+        color: '#9dcb00',
         fontSize: 32,
         fontWeight: "600",
         marginBottom: 3,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 28,
         fontWeight: "600",
         marginBottom: 18,
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 18,
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     author: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
         marginBottom: 15,
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 25,
@@ -335,12 +335,12 @@ const styles = StyleSheet.create({
         marginTop : 30
     },
     legalBth: {
-        borderBottomColor: "rgba(255,255,255,0.25)",
+        borderBottomColor: "#19290a",
         borderBottomWidth: 1,
         paddingBottom : 2,
     },
     legalText: {
-        color: "rgba(255,255,255,0.25)",
-        fontSize : 16,
+        color: "#19290a",
+        fontSize : 12,
     },
 })

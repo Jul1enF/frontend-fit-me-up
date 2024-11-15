@@ -113,12 +113,12 @@ export default function Signup(props) {
 
 
                 <View style={styles.closeContainer}>
-                    <Icon name="close" onPress={() => props.closeModal2()} color="white" size={RPH(4)} ></Icon>
+                    <Icon name="close" onPress={() => props.closeModal2()} color="#19290a" size={RPH(4)} ></Icon>
                 </View>
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -130,7 +130,7 @@ export default function Signup(props) {
                         }}
                         value={firstname}
                         placeholder='Prénom'
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                     placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(-16))}
                         onBlur={() => setOffsetKeyboard(0)}>
                     </TextInput>
@@ -138,7 +138,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -150,7 +150,7 @@ export default function Signup(props) {
                         }}
                         value={name}
                         placeholder='Nom'
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                     placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(-16))}
                         onBlur={() => setOffsetKeyboard(0)}>
                     </TextInput>
@@ -158,7 +158,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -170,7 +170,7 @@ export default function Signup(props) {
                         }}
                         value={email}
                         placeholder='Email'
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                       placeholderTextColor="#fbfff790"
                         keyboardType='email-address'
                         autoCapitalize='none'
                         onFocus={() => setOffsetKeyboard(RPH(-2))}
@@ -180,7 +180,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -192,7 +192,7 @@ export default function Signup(props) {
                         }}
                         value={password}
                         placeholder='Mot de passe'
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                       placeholderTextColor="#fbfff790"
                         secureTextEntry={!passwordVisible}
                         onFocus={() => setOffsetKeyboard(-RPH(2))}
                         onBlur={() => setOffsetKeyboard(0)} >
@@ -204,7 +204,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -216,7 +216,7 @@ export default function Signup(props) {
                         }}
                         value={password2}
                         placeholder='Confirmation mot de passe'
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                       placeholderTextColor="#fbfff790"
                         secureTextEntry={!password2Visible}
                         onFocus={() => setOffsetKeyboard(RPH(23))}
                         onBlur={() => setOffsetKeyboard(0)} >
@@ -228,7 +228,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -240,7 +240,7 @@ export default function Signup(props) {
                         }}
                         value={coach}
                         placeholder="Nom de votre coach"
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                       placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(30))}
                         onBlur={() => setOffsetKeyboard(0)}
                     >
@@ -250,7 +250,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.gradientContainer}
-                    colors={['#49158f', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -262,7 +262,7 @@ export default function Signup(props) {
                         }}
                         value={appCode}
                         placeholder="Code de l'application"
-                        placeholderTextColor='rgba(255,255,255,0.4)'
+                        placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(30))}
                         onBlur={() => setOffsetKeyboard(0)}
                     >
@@ -271,7 +271,7 @@ export default function Signup(props) {
 
                 <LinearGradient
                     style={styles.registerContainer}
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0, 0.9]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
         width: RPW(85),
         minHeight: RPH(80),
         marginTop: RPH(8),
-        backgroundColor: "#1c1c1c",
+        backgroundColor: "#e6eedd",
         alignItems: "center",
         borderRadius: 10,
     },
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(1.5)
     },
     cross: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.8),
         fontWeight: "400",
     },
@@ -356,18 +356,18 @@ const styles = StyleSheet.create({
     },
     registerBtn: {
         flex: 1,
-        backgroundColor: "#1c1c1c",
+        backgroundColor: "#e6eedd",
         margin: 2,
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center"
     },
     registerSentence: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPH(2.5)
     },
     error: {
-        color: "white",
+        color: "red",
         fontSize: RPW(4),
         fontWeight: "600",
         marginBottom: RPH(2)

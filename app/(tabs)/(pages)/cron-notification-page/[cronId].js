@@ -318,7 +318,7 @@ export default function CronNotificationPage() {
     function CronHeader() {
         return (
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -387,15 +387,15 @@ export default function CronNotificationPage() {
                     Statut :
                 </Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
                     style={styles.gradientBtn}
                 >
-                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "black" }]}
+                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "#f9fff4" }]}
                         onPress={() => setIsActive(!isActive)} >
-                        <Text style={styles.btnText}>{isActive ? "Activée" : "Désactivée"}</Text>
+                        <Text style={[styles.btnText, !isActive && { color: "#19290a" }]}>{isActive ? "Activée" : "Désactivée"}</Text>
                     </TouchableOpacity>
                 </LinearGradient>
 
@@ -448,7 +448,7 @@ export default function CronNotificationPage() {
 
                 <View style={[styles.row, cronId == "new" && {justifyContent : "center"}]}>
                  { cronId !== "new" &&  <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -461,7 +461,7 @@ export default function CronNotificationPage() {
                     </LinearGradient>}
 
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -488,7 +488,7 @@ export default function CronNotificationPage() {
                     <View style={styles.modalBody}>
                         <Text style={styles.modalText}>Êtes vous sûr de vouloir supprimer cette notification programmée ?</Text>
                         <LinearGradient
-                            colors={['#7700a4', '#0a0081']}
+                            colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
                             start={{ x: 0, y: 0.5 }}
                             end={{ x: 1, y: 0.5 }}
@@ -498,7 +498,7 @@ export default function CronNotificationPage() {
                         <View style={styles.btnContainer2}>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -509,7 +509,7 @@ export default function CronNotificationPage() {
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => deletePress()}>
                                 <LinearGradient
-                                    colors={['#7700a4', '#0a0081']}
+                                    colors={['#9dcb00', '#045400']}
                                     locations={[0.05, 1]}
                                     start={{ x: 0, y: 0.5 }}
                                     end={{ x: 1, y: 0.5 }}
@@ -535,7 +535,7 @@ export default function CronNotificationPage() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     header: {
         height: RPH(6),
@@ -575,17 +575,18 @@ const styles = StyleSheet.create({
         paddingRight: RPW(4),
         paddingBottom: RPW(3),
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     text1: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(5.3),
         fontWeight: "600",
         marginBottom: 13
     },
     input: {
         width: "100%",
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         borderRadius: 5,
         marginBottom: 25,
         paddingLeft: 8,
@@ -622,7 +623,8 @@ const styles = StyleSheet.create({
     },
     input2: {
         width: RPW(12),
-        backgroundColor: "white",
+        backgroundColor: "#2e6017",
+        color : "white",
         textAlign: "center",
         borderRadius: 5,
         fontSize: RPW(5.3),
@@ -630,14 +632,14 @@ const styles = StyleSheet.create({
         paddingTop: 6,
     },
     text2: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(5.3),
         fontWeight: "600",
         marginLeft: RPW(2),
         marginRight: RPW(2),
     },
     text3: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(5.3),
         fontWeight: "600",
         marginBottom: 20
@@ -657,7 +659,7 @@ const styles = StyleSheet.create({
         marginBottom: 40,
     },
     error: {
-        color: "white",
+        color: "red",
         fontSize: RPW(4.5),
         fontWeight: "600",
         marginBottom: 13
@@ -678,14 +680,14 @@ const styles = StyleSheet.create({
         paddingBottom: RPH(5),
         paddingLeft: RPW(2),
         paddingRight: RPW(2),
-        backgroundColor: "#222222",
+        backgroundColor: "#e6eedd",
         position: "absolute",
         bottom : RPH(10),
         justifyContent: "space-between",
         alignItems: "center"
     },
     modalText: {
-        color: "#e0e0e0",
+        color: "white",
         fontSize: RPW(6),
         fontWeight: "600",
         textAlign: "center",
@@ -714,7 +716,7 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     modalText2: {
-        color: "#e0e0e0",
+        color: "white",
         fontSize: RPW(5.4),
         fontWeight: "700",
         marginRight: RPW(2),

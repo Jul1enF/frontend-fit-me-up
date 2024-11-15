@@ -30,7 +30,7 @@ export default function FirstArticle(props) {
 
             {props.img_link && <View style={styles.imgContainer} >
 
-                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "black"}, imgLoaded && {display : "none"}]}></View>
+                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "#f9fff4"}, imgLoaded && {display : "none"}]}></View>
 
                 <Image
                     style={[styles.image, {
@@ -58,7 +58,7 @@ export default function FirstArticle(props) {
             <View style={styles.textContainer}>
                 <Text style={styles.title}>{props.title}</Text>
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -72,7 +72,7 @@ export default function FirstArticle(props) {
             
             <Text style={styles.date}>Posté {lastingTime}</Text>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(6.3),
         fontWeight: "450",
         marginBottom: 12,
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.6),
         fontWeight: "400",
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.2),
         marginLeft: RPW(3),
         marginBottom: 18,

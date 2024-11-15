@@ -17,7 +17,7 @@ export default function Days(props) {
 
     return (
         <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             locations={[0.05, 1]}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
@@ -25,7 +25,7 @@ export default function Days(props) {
         >
             <TouchableOpacity style={[styles.numberBody, props.isSelected && {backgroundColor : "transparent"}]}
             onPress={()=> numberPress() } >
-                <Text style={styles.text}>{props.i + 1}</Text>
+                <Text style={[styles.text, !props.isSelected && { color: "#19290a" }]}>{props.i + 1}</Text>
             </TouchableOpacity>
         </LinearGradient>
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     numberBody : {
         flex : 1,
-        backgroundColor : "black",
+        backgroundColor : "#f9fff4",
         margin : 2,
         justifyContent : "center",
         alignItems : "center",

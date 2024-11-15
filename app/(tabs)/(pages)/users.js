@@ -125,7 +125,7 @@ export default function Users() {
 
     const [isRefreshing, setIsRefreshing] = useState(false)
 
-    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["white"]} progressBackgroundColor={"black"}  tintColor={"white"} onRefresh={() => {
+    const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["#19290a"]} progressBackgroundColor={"white"} tintColor={"#19290a"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
         loadUsers()
@@ -147,7 +147,7 @@ export default function Users() {
                             onChangeText={(e) => setSearchText(e)}
                             value={searchText}
                             returnKeyType="send"
-                            placeholderTextColor={"rgba(255,255,255,0.8)"}
+                            placeholderTextColor="#19290a90"
                             autoCapitalize="none"
                             onSubmitEditing={() => submitSearch()}
                             autoCorrect={false}
@@ -156,7 +156,7 @@ export default function Users() {
                     </View>
 
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -173,7 +173,7 @@ export default function Users() {
 
             <Text style={styles.title}>Liste des {usersToDisplay.length.toString()} utilisateurs :</Text>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -206,11 +206,11 @@ export default function Users() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     topContainer: {
         width: RPW(100),
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
         paddingLeft: RPW(3),
         paddingRight: RPW(3),
         marginBottom: 15,
@@ -238,16 +238,16 @@ const styles = StyleSheet.create({
         height: 2,
     },
     search: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(4.2),
         fontWeight: "500",
         width: "90%",
     },
     icon: {
-        color: "white",
+        color: "#19290a",
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 24,
         fontWeight: "450",
         marginBottom: 9,

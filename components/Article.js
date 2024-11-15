@@ -45,7 +45,7 @@ export default function Article(props) {
                 </View>
             </View>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -59,7 +59,9 @@ export default function Article(props) {
 const styles = StyleSheet.create({
     body: {
         width: RPW(100),
-        marginBottom: 14,
+        // marginBottom: 14,
+        paddingTop : 4,
+        marginBottom:10,
         paddingRight: RPW(3),
         paddingLeft: RPW(3),
     },
@@ -75,19 +77,19 @@ const styles = StyleSheet.create({
         justifyContent: "space-evenly",
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(5.2),
         fontWeight: "450",
         marginBottom: 10
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.6),
         fontWeight: "400",
         marginBottom: 10,
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: RPW(3.2),
         fontWeight: "300"
     },

@@ -89,7 +89,7 @@ export default function BookmarkArticle() {
         <View style={styles.body}>
             <StatusBar translucent={true} barStyle="light"/>
             <LinearGradient
-                colors={['#7700a4', '#0a0081']}
+                colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
                 start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }}
@@ -112,7 +112,7 @@ export default function BookmarkArticle() {
                 <Text style={styles.title}>{article.title}</Text>
                 {article.sub_title && <Text style={styles.subTitle}>{article.sub_title}</Text>}
                 <LinearGradient
-                    colors={['#7700a4', '#0a0081']}
+                    colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
@@ -144,7 +144,7 @@ export default function BookmarkArticle() {
                 <View style={styles.lineContainer}>
                     {article.author && <Text style={styles.date}>par {article.author}</Text>}
                     <LinearGradient
-                        colors={['#7700a4', '#0a0081']}
+                        colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
@@ -162,7 +162,7 @@ export default function BookmarkArticle() {
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        backgroundColor: "black",
+        backgroundColor: "#f9fff4",
     },
     header: {
         height: RPH(6),
@@ -203,19 +203,19 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     categoryTitle: {
-        color: '#7700a4',
+        color: '#9dcb00',
         fontSize: 32,
         fontWeight: "600",
         marginBottom: 6,
     },
     title: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 28,
         fontWeight: "600",
         marginBottom: 18,
     },
     subTitle: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 18,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     date: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
         marginBottom: 12,
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     author: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
         marginBottom: 15,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
     },
     text: {
-        color: "#e0e0e0",
+        color: "#19290a",
         fontSize: 16,
         fontWeight: "500",
         marginBottom: 25,

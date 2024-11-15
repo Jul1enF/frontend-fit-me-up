@@ -15,7 +15,9 @@ export default function TabsLayout() {
         tabBarIcon: ({ focused }) => {
           let iconName = '';
           let color = ""
-          color = focused ? "#ff00e8" : "white"
+          // color = focused ? '#6d2100' : "white"
+          color = focused ? '#758174' : "white"
+          // color = focused ? '#610063' : "white"
 
           if (route.name === '(recipes)') {
             iconName = 'pot-mix';
@@ -31,12 +33,12 @@ export default function TabsLayout() {
           return <Icon name={iconName} size={RPH(3.8)} color={color} />;
         },
 
-        tabBarActiveTintColor: '#ff00e8',
+        tabBarActiveTintColor: '#758174',
         tabBarInactiveTintColor: 'white',
-        tabBarLabelStyle: { fontSize: RPW(3.8) },
+        tabBarLabelStyle: { fontSize: RPW(4.2), fontWeight : "500" },
         tabBarBackground: () => (
           <LinearGradient
-            colors={['#7700a4', '#0a0081']}
+            colors={['#9dcb00', '#045400']}
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
             style={{ height: 150 }}
