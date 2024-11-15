@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, StatusBar } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect } from 'expo-router'
 import { useCallback, useState, useEffect } from 'react'
 
 import { RPW, RPH } from "../../../modules/dimensions"

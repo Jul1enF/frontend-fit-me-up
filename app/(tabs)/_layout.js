@@ -5,6 +5,8 @@ import { Dimensions, Platform, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { RPH, RPW, getNavigationHeight } from "../../modules/dimensions"
 
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+
 
 
 export default function TabsLayout() {
@@ -30,9 +32,9 @@ export default function TabsLayout() {
           else if (route.name === '(bookmarks)') {
             iconName = 'heart';
           }
-          return <Icon name={iconName} size={RPH(3.8)} color={color} />;
+          return <MaterialCommunityIcons name={iconName} size={RPH(3.8)} color={color} />;
         },
-
+        tabBarIconStyle : {width : "100%", height : RPH(4.8)},
         tabBarActiveTintColor: '#758174',
         tabBarInactiveTintColor: 'white',
         tabBarLabelStyle: { fontSize: RPW(4.2), fontWeight : "500" },
@@ -44,7 +46,7 @@ export default function TabsLayout() {
             style={{ height: 150 }}
           ></LinearGradient>
         ),
-        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(1) },
+        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(0.5), width : RPW(100) },
         // tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
         tabBarHideOnKeyboard: Platform.OS === 'android' ? true : false,
         header: (props) => <Header {...props} />,

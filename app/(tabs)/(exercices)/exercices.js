@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, StatusBar } from 'react-native'
 import { registerForPushNotificationsAsync } from "../../../modules/registerForPushNotificationsAsync"
-import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState, useEffect } from 'react'
 
 import { RPW, RPH } from "../../../modules/dimensions"
@@ -8,7 +7,7 @@ import { RPW, RPH } from "../../../modules/dimensions"
 import FirstArticle from '../../../components/FirstArticle'
 import Article from '../../../components/Article'
 
-import { router } from 'expo-router'
+import { router, useFocusEffect } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { useSelector, useDispatch } from 'react-redux'
