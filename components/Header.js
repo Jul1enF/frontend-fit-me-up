@@ -307,6 +307,6 @@ const styles = StyleSheet.create({
     link: {
         color: "#19290a",
         fontSize: RPW(6.3),
-        fontWeight: "200"
+        fontWeight: "300"
     },
 })
