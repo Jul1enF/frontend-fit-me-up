@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/logo-boost-up1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#f9fff4"
     },
     "ios": {
       "supportsTablet": true,
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-boost-up1.png",
-        "backgroundColor": "#000000"
+        "backgroundColor": "#f9fff4"
       },
       "package": "com.furic.fit.me.up",
       "versionCode": 1,

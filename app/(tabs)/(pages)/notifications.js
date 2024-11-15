@@ -237,7 +237,7 @@ export default function Notifications() {
                                     end={{ x: 1, y: 0.5 }}
                                     style={styles.btnGradientContainer}
                                 >
-                                    <Text style={styles.modalText2}>Annuler</Text>
+                                    <Text style={styles.modalText4}>Annuler</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalPostPress()}>
@@ -248,7 +248,7 @@ export default function Notifications() {
                                     end={{ x: 1, y: 0.5 }}
                                     style={styles.btnGradientContainer}
                                 >
-                                    <Text style={styles.modalText2}>Poster</Text>
+                                    <Text style={styles.modalText4}>Poster</Text>
                                 </LinearGradient>
                             </TouchableOpacity>
                         </View>
@@ -430,6 +430,12 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         flexWrap: "wrap",
         flexShrink: 1
+    },
+    modalText4: {
+        color: "white",
+        fontSize: RPW(5),
+        fontWeight: "700",
+        marginRight: RPW(2),
     },
     btnContainer2: {
         flexDirection: "row",
