@@ -2,6 +2,12 @@ import { Stack } from "expo-router";
 
 import { Provider } from 'react-redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+import { PersistGate } from 'redux-persist/integration/react'
+
 import user from '../reducers/user'
 import testArticle from '../reducers/testArticle'
 import articles from '../reducers/articles'
@@ -22,11 +28,26 @@ SplashScreen.preventAutoHideAsync();
 import * as Notifications from 'expo-notifications';
 
 
+
+const persistConfig = {
+    key: 'root',
+    storage: AsyncStorage,
+}
+
+const reducers = combineReducers({ user, testArticle, articles, cronsNotifications })
+
+
 const store = configureStore({
-    reducer: { user, testArticle, articles, cronsNotifications },
+    reducer: persistReducer(persistConfig, reducers),
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: false })
+        getDefaultMiddleware({ serializableCheck: false }),
 })
+
+const persistor = persistStore(store)
+
+
+
+
 
 export default function RootLayout() {
 
@@ -87,45 +108,50 @@ export default function RootLayout() {
         return null;
     }
 
+
+
+
     return (
         <Provider store={store}>
-            {/* <KeyboardProvider> */}
-            <Stack >
-                <Stack.Screen name="index" options={{
-                    headerShown: false,
-                    title: "Connexion",
-                }} />
-                <Stack.Screen name="(tabs)" options={{
-                    headerShown: false,
-                }} />
-                <Stack.Screen name="legal-index" options={{
-                    headerShown: true,
-                    title: "CGU / Mentions Légales",
-                    headerTintColor: 'white',
-                    headerBackground: () => (
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={{ height: 150 }}
-                        ></LinearGradient>
-                    ),
-                }} />
-                <Stack.Screen name="contact-index" options={{
-                    headerShown: true,
-                    title: "Contact",
-                    headerTintColor: 'white',
-                    headerBackground: () => (
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={{ height: 150 }}
-                        ></LinearGradient>
-                    ),
-                }} />
-            </Stack>
-            {/* </KeyboardProvider> */}
+            <PersistGate persistor={persistor}>
+                {/* <KeyboardProvider> */}
+                <Stack >
+                    <Stack.Screen name="index" options={{
+                        headerShown: false,
+                        title: "Connexion",
+                    }} />
+                    <Stack.Screen name="(tabs)" options={{
+                        headerShown: false,
+                    }} />
+                    <Stack.Screen name="legal-index" options={{
+                        headerShown: true,
+                        title: "CGU / Mentions Légales",
+                        headerTintColor: 'white',
+                        headerBackground: () => (
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={{ height: 150 }}
+                            ></LinearGradient>
+                        ),
+                    }} />
+                    <Stack.Screen name="contact-index" options={{
+                        headerShown: true,
+                        title: "Contact",
+                        headerTintColor: 'white',
+                        headerBackground: () => (
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={{ height: 150 }}
+                            ></LinearGradient>
+                        ),
+                    }} />
+                </Stack>
+                {/* </KeyboardProvider> */}
+            </PersistGate>
         </Provider>
     )
 }
