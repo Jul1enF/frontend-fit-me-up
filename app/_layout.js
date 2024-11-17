@@ -51,7 +51,6 @@ const persistor = persistStore(store)
 
 export default function RootLayout() {
 
-
     // Paramétrage des notifications reçues
 
     Notifications.setNotificationHandler({
@@ -59,13 +58,14 @@ export default function RootLayout() {
             shouldShowAlert: true,
             shouldPlaySound: true,
             shouldSetBadge: true,
-        }),
+        }), 
     });
 
 
     // Hooks pour l'écoute et l'enregistrement des notifications
 
     const [notification, setNotification] = useState('');
+    console.log("NOTIFICATION DATA:", notification)
 
     const notificationListener = useRef('');
     const responseListener = useRef('');
@@ -86,9 +86,11 @@ export default function RootLayout() {
 
         // Écoute et enregistrement des notifactions. Démontage des listeners
 
-        notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-            setNotification(notification);
+        notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
+            setNotification(notif);
         });
+
+        console.log("NOTIFICATION LISTENER :",notificationListener.current)
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
             console.log("RESPONSE :", response);

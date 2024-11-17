@@ -26,7 +26,6 @@ export default function Index() {
     }, []))
 
 
-
     // États pour voir ou non modals
     const [modal1Visible, setModal1VIsible] = useState(false)
     const [modal2Visible, setModal2VIsible] = useState(false)
@@ -42,7 +41,6 @@ export default function Index() {
     const closeModal2 = () => {
         setModal2VIsible(false)
     }
-
 
     return (
         <View style={styles.body} >
