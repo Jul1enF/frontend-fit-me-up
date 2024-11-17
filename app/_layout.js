@@ -66,7 +66,6 @@ export default function RootLayout() {
         // Écoute et enregistrement des notifactions. Démontage des listeners
 
         notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-            console.log("NOTIFICATION :", notification)
             setNotification(notification);
         });
 
@@ -91,41 +90,41 @@ export default function RootLayout() {
     return (
         <Provider store={store}>
             {/* <KeyboardProvider> */}
-                <Stack >
-                    <Stack.Screen name="index" options={{
-                        headerShown: false,
-                        title : "Connexion",
-                    }} />
-                    <Stack.Screen name="(tabs)" options={{
-                        headerShown: false,
-                    }} />
-                       <Stack.Screen name="legal-index" options={{
-                headerShown : true,
-                title : "CGU / Mentions Légales",
-                headerTintColor: 'white',
-                headerBackground: () => (
-                    <LinearGradient
-                      colors={['#9dcb00', '#045400']}
-                      start={{ x: 0, y: 0.5 }}
-                      end={{ x: 1, y: 0.5 }}
-                      style={{ height: 150 }}
-                    ></LinearGradient>
-                  ),
-            }} />
-            <Stack.Screen name="contact-index" options={{
-                headerShown : true,
-                title : "Contact",
-                headerTintColor: 'white',
-                headerBackground: () => (
-                    <LinearGradient
-                      colors={['#9dcb00', '#045400']}
-                      start={{ x: 0, y: 0.5 }}
-                      end={{ x: 1, y: 0.5 }}
-                      style={{ height: 150 }}
-                    ></LinearGradient>
-                  ),
-            }}/>
-                </Stack>
+            <Stack >
+                <Stack.Screen name="index" options={{
+                    headerShown: false,
+                    title: "Connexion",
+                }} />
+                <Stack.Screen name="(tabs)" options={{
+                    headerShown: false,
+                }} />
+                <Stack.Screen name="legal-index" options={{
+                    headerShown: true,
+                    title: "CGU / Mentions Légales",
+                    headerTintColor: 'white',
+                    headerBackground: () => (
+                        <LinearGradient
+                            colors={['#9dcb00', '#045400']}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={{ height: 150 }}
+                        ></LinearGradient>
+                    ),
+                }} />
+                <Stack.Screen name="contact-index" options={{
+                    headerShown: true,
+                    title: "Contact",
+                    headerTintColor: 'white',
+                    headerBackground: () => (
+                        <LinearGradient
+                            colors={['#9dcb00', '#045400']}
+                            start={{ x: 0, y: 0.5 }}
+                            end={{ x: 1, y: 0.5 }}
+                            style={{ height: 150 }}
+                        ></LinearGradient>
+                    ),
+                }} />
+            </Stack>
             {/* </KeyboardProvider> */}
         </Provider>
     )

@@ -154,7 +154,7 @@ export default function User(props) {
                     >
                         <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "#f9fff4" }]}
                             onPress={() => setModal1Visible(true)} >
-                            <Text style={styles.text1}>{props.is_allowed ? "Autorisé" : "Bloqué"}</Text>
+                            <Text style={styles.text4}>{props.is_allowed ? "Autorisé" : "Bloqué"}</Text>
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
@@ -166,7 +166,7 @@ export default function User(props) {
                     >
                         <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "#f9fff4" }]}
                             onPress={() => setModal2Visible(true)} >
-                            <Text style={styles.text1}>{props.is_admin ? "Admin" : "Client"}</Text>
+                            <Text style={styles.text4}>{props.is_admin ? "Admin" : "Client"}</Text>
                         </TouchableOpacity>
                     </LinearGradient>
                 </View>
@@ -202,7 +202,7 @@ export default function User(props) {
                             >
                                 <TouchableOpacity style={[styles.btn]}
                                     onPress={() => setModal1Visible(false)} >
-                                    <Text style={styles.text1}>Annuler</Text>
+                                    <Text style={styles.text4}>Annuler</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                             <LinearGradient
@@ -214,7 +214,7 @@ export default function User(props) {
                             >
                                 <TouchableOpacity style={[styles.btn]}
                                     onPress={() => allowedPress()} >
-                                    <Text style={styles.text1}>{props.is_allowed ? "Bloquer" : "Autoriser"}</Text>
+                                    <Text style={styles.text4}>{props.is_allowed ? "Bloquer" : "Autoriser"}</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
 
@@ -256,7 +256,7 @@ export default function User(props) {
                             >
                                 <TouchableOpacity style={[styles.btn]}
                                     onPress={() => setModal2Visible(false)} >
-                                    <Text style={styles.text1}>Annuler</Text>
+                                    <Text style={styles.text4}>Annuler</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                             <LinearGradient
@@ -268,7 +268,7 @@ export default function User(props) {
                             >
                                 <TouchableOpacity style={[styles.btn]}
                                     onPress={() => adminPress()} >
-                                    <Text style={styles.text1}>{props.is_admin ? "Retirer" : "Ajouter"}</Text>
+                                    <Text style={styles.text4}>{props.is_admin ? "Retirer" : "Ajouter"}</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
 
@@ -328,6 +328,11 @@ const styles = StyleSheet.create({
         color: "#19290a",
         fontSize: RPW(3.5),
         fontWeight: "500"
+    },
+    text4: {
+        color: "white",
+        fontSize: RPW(3.8),
+        fontWeight: "700"
     },
     row2: {
         flexDirection: "row",

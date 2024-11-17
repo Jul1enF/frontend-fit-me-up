@@ -109,7 +109,7 @@ export default function Notifications() {
             
             postRef.current = true
 
-            setError("Erreur lors de l'envoi de la notification. Contactez le webmaster")
+            setError("Erreur lors de l'envoi de la notification. Essayez en vous reconnectant ou contactez le webmaster")
             setTimeout(() => setError(''), 3000)
         }
 
@@ -145,7 +145,6 @@ export default function Notifications() {
                 <TextInput style={styles.input}
                     onChangeText={(value) => {
                         setTitle(value)
-                        if (value !== ""){setError("")}
                     }}
                     value={title}
                     placeholder="Titre"
@@ -154,7 +153,6 @@ export default function Notifications() {
                 </TextInput>
                 <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
                     onChangeText={(value) =>{
-                        if (value !== ""){setError("")}
                         setMessage(value)}}
                     value={message}
                     placeholder="Message"
@@ -386,8 +384,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     modalBody: {
-        height: RPH(60),
-        width: RPW(96),
+        width: RPW(94),
         borderRadius: 10,
         paddingTop: RPH(4),
         paddingBottom: RPH(4),
@@ -401,6 +398,7 @@ const styles = StyleSheet.create({
     },
     modalText: {
         color: "#19290a",
+        marginBottom : RPH(3),
         fontSize: RPW(6),
         fontWeight: "600",
         textAlign: "center",
@@ -411,12 +409,13 @@ const styles = StyleSheet.create({
     gradientLine2: {
         width: "90%",
         height: 4,
-        marginTop : -6,
+        marginBottom : RPH(3),
     },
     row: {
         flexDirection: "row",
         justifyContent: "flex-start",
-        width: "100%"
+        width: "100%",
+        marginBottom : RPH(1.5),
     },
     modalText2: {
         color: "#19290a",
@@ -440,7 +439,8 @@ const styles = StyleSheet.create({
     btnContainer2: {
         flexDirection: "row",
         justifyContent: "space-evenly",
-        width: "100%"
+        width: "100%",
+        marginTop : RPH(3),
     },
     
 })

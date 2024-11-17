@@ -8,7 +8,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/logo-boost-up1.png",
+      "image": "./assets/logo-boost-up-splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#f9fff4"
     },
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-boost-up1.png",
-        "backgroundColor": "#f9fff4"
+        "backgroundColor": "#63962e"
       },
       "package": "com.furic.fit.me.up",
       "versionCode": 1,
