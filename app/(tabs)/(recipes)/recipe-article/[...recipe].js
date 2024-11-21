@@ -51,7 +51,7 @@ export default function Article() {
 
     useFocusEffect(useCallback(() => {
         // Si utilisateur pas connecté
-        if (!user.token){ return }
+        if (!user.token) { return }
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
         if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/recipes') }
@@ -190,8 +190,6 @@ export default function Article() {
         )
     }
 
-
-
     moment.locale('fr')
     const date = moment(article.createdAt).format('LL')
     const hour = moment(article.createdAt).format('LT')
@@ -213,7 +211,7 @@ export default function Article() {
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>Recettes</Text>
                 </TouchableOpacity>
-               { user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
+                {user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
                     <Icon name={isBookmarked ? "heart-remove" : "heart-plus"} size={RPH(2.9)} color={isBookmarked ? "#ff00e8" : "white"} style={styles.icon2} />
                 </TouchableOpacity>}
@@ -235,13 +233,25 @@ export default function Article() {
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
 
-                <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 25 }]}>
-                    <YoutubePlayer
-                        height={RPW(56)}
-                        width={RPW(98)}
-                        videoId={article.video_id}
-                    />
-                </View>
+                {/* {article.video_id && 
+                   <View style={[styles.youtubeContainer, !article.author && { marginBottom: 25 }]}>
+                   <YoutubePlayer
+                       height={RPW(56)}
+                       width={RPW(98)}
+                       videoId={article.video_id}
+                   />
+               </View>
+                } */}
+
+    
+                        <YoutubePlayer
+                            videoId={article.video_id}
+                            height={200}
+                            onReady={(e)=>console.log("READY", e)}
+                            onError={(error)=>console.log("ERROR :", error)}
+                        />
+                
+           
 
                 {!article.video_id &&
                     <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
@@ -399,8 +409,10 @@ const styles = StyleSheet.create({
         height: RPW(1000),
         resizeMode: "contain",
     },
-    youtubeContainer :{
-        marginBottom : 5,
+    youtubeContainer: {
+        marginBottom: 5,
+        height: RPW(56),
+        width: RPW(98),
     },
     lineContainer: {
         alignItems: "flex-end",
