@@ -3009,15 +3009,15 @@ escape-html@~1.0.3:
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==
 
-escape-string-regexp@2.0.0, escape-string-regexp@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
-  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
-
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==
+
+escape-string-regexp@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
 escape-string-regexp@^4.0.0:
   version "4.0.0"
@@ -3295,7 +3295,7 @@ expo-web-browser@~14.0.0, expo-web-browser@~14.0.1:
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-14.0.1.tgz#97f3f141b0897364bc8364d90d6e29df0beec8aa"
   integrity sha512-QM9F3ie+UyIOoBvqFmT6CZojb1vMc2H+7ZlMT5dEu1PL2jtYyOeK2hLfbt/EMt7CBm/w+P29H9W9Y9gdebOkuQ==
 
-expo@~52.0.9:
+expo@^52.0.9:
   version "52.0.9"
   resolved "https://registry.yarnpkg.com/expo/-/expo-52.0.9.tgz#e33dd6fd2fc50325747cb1df5fddad1e61e04cb0"
   integrity sha512-xbgsvshsJ99wEHp8IZLp4C4SIYVnafrlmQjTwyGjHKvZhBXLHRp7+fwx+Fa26iqQEbaPZ3XkSGxKR73cttR4ug==
@@ -3457,9 +3457,9 @@ flow-enums-runtime@^0.0.6:
   integrity sha512-3PYnM29RFXwvAN6Pc/scUfkI7RwhQ/xqyLUyPNlXUp9S40zI8nup9tUSrTLSVnWGBN38FNiGWbwZOB6uR4OGdw==
 
 flow-parser@0.*:
-  version "0.254.0"
-  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.254.0.tgz#67b2f2c27626cd643896af328e548b9b6a78253c"
-  integrity sha512-FhO64nGWlkrCxMWRDL1Wbok+ep4iSw2t6EtuyYOFZRzBh902iynZ/GMDU/3RSbiKTmALkcmCmKQLe0eOWdMA8Q==
+  version "0.254.1"
+  resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.254.1.tgz#914a3420506c0dbd7a3be73d94c51ca41f2a7727"
+  integrity sha512-dyUrQD6ZyI4PVQppj8PP5kj6BVThK8FprAcPCnJNLIZM7zcAL6/xGS1EE1haWv2HcO/dHy7GSwOAO59uaffjYw==
 
 fontfaceobserver@^2.1.0:
   version "2.3.0"
@@ -5523,10 +5523,10 @@ react-native-safe-area-context@4.12.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-4.12.0.tgz#17868522a55bbc6757418c94a1b4abdda6b045d9"
   integrity sha512-ukk5PxcF4p3yu6qMZcmeiZgowhb5AsKRnil54YFUUAXVIS7PJcMHGGC+q44fCiBg44/1AJk5njGMez1m9H0BVQ==
 
-react-native-screens@~4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-4.1.0.tgz#3f703a1bb4fd65fd7963e616ddc373a97809c254"
-  integrity sha512-tCBwe7fRMpoi/nIgZxE86N8b2SH8d5PlfGaQO8lgqlXqIyvwqm3u1HJCaA0tsacPyzhW7vVtRfQyq9e1j0S2gA==
+react-native-screens@^4.0.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-4.2.0.tgz#4d79ecd1be49506cdb1477b9582c6531d64e0225"
+  integrity sha512-FqQSWjDNsLuoLHx28PQBKJKQFn6kVB3+hmuEQl6NtBZXYVn3c3I/UVc7kyWv7vndJTBqS4a7Xshz4CJqjnZNFg==
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
@@ -5553,12 +5553,12 @@ react-native-vector-icons@^10.2.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-webview@13.10.0:
-  version "13.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-13.10.0.tgz#846f983d6a5ee7ef1cfc86e18bc60690aaca05cc"
-  integrity sha512-bntBbc3JHBve17NL5fqBWPiOYYDz1VmYUPA0UbsUPHgZj6t7TXUQd4yn2yL//XFKXPDlvMO+MPB9E1uAYpEp/g==
+react-native-webview@^13.12.4:
+  version "13.12.4"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-13.12.4.tgz#1a563a7fbd6bf53d688388d46708f273ed0ebb94"
+  integrity sha512-8lWeYPVWeOj0ya9ZpDesOQPRgczuN3ogQHlhS21sNXndd4kvfPG+WjlRdrvxYgj//udpwmzcWzagwLnEp60Aqg==
   dependencies:
-    escape-string-regexp "2.0.0"
+    escape-string-regexp "^4.0.0"
     invariant "2.2.4"
 
 react-native-youtube-iframe@^2.3.0:

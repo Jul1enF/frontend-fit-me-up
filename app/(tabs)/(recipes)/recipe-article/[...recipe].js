@@ -242,16 +242,19 @@ export default function Article() {
                    />
                </View>
                 } */}
+                <YoutubePlayer
+                    videoId={article.video_id}
+                    height={300}
+                    contentScale={1.0}
+                    viewContainerStyle={{flex : 1}}
+                    webViewStyle={{ display : "flex", flex : 1, overflow : "visible"}}
+                    onReady={(event) => console.log("READY", event)}
+                    onError={(error) => console.log("ERROR :", error)}
+                    // webViewProps={{ onError: (event) => console.log("ERROR2 :", event), onLoadEnd: (event) => console.log("LOADED ! :", event), style: { flex: 1, backgroundColor: "transparent" }, containerStyle: { flex: 1, backgroundColor: "transparent" }, onHttpError: (event) => console.log("ERROR 3 :", event), }}
+                />
 
-    
-                        <YoutubePlayer
-                            videoId={article.video_id}
-                            height={200}
-                            onReady={(e)=>console.log("READY", e)}
-                            onError={(error)=>console.log("ERROR :", error)}
-                        />
-                
-           
+
+
 
                 {!article.video_id &&
                     <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >

@@ -65,8 +65,7 @@ export default function RootLayout() {
     // Hooks pour l'écoute et l'enregistrement des notifications
 
     const [notification, setNotification] = useState('');
-    console.log("NOTIFICATION DATA:", notification)
-
+    
     const notificationListener = useRef('');
     const responseListener = useRef('');
 
@@ -89,8 +88,6 @@ export default function RootLayout() {
         notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
             setNotification(notif);
         });
-
-        console.log("NOTIFICATION LISTENER :",notificationListener.current)
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
             console.log("RESPONSE :", response);
