@@ -35,6 +35,10 @@ export default function Article() {
     const [error, setError] = useState('')
 
 
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+
     // useEffect pour charger les infos de l'article
     useEffect(() => {
         if (_id === "testArticleId") {
@@ -44,6 +48,12 @@ export default function Article() {
                 e._id === _id && setArticle(e)
             })
         }
+
+        // Pour reload webview à cause du bug
+        if (Platform.OS === "ios" && webviewKey == 1) {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
+
     }, [user])
 
 
@@ -51,8 +61,8 @@ export default function Article() {
 
     useFocusEffect(useCallback(() => {
         // Si utilisateur pas connecté
-        if (!user.token){ return }
-        
+        if (!user.token) { return }
+
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
         if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/news') }
@@ -214,7 +224,7 @@ export default function Article() {
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>News</Text>
                 </TouchableOpacity>
-               { user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
+                {user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
                     <Icon name={isBookmarked ? "heart-remove" : "heart-plus"} size={RPH(2.9)} color={isBookmarked ? "#ff00e8" : "white"} style={styles.icon2} />
                 </TouchableOpacity>}
@@ -241,6 +251,9 @@ export default function Article() {
                         height={RPW(56)}
                         width={RPW(98)}
                         videoId={article.video_id}
+                        webViewProps={{
+                            key: webviewKey,
+                        }}
                     />
                 </View>
 
@@ -400,8 +413,8 @@ const styles = StyleSheet.create({
         height: RPW(1000),
         resizeMode: "contain",
     },
-    youtubeContainer :{
-        marginBottom : 5,
+    youtubeContainer: {
+        marginBottom: 5,
     },
     lineContainer: {
         alignItems: "flex-end",

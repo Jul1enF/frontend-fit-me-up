@@ -35,6 +35,11 @@ export default function Article() {
     const [error, setError] = useState('')
 
 
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+
+
     // useEffect pour charger les infos de l'article
     useEffect(() => {
         if (_id === "testArticleId") {
@@ -44,7 +49,14 @@ export default function Article() {
                 e._id === _id && setArticle(e)
             })
         }
+
+        // Pour reload webview à cause du bug
+        if (Platform.OS === "ios" && webviewKey == 1) {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
     }, [user])
+
+
 
 
     // useFocusEffect pour vérifier si l'article est en favoris, naviguer vers recette si l'article test a été supprimé ou si un nouveau a été mis en test
@@ -58,6 +70,8 @@ export default function Article() {
 
         if (testArticle.length > 0 && testArticle[0].category === 'recipes' && _id !== "testArticleId") { router.navigate('/recipes') }
     }, [user, testArticle]))
+
+
 
 
     // Fonction appelée en cliquant sur l'icone favoris
@@ -233,27 +247,19 @@ export default function Article() {
                 </LinearGradient>
                 <Text style={styles.date}>Posté le {date} à {hour}</Text>
 
-                {/* {article.video_id && 
-                   <View style={[styles.youtubeContainer, !article.author && { marginBottom: 25 }]}>
-                   <YoutubePlayer
-                       height={RPW(56)}
-                       width={RPW(98)}
-                       videoId={article.video_id}
-                   />
-               </View>
-                } */}
-                <YoutubePlayer
-                    videoId={article.video_id}
-                    height={300}
-                    contentScale={1.0}
-                    viewContainerStyle={{flex : 1}}
-                    webViewStyle={{ display : "flex", flex : 1, overflow : "visible"}}
-                    onReady={(event) => console.log("READY", event)}
-                    onError={(error) => console.log("ERROR :", error)}
-                    // webViewProps={{ onError: (event) => console.log("ERROR2 :", event), onLoadEnd: (event) => console.log("LOADED ! :", event), style: { flex: 1, backgroundColor: "transparent" }, containerStyle: { flex: 1, backgroundColor: "transparent" }, onHttpError: (event) => console.log("ERROR 3 :", event), }}
-                />
 
-
+                {article.video_id &&
+                    <View style={[styles.youtubeContainer, !article.author && { marginBottom: 25 }]}>
+                        <YoutubePlayer
+                            height={RPW(56)}
+                            width={RPW(98)}
+                            videoId={article.video_id}
+                            webViewProps={{
+                                key: webviewKey,
+                            }}
+                        />
+                    </View>
+                }
 
 
                 {!article.video_id &&

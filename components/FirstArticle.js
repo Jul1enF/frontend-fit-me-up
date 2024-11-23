@@ -13,6 +13,18 @@ export default function FirstArticle(props) {
     // État pour afficher un carré noir quand l'image n'a pas fini de charger
 
     const [imgLoaded, setImgLoaded] = useState(false)
+    console.log("LOADED :", imgLoaded)
+
+
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+    // useEffect pour bug webview
+    useEffect(() => {
+        if (Platform.OS === "ios") {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
+    }, [])
 
 
 
@@ -30,28 +42,33 @@ export default function FirstArticle(props) {
 
             {props.img_link && <View style={styles.imgContainer} >
 
-                <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor : "#f9fff4"}, imgLoaded && {display : "none"}]}></View>
+                {
+                    !imgLoaded && <View style={[{ minWidth: RPW(300), minHeight: RPW(600), backgroundColor: "#f9fff4" }]}></View>
+                }
 
                 <Image
                     style={[styles.image, {
                         width: RPW(100 * props.img_zoom),
                         marginTop: RPW(props.img_margin_top),
                         marginLeft: RPW(props.img_margin_left)
-                    }, ]}
+                    },]}
                     source={{ uri: props.img_link, }}
-                    onLoadStart={()=> setImgLoaded(false)}
-                    onLoad={()=> setImgLoaded(true)}
+                    // onLoadStart={() => setImgLoaded(false)}
+                    onLoadEnd={() => setImgLoaded(true)}
                 />
             </View>}
 
 
-            {!props.img_link && <View style={{ width : RPW(100), height : RPW(57)}} pointerEvents="none" >
+            {!props.img_link && <View style={{ width: RPW(100), height: RPW(57) }} pointerEvents="none" >
                 <YoutubePlayer
                     width={RPW(100)}
                     height={RPW(57)}
                     videoId={props.video_id}
+                    webViewProps={{
+                        key: webviewKey,
+                    }}
                 />
-                </ View>
+            </ View>
             }
 
 
@@ -69,7 +86,7 @@ export default function FirstArticle(props) {
                 {optionnalSubTitle}
             </View>
 
-            
+
             <Text style={styles.date}>Posté {lastingTime}</Text>
             <LinearGradient
                 colors={['#9dcb00', '#045400']}

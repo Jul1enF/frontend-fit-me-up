@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { removeBookmark } from "../../../../reducers/user";
-import {RPH, RPW} from "../../../../modules/dimensions"
+import { RPH, RPW } from "../../../../modules/dimensions"
 
 import { useLocalSearchParams, router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
@@ -31,6 +31,10 @@ export default function BookmarkArticle() {
     const [error, setError] = useState('')
 
 
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+
     // useFocusEffect pour rediriger si l'article n'est pas dans les favoris
 
     useFocusEffect(useCallback(() => {
@@ -45,6 +49,11 @@ export default function BookmarkArticle() {
         articles.map(e => {
             e._id === _id && setArticle(e)
         })
+
+        // Pour reload webview à cause du bug
+        if (Platform.OS === "ios") {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
     }, [])
 
     // Affichage conditionnel du nom de la catégory
@@ -83,11 +92,11 @@ export default function BookmarkArticle() {
     const date = moment(article.createdAt).format('LL')
     const hour = moment(article.createdAt).format('LT')
 
-    if (!article){return <View></View>}
+    if (!article) { return <View></View> }
 
     return (
         <View style={styles.body}>
-            <StatusBar translucent={true} barStyle="light"/>
+            <StatusBar translucent={true} barStyle="light" />
             <LinearGradient
                 colors={['#9dcb00', '#045400']}
                 locations={[0.05, 1]}
@@ -126,6 +135,9 @@ export default function BookmarkArticle() {
                         height={RPW(56)}
                         width={RPW(98)}
                         videoId={article.video_id}
+                        webViewProps={{
+                            key: webviewKey,
+                        }}
                     />
                 </View>
 
@@ -153,7 +165,7 @@ export default function BookmarkArticle() {
                     </LinearGradient>
                 </View>
                 {article.text && <Text style={styles.text}>{article.text}</Text>}
-        
+
             </ScrollView>
         </View>
     )
@@ -243,8 +255,8 @@ const styles = StyleSheet.create({
         height: RPW(1000),
         resizeMode: "contain",
     },
-    youtubeContainer :{
-        marginBottom : 5,
+    youtubeContainer: {
+        marginBottom: 5,
     },
     lineContainer: {
         alignItems: "flex-end",

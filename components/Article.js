@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Dimensions, Image, StatusBar, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { RPH, RPW } from "../modules/dimensions"
+import { useState, useEffect } from "react";
 
 import YoutubePlayer from "react-native-youtube-iframe";
 
@@ -8,6 +9,17 @@ import moment from 'moment/min/moment-with-locales'
 
 
 export default function Article(props) {
+
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+    // useEffect pour bug webview
+    useEffect(() => {
+        if (Platform.OS === "ios") {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
+    }, [])
+
 
     moment.locale('fr')
     const lastingTime = moment(props.createdAt).fromNow()
@@ -38,6 +50,9 @@ export default function Article(props) {
                                 width={RPW(41)}
                                 height={RPW(24)}
                                 videoId={props.video_id}
+                                webViewProps={{
+                                    key: webviewKey,
+                                }}
                             />
                         </View>
                     }
@@ -60,8 +75,8 @@ const styles = StyleSheet.create({
     body: {
         width: RPW(100),
         // marginBottom: 14,
-        paddingTop : 4,
-        marginBottom:10,
+        paddingTop: 4,
+        marginBottom: 10,
         paddingRight: RPW(3),
         paddingLeft: RPW(3),
     },
@@ -73,7 +88,7 @@ const styles = StyleSheet.create({
     column1: {
         width: RPW(51),
         maxHeight: RPH(17),
-        minHeight : RPH(12.5),
+        minHeight: RPH(12.5),
         justifyContent: "space-evenly",
     },
     title: {
@@ -111,7 +126,7 @@ const styles = StyleSheet.create({
     },
     gradientLine2: {
         width: RPW(100),
-        marginLeft : RPW(-3),
+        marginLeft: RPW(-3),
         height: 1,
         borderRadius: 15,
     },

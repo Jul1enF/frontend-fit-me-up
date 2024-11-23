@@ -20,11 +20,6 @@ import { useEffect, useRef, useState } from 'react';
 
 // import { KeyboardProvider } from "react-native-keyboard-controller";
 
-
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-SplashScreen.preventAutoHideAsync();
-
 import * as Notifications from 'expo-notifications';
 
 
@@ -70,19 +65,7 @@ export default function RootLayout() {
     const responseListener = useRef('');
 
 
-    // Paramétrage des custom fonts
-    const [loaded, error] = useFonts({
-        'HandoTrial-Black': require('../assets/fonts/HandoTrial-Black.otf'),
-        'HandoTrial-Bold': require('../assets/fonts/HandoTrial-Bold.otf'),
-        'HandoTrial-Regular': require('../assets/fonts/HandoTrial-Regular.otf'),
-    });
-
     useEffect(() => {
-        // Custom Fonts
-        if (loaded || error) {
-            SplashScreen.hideAsync();
-        }
-
         // Écoute et enregistrement des notifactions. Démontage des listeners
 
         notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
@@ -99,14 +82,7 @@ export default function RootLayout() {
             responseListener.current &&
                 Notifications.removeNotificationSubscription(responseListener.current);
         };
-    }, [loaded, error])
-
-
-    // Ne pas charger la page si les polices n'ont pas été chargées
-    if (!loaded && !error) {
-        return null;
-    }
-
+    }, [])
 
 
 

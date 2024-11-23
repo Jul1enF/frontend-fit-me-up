@@ -36,18 +36,29 @@ export default function SearchArticle() {
 
 
 
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+
+
     // useEffect pour charger les infos de l'article et vérifier s'il est en favoris de l'utilisateur
     useEffect(() => {
         articles.map(e => {
             e._id === _id && setArticle(e)
         })
-        
+
         // Si pas connecté, pas de vérif des favoris
-        if (!user.token){ return }
+        if (!user.token) { return }
 
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
-    }, [search])
+
+        // Pour reload webview à cause du bug
+        if (Platform.OS === "ios") {
+            setTimeout(() => setWebviewKey(key => key + 1), 50)
+        }
+
+    }, [])
 
 
     // Affichage conditionnel du nom de la catégory
@@ -211,7 +222,7 @@ export default function SearchArticle() {
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText} >Recherche</Text>
                 </TouchableOpacity>
-               {user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
+                {user.token && <TouchableOpacity style={styles.headerSection2} onPress={() => bookmarkPress()}>
                     <Text style={styles.headerText} >{isBookmarked ? "Retirer des favoris" : "Ajouter aux favoris"}</Text>
                     <Icon name={isBookmarked ? "heart-remove" : "heart-plus"} size={RPH(2.9)} color={isBookmarked ? "#ff00e8" : "white"} style={styles.icon2} />
                 </TouchableOpacity>}
@@ -238,6 +249,9 @@ export default function SearchArticle() {
                         height={RPW(56)}
                         width={RPW(98)}
                         videoId={article.video_id}
+                        webViewProps={{
+                            key: webviewKey,
+                        }}
                     />
                 </View>
 

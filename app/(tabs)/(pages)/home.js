@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, RefreshControl, StatusBar } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, RefreshControl, StatusBar, Platform } from "react-native";
 import { useEffect, useState, useCallback } from 'react'
 import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,6 +29,13 @@ export default function Article() {
 
     const [error, setError] = useState('')
 
+
+
+    // État pour bug webview
+    const [webviewKey, setWebviewKey] = useState(1)
+
+
+
     // Fonction pour charger le contenu de la page
 
     const loadContent = async () => {
@@ -36,12 +43,12 @@ export default function Article() {
             setArticle(testArticle[0])
         }
         else {
-              // Envoi d'un token ou non en fonction de si l'utilisateur en a un
-              let token = "noToken"
+            // Envoi d'un token ou non en fonction de si l'utilisateur en a un
+            let token = "noToken"
 
-              if (user.token) {
-                  token = user.token
-              }
+            if (user.token) {
+                token = user.token
+            }
 
             const response = await fetch(`${url}/articles/getArticles/${token}`)
 
@@ -67,6 +74,11 @@ export default function Article() {
     // useEffect pour charger les infos de la page avec la fonction précédente
     useEffect(() => {
         loadContent()
+
+        // Pour reload webview à cause du bug
+        if (Platform.OS === "ios") {
+            setTimeout(() => setWebviewKey(key => key + 1), 500)
+        }
     }, [testArticle])
 
 
@@ -75,18 +87,18 @@ export default function Article() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async (pushToken, token) => {
-         // Si utilisateur pas connecté
-         if (!user.token) { return }
+        // Si utilisateur pas connecté
+        if (!user.token) { return }
 
-         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
+        const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
-         if (!pushTokenInfos) {
-             dispatch(logout())
-             router.navigate('/')
-         }
-         if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
-             dispatch(changePushToken(pushTokenInfos.change))
-         }
+        if (!pushTokenInfos) {
+            dispatch(logout())
+            router.navigate('/')
+        }
+        if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
+            dispatch(changePushToken(pushTokenInfos.change))
+        }
     }
 
 
@@ -185,6 +197,9 @@ export default function Article() {
                     height={RPW(54.5)}
                     width={RPW(96)}
                     videoId={article.video_id}
+                    webViewProps={{
+                        key: webviewKey,
+                    }}
                 />
             </View>
 
@@ -215,12 +230,12 @@ export default function Article() {
             <Text style={[{ color: 'red' }, !error && { display: "none" }]}>{error}</Text>
 
             <View style={styles.legalContainer1}>
-                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/contact')}>
+                <TouchableOpacity style={styles.legalBth} onPress={() => router.push('/contact')}>
                     <Text style={styles.legalText}>
                         Contact
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.legalBth} onPress={()=>router.push('/legal')}>
+                <TouchableOpacity style={styles.legalBth} onPress={() => router.push('/legal')}>
                     <Text style={styles.legalText}>
                         CGU / Mentions légales
                     </Text>
@@ -326,21 +341,21 @@ const styles = StyleSheet.create({
         fontWeight: "500",
     },
     legalContainer1: {
-        paddingRight : RPW(7),
-        paddingLeft : RPW(7),
+        paddingRight: RPW(7),
+        paddingLeft: RPW(7),
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
-        marginBottom : 30,
-        marginTop : 30
+        marginBottom: 30,
+        marginTop: 30
     },
     legalBth: {
         borderBottomColor: "#19290a",
         borderBottomWidth: 1,
-        paddingBottom : 2,
+        paddingBottom: 2,
     },
     legalText: {
         color: "#19290a",
-        fontSize : 12,
+        fontSize: 12,
     },
 })
