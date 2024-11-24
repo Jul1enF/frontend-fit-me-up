@@ -218,7 +218,7 @@ export default function SearchArticle() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate(`/searches/${searchText}`)}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.back(`/searches/${searchText}`)}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText} >Recherche</Text>
                 </TouchableOpacity>

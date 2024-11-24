@@ -7,11 +7,6 @@
     "icon": "./assets/logo-boost-up1.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/logo-boost-up-splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#f9fff4"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.furic.fit.me.up",
@@ -41,6 +36,12 @@
     "scheme": "boost-up",
     "plugins": [
       "expo-router",
+      ["expo-splash-screen",
+        {
+          "backgroundColor": "#f9fff4",
+          "image": "./assets/logo-boost-up-splash.png",
+          "imageWidth": 200
+        }],
       ["expo-font",
       {
         "fonts": ["./assets/fonts/HandoTrial-Black.otf", "./assets/fonts/HandoTrial-Bold.otf", "./assets/fonts/HandoTrial-Regular.otf"]

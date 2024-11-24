@@ -220,7 +220,7 @@ export default function Article() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/news')}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.back('/news')}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>News</Text>
                 </TouchableOpacity>

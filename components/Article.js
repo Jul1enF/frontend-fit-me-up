@@ -53,6 +53,7 @@ export default function Article(props) {
                                 webViewProps={{
                                     key: webviewKey,
                                 }}
+                                initialPlayerParams={{modestbranding : false}}
                             />
                         </View>
                     }

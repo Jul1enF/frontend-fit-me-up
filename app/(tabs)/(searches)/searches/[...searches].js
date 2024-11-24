@@ -18,7 +18,7 @@ export default function Searches() {
 
     const { searches } = useLocalSearchParams()
     const searchText = searches[0]
-    console.log(searchText)
+    console.log("SEARCHED TEXT :",searchText)
 
     const articles = useSelector((state) => state.articles.value)
 
@@ -36,7 +36,7 @@ export default function Searches() {
 
         searchedArticles.reverse()
 
-        searchedArticles.length > 0 && setArticlesInfos(searchedArticles)
+        searchedArticles.length > 0 ? setArticlesInfos(searchedArticles) : setArticlesInfos("")
 
     }
 
@@ -45,7 +45,7 @@ export default function Searches() {
 
     useEffect(() => {
         loadArticles()
-    }, [])
+    }, [searchText])
 
 
     // Affichage conditionnel du mot Résultat

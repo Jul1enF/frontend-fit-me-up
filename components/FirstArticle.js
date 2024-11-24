@@ -13,7 +13,6 @@ export default function FirstArticle(props) {
     // État pour afficher un carré noir quand l'image n'a pas fini de charger
 
     const [imgLoaded, setImgLoaded] = useState(false)
-    console.log("LOADED :", imgLoaded)
 
 
     // État pour bug webview

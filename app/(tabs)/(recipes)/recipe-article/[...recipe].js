@@ -221,7 +221,7 @@ export default function Article() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/recipes')}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.back('/recipes')}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>Recettes</Text>
                 </TouchableOpacity>
