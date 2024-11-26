@@ -47,8 +47,8 @@ export default function TabsLayout() {
           ></LinearGradient>
         ),
         tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(0.5), width : RPW(100) },
-        // tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
-        tabBarHideOnKeyboard: Platform.OS === 'android' ? true : false,
+        tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
+        // tabBarHideOnKeyboard: Platform.OS === 'android' ? true : false,
         header: (props) => <Header {...props} />,
       })}
     >

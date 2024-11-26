@@ -9,7 +9,7 @@ import { RPH, RPW } from "../../../modules/dimensions"
 
 import * as ImagePicker from 'expo-image-picker'
 
-// import { KeyboardAwareScrollView, KeyboardToolbar } from "react-native-keyboard-controller";
+import { KeyboardAwareScrollView, KeyboardToolbar } from "react-native-keyboard-controller";
 
 import JWT, { SupportedAlgorithms } from 'expo-jwt';
 const jwtKey = process.env.EXPO_PUBLIC_JWT_KEY
@@ -304,7 +304,7 @@ export default function Redaction() {
         }
 
         const formData = new FormData()
-        console.log("LOCAL PIC :", localPic)
+  
         uri && formData.append('articlePicture', {
             uri,
             name: 'photo.jpg',
@@ -367,16 +367,16 @@ export default function Redaction() {
 
     return (
         <>
-            {/* <KeyboardAwareScrollView
+            <KeyboardAwareScrollView
             style={{ flex: 1, backgroundColor: "#f9fff4" }}
             contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
             scrollEnabled={scrollable}
             bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
-        > */}
+        >
 
-            <KeyboardAvoidingView
+            {/* <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.body} keyboardVerticalOffset={RPH(14.5)}  >
-                <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }} scrollEnabled={scrollable} >
+                <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }} scrollEnabled={scrollable} > */}
 
                     <StatusBar translucent={true} barStyle="light" />
                     <TextInput style={styles.smallInput}
@@ -572,11 +572,11 @@ export default function Redaction() {
 
                     <Text style={{ color: 'red' }}>{error}</Text>
 
-                </ScrollView>
-            </KeyboardAvoidingView>
+                {/* </ScrollView>
+            </KeyboardAvoidingView> */}
 
-            {/* </KeyboardAwareScrollView>
-        {Platform.OS === "ios" && <KeyboardToolbar doneText="Fermer" style={{height : 100, backgroundColor : "green"}}/>} */}
+            </KeyboardAwareScrollView>
+        {Platform.OS === "ios" && <KeyboardToolbar doneText="Fermer" style={{height : 100, backgroundColor : "green"}}/>}
         </>
     )
 }

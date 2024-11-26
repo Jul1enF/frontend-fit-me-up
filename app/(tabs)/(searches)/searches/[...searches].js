@@ -18,7 +18,6 @@ export default function Searches() {
 
     const { searches } = useLocalSearchParams()
     const searchText = searches[0]
-    console.log("SEARCHED TEXT :",searchText)
 
     const articles = useSelector((state) => state.articles.value)
 

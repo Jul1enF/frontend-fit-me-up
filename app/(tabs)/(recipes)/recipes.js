@@ -19,7 +19,6 @@ import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 export default function Recipes() {
 
     const user = useSelector((state) => state.user.value)
-    console.log(user)
     const testArticle = useSelector((state) => state.testArticle.value)
     const articles = useSelector((state) => state.articles.value)
     const dispatch = useDispatch()

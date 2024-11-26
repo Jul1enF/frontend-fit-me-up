@@ -1,5 +1,5 @@
 import { Dimensions, Platform, StatusBar } from "react-native";
-// import { getNavigationBarHeight, getNavigationBarHeightAsync } from "react-native-android-navbar-height";
+import { getNavigationBarHeight, getNavigationBarHeightAsync } from "react-native-android-navbar-height";
 
 
 const screenHeight = Dimensions.get('window').height;
@@ -12,7 +12,7 @@ const statusHeight = StatusBar.currentHeight
 
 
 
-// const navigationHeight = getNavigationBarHeight()
+const navigationHeight = getNavigationBarHeight()
 
 
 
@@ -33,7 +33,7 @@ const RPH = (percentage) => {
             return (percentage / 100) * screenHeight;
         }
         else{
-            // return (percentage / 100) * (screenHeight - navigationHeight);
+            return (percentage / 100) * (screenHeight - navigationHeight);
             return (percentage / 100) * (screenHeight);
         }
     }

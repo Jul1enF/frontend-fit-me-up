@@ -63,6 +63,7 @@ export default function FirstArticle(props) {
                     width={RPW(100)}
                     height={RPW(57)}
                     videoId={props.video_id}
+                    initialPlayerParams={{modestbranding : false}}
                     webViewProps={{
                         key: webviewKey,
                     }}

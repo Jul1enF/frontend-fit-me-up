@@ -135,6 +135,7 @@ export default function BookmarkArticle() {
                         height={RPW(56)}
                         width={RPW(98)}
                         videoId={article.video_id}
+                        initialPlayerParams={{modestbranding : false}}
                         webViewProps={{
                             key: webviewKey,
                         }}

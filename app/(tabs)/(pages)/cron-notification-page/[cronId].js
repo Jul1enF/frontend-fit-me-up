@@ -14,7 +14,7 @@ import Months from '../../../../components/Months'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Modal from "react-native-modal"
 
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
@@ -339,16 +339,16 @@ export default function CronNotificationPage() {
 
 
     return (<>
-        {/* <KeyboardAwareScrollView
+        <KeyboardAwareScrollView
             style={{ flex: 1 }}
             contentContainerStyle={[styles.contentBody]}
             bottomOffset={RPH(3)}
             stickyHeaderIndices={[0]}
-        > */}
+        >
 
 
-         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody} stickyHeaderIndices={[0]} >
+         {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody} stickyHeaderIndices={[0]} > */}
 
                 <CronHeader />
 
@@ -523,10 +523,10 @@ export default function CronNotificationPage() {
                 </Modal>
 
 
-             </ScrollView>
-         </KeyboardAvoidingView>
+             {/* </ScrollView>
+         </KeyboardAvoidingView> */}
 
-        {/* </KeyboardAwareScrollView> */}
+        </KeyboardAwareScrollView>
 
         </>)
 }

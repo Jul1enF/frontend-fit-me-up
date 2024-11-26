@@ -18,7 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef, useState } from 'react';
 
 
-// import { KeyboardProvider } from "react-native-keyboard-controller";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import * as Notifications from 'expo-notifications';
 
@@ -89,7 +89,7 @@ export default function RootLayout() {
     return (
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                {/* <KeyboardProvider> */}
+                <KeyboardProvider>
                 <Stack >
                     <Stack.Screen name="index" options={{
                         headerShown: false,
@@ -125,7 +125,7 @@ export default function RootLayout() {
                         ),
                     }} />
                 </Stack>
-                {/* </KeyboardProvider> */}
+                </KeyboardProvider>
             </PersistGate>
         </Provider>
     )

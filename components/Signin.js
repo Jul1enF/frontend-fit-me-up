@@ -55,7 +55,6 @@ export default function Signin(props) {
                 })
             })
             const data = await response.json()
-            console.log("data : ", data)
 
             if (!data.result) {
                 setError(data.error)

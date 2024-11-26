@@ -197,6 +197,7 @@ export default function Article() {
                     height={RPW(54.5)}
                     width={RPW(96)}
                     videoId={article.video_id}
+                    initialPlayerParams={{modestbranding : false}}
                     webViewProps={{
                         key: webviewKey,
                     }}

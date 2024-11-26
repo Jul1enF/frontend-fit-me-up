@@ -14,7 +14,7 @@ import { router } from "expo-router";
 import Modal from "react-native-modal"
 
 
-// import { KeyboardAwareScrollView, KeyboardToolbar } from "react-native-keyboard-controller";
+import { KeyboardAwareScrollView, KeyboardToolbar } from "react-native-keyboard-controller";
 
 
 
@@ -183,15 +183,15 @@ export default function UserInformations() {
 
 
     return (<>
-        {/* <KeyboardAwareScrollView
+        <KeyboardAwareScrollView
             style={{ flex: 1 }}
             contentContainerStyle={[styles.contentBody ]}
             bottomOffset={RPH(14)}
-        > */}
+        >
 
 
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
+        {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  > */}
 
                 <View style={styles.topContainer}>
                     <Text style={styles.title}>Mes informations</Text>
@@ -400,7 +400,7 @@ export default function UserInformations() {
                     onBackdropPress={() => setModal2Visible(!modal2Visible)}
                 >
                     <View style={styles.modalBody}>
-                        <Text style={styles.text2}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
+                        <Text style={styles.text3}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
                         <LinearGradient
                             colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
@@ -440,11 +440,11 @@ export default function UserInformations() {
 
 
 
-            </ScrollView>
-        </KeyboardAvoidingView>
+            {/* </ScrollView>
+        </KeyboardAvoidingView> */}
 
 
-        {/* </KeyboardAwareScrollView> */}
+        </KeyboardAwareScrollView>
 
     </>
     )

@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { RPH, RPW } from "../modules/dimensions"
 
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 
 
 
@@ -97,19 +97,19 @@ export default function Signup(props) {
 
 
     return (<>
-        {/* <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
             <KeyboardAwareScrollView
                 style={{  width: RPW(85),
                     height: RPH(80), backgroundColor: "rgba(0,0,0,0)", }}
                 contentContainerStyle={[styles.contentBody, Platform.OS === "android" && {marginTop : RPH(2)}]}
                 bottomOffset={Platform.OS === 'ios' ? RPH(16) : RPH(14)}
                 keyboardShouldPersistTaps={'handled'}
-            > */}
+            >
 
 
-                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                {/* <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={offsetKeyboard} style={styles.body}>
-                    <View style={styles.contentBody}>
+                    <View style={styles.contentBody}> */}
 
 
                 <View style={styles.closeContainer}>
@@ -285,14 +285,14 @@ export default function Signup(props) {
                 <Text style={styles.error}>{error}</Text>
 
 
-                </View>
+                {/* </View>
                 </KeyboardAvoidingView>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
 
 
 
-            {/* </KeyboardAwareScrollView>
-        </View> */}
+            </KeyboardAwareScrollView>
+        </View>
 
         </>
     )

@@ -39,8 +39,7 @@
       ["expo-splash-screen",
         {
           "backgroundColor": "#f9fff4",
-          "image": "./assets/logo-boost-up-splash.png",
-          "imageWidth": 200
+          "image": "./assets/logo-boost-up-splash.png"
         }],
       ["expo-font",
       {
