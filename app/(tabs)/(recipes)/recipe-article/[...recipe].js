@@ -299,6 +299,7 @@ export default function Article() {
                 backdropColor="transparent"
                 animationIn="slideInUp"
                 animationOut="slideOutDown"
+                statusBarTranslucent={true}
                 onBackButtonPress={() => setModalVisible(!modalVisible)}
                 onBackdropPress={() => setModalVisible(!modalVisible)}
             >

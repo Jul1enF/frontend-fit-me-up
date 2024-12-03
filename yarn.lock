@@ -6602,7 +6602,7 @@ react-native-keyboard-aware-scroll-view@^0.9.5:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-keyboard-controller@^1.14.2:
+react-native-keyboard-controller@^1.14.5:
   version "1.14.5"
   resolved "https://registry.yarnpkg.com/react-native-keyboard-controller/-/react-native-keyboard-controller-1.14.5.tgz#ec1e7d1fb8ee18b69ced4d8ddd6fd99bdaaf14bb"
   integrity sha512-Cx7+SWI/P50i4PKJZN4T43RqoFkJ3GBoxjQ5ysrzZGoImHTF4j3atSwcBQGMmunKCem1yGOOQ84or+Vbcor6wQ==

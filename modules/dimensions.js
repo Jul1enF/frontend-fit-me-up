@@ -16,8 +16,6 @@ const navigationHeight = getNavigationBarHeight()
 
 
 
-
-
 const RPH = (percentage) => {
 
     // console.log("screenHeight :", screenHeight)
@@ -34,7 +32,7 @@ const RPH = (percentage) => {
         }
         else{
             return (percentage / 100) * (screenHeight - navigationHeight);
-            return (percentage / 100) * (screenHeight);
+            // return (percentage / 100) * (screenHeight);
         }
     }
     else {

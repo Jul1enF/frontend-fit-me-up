@@ -6,7 +6,7 @@ import { login } from '../reducers/user'
 import { router } from 'expo-router';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import {RPH, RPW} from "../modules/dimensions"
+import { RPH, RPW } from "../modules/dimensions"
 
 
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
@@ -63,11 +63,11 @@ export default function Signin(props) {
             else {
                 dispatch(login({
                     firstname: data.firstname,
-                    name : data.name,
-                    email : data.email,
+                    name: data.name,
+                    email: data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
-                    is_allowed : data.is_allowed,
+                    is_allowed: data.is_allowed,
                     push_token: data.push_token,
                     bookmarks: data.bookmarks
                 }))
@@ -132,6 +132,7 @@ export default function Signin(props) {
                             autoComplete="current-password"
                             placeholderTextColor="#fbfff790"
                             secureTextEntry={!passwordVisible}
+                            autoCapitalize='none'
                             onFocus={() => setOffsetKeyboard(RPH(6))} >
                         </TextInput>
                         <FontAwesome
@@ -158,7 +159,7 @@ export default function Signin(props) {
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
-        
+
     )
 }
 
@@ -235,7 +236,7 @@ const styles = StyleSheet.create({
         color: "red",
         position: "absolute",
         marginTop: RPH(6),
-        fontSize : RPW(3.5),
-        fontWeight : "600"
+        fontSize: RPW(3.5),
+        fontWeight: "600"
     }
 })

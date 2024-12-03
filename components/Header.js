@@ -88,15 +88,8 @@ export default function Header() {
 
     return (
         <View style={styles.body}>
-            <StatusBar translucent={true} barStyle="light" />
+            <StatusBar translucent={true} backgroundColor="transparent" barStyle="light" />
             <LinearGradient style={styles.header}
-                // COULEURS MOINS ÉLOIGNÉES (MOINS DE CONTRASTE)
-                // colors={['#A9dcb00', '#A045400']}
-                // locations={[0, 0.75]}
-                // COULEURS PLUS ÉLOIGNÉES (CHOIX FINAL ???!!!!!)
-                // colors={['#Acbc500', '#A055900']}
-                // colors={['#9dcb00', '#045400']}
-
                 colors={['#9dcb00', '#045400']}
                 locations={[0, 0.75]}
                 // MÊME COULEUR
@@ -231,7 +224,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     title: {
-        fontSize: RPW(8.5),
+        fontSize: RPW(9.3),
         color: "white",
         letterSpacing: 1.5,
         fontWeight: "600",

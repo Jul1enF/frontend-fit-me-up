@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import { RPH, RPW } from '../modules/dimensions'
 
 
+const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
 
 export default function Index() {
@@ -31,7 +32,6 @@ export default function Index() {
     const [modal2Visible, setModal2VIsible] = useState(false)
 
 
-
     // Fonction envoyée en IDF à Signup et Signin pour fermer modal après login
 
     const closeModal1 = () => {
@@ -44,7 +44,7 @@ export default function Index() {
 
     return (
         <View style={styles.body} >
-            <StatusBar translucent={true} barStyle="light" />
+            <StatusBar translucent={true} backgroundColor="transparent" barStyle="light" />
             <LinearGradient style={styles.header}
                 // colors={['#ffd500', '#fd8600']}
                 //  colors={['#97002e', '#450150']}
@@ -124,6 +124,7 @@ export default function Index() {
                 backdropColor="rgba(0,0,0,0.7)"
                 animationIn="slideInUp"
                 animationOut="slideOutDown"
+                statusBarTranslucent={true}
                 onBackButtonPress={() => setModal1VIsible(!modal1Visible)}
                 onBackdropPress={() => setModal1VIsible(!modal1Visible)}
             >
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
     },
     header: {
         height: RPH(14),
-        paddingTop: RPH(4),
+        paddingTop: RPH(4) - (statusHeight / 2),
         justifyContent: "center",
         alignItems: "center",
     },
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: RPH(0.1)
     },
     title: {
-        fontSize: RPH(4.5),
+        fontSize: RPW(9.3),
         color: "white",
         letterSpacing: 1.5,
         fontWeight: "600",

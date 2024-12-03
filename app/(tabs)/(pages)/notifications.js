@@ -197,6 +197,7 @@ export default function Notifications() {
                     backdropColor="rgba(0,0,0,0.7)"
                     animationIn="slideInDown"
                     animationOut="slideOutUp"
+                    statusBarTranslucent={true}
                     onBackButtonPress={() => setModalVisible(!modalVisible)}
                     onBackdropPress={() => setModalVisible(!modalVisible)}
                 >

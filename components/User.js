@@ -179,6 +179,7 @@ export default function User(props) {
                     backdropColor="rgba(0,0,0,0.9)"
                     animationIn="slideInDown"
                     animationOut="slideOutUp"
+                    statusBarTranslucent={true}
                     onBackButtonPress={() => setModal1Visible(!modal1Visible)}
                     onBackdropPress={() => setModal1Visible(!modal1Visible)}
                 >
@@ -233,6 +234,7 @@ export default function User(props) {
                     backdropColor="rgba(0,0,0,0.9)"
                     animationIn="slideInDown"
                     animationOut="slideOutUp"
+                    statusBarTranslucent={true}
                     onBackButtonPress={() => setModal1Visible(!modal2Visible)}
                     onBackdropPress={() => setModal1Visible(!modal2Visible)}
                 >

@@ -37,14 +37,21 @@
     "plugins": [
       "expo-router",
       ["expo-splash-screen",
-        {
-          "backgroundColor": "#f9fff4",
-          "image": "./assets/logo-boost-up-splash.png"
-        }],
-      ["expo-font",
       {
-        "fonts": ["./assets/fonts/HandoTrial-Black.otf", "./assets/fonts/HandoTrial-Bold.otf", "./assets/fonts/HandoTrial-Regular.otf"]
+        "backgroundColor": "#f9fff4",
+        "image": "./assets/logo-boost-up-splash.png",
+        "imageWidth" : 300
       }],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/HandoTrial-Black.otf",
+            "./assets/fonts/HandoTrial-Bold.otf",
+            "./assets/fonts/HandoTrial-Regular.otf"
+          ]
+        }
+      ],
       [
         "expo-image-picker",
         {

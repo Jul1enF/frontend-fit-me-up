@@ -482,6 +482,7 @@ export default function CronNotificationPage() {
                     backdropColor="rgba(0,0,0,0.9)"
                     animationIn="slideInDown"
                     animationOut="slideOutUp"
+                    statusBarTranslucent={true}
                     onBackButtonPress={() => setModalVisible(!modalVisible)}
                     onBackdropPress={() => setModalVisible(!modalVisible)}
                 >
