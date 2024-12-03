@@ -2,6 +2,7 @@
   "expo": {
     "name": "Boost Up",
     "slug": "frontend-fit-me-up",
+    "description" : "Boost Up vous donne des conseils, des recettes et des exercices pour booster votre ligne !",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo-boost-up1.png",
