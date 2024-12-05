@@ -13,17 +13,7 @@ export default function FirstArticle(props) {
     // État pour afficher un carré noir quand l'image n'a pas fini de charger
 
     const [imgLoaded, setImgLoaded] = useState(false)
-
-
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
-
-    // useEffect pour bug webview
-    useEffect(() => {
-        if (Platform.OS === "ios") {
-            setTimeout(() => setWebviewKey(key => key + 1), 50)
-        }
-    }, [])
+    
 
 
 
@@ -64,9 +54,6 @@ export default function FirstArticle(props) {
                     height={RPW(57)}
                     videoId={props.video_id}
                     initialPlayerParams={{modestbranding : false}}
-                    webViewProps={{
-                        key: webviewKey,
-                    }}
                 />
             </ View>
             }

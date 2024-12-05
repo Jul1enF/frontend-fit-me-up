@@ -36,9 +36,6 @@ export default function SearchArticle() {
 
 
 
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
-
 
 
     // useEffect pour charger les infos de l'article et vérifier s'il est en favoris de l'utilisateur
@@ -51,12 +48,6 @@ export default function SearchArticle() {
         if (!user.token) { return }
 
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
-
-
-        // Pour reload webview à cause du bug
-        if (Platform.OS === "ios") {
-            setTimeout(() => setWebviewKey(key => key + 1), 50)
-        }
 
     }, [])
 
@@ -250,9 +241,6 @@ export default function SearchArticle() {
                         width={RPW(98)}
                         videoId={article.video_id}
                         initialPlayerParams={{modestbranding : false}}
-                        webViewProps={{
-                            key: webviewKey,
-                        }}
                     />
                 </View>
 

@@ -31,11 +31,6 @@ export default function Article() {
 
 
 
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
-
-
-
     // Fonction pour charger le contenu de la page
 
     const loadContent = async () => {
@@ -69,16 +64,9 @@ export default function Article() {
         }
     }
 
-
-
     // useEffect pour charger les infos de la page avec la fonction précédente
     useEffect(() => {
         loadContent()
-
-        // Pour reload webview à cause du bug
-        if (Platform.OS === "ios") {
-            setTimeout(() => setWebviewKey(key => key + 1), 500)
-        }
     }, [testArticle])
 
 
@@ -192,20 +180,17 @@ export default function Article() {
             >
             </LinearGradient>
 
-            <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 25 }]}>
+            <View style={[styles.youtubeContainer, !article.video_id && { display: "none" }, !article.author && { marginBottom: 20 }]}>
                 <YoutubePlayer
                     height={RPW(54.5)}
                     width={RPW(96)}
                     videoId={article.video_id}
-                    initialPlayerParams={{modestbranding : false}}
-                    webViewProps={{
-                        key: webviewKey,
-                    }}
+                    initialPlayerParams={{ modestbranding: false }}
                 />
             </View>
 
             {!article.video_id &&
-                <View style={[styles.imgContainer, !article.author && { marginBottom: 25 }]} >
+                <View style={[styles.imgContainer, !article.author && { marginBottom: 20 }]} >
                     <Image
                         style={[styles.image, {
                             width: RPW(98 * article.img_zoom),
@@ -216,7 +201,9 @@ export default function Article() {
                     />
                 </View>}
 
+
             <View style={styles.lineContainer}>
+            {article.author && <Text style={styles.author}>par {article.author}</Text>}
                 <LinearGradient
                     colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
@@ -281,7 +268,7 @@ const styles = StyleSheet.create({
     gradientLine: {
         width: "83%",
         height: 4.5,
-        marginBottom: 18,
+        marginBottom: 20,
         borderRadius: 15,
     },
     imgContainer: {
@@ -307,7 +294,7 @@ const styles = StyleSheet.create({
         color: "#19290a",
         fontSize: 12,
         fontWeight: "450",
-        marginBottom: 15,
+        marginBottom: 8,
     },
     gradientLine2: {
         width: "83%",

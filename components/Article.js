@@ -10,15 +10,6 @@ import moment from 'moment/min/moment-with-locales'
 
 export default function Article(props) {
 
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
-
-    // useEffect pour bug webview
-    useEffect(() => {
-        if (Platform.OS === "ios") {
-            setTimeout(() => setWebviewKey(key => key + 1), 50)
-        }
-    }, [])
 
 
     moment.locale('fr')
@@ -50,9 +41,6 @@ export default function Article(props) {
                                 width={RPW(41)}
                                 height={RPW(24)}
                                 videoId={props.video_id}
-                                webViewProps={{
-                                    key: webviewKey,
-                                }}
                                 initialPlayerParams={{modestbranding : false}}
                             />
                         </View>

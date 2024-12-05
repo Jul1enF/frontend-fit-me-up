@@ -31,8 +31,6 @@ export default function BookmarkArticle() {
     const [error, setError] = useState('')
 
 
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
 
 
     // useFocusEffect pour rediriger si l'article n'est pas dans les favoris
@@ -49,11 +47,6 @@ export default function BookmarkArticle() {
         articles.map(e => {
             e._id === _id && setArticle(e)
         })
-
-        // Pour reload webview à cause du bug
-        if (Platform.OS === "ios") {
-            setTimeout(() => setWebviewKey(key => key + 1), 50)
-        }
     }, [])
 
     // Affichage conditionnel du nom de la catégory
@@ -136,9 +129,6 @@ export default function BookmarkArticle() {
                         width={RPW(98)}
                         videoId={article.video_id}
                         initialPlayerParams={{modestbranding : false}}
-                        webViewProps={{
-                            key: webviewKey,
-                        }}
                     />
                 </View>
 

@@ -35,9 +35,6 @@ export default function Article() {
     const [error, setError] = useState('')
 
 
-    // État pour bug webview
-    const [webviewKey, setWebviewKey] = useState(1)
-
 
     // useEffect pour charger les infos de l'article
     useEffect(() => {
@@ -48,12 +45,6 @@ export default function Article() {
                 e._id === _id && setArticle(e)
             })
         }
-
-        // Pour reload webview à cause du bug
-        if (Platform.OS === "ios" && webviewKey == 1) {
-            setTimeout(() => setWebviewKey(key => key + 1), 50)
-        }
-
     }, [user])
 
 
@@ -252,9 +243,6 @@ export default function Article() {
                         width={RPW(98)}
                         videoId={article.video_id}
                         initialPlayerParams={{modestbranding : false}}
-                        webViewProps={{
-                            key: webviewKey,
-                        }}
                     />
                 </View>
 
