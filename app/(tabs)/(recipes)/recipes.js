@@ -104,6 +104,10 @@ export default function Recipes() {
                 router.navigate('/')
                 return
             }
+            else {
+                dispatch(logout())
+                router.navigate('/')
+            }
         }
     }
 

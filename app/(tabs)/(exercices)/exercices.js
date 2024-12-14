@@ -104,6 +104,10 @@ export default function Exercices() {
                 router.navigate('/')
                 return
             }
+            else {
+                dispatch(logout())
+                router.navigate('/')
+            }
         }
     }
 

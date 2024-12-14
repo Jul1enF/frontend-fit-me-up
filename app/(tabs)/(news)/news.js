@@ -104,6 +104,9 @@ export default function News() {
                 dispatch(logout())
                 router.navigate('/')
                 return
+            }else {
+                dispatch(logout())
+                router.navigate('/')
             }
         }
     }
