@@ -1,6 +1,9 @@
 {
   "buildCommand": "expo export -p web",
   "outputDirectory": "dist",
+  "github" : {
+    "enable" : "false"
+  },
   "devCommand": "expo",
   "cleanUrls": true,
   "framework": null,
