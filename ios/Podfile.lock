@@ -13,7 +13,7 @@ PODS:
   - EXJSONUtils (0.14.0)
   - EXManifests (0.15.4):
     - ExpoModulesCore
-  - EXNotifications (0.29.8):
+  - EXNotifications (0.29.11):
     - ExpoModulesCore
   - Expo (52.0.11):
     - ExpoModulesCore
@@ -1357,7 +1357,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-keyboard-controller (1.14.5):
+  - react-native-keyboard-controller (1.15.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2331,7 +2331,7 @@ SPEC CHECKSUMS:
   EXImageLoader: 759063a65ab016b836f73972d3bb25404888713d
   EXJSONUtils: 01fc7492b66c234e395dcffdd5f53439c5c29c93
   EXManifests: f30a0c5d3d6cad8db9c01bab579e0aa0df5d3cb2
-  EXNotifications: c5b96ad5fffef5515c9cfc7887ae10f8720c70a5
+  EXNotifications: e27ed9ad086026ef0cdd5ddbf9be60abd18232c8
   Expo: 148aac4ce0da148c63447d09ae41ddb153f35506
   ExpoAsset: 8138f2a9ec55ae1ad7c3871448379f7d97692d15
   ExpoCrypto: 8465f71eb3798c194c0a509d4a76e5c429656d83
@@ -2384,7 +2384,7 @@ SPEC CHECKSUMS:
   React-Mapbuffer: ad1ba0205205a16dbff11b8ade6d1b3959451658
   React-microtasksnativemodule: e771eb9eb6ace5884ee40a293a0e14a9d7a4343c
   react-native-android-navbar-height: cae056eaad31916791dd758fafb85eb3cfaac28e
-  react-native-keyboard-controller: 69a854c840adc8f8d1c621b1d2b816346330383d
+  react-native-keyboard-controller: dbd7fb6a233505f937c9242d6d8bb5ebe659ec32
   react-native-safe-area-context: 458f6b948437afcb59198016b26bbd02ff9c3b47
   react-native-slider: 124ce99f9cd2d04c79f020da6dee9f8d38a6b8c7
   react-native-webview: 40b8823be3fac70f0404016e6aed754ef4307517

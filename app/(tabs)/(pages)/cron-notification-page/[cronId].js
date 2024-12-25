@@ -26,10 +26,10 @@ export default function CronNotificationPage() {
     const { cronId } = useLocalSearchParams()
     const cronsNotifications = useSelector((state) => state.cronsNotifications.value)
 
-    const user = useSelector((state)=>state.user.value)
+    const user = useSelector((state) => state.user.value)
 
     const [error, setError] = useState("")
-    const [modalVisible, setModalVisible]=useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
 
     const [title, setTitle] = useState("")
     const [message, setMessage] = useState("")
@@ -49,7 +49,7 @@ export default function CronNotificationPage() {
     // Si la page est affichée pour modifier une cron notification, fonction et useEffect pour récupérer l'id passée en param et enregistrer les réglages de la cron notif à modifier au bon format dans des états
 
     const settleStates = (cron) => {
-        if (!cron){ return }
+        if (!cron) { return }
 
         setDaysSelected(cron.day)
 
@@ -58,7 +58,7 @@ export default function CronNotificationPage() {
         setTitle(cron.notification_title)
         setMessage(cron.notification_message)
         setHour(cron.hour[0].toString())
-        setMinute(cron.minute[0]<10 ? "0" + cron.minute[0].toString() : cron.minute[0].toString())
+        setMinute(cron.minute[0] < 10 ? "0" + cron.minute[0].toString() : cron.minute[0].toString())
         setIsActive(cron.is_active)
     }
 
@@ -195,7 +195,7 @@ export default function CronNotificationPage() {
                     hour: finalHour,
                     day,
                     month,
-                    jwtToken : user.token,
+                    jwtToken: user.token,
                 })
             })
 
@@ -214,7 +214,7 @@ export default function CronNotificationPage() {
             else {
                 dispatch(addOneCronNotification(data.cronSavedAgain))
 
-                router.navigate('/notifications')
+                router.back('/notifications')
                 registerRef.current = true
             }
         }
@@ -233,9 +233,9 @@ export default function CronNotificationPage() {
                     hour: finalHour,
                     day,
                     month,
-                    _id : originalCronNotif._id,
-                    cron_id : originalCronNotif.cron_id,
-                    jwtToken : user.token,
+                    _id: originalCronNotif._id,
+                    cron_id: originalCronNotif.cron_id,
+                    jwtToken: user.token,
                 })
             })
 
@@ -254,7 +254,7 @@ export default function CronNotificationPage() {
             else {
                 dispatch(modifyCronNotification(data.cronSaved))
 
-                router.navigate('/notifications')
+                router.back('/notifications')
                 registerRef.current = true
             }
         }
@@ -266,13 +266,13 @@ export default function CronNotificationPage() {
 
     const pressRef = useRef(true)
 
-    const deletePress = async () =>{
+    const deletePress = async () => {
 
-        if (pressRef.current == false){ return }
+        if (pressRef.current == false) { return }
         pressRef.current = false
 
-        const response  = await fetch(`${url}/notifications/delete-cron-notification/${originalCronNotif.cron_id}/${user.token}`, { method: 'DELETE' })
-        
+        const response = await fetch(`${url}/notifications/delete-cron-notification/${originalCronNotif.cron_id}/${user.token}`, { method: 'DELETE' })
+
         const data = await response.json()
 
         if (!data.result && data.error) {
@@ -288,7 +288,7 @@ export default function CronNotificationPage() {
         else {
             dispatch(deleteCronNotification(originalCronNotif._id))
 
-            router.navigate('/notifications')
+            router.back('/notifications')
             pressRef.current = true
         }
     }
@@ -324,7 +324,7 @@ export default function CronNotificationPage() {
                 end={{ x: 1, y: 0.5 }}
                 style={styles.header}
             >
-                <TouchableOpacity style={styles.headerSection} onPress={() => router.navigate('/notifications')}>
+                <TouchableOpacity style={styles.headerSection} onPress={() => router.back('/notifications')}>
                     <FontAwesome5 name="chevron-left" color="white" size={RPH(2.5)} style={styles.icon} />
                     <Text style={styles.headerText}>Notifications</Text>
                 </TouchableOpacity>
@@ -338,8 +338,6 @@ export default function CronNotificationPage() {
 
 
 
-if (Platform.OS !== "android"){
-
 
     return (<>
         <KeyboardAwareScrollView
@@ -350,377 +348,189 @@ if (Platform.OS !== "android"){
         >
 
 
-         {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+            {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody} stickyHeaderIndices={[0]} > */}
 
-                <CronHeader />
+            <CronHeader />
 
-                <Text style={styles.text1}>
-                    Titre de la notification :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setTitle(value)
-                        setError('')
-                    }}
-                    value={title}
-                    placeholder="Titre"
-                    placeholderTextColor='grey'
-                    maxLength={28}>
-                </TextInput>
-                <Text style={styles.text1}>
-                    Message de la notification :
-                </Text>
-                <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
+            <Text style={styles.text1}>
+                Titre de la notification :
+            </Text>
+            <TextInput style={styles.input}
+                onChangeText={(value) => {
+                    setTitle(value)
+                    setError('')
+                }}
+                value={title}
+                placeholder="Titre"
+                placeholderTextColor='grey'
+                maxLength={28}>
+            </TextInput>
+            <Text style={styles.text1}>
+                Message de la notification :
+            </Text>
+            <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
+                onChangeText={(value) => {
+                    setError("")
+                    setMessage(value)
+                }}
+                value={message}
+                placeholder="Message"
+                placeholderTextColor='grey'
+                maxLength={144}
+                multiline
+                blurOnSubmit
+            >
+            </TextInput>
+
+
+            <Text style={styles.text1}>
+                Statut :
+            </Text>
+            <LinearGradient
+                colors={['#9dcb00', '#045400']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientBtn}
+            >
+                <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "#f9fff4" }]}
+                    onPress={() => setIsActive(!isActive)} >
+                    <Text style={[styles.btnText, !isActive && { color: "#19290a" }]}>{isActive ? "Activée" : "Désactivée"}</Text>
+                </TouchableOpacity>
+            </LinearGradient>
+
+
+            <Text style={styles.text1}>
+                Heure d'envoi :
+            </Text>
+            <View style={styles.timeInputsContainer}>
+                <TextInput style={styles.input2}
                     onChangeText={(value) => {
                         setError("")
-                        setMessage(value)
+                        typeof value == "string" ? setHour(value) : setHour(value.toString())
                     }}
-                    value={message}
-                    placeholder="Message"
-                    placeholderTextColor='grey'
-                    maxLength={144}
-                    multiline
-                    blurOnSubmit
-                >
+                    value={hour}
+                    placeholder="HH"
+                    maxLength={2}
+                    placeholderTextColor='grey'>
                 </TextInput>
+                <Text style={styles.text2}>H</Text>
+                <TextInput style={styles.input2}
+                    onChangeText={(value) => {
+                        setError("")
+                        typeof value == "string" ? setMinute(value) : setMinute(value.toString())
+                    }}
+                    value={minute}
+                    maxLength={2}
+                    placeholder="MM"
+                    placeholderTextColor='grey'>
+                </TextInput>
+            </View>
 
 
-                <Text style={styles.text1}>
-                    Statut :
-                </Text>
+            <Text style={styles.text3}>
+                Jours d'envoi :
+            </Text>
+            <View style={styles.daysItemContainer}>
+                {days}
+            </View>
+
+            <Text style={styles.text3}>
+                Mois d'envoi :
+            </Text>
+            <View style={styles.monthsItemContainer}>
+                {months}
+            </View>
+
+            <Text style={[styles.error, !error && { display: "none" }]}>
+                {error}
+            </Text>
+
+            <View style={[styles.row, cronId == "new" && { justifyContent: "center" }]}>
+                {cronId !== "new" && <LinearGradient
+                    colors={['#9dcb00', '#045400']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={[styles.gradientBtn]}
+                >
+                    <TouchableOpacity style={[styles.btn]}
+                        onPress={() => setModalVisible(true)} >
+                        <Text style={styles.btnText}>Supprimer</Text>
+                    </TouchableOpacity>
+                </LinearGradient>}
+
                 <LinearGradient
                     colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn}
+                    style={[styles.gradientBtn]}
                 >
-                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "#f9fff4" }]}
-                        onPress={() => setIsActive(!isActive)} >
-                        <Text style={[styles.btnText, !isActive && { color: "#19290a" }]}>{isActive ? "Activée" : "Désactivée"}</Text>
+                    <TouchableOpacity style={[styles.btn]}
+                        onPress={() => registerPress()} >
+                        <Text style={styles.btnText}>Enregistrer</Text>
                     </TouchableOpacity>
                 </LinearGradient>
+            </View>
 
 
-                <Text style={styles.text1}>
-                    Heure d'envoi :
-                </Text>
-                <View style={styles.timeInputsContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setError("")
-                            typeof value == "string" ? setHour(value) : setHour(value.toString())
-                        }}
-                        value={hour}
-                        placeholder="HH"
-                        maxLength={2}
-                        placeholderTextColor='grey'>
-                    </TextInput>
-                    <Text style={styles.text2}>H</Text>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setError("")
-                            typeof value == "string" ? setMinute(value) : setMinute(value.toString())
-                        }}
-                        value={minute}
-                        maxLength={2}
-                        placeholder="MM"
-                        placeholderTextColor='grey'>
-                    </TextInput>
-                </View>
 
-
-                <Text style={styles.text3}>
-                    Jours d'envoi :
-                </Text>
-                <View style={styles.daysItemContainer}>
-                    {days}
-                </View>
-
-                <Text style={styles.text3}>
-                    Mois d'envoi :
-                </Text>
-                <View style={styles.monthsItemContainer}>
-                    {months}
-                </View>
-
-                <Text style={[styles.error, !error && { display: "none" }]}>
-                    {error}
-                </Text>
-
-                <View style={[styles.row, cronId == "new" && {justifyContent : "center"}]}>
-                 { cronId !== "new" &&  <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={[styles.gradientBtn]}
-                    >
-                        <TouchableOpacity style={[styles.btn]}
-                            onPress={() => setModalVisible(true)} >
-                            <Text style={styles.btnText}>Supprimer</Text>
-                        </TouchableOpacity>
-                    </LinearGradient>}
-
+            <Modal
+                isVisible={modalVisible}
+                style={styles.modal}
+                backdropColor="rgba(0,0,0,0.9)"
+                animationIn="slideInDown"
+                animationOut="slideOutUp"
+                statusBarTranslucent={true}
+                onBackButtonPress={() => setModalVisible(!modalVisible)}
+                onBackdropPress={() => setModalVisible(!modalVisible)}
+            >
+                <View style={styles.modalBody}>
+                    <Text style={styles.modalText}>Êtes vous sûr de vouloir supprimer cette notification programmée ?</Text>
                     <LinearGradient
                         colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
-                        style={[styles.gradientBtn]}
+                        style={styles.gradientLine2}
                     >
-                        <TouchableOpacity style={[styles.btn]}
-                            onPress={() => registerPress()} >
-                            <Text style={styles.btnText}>Enregistrer</Text>
-                        </TouchableOpacity>
                     </LinearGradient>
-                </View>
-
-
-
-                <Modal
-                    isVisible={modalVisible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModalVisible(!modalVisible)}
-                    onBackdropPress={() => setModalVisible(!modalVisible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.modalText}>Êtes vous sûr de vouloir supprimer cette notification programmée ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.btnContainer2}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => deletePress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText2}>Supprimer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
+                    <View style={styles.btnContainer2}>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.modalText2}>Annuler</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => deletePress()}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.modalText2}>Supprimer</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
-                </Modal>
+                </View>
+            </Modal>
 
 
-             {/* </ScrollView>
+            {/* </ScrollView>
          </KeyboardAvoidingView> */}
 
         </KeyboardAwareScrollView>
 
-        </>)
-}
-
-else {
-
-    return (<>
-
-         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody} stickyHeaderIndices={[0]} >
-
-                <CronHeader />
-
-                <Text style={styles.text1}>
-                    Titre de la notification :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setTitle(value)
-                        setError('')
-                    }}
-                    value={title}
-                    placeholder="Titre"
-                    placeholderTextColor='grey'
-                    maxLength={28}>
-                </TextInput>
-                <Text style={styles.text1}>
-                    Message de la notification :
-                </Text>
-                <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
-                    onChangeText={(value) => {
-                        setError("")
-                        setMessage(value)
-                    }}
-                    value={message}
-                    placeholder="Message"
-                    placeholderTextColor='grey'
-                    maxLength={144}
-                    multiline
-                    blurOnSubmit
-                >
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Statut :
-                </Text>
-                <LinearGradient
-                    colors={['#9dcb00', '#045400']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientBtn}
-                >
-                    <TouchableOpacity style={[styles.btn, !isActive && { backgroundColor: "#f9fff4" }]}
-                        onPress={() => setIsActive(!isActive)} >
-                        <Text style={[styles.btnText, !isActive && { color: "#19290a" }]}>{isActive ? "Activée" : "Désactivée"}</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-
-
-                <Text style={styles.text1}>
-                    Heure d'envoi :
-                </Text>
-                <View style={styles.timeInputsContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setError("")
-                            typeof value == "string" ? setHour(value) : setHour(value.toString())
-                        }}
-                        value={hour}
-                        placeholder="HH"
-                        maxLength={2}
-                        placeholderTextColor='grey'>
-                    </TextInput>
-                    <Text style={styles.text2}>H</Text>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setError("")
-                            typeof value == "string" ? setMinute(value) : setMinute(value.toString())
-                        }}
-                        value={minute}
-                        maxLength={2}
-                        placeholder="MM"
-                        placeholderTextColor='grey'>
-                    </TextInput>
-                </View>
-
-
-                <Text style={styles.text3}>
-                    Jours d'envoi :
-                </Text>
-                <View style={styles.daysItemContainer}>
-                    {days}
-                </View>
-
-                <Text style={styles.text3}>
-                    Mois d'envoi :
-                </Text>
-                <View style={styles.monthsItemContainer}>
-                    {months}
-                </View>
-
-                <Text style={[styles.error, !error && { display: "none" }]}>
-                    {error}
-                </Text>
-
-                <View style={[styles.row, cronId == "new" && {justifyContent : "center"}]}>
-                 { cronId !== "new" &&  <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={[styles.gradientBtn]}
-                    >
-                        <TouchableOpacity style={[styles.btn]}
-                            onPress={() => setModalVisible(true)} >
-                            <Text style={styles.btnText}>Supprimer</Text>
-                        </TouchableOpacity>
-                    </LinearGradient>}
-
-                    <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={[styles.gradientBtn]}
-                    >
-                        <TouchableOpacity style={[styles.btn]}
-                            onPress={() => registerPress()} >
-                            <Text style={styles.btnText}>Enregistrer</Text>
-                        </TouchableOpacity>
-                    </LinearGradient>
-                </View>
-
-
-
-                <Modal
-                    isVisible={modalVisible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModalVisible(!modalVisible)}
-                    onBackdropPress={() => setModalVisible(!modalVisible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.modalText}>Êtes vous sûr de vouloir supprimer cette notification programmée ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.btnContainer2}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => deletePress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText2}>Supprimer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
-
-
-             </ScrollView>
-         </KeyboardAvoidingView>
-
-        </>)
-}
+    </>)
 
 }
 
@@ -779,7 +589,7 @@ const styles = StyleSheet.create({
     input: {
         width: "100%",
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         borderRadius: 5,
         marginBottom: 25,
         paddingLeft: 8,
@@ -817,7 +627,7 @@ const styles = StyleSheet.create({
     input2: {
         width: RPW(12),
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         textAlign: "center",
         borderRadius: 5,
         fontSize: RPW(5.3),
@@ -857,10 +667,10 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         marginBottom: 13
     },
-    row : {
-        flexDirection : "row",
-        justifyContent : "space-between",
-        width : "90%"
+    row: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        width: "90%"
     },
     modal: {
         alignItems: "center"
@@ -875,7 +685,7 @@ const styles = StyleSheet.create({
         paddingRight: RPW(2),
         backgroundColor: "#e6eedd",
         position: "absolute",
-        bottom : RPH(10),
+        bottom: RPH(10),
         justifyContent: "space-between",
         alignItems: "center"
     },
@@ -891,7 +701,7 @@ const styles = StyleSheet.create({
     gradientLine2: {
         width: "90%",
         height: 4,
-        marginTop : -6,
+        marginTop: -6,
     },
     btnContainer2: {
         flexDirection: "row",

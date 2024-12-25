@@ -56,9 +56,9 @@ export default function Article() {
         if (!user.token) { return }
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
-        if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/exercices') }
+        if (_id === "testArticleId" && testArticle.length === 0) { router.back('/exercices') }
 
-        if (testArticle.length > 0 && testArticle[0].category === 'exercices' && _id !== "testArticleId") { router.navigate('/exercices') }
+        if (testArticle.length > 0 && testArticle[0].category === 'exercices' && _id !== "testArticleId") { router.back('/exercices') }
     }, [user, testArticle]))
 
 

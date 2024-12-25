@@ -56,9 +56,9 @@ export default function Article() {
 
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
-        if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/news') }
+        if (_id === "testArticleId" && testArticle.length === 0) { router.back('/news') }
 
-        if (testArticle.length > 0 && testArticle[0].category === 'news' && _id !== "testArticleId") { router.navigate('/news') }
+        if (testArticle.length > 0 && testArticle[0].category === 'news' && _id !== "testArticleId") { router.back('/news') }
     }, [user, testArticle]))
 
 

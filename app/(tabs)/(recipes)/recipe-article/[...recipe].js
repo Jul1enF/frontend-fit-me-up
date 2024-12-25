@@ -58,9 +58,9 @@ export default function Article() {
         if (!user.token) { return }
         user.bookmarks.includes(_id) ? setIsBookmarked(true) : setIsBookmarked(false)
 
-        if (_id === "testArticleId" && testArticle.length === 0) { router.navigate('/recipes') }
+        if (_id === "testArticleId" && testArticle.length === 0) { router.back('/recipes') }
 
-        if (testArticle.length > 0 && testArticle[0].category === 'recipes' && _id !== "testArticleId") { router.navigate('/recipes') }
+        if (testArticle.length > 0 && testArticle[0].category === 'recipes' && _id !== "testArticleId") { router.back('/recipes') }
     }, [user, testArticle]))
 
 

@@ -37,7 +37,7 @@ export default function BookmarkArticle() {
 
     useFocusEffect(useCallback(() => {
         if (!user.bookmarks.includes(_id)) {
-            router.navigate('/bookmarks')
+            router.back('/bookmarks')
             return
         }
     }, [user]))
@@ -76,7 +76,7 @@ export default function BookmarkArticle() {
         }
         else {
             dispatch(removeBookmark(_id))
-            router.navigate('/bookmarks')
+            router.back('/bookmarks')
         }
     }
 

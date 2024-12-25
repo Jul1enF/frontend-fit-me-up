@@ -178,542 +178,274 @@ export default function UserInformations() {
 
 
 
+    return (<>
+        <KeyboardAwareScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={[styles.contentBody]}
+            bottomOffset={RPH(14)}
+        >
 
 
-
-
-    if (Platform.OS !== "android") {
-        return (<>
-            <KeyboardAwareScrollView
-                style={{ flex: 1 }}
-                contentContainerStyle={[styles.contentBody]}
-                bottomOffset={RPH(14)}
-            >
-
-
-                {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
+            {/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
             <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  > */}
 
-                <View style={styles.topContainer}>
-                    <Text style={styles.title}>Mes informations</Text>
-                    <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={styles.gradientLine}
-                    >
-                    </LinearGradient>
-                </View>
-
-                <Text style={styles.text1}>
-                    Changer mon prénom :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setFirstname(value)
-                        setError('')
-                    }}
-                    value={firstname}
-                    placeholder="Prénom"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon nom :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setName(value)
-                        setError('')
-                    }}
-                    value={name}
-                    placeholder="Nom"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon email :
-                </Text>
-                <TextInput style={[styles.input, { marginBottom: 40 }]}
-                    onChangeText={(value) => {
-                        setEmail(value)
-                        setError('')
-                    }}
-                    value={email}
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                    placeholder="Email"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon mot de passe :
-                </Text>
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setOldPassword(value)
-                            setError('')
-                        }}
-                        value={oldPassword}
-                        placeholder="Ancien mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!oldPasswordVisible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={oldPasswordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setOldPasswordVisible(!oldPasswordVisible)}>
-                    </FontAwesome>
-                </View>
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setPassword(value)
-                            setError('')
-                        }}
-                        value={password}
-                        placeholder="Nouveau mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!passwordVisible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={passwordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
-                    </FontAwesome>
-                </View>
-
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setPassword2(value)
-                            setError('')
-                        }}
-                        value={password2}
-                        placeholder="Confirmation mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!password2Visible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={password2Visible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
-                    </FontAwesome>
-                </View>
-
-
-                <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error}</Text>
-
-                <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
-                    <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={styles.btnGradientContainer}
-                    >
-                        <Text style={styles.text2}>Enregistrer</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-
-                <Text style={[styles.text1, !error && { display: "none" }, { color: "red" }]}>{error}</Text>
-
-
+            <View style={styles.topContainer}>
+                <Text style={styles.title}>Mes informations</Text>
                 <LinearGradient
                     colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}
                     start={{ x: 0, y: 0.5 }}
                     end={{ x: 1, y: 0.5 }}
-                    style={styles.btnGradientContainer2}
+                    style={styles.gradientLine}
                 >
-                    <TouchableOpacity style={[styles.btnTouchable2,]} activeOpacity={0.8} onPress={() => setModal2Visible(true)}>
-                        <Text style={styles.text3}>Me désinscrire</Text>
-                    </TouchableOpacity>
                 </LinearGradient>
+            </View>
+
+            <Text style={styles.text1}>
+                Changer mon prénom :
+            </Text>
+            <TextInput style={styles.input}
+                onChangeText={(value) => {
+                    setFirstname(value)
+                    setError('')
+                }}
+                value={firstname}
+                placeholder="Prénom"
+                placeholderTextColor="#fbfff790"
+                maxLength={28}>
+            </TextInput>
 
 
+            <Text style={styles.text1}>
+                Changer mon nom :
+            </Text>
+            <TextInput style={styles.input}
+                onChangeText={(value) => {
+                    setName(value)
+                    setError('')
+                }}
+                value={name}
+                placeholder="Nom"
+                placeholderTextColor="#fbfff790"
+                maxLength={28}>
+            </TextInput>
 
 
-                <Modal
-                    isVisible={modal1Visible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModal1Visible(!modal1Visible)}
-                    onBackdropPress={() => setModal1Visible(!modal1Visible)}
+            <Text style={styles.text1}>
+                Changer mon email :
+            </Text>
+            <TextInput style={[styles.input, { marginBottom: 40 }]}
+                onChangeText={(value) => {
+                    setEmail(value)
+                    setError('')
+                }}
+                value={email}
+                keyboardType='email-address'
+                autoCapitalize='none'
+                placeholder="Email"
+                placeholderTextColor="#fbfff790"
+                maxLength={28}>
+            </TextInput>
+
+
+            <Text style={styles.text1}>
+                Changer mon mot de passe :
+            </Text>
+
+            <View style={styles.passwordContainer}>
+                <TextInput style={styles.input2}
+                    onChangeText={(value) => {
+                        setOldPassword(value)
+                        setError('')
+                    }}
+                    value={oldPassword}
+                    placeholder="Ancien mot de passe"
+                    placeholderTextColor="#fbfff790"
+                    secureTextEntry={!oldPasswordVisible}
+                    maxLength={28}>
+                </TextInput>
+                <FontAwesome
+                    name={oldPasswordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setOldPasswordVisible(!oldPasswordVisible)}>
+                </FontAwesome>
+            </View>
+
+            <View style={styles.passwordContainer}>
+                <TextInput style={styles.input2}
+                    onChangeText={(value) => {
+                        setPassword(value)
+                        setError('')
+                    }}
+                    value={password}
+                    placeholder="Nouveau mot de passe"
+                    placeholderTextColor="#fbfff790"
+                    secureTextEntry={!passwordVisible}
+                    maxLength={28}>
+                </TextInput>
+                <FontAwesome
+                    name={passwordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
+                </FontAwesome>
+            </View>
+
+
+            <View style={styles.passwordContainer}>
+                <TextInput style={styles.input2}
+                    onChangeText={(value) => {
+                        setPassword2(value)
+                        setError('')
+                    }}
+                    value={password2}
+                    placeholder="Confirmation mot de passe"
+                    placeholderTextColor="#fbfff790"
+                    secureTextEntry={!password2Visible}
+                    maxLength={28}>
+                </TextInput>
+                <FontAwesome
+                    name={password2Visible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
+                </FontAwesome>
+            </View>
+
+
+            <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error}</Text>
+
+            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
+                <LinearGradient
+                    colors={['#9dcb00', '#045400']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={styles.btnGradientContainer}
                 >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.text3}>Êtes vous sûr de vouloir enregistrer ces informations ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.row1}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal1Visible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
+                    <Text style={styles.text2}>Enregistrer</Text>
+                </LinearGradient>
+            </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalRegisterPress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Enregistrer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
+            <Text style={[styles.text1, !error && { display: "none" }, { color: "red" }]}>{error}</Text>
+
+
+            <LinearGradient
+                colors={['#9dcb00', '#045400']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.btnGradientContainer2}
+            >
+                <TouchableOpacity style={[styles.btnTouchable2,]} activeOpacity={0.8} onPress={() => setModal2Visible(true)}>
+                    <Text style={styles.text3}>Me désinscrire</Text>
+                </TouchableOpacity>
+            </LinearGradient>
+
+
+
+
+            <Modal
+                isVisible={modal1Visible}
+                style={styles.modal}
+                backdropColor="rgba(0,0,0,0.9)"
+                animationIn="slideInDown"
+                animationOut="slideOutUp"
+                statusBarTranslucent={true}
+                onBackButtonPress={() => setModal1Visible(!modal1Visible)}
+                onBackdropPress={() => setModal1Visible(!modal1Visible)}
+            >
+                <View style={styles.modalBody}>
+                    <Text style={styles.text3}>Êtes vous sûr de vouloir enregistrer ces informations ?</Text>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientLine2}
+                    >
+                    </LinearGradient>
+                    <View style={styles.row1}>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal1Visible(false)}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.text2}>Annuler</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalRegisterPress()}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.text2}>Enregistrer</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
-                </Modal>
+                </View>
+            </Modal>
 
 
 
-                <Modal
-                    isVisible={modal2Visible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModal2Visible(!modal2Visible)}
-                    onBackdropPress={() => setModal2Visible(!modal2Visible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.text3}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.row1}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal2Visible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
+            <Modal
+                isVisible={modal2Visible}
+                style={styles.modal}
+                backdropColor="rgba(0,0,0,0.9)"
+                animationIn="slideInDown"
+                animationOut="slideOutUp"
+                statusBarTranslucent={true}
+                onBackButtonPress={() => setModal2Visible(!modal2Visible)}
+                onBackdropPress={() => setModal2Visible(!modal2Visible)}
+            >
+                <View style={styles.modalBody}>
+                    <Text style={styles.text3}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientLine2}
+                    >
+                    </LinearGradient>
+                    <View style={styles.row1}>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal2Visible(false)}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.text2}>Annuler</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => unsuscribePress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Confirmer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => unsuscribePress()}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.text2}>Confirmer</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
                     </View>
-                </Modal>
+                </View>
+            </Modal>
 
 
 
 
-                {/* </ScrollView>
+            {/* </ScrollView>
         </KeyboardAvoidingView> */}
 
 
-            </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
 
-        </>
-        )
-    }
-
-
-    else {
-        return (<>
-                <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={RPH(14.5)} style={styles.body}>
-            <ScrollView style={styles.body} contentContainerStyle={styles.contentBody}  >
-
-                <View style={styles.topContainer}>
-                    <Text style={styles.title}>Mes informations</Text>
-                    <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={styles.gradientLine}
-                    >
-                    </LinearGradient>
-                </View>
-
-                <Text style={styles.text1}>
-                    Changer mon prénom :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setFirstname(value)
-                        setError('')
-                    }}
-                    value={firstname}
-                    placeholder="Prénom"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon nom :
-                </Text>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setName(value)
-                        setError('')
-                    }}
-                    value={name}
-                    placeholder="Nom"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon email :
-                </Text>
-                <TextInput style={[styles.input, { marginBottom: 40 }]}
-                    onChangeText={(value) => {
-                        setEmail(value)
-                        setError('')
-                    }}
-                    value={email}
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                    placeholder="Email"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-
-
-                <Text style={styles.text1}>
-                    Changer mon mot de passe :
-                </Text>
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setOldPassword(value)
-                            setError('')
-                        }}
-                        value={oldPassword}
-                        placeholder="Ancien mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!oldPasswordVisible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={oldPasswordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setOldPasswordVisible(!oldPasswordVisible)}>
-                    </FontAwesome>
-                </View>
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setPassword(value)
-                            setError('')
-                        }}
-                        value={password}
-                        placeholder="Nouveau mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!passwordVisible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={passwordVisible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPasswordVisible(!passwordVisible)}>
-                    </FontAwesome>
-                </View>
-
-
-                <View style={styles.passwordContainer}>
-                    <TextInput style={styles.input2}
-                        onChangeText={(value) => {
-                            setPassword2(value)
-                            setError('')
-                        }}
-                        value={password2}
-                        placeholder="Confirmation mot de passe"
-                        placeholderTextColor="#fbfff790"
-                        secureTextEntry={!password2Visible}
-                        maxLength={28}>
-                    </TextInput>
-                    <FontAwesome
-                        name={password2Visible ? "eye-slash" : "eye"} color="#f9fff4" size={RPH(3.8)} onPress={() => setPassword2Visible(!password2Visible)}>
-                    </FontAwesome>
-                </View>
-
-
-                <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error}</Text>
-
-                <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
-                    <LinearGradient
-                        colors={['#9dcb00', '#045400']}
-                        locations={[0.05, 1]}
-                        start={{ x: 0, y: 0.5 }}
-                        end={{ x: 1, y: 0.5 }}
-                        style={styles.btnGradientContainer}
-                    >
-                        <Text style={styles.text2}>Enregistrer</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-
-                <Text style={[styles.text1, !error && { display: "none" }, { color: "red" }]}>{error}</Text>
-
-
-                <LinearGradient
-                    colors={['#9dcb00', '#045400']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.btnGradientContainer2}
-                >
-                    <TouchableOpacity style={[styles.btnTouchable2,]} activeOpacity={0.8} onPress={() => setModal2Visible(true)}>
-                        <Text style={styles.text3}>Me désinscrire</Text>
-                    </TouchableOpacity>
-                </LinearGradient>
-
-
-
-
-                <Modal
-                    isVisible={modal1Visible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModal1Visible(!modal1Visible)}
-                    onBackdropPress={() => setModal1Visible(!modal1Visible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.text3}>Êtes vous sûr de vouloir enregistrer ces informations ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.row1}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal1Visible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalRegisterPress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Enregistrer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
-
-
-
-                <Modal
-                    isVisible={modal2Visible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.9)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModal2Visible(!modal2Visible)}
-                    onBackdropPress={() => setModal2Visible(!modal2Visible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.text3}>Êtes vous sûr de vouloir vous désinscrire ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.row1}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModal2Visible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => unsuscribePress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.text2}>Confirmer</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
-
-
-
-
-                </ScrollView>
-        </KeyboardAvoidingView>
-
-        </>
-        )
-    }
+    </>
+    )
 
 
 }
