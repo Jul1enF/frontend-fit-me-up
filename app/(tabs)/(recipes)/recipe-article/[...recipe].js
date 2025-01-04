@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     modalText: {
-        color: "white",
+        color: "#19290a",
         fontSize: RPW(4.5),
         fontWeight: "600",
         textAlign: "center",

@@ -28,7 +28,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>boost-up</string>
-          <string>com.furic.fit.me.up</string>
+          <string>com.kevfit.boostup</string>
         </array>
       </dict>
     </array>

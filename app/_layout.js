@@ -72,7 +72,7 @@ export default function RootLayout() {
         // Écoute et enregistrement des notifactions. Démontage des listeners
 
         notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
-            setNotification(notif);
+            setNotification(notifications => [...notifications, notif]);
         });
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
@@ -85,7 +85,7 @@ export default function RootLayout() {
             responseListener.current &&
                 Notifications.removeNotificationSubscription(responseListener.current);
         };
-    }, [])
+    }, [notification])
 
 
 

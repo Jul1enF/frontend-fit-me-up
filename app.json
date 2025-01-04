@@ -10,8 +10,9 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.furic.fit.me.up",
-      "buildNumber": "1.0.0"
+      "bundleIdentifier": "com.kevfit.boostup",
+      "buildNumber": "1.0.0",
+      "appleTeamId": "R8783NSXR8"
     },
     "android": {
       "adaptiveIcon": {
