@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Boost Up",
+    "name": "Boost-Up",
     "slug": "frontend-fit-me-up",
     "description" : "Boost Up vous donne des conseils, des recettes et des exercices pour booster votre ligne !",
     "version": "1.0.0",
@@ -9,9 +9,9 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.kevfit.boostup",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "appleTeamId": "R8783NSXR8"
     },
     "android": {
