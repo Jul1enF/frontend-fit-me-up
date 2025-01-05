@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.kevfit.boostup",
-      "buildNumber": "1.0.1",
+      "buildNumber": "1.1.0",
       "appleTeamId": "R8783NSXR8"
     },
     "android": {
