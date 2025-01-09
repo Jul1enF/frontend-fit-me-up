@@ -27,7 +27,6 @@ export default function Signup(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
-    const [appCode, setAppCode] = useState('')
     const [coach, setCoach] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -45,7 +44,7 @@ export default function Signup(props) {
 
         const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
-        if (!firstname || !name || !email || !password || !password2 || !appCode || !coach) {
+        if (!firstname || !name || !email || !password || !password2 ) {
             setError("Merci de remplir tous les champs ci dessus !")
         }
         else if (password !== password2) {
@@ -67,7 +66,6 @@ export default function Signup(props) {
                     firstname,
                     email,
                     password,
-                    appCode,
                     coach,
                 })
             })
@@ -84,7 +82,7 @@ export default function Signup(props) {
                     email: data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
-                    is_allowed: data.is_allowed,
+                    coach,
                     push_token: "",
                     bookmarks: []
                 }))
@@ -98,6 +96,7 @@ export default function Signup(props) {
 
     return (<>
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
+
             <KeyboardAwareScrollView
                 style={{  width: RPW(85),
                     height: RPH(80), backgroundColor: "rgba(0,0,0,0)", }}
@@ -239,30 +238,8 @@ export default function Signup(props) {
                             setError('')
                         }}
                         value={coach}
-                        placeholder="Nom de votre coach"
+                        placeholder="Nom de votre coach (facultatif)"
                        placeholderTextColor="#fbfff790"
-                        onFocus={() => setOffsetKeyboard(RPH(30))}
-                        onBlur={() => setOffsetKeyboard(0)}
-                    >
-                    </TextInput>
-                </LinearGradient>
-
-
-                <LinearGradient
-                    style={styles.gradientContainer}
-                    colors={['#9dcb00', '#045400']}
-                    locations={[0, 0.9]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                >
-                    <TextInput style={styles.input}
-                        onChangeText={(e) => {
-                            setAppCode(e)
-                            setError('')
-                        }}
-                        value={appCode}
-                        placeholder="Code de l'application"
-                        placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(30))}
                         onBlur={() => setOffsetKeyboard(0)}
                     >
@@ -292,6 +269,7 @@ export default function Signup(props) {
 
 
             </KeyboardAwareScrollView>
+            
         </View>
 
         </>
@@ -309,7 +287,7 @@ const styles = StyleSheet.create({
     contentBody: {
         width: RPW(85),
         minHeight: RPH(80),
-        marginTop: RPH(8),
+        marginTop: RPH(8.5),
         backgroundColor: "#e6eedd",
         alignItems: "center",
         borderRadius: 10,

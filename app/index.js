@@ -112,7 +112,7 @@ export default function Index() {
                     </LinearGradient>
                 </View>
 
-                <Link href="/home" style={styles.link}>Accéder à l'application sans se connecter (contenu limité)</Link>
+                <Link href="/home" style={styles.link}>Accéder à l'application sans se connecter</Link>
 
 
             </View>

@@ -30,6 +30,7 @@ export default function UserInformations() {
         setFirstname(user.firstname)
         setName(user.name)
         setEmail(user.email)
+        setCoach(user.coach)
         setOldPassword("")
         setPassword('')
         setPassword2('')
@@ -39,11 +40,14 @@ export default function UserInformations() {
     const [firstname, setFirstname] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [coach, setCoach] = useState('')
     const [oldPassword, setOldPassword] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
 
     const [error, setError] = useState('')
+    const [error2, setError2] = useState('')
+
     const [modal1Visible, setModal1Visible] = useState(false)
     const [modal2Visible, setModal2Visible] = useState(false)
 
@@ -100,6 +104,7 @@ export default function UserInformations() {
                 email,
                 oldPassword,
                 password,
+                coach,
                 jwtToken: user.token,
             })
         })
@@ -111,6 +116,7 @@ export default function UserInformations() {
                 name,
                 firstname,
                 email,
+                coach,
             }))
 
             setOldPassword("")
@@ -119,24 +125,24 @@ export default function UserInformations() {
 
             registerRef.current = true
 
-            setError("Modifications enregistrées !")
-            setTimeout(() => setError(''), 4000)
+            setError2("Modifications enregistrées !")
+            setTimeout(() => setError2(''), 4000)
         }
         else if (data.error) {
             setModal1Visible(false)
 
             registerRef.current = true
 
-            setError(data.error)
-            setTimeout(() => setError(''), 5000)
+            setError2(data.error)
+            setTimeout(() => setError2(''), 5000)
         }
         else {
             setModal1Visible(false)
 
             registerRef.current = true
 
-            setError("Problème d'autorisation. Essayez en quittant l'application et en vous reconnectant.")
-            setTimeout(() => setError(''), 5000)
+            setError2("Problème d'autorisation. Essayez en quittant l'application et en vous reconnectant.")
+            setTimeout(() => setError2(''), 5000)
         }
     }
 
@@ -156,13 +162,13 @@ export default function UserInformations() {
         const data = await response.json()
 
         if (!data.result && data.error) {
-            setError(data.error)
-            setTimeout(() => setError(''), 4000)
+            setError2(data.error)
+            setTimeout(() => setError2(''), 4000)
             unsuscribeRef.current = true
         }
         else if (!data.result) {
-            setError("Erreur : Merci de réessayez après vous être reconnecté ou de contacter l'Éditeur de l'application.")
-            setTimeout(() => setError(''), 4000)
+            setError2("Erreur : Merci de réessayez après vous être reconnecté ou de contacter l'Éditeur de l'application.")
+            setTimeout(() => setError2(''), 4000)
             unsuscribeRef.current = true
         }
         else {
@@ -244,7 +250,22 @@ export default function UserInformations() {
                 autoCapitalize='none'
                 placeholder="Email"
                 placeholderTextColor="#fbfff790"
-                maxLength={28}>
+                >
+            </TextInput>
+
+
+            <Text style={styles.text1}>
+                Changer le nom de mon coach :
+            </Text>
+            <TextInput style={styles.input}
+                onChangeText={(value) => {
+                    setCoach(value)
+                    setError('')
+                }}
+                value={coach}
+                placeholder="Nom de votre coach (facultatif)"
+                placeholderTextColor="#fbfff790"
+                >
             </TextInput>
 
 
@@ -305,7 +326,7 @@ export default function UserInformations() {
             </View>
 
 
-            <Text style={[styles.text1, !error && { display: "none" }, error == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error}</Text>
+            <Text style={[styles.text1, !error2 && { display: "none" }, error2 == "Modifications enregistrées !" ? { color: "green" } : { color: "red" }]}>{error2}</Text>
 
             <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstRegisterPress()}>
                 <LinearGradient

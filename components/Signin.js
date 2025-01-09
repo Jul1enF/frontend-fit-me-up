@@ -67,7 +67,7 @@ export default function Signin(props) {
                     email: data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
-                    is_allowed: data.is_allowed,
+                    coach : data.coach,
                     push_token: data.push_token,
                     bookmarks: data.bookmarks
                 }))

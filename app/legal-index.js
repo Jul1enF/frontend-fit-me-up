@@ -51,27 +51,22 @@ export default function Legal() {
                 </Text><Text style={styles.text}>
                 Effectuer une recherche pour trouver l'un de ces articles.
                 </Text><Text style={styles.text}>
-                La création d’un Compte se fait au moyen d’un email, d’un mot de passe, du nom de l'Utilisateur, du prénom de l'Utilisateur, d'un code fourni par un coach sportif et du nom de ce coach.
+                La création d’un Compte se fait au moyen d’un email, d’un mot de passe, du nom de l'Utilisateur, du prénom de l'Utilisateur.
             </Text><Text style={styles.text}>
                 Le Client s'engage à ne créer qu'un seul Compte correspondant à son profil.
             </Text><Text style={styles.text}>
                 La création d’un compte sur l'application {appName} permet à l'utilisateur de :
             </Text><Text style={styles.text2}>
-                Consulter tous les articles et conseils publiés sur l'application {appName}.
+                Être informé par notification de la publication d'un nouvel article qu'il peut consulter.
             </Text><Text style={styles.text2}>
-                Être informé par notification de la publication d'un nouvel article.
-            </Text><Text style={styles.text2}>
-                Être informé par notification de l'actualité des coachs de l'application.
+                Être informé par notification de l'actualité des coachs de l'application qu'il peut consulter.
             </Text><Text style={styles.text2}>
                 Enregistrer ses articles favoris et les retrouver dans la rubrique "Favoris".
             </Text><Text style={styles.text}>
                 Accéder à son profil, renseigner ou modifier ses informations personnelles et de contact.
             </Text><Text style={styles.text}>
                 Le site et ses différents services peuvent être interrompus ou suspendus par l’Éditeur, notamment à l’occasion d’une maintenance, sans obligation de préavis ou de justification.
-            </Text><Text style={styles.text}>
-                Le compte d'un Utilisateur peut-être suspendu par l'Éditeur s'il estime que ce dernier n'a plus besoin des conseils prodigués par l'application, et ce sans obligation de préavis ou de justification.
             </Text>
-
 
             <Text style={styles.title3}>
                 ARTICLE 4 : Responsabilité de l’Utilisateur
