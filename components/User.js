@@ -17,8 +17,6 @@ export default function User(props) {
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
 
-
-
     // Fonction appelée en cliquant pour changer le statut autorisé
 
     const allowedRef = useRef(true)
@@ -96,7 +94,28 @@ export default function User(props) {
         }
     }
 
+    // Style conditionel du bouton bloqué/autorisé
+    let blockedStyle = {}
+    if (props.is_allowed === "blocked" || props.is_allowed === "false") {
+        blockedStyle = { backgroundColor: "#f9fff4" }
+    }
 
+
+    // Mots conditionnels au retrait / ajout de l'autorisation
+
+    let allowingWords = "autoriser"
+    let buttonWord = "Autoriser"
+
+    if (props.is_allowed === "true") {
+        allowingWords = "retirer l'autorisation à"
+        buttonWord = "Retirer"
+    }
+
+
+    let autorizationStatus = "Autorisé"
+    if (props.is_allowed === "false" || props.is_allowed === "blocked") {
+        autorizationStatus = "Non autorisé"
+    }
 
 
     return (
@@ -152,9 +171,9 @@ export default function User(props) {
                         end={{ x: 1, y: 0.5 }}
                         style={styles.gradientBtn}
                     >
-                        <TouchableOpacity style={[styles.btn, !props.is_allowed && { backgroundColor: "#f9fff4" }]}
+                        <TouchableOpacity style={[styles.btn, blockedStyle]}
                             onPress={() => setModal1Visible(true)} >
-                            <Text style={props.is_allowed ? styles.text4 : styles.text5}>{props.is_allowed ? "Autorisé" : "Bloqué"}</Text>
+                            <Text style={props.is_allowed === "true" ? styles.text4 : styles.text5}>{autorizationStatus}</Text>
                         </TouchableOpacity>
                     </LinearGradient>
                     <LinearGradient
@@ -166,7 +185,7 @@ export default function User(props) {
                     >
                         <TouchableOpacity style={[styles.btn, !props.is_admin && { backgroundColor: "#f9fff4" }]}
                             onPress={() => setModal2Visible(true)} >
-                            <Text style={props.is_admin ?  styles.text4 : styles.text5}>{props.is_admin ? "Admin" : "Client"}</Text>
+                            <Text style={props.is_admin ? styles.text4 : styles.text5}>{props.is_admin ? "Admin" : "Client"}</Text>
                         </TouchableOpacity>
                     </LinearGradient>
                 </View>
@@ -184,7 +203,7 @@ export default function User(props) {
                     onBackdropPress={() => setModal1Visible(!modal1Visible)}
                 >
                     <View style={styles.modalBody}>
-                        <Text style={styles.text3}>Êtes vous sûr de vouloir {props.is_allowed ? "bloquer" : "autoriser"} l'utilisateur {props.email} ?</Text>
+                        <Text style={styles.text3}>Êtes vous sûr de vouloir {allowingWords} l'utilisateur {props.email} ?</Text>
                         <LinearGradient
                             colors={['#9dcb00', '#045400']}
                             locations={[0.05, 1]}
@@ -215,12 +234,12 @@ export default function User(props) {
                             >
                                 <TouchableOpacity style={[styles.btn]}
                                     onPress={() => allowedPress()} >
-                                    <Text style={styles.text4}>{props.is_allowed ? "Bloquer" : "Autoriser"}</Text>
+                                    <Text style={styles.text4}>{buttonWord}</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
 
                         </View>
-                        <Text style={[styles.text1, !error && { display: "none" }, {color : "red"}]}>{error}</Text>
+                        <Text style={[styles.text1, !error && { display: "none" }, { color: "red" }]}>{error}</Text>
                     </View>
                 </Modal>
 
@@ -275,7 +294,7 @@ export default function User(props) {
                             </LinearGradient>
 
                         </View>
-                        <Text style={[styles.text1, !error && { display: "none" },  {color : "red"}]}>{error}</Text>
+                        <Text style={[styles.text1, !error && { display: "none" }, { color: "red" }]}>{error}</Text>
                     </View>
                 </Modal>
 
@@ -333,12 +352,12 @@ const styles = StyleSheet.create({
     },
     text4: {
         color: "white",
-        fontSize: RPW(3.8),
+        fontSize: RPW(3.6),
         fontWeight: "700"
     },
     text5: {
         color: "#19290a",
-        fontSize: RPW(3.8),
+        fontSize: RPW(3.6),
         fontWeight: "700"
     },
     row2: {

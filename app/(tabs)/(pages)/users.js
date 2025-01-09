@@ -29,7 +29,7 @@ export default function Users() {
     // Fonction et useEffect pour charger les users
 
     const loadUsers = async () => {
-        if (searching){ return }
+        if (searching) { return }
 
         const response = await fetch(`${url}/users/all-users`)
         const data = await response.json()
@@ -41,32 +41,43 @@ export default function Users() {
     }
 
 
-    useEffect(()=>{
+    useEffect(() => {
         loadUsers()
-    },[])
+    }, [])
 
 
 
 
-    // Fonction en IDF pour changer is_allowed ici, si modifié dans bdd
+    // Fonction en IDF pour changer is_allowed ici, si modifié dans bdd dans User
 
     const toggleAllowed = (_id) => {
 
+        
         setAllUsers(allUsers.map(e => {
-            if (e._id == _id) {
-                newE = {...e}
-                newE.is_allowed = !newE.is_allowed
 
+            if (e._id == _id) {
+                newE = { ...e }
+                if (newE.is_allowed === "false" || newE.is_allowed === "blocked") {
+                    newE.is_allowed = "true"
+                }
+                else {
+                    newE.is_allowed = "false"
+                }
                 return newE
             }
             return e
         }))
 
         setUsersToDisplay(usersToDisplay.map(e => {
+          
             if (e._id == _id) {
-                newE = {...e}
-                newE.is_allowed = !newE.is_allowed
-
+                newE = { ...e }
+                if (newE.is_allowed === "false" || newE.is_allowed === "blocked") {
+                    newE.is_allowed = "true"
+                }
+                else {
+                    newE.is_allowed = "false"
+                }
                 return newE
             }
             return e
@@ -75,13 +86,13 @@ export default function Users() {
 
 
 
-    // Fonction en IDF pour changer is_admin ici, si modifié dans bdd
+    // Fonction en IDF pour changer is_admin ici, si modifié dans bdd dans USer
 
     const toggleAdmin = (_id) => {
 
         setAllUsers(allUsers.map(e => {
             if (e._id == _id) {
-                newE = {...e}
+                newE = { ...e }
                 newE.is_admin = !newE.is_admin
 
                 return newE
@@ -91,7 +102,7 @@ export default function Users() {
 
         setUsersToDisplay(usersToDisplay.map(e => {
             if (e._id == _id) {
-                newE = {...e}
+                newE = { ...e }
                 newE.is_admin = !newE.is_admin
 
                 return newE
@@ -106,7 +117,7 @@ export default function Users() {
 
     const submitSearch = () => {
         const regex = new RegExp(searchText, 'i')
-    
+
         if (!searchText) {
             setUsersToDisplay(allUsers)
             setSearching(false)
