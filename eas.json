@@ -34,10 +34,6 @@
     "production": {
       "ios" : {
           "companyName" : "Kevfit"
-      },
-      "android": {
-        "serviceAccountKeyPath": "./fit-me-up-94720-ba9c93bdbf73.json",
-        "track": "production"
       }
     }
   }
