@@ -61,7 +61,9 @@
         {
           "photosPermission": "L'application souhaite accéder à vos photos."
         }
-      ]
+      ],
+      "./plugins/androidPhoneOnly.js"
+
     ]
   }
 }
