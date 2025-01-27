@@ -15,6 +15,8 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import YoutubePlayer from "react-native-youtube-iframe";
 
+import NetInfo from '@react-native-community/netinfo'
+
 
 export default function Article() {
 
@@ -45,21 +47,33 @@ export default function Article() {
                 token = user.token
             }
 
+            const state = await NetInfo.fetch()
+
+            if (state.isConnected) {
+
+
+            }
+
             const response = await fetch(`${url}/articles/getArticles/${token}`)
 
             const data = await response.json()
 
             if (data.result) {
                 dispatch(fillWithArticles(data.articles))
+            }
+            else if (!data.result || data.err) {
+                dispatch(logout())
+                router.navigate('/')
+                return
+            }
 
-                data.articles.map(e => {
+            // Tri des articles par catégorie
+            if (articles.length !== 0) {
+                articles.map(e => {
                     if (e.category === "home") {
                         setArticle(e)
                     }
                 })
-            }
-            else if (!data.result && data.error == "Utilisateur bloqué.") {
-                return
             }
         }
     }
@@ -70,13 +84,13 @@ export default function Article() {
     }, [testArticle])
 
 
-
-
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async (pushToken, token) => {
-        // Si utilisateur pas connecté
-        if (!user.token) { return }
+        const state = await NetInfo.fetch()
+
+        // Si utilisateur pas inscrit ou connecté
+        if (!user.token || !state.isConnected) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
@@ -203,7 +217,7 @@ export default function Article() {
 
 
             <View style={styles.lineContainer}>
-            {article.author && <Text style={styles.author}>par {article.author}</Text>}
+                {article.author && <Text style={styles.author}>par {article.author}</Text>}
                 <LinearGradient
                     colors={['#9dcb00', '#045400']}
                     locations={[0.05, 1]}

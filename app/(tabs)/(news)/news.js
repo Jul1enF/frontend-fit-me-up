@@ -15,6 +15,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../../reducers/user'
 import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 
+import NetInfo from '@react-native-community/netinfo'
+
 
 
 export default function News() {
@@ -36,8 +38,10 @@ export default function News() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
-        // Si utilisateur pas connecté
-        if (!user.token) { return }
+        const state = await NetInfo.fetch()
+
+        // Si utilisateur pas inscrit ou connecté
+        if (!user.token || !state.isConnected) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
@@ -70,16 +74,32 @@ export default function News() {
                 token = user.token
             }
 
+            const state = await NetInfo.fetch()
 
-            const response = await fetch(`${url}/articles/getArticles/${token}`)
+            if (state.isConnected) {
+                const response = await fetch(`${url}/articles/getArticles/${token}`)
 
-            const data = await response.json()
+                const data = await response.json()
 
 
-            if (data.result) {
-                dispatch(fillWithArticles(data.articles))
+                if (data.result) {
+                    dispatch(fillWithArticles(data.articles))
+                }
+                else if (data.err) {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                } else {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
+            }
 
-                let newsArticles = data.articles.filter(e => e.category === 'news')
+            // Tri des articles par catégorie
+            if (articles.length !== 0) {
+
+                let newsArticles = articles.filter(e => e.category === 'news')
 
                 newsArticles.reverse()
 
@@ -98,15 +118,6 @@ export default function News() {
                 })
                 setSubcategoriesList(sortedSubcategories)
                 setChosenSubcategory("Toutes les news")
-
-            }
-            else if (data.err) {
-                dispatch(logout())
-                router.navigate('/')
-                return
-            }else {
-                dispatch(logout())
-                router.navigate('/')
             }
         }
     }

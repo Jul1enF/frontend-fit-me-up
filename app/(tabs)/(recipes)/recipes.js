@@ -14,6 +14,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../../reducers/user'
 import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 
+import NetInfo from '@react-native-community/netinfo'
+
 
 
 export default function Recipes() {
@@ -35,8 +37,10 @@ export default function Recipes() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
-        // Si utilisateur pas connecté
-        if (!user.token) { return }
+        const state = await NetInfo.fetch()
+
+        // Si utilisateur pas inscrit ou connecté
+        if (!user.token || !state.isConnected) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
@@ -70,15 +74,33 @@ export default function Recipes() {
             }
 
 
-            const response = await fetch(`${url}/articles/getArticles/${token}`)
+            const state = await NetInfo.fetch()
 
-            const data = await response.json()
+            if (state.isConnected) {
+                const response = await fetch(`${url}/articles/getArticles/${token}`)
+
+                const data = await response.json()
 
 
-            if (data.result) {
-                dispatch(fillWithArticles(data.articles))
+                if (data.result) {
+                    dispatch(fillWithArticles(data.articles))
+                }
+                else if (data.err) {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
+                else {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
 
-                let recipesArticles = data.articles.filter(e => e.category === 'recipes')
+            }
+
+            // Tri des articles par catégorie
+            if (articles.length !== 0) {
+                let recipesArticles = articles.filter(e => e.category === 'recipes')
 
                 recipesArticles.reverse()
 
@@ -97,16 +119,6 @@ export default function Recipes() {
                 })
                 setSubcategoriesList(sortedSubcategories)
                 setChosenSubcategory("Toutes les recettes")
-
-            }
-            else if (data.err) {
-                dispatch(logout())
-                router.navigate('/')
-                return
-            }
-            else {
-                dispatch(logout())
-                router.navigate('/')
             }
         }
     }

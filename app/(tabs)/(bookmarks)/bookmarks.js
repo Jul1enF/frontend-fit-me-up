@@ -13,6 +13,8 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../../reducers/user'
 
+import NetInfo from '@react-native-community/netinfo'
+
 
 
 
@@ -40,8 +42,10 @@ export default function Bookmarks() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
-        // Si utilisateur pas connecté
-        if (!user.token) { return }
+        const state = await NetInfo.fetch()
+
+        // Si utilisateur pas inscrit ou connecté
+        if (!user.token || !state.isConnected) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 

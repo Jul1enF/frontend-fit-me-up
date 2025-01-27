@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout, changePushToken } from '../../../reducers/user'
 import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 
+import NetInfo from '@react-native-community/netinfo'
 
 
 export default function Exercices() {
@@ -35,8 +36,10 @@ export default function Exercices() {
     // Fonction pour gérer les potentiels changement de push token
 
     const checkPushTokenChanges = async () => {
-        // Si utilisateur pas connecté
-        if (!user.token) { return }
+        const state = await NetInfo.fetch()
+
+        // Si utilisateur pas inscrit ou connecté
+        if (!user.token || !state.isConnected) { return }
 
         const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
 
@@ -69,16 +72,34 @@ export default function Exercices() {
                 token = user.token
             }
 
+            const state = await NetInfo.fetch()
 
-            const response = await fetch(`${url}/articles/getArticles/${token}`)
+            if (state.isConnected) {
+                const response = await fetch(`${url}/articles/getArticles/${token}`)
 
-            const data = await response.json()
+                const data = await response.json()
 
 
-            if (data.result) {
-                dispatch(fillWithArticles(data.articles))
+                if (data.result) {
+                    dispatch(fillWithArticles(data.articles))
 
-                let exercicesArticles = data.articles.filter(e => e.category === 'exercices')
+                }
+                else if (data.err) {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
+                else {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
+            }
+
+
+            // Tri des articles par catégorie
+            if (articles.length !== 0) {
+                let exercicesArticles = articles.filter(e => e.category === 'exercices')
 
                 exercicesArticles.reverse()
 
@@ -97,16 +118,6 @@ export default function Exercices() {
                 })
                 setSubcategoriesList(sortedSubcategories)
                 setChosenSubcategory("Tous les exercices")
-
-            }
-            else if (data.err) {
-                dispatch(logout())
-                router.navigate('/')
-                return
-            }
-            else {
-                dispatch(logout())
-                router.navigate('/')
             }
         }
     }
