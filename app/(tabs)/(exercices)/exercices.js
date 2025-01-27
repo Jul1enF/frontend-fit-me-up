@@ -74,6 +74,9 @@ export default function Exercices() {
 
             const state = await NetInfo.fetch()
 
+            // Le chargement du reducer avec les articles téléchargés ne sera effectif qu'au prochain refresh. Utilisation d'une variable pour setter les articles avec ceux téléchargés plutôt que le reducer pas encore actualisé.
+            let downloadedArticles
+
             if (state.isConnected) {
                 const response = await fetch(`${url}/articles/getArticles/${token}`)
 
@@ -82,7 +85,7 @@ export default function Exercices() {
 
                 if (data.result) {
                     dispatch(fillWithArticles(data.articles))
-
+                    downloadedArticles = data.articles
                 }
                 else if (data.err) {
                     dispatch(logout())
@@ -98,8 +101,8 @@ export default function Exercices() {
 
 
             // Tri des articles par catégorie
-            if (articles.length !== 0) {
-                let exercicesArticles = articles.filter(e => e.category === 'exercices')
+            if (articles.length !== 0 || downloadedArticles) {
+                let exercicesArticles = downloadedArticles ? downloadedArticles.filter(e => e.category === 'exercices') : articles.filter(e => e.category === 'exercices')
 
                 exercicesArticles.reverse()
 

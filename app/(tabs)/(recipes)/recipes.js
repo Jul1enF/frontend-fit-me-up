@@ -74,6 +74,9 @@ export default function Recipes() {
             }
 
 
+            // Le chargement du reducer avec les articles téléchargés ne sera effectif qu'au prochain refresh. Utilisation d'une variable pour setter les articles avec ceux téléchargés plutôt que le reducer pas encore actualisé.
+            let downloadedArticles
+
             const state = await NetInfo.fetch()
 
             if (state.isConnected) {
@@ -84,6 +87,7 @@ export default function Recipes() {
 
                 if (data.result) {
                     dispatch(fillWithArticles(data.articles))
+                    downloadedArticles = data.articles
                 }
                 else if (data.err) {
                     dispatch(logout())
@@ -99,8 +103,8 @@ export default function Recipes() {
             }
 
             // Tri des articles par catégorie
-            if (articles.length !== 0) {
-                let recipesArticles = articles.filter(e => e.category === 'recipes')
+            if (articles.length !== 0 || downloadedArticles) {
+                let recipesArticles = downloadedArticles ? downloadedArticles.filter(e => e.category === 'recipes') : articles.filter(e => e.category === 'recipes')
 
                 recipesArticles.reverse()
 

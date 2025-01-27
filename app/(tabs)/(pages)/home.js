@@ -49,27 +49,33 @@ export default function Article() {
 
             const state = await NetInfo.fetch()
 
+            // Le chargement du reducer avec les articles téléchargés ne sera effectif qu'au prochain refresh. Utilisation d'une variable pour setter les articles avec ceux téléchargés plutôt que le reducer pas encore actualisé.
+            let downloadedArticles
+
             if (state.isConnected) {
 
+                const response = await fetch(`${url}/articles/getArticles/${token}`)
 
-            }
-
-            const response = await fetch(`${url}/articles/getArticles/${token}`)
-
-            const data = await response.json()
-
-            if (data.result) {
-                dispatch(fillWithArticles(data.articles))
-            }
-            else if (!data.result || data.err) {
-                dispatch(logout())
-                router.navigate('/')
-                return
+                const data = await response.json()
+    
+                if (data.result) {
+                    dispatch(fillWithArticles(data.articles))
+                    downloadedArticles = data.articles
+                }
+                else if (!data.result || data.err) {
+                    dispatch(logout())
+                    router.navigate('/')
+                    return
+                }
             }
 
             // Tri des articles par catégorie
-            if (articles.length !== 0) {
-                articles.map(e => {
+            if (articles.length !== 0 || downloadedArticles) {
+                downloadedArticles ? downloadedArticles.map(e => {
+                    if (e.category === "home") {
+                        setArticle(e)
+                    }
+                }) : articles.map(e => {
                     if (e.category === "home") {
                         setArticle(e)
                     }
