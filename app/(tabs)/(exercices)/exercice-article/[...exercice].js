@@ -4,6 +4,7 @@ import { useFocusEffect } from "expo-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addBookmark, removeBookmark } from "../../../../reducers/user";
 import { addTestArticle } from "../../../../reducers/testArticle";
+import { deleteOneArticle } from "../../../../reducers/articles"
 import { RPH, RPW } from "../../../../modules/dimensions"
 
 import { useLocalSearchParams, router } from "expo-router";
@@ -153,6 +154,7 @@ export default function Article() {
             setTimeout(() => setError(''), 4000)
         }
         else {
+            dispatch(deleteOneArticle(article._id))
             setModalVisible(false)
             router.push(`/${article.category}`)
         }

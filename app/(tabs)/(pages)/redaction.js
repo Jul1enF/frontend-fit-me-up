@@ -113,7 +113,7 @@ export default function Redaction() {
     const choosePicture = async () => {
 
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            mediaTypes: 'images',
             allowsEditing: false,
             aspect: [1, 1],
             quality: 0.2,
