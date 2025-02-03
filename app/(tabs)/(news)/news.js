@@ -12,7 +12,7 @@ import { router } from 'expo-router'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { logout, changePushToken } from '../../../reducers/user'
+import { logout, changePushToken, toggleNewNotifications } from '../../../reducers/user'
 import { fillWithArticles, suppressArticles } from '../../../reducers/articles'
 
 import NetInfo from '@react-native-community/netinfo'
@@ -43,7 +43,7 @@ export default function News() {
         // Si utilisateur pas inscrit ou connecté
         if (!user.token || !state.isConnected) { return }
 
-        const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token)
+        const pushTokenInfos = await registerForPushNotificationsAsync(user.push_token, user.token, user.new_notifications)
 
         if (!pushTokenInfos) {
             dispatch(logout())
@@ -51,6 +51,9 @@ export default function News() {
         }
         if (pushTokenInfos?.change || pushTokenInfos?.change === "") {
             dispatch(changePushToken(pushTokenInfos.change))
+        }
+        if (pushTokenInfos?.toggleNewNotifications){
+            dispatch(toggleNewNotifications())
         }
     }
 

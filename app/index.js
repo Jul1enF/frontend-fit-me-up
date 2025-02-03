@@ -12,6 +12,11 @@ import { useSelector } from 'react-redux'
 import { RPH, RPW } from '../modules/dimensions'
 
 
+import {bgNotifTask} from "../modules/taskManager"
+
+bgNotifTask()
+
+
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 
 

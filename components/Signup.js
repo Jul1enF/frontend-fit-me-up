@@ -84,7 +84,8 @@ export default function Signup(props) {
                     is_admin: data.is_admin,
                     coach,
                     push_token: "",
-                    bookmarks: []
+                    bookmarks: [],
+                    new_notifications : data.new_notifications,
                 }))
                 props.closeModal2()
                 router.push("/home")

@@ -29,8 +29,11 @@ export const userSlice = createSlice({
             state.value.email = action.payload.email
             state.value.coach = action.payload.coach
         },
+        toggleNewNotifications : (state)=>{
+            state.value.new_notifications = true
+        }
     }
 })
 
-export const { login, changePushToken, logout, addBookmark, removeBookmark, changeUserInfos } = userSlice.actions
+export const { login, changePushToken, logout, addBookmark, removeBookmark, changeUserInfos, toggleNewNotifications } = userSlice.actions
 export default userSlice.reducer

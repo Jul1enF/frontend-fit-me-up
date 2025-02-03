@@ -40,6 +40,12 @@
     "scheme": "boost-up",
     "plugins": [
       "expo-router",
+      [
+        "expo-notifications",
+        {
+          "enableBackgroundRemoteNotifications": true
+        }
+      ],
       ["expo-splash-screen",
       {
         "backgroundColor": "#f9fff4",

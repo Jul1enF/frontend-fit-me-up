@@ -69,7 +69,8 @@ export default function Signin(props) {
                     is_admin: data.is_admin,
                     coach : data.coach,
                     push_token: data.push_token,
-                    bookmarks: data.bookmarks
+                    bookmarks: data.bookmarks,
+                    new_notifications : data.new_notifications,
                 }))
                 connectRef.current = true
                 props.closeModal1()

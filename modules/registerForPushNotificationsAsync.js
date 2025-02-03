@@ -5,7 +5,10 @@ import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
 
-async function registerForPushNotificationsAsync(userPushToken, userToken) {
+
+
+
+async function registerForPushNotificationsAsync(userPushToken, userToken, newNotifications) {
 
   const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
@@ -19,6 +22,23 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
   }
 
   if (Device.isDevice) {
+    let toggleNewNotifications = false
+
+    if (!newNotifications) {
+      const response = await fetch(`${url}/userModifications/toggleNewNotifications`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          jwtToken: userToken,
+        })
+      })
+      const data = await response.json()
+
+      if (data.result) {
+        toggleNewNotifications = true
+      }
+    }
+
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
 
     let finalStatus = existingStatus;
@@ -27,15 +47,15 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    
+
     if (finalStatus !== 'granted') {
       if (userPushToken) {
         const response = await fetch(`${url}/userModifications/changePushToken`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            jwtToken : userToken,
-            push_token : "",
+            jwtToken: userToken,
+            push_token: "",
           })
         })
         const data = await response.json()
@@ -44,10 +64,10 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
           return false
         }
         else {
-          return {change : ""}
+          return { change: "", toggleNewNotifications }
         }
       }
-      else {return true}
+      else { return { toggleNewNotifications } }
     }
 
     const projectId =
@@ -60,15 +80,15 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
         })
       ).data;
 
-  
-      if (!userPushToken || userPushToken !== pushTokenString ){
+
+      if (!userPushToken || userPushToken !== pushTokenString) {
 
         const response = await fetch(`${url}/userModifications/changePushToken`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            jwtToken : userToken,
-            push_token : pushTokenString,
+            jwtToken: userToken,
+            push_token: pushTokenString,
           })
         })
         const data = await response.json()
@@ -77,10 +97,10 @@ async function registerForPushNotificationsAsync(userPushToken, userToken) {
           return false
         }
         else {
-          return {change : pushTokenString}
+          return { change: pushTokenString, toggleNewNotifications }
         }
       }
-      return true;
+      return { toggleNewNotifications };
 
     } catch (e) {
       console.log(e);
