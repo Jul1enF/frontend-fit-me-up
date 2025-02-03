@@ -20,6 +20,7 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
     }
 
     let connected = false
+    const dateFirstTryToConnect = new Date()
 
     do {
         const state = await NetInfo.fetch()
@@ -47,7 +48,12 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
                 }
             }
         } else {
-            // Rien à faire, attente de la connection internet
+            const actualTime = new Date()
+            const connectionTime = (actualTime - dateFirstTryToConnect) / 1000
+
+            if (connectionTime > 600){
+                break ;
+            }
         }
     } while (connected !== true)
 
