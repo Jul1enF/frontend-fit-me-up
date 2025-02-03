@@ -1,6 +1,7 @@
 
 import * as TaskManager from 'expo-task-manager';
 import * as Notifications from 'expo-notifications';
+import NetInfo from '@react-native-community/netinfo'
 
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
@@ -18,26 +19,37 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
         token = data.body.token
     }
 
-    const response = await fetch(`${url}/notifications/get-notifications/${token}`)
+    let connected = false
 
-    const result = await response.json()
+    do {
+        const state = await NetInfo.fetch()
+        if (state.isConnected) {
+            connected = true
+            console.log("Connected !!!")
+            const response = await fetch(`${url}/notifications/get-notifications/${token}`)
 
-    console.log("RESULT :", result)
+            const result = await response.json()
 
-    if (result.notifications.length > 0) {
-        for (let notification of result.notifications) {
-            Notifications.scheduleNotificationAsync({
-                content: {
-                    title: notification.title,
-                    body: notification.message,
-                    sound: "default",
-                    priority: 'high',
-                    channelId: 'boost-up',
-                },
-                trigger: null,
-            });
+            console.log("RESULT :", result)
+
+            if (result.notifications.length > 0) {
+                for (let notification of result.notifications) {
+                    Notifications.scheduleNotificationAsync({
+                        content: {
+                            title: notification.title,
+                            body: notification.message,
+                            sound: "default",
+                            priority: 'high',
+                            channelId: 'boost-up',
+                        },
+                        trigger: null,
+                    });
+                }
+            }
+        } else {
+            // Rien à faire, attente de la connection internet
         }
-    }
+    } while (connected !== true)
 
 });
 

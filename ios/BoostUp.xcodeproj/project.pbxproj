@@ -10,35 +10,35 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		2D863AEB3E34501609B4C910 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = D10D7441CCBD37D227A91F60 /* PrivacyInfo.xcprivacy */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		617B307FB261498A828A1DBB /* HandoTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D9D01A92BB2A4FADB2DCED64 /* HandoTrial-Regular.otf */; };
 		96905EF65AED1B983A6B3ABC /* libPods-BoostUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-BoostUp.a */; };
+		9E1F461596A14AD28788BB1A /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09834A780BBF49BEBEE0F29F /* noop-file.swift */; };
+		A0E0B7B92283C2C11FADBDCA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E42AEAC4A653D32ADDB91EDC /* PrivacyInfo.xcprivacy */; };
+		A247D4403233494FBFEE354B /* HandoTrial-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 797E4A328555427E8F30EC1C /* HandoTrial-Black.otf */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		E1C2B49D20104170A0E4AC35 /* HandoTrial-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 826A5718196C4D3CB500D405 /* HandoTrial-Black.otf */; };
-		E4A9A262E1CF487F9082E795 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDE0F2837B24DC68E992111 /* noop-file.swift */; };
-		E71F2DF43109492D8A00DE71 /* HandoTrial-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4B5670C9B2C240F1A147BA24 /* HandoTrial-Bold.otf */; };
+		C23950C8E0C049708A5EEC8A /* HandoTrial-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B9DDB765FB344929BF4A8268 /* HandoTrial-Regular.otf */; };
+		FD95053964EB4E5FB493DBBB /* HandoTrial-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B0873A7BDEE74D72B0691A8B /* HandoTrial-Bold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09834A780BBF49BEBEE0F29F /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "BoostUp/noop-file.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BoostUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoostUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BoostUp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = BoostUp/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BoostUp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BoostUp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BoostUp/main.m; sourceTree = "<group>"; };
-		4B5670C9B2C240F1A147BA24 /* HandoTrial-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Bold.otf"; path = "../assets/fonts/HandoTrial-Bold.otf"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-BoostUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BoostUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-BoostUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostUp.debug.xcconfig"; path = "Target Support Files/Pods-BoostUp/Pods-BoostUp.debug.xcconfig"; sourceTree = "<group>"; };
+		797E4A328555427E8F30EC1C /* HandoTrial-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Black.otf"; path = "../assets/fonts/HandoTrial-Black.otf"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-BoostUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoostUp.release.xcconfig"; path = "Target Support Files/Pods-BoostUp/Pods-BoostUp.release.xcconfig"; sourceTree = "<group>"; };
-		826A5718196C4D3CB500D405 /* HandoTrial-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Black.otf"; path = "../assets/fonts/HandoTrial-Black.otf"; sourceTree = "<group>"; };
-		A9D2B854E7BB4F239E963BAB /* BoostUp-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "BoostUp-Bridging-Header.h"; path = "BoostUp/BoostUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = BoostUp/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B0873A7BDEE74D72B0691A8B /* HandoTrial-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Bold.otf"; path = "../assets/fonts/HandoTrial-Bold.otf"; sourceTree = "<group>"; };
+		B970C8B70AF24B4A801B117A /* BoostUp-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "BoostUp-Bridging-Header.h"; path = "BoostUp/BoostUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		B9DDB765FB344929BF4A8268 /* HandoTrial-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Regular.otf"; path = "../assets/fonts/HandoTrial-Regular.otf"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		CBDE0F2837B24DC68E992111 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "BoostUp/noop-file.swift"; sourceTree = "<group>"; };
-		D10D7441CCBD37D227A91F60 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = BoostUp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		D9D01A92BB2A4FADB2DCED64 /* HandoTrial-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "HandoTrial-Regular.otf"; path = "../assets/fonts/HandoTrial-Regular.otf"; sourceTree = "<group>"; };
+		E42AEAC4A653D32ADDB91EDC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = BoostUp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-BoostUp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,19 +65,19 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				CBDE0F2837B24DC68E992111 /* noop-file.swift */,
-				A9D2B854E7BB4F239E963BAB /* BoostUp-Bridging-Header.h */,
-				D10D7441CCBD37D227A91F60 /* PrivacyInfo.xcprivacy */,
+				09834A780BBF49BEBEE0F29F /* noop-file.swift */,
+				B970C8B70AF24B4A801B117A /* BoostUp-Bridging-Header.h */,
+				E42AEAC4A653D32ADDB91EDC /* PrivacyInfo.xcprivacy */,
 			);
 			name = BoostUp;
 			sourceTree = "<group>";
 		};
-		20A9F0498CB54FABBD566208 /* Resources */ = {
+		2BE9581406704C7F97ADA535 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				826A5718196C4D3CB500D405 /* HandoTrial-Black.otf */,
-				4B5670C9B2C240F1A147BA24 /* HandoTrial-Bold.otf */,
-				D9D01A92BB2A4FADB2DCED64 /* HandoTrial-Regular.otf */,
+				797E4A328555427E8F30EC1C /* HandoTrial-Black.otf */,
+				B0873A7BDEE74D72B0691A8B /* HandoTrial-Bold.otf */,
+				B9DDB765FB344929BF4A8268 /* HandoTrial-Regular.otf */,
 			);
 			name = Resources;
 			path = "";
@@ -108,7 +108,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
-				20A9F0498CB54FABBD566208 /* Resources */,
+				2BE9581406704C7F97ADA535 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -165,13 +165,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "BoostUp" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				31EE0B41ACCAFA28D81090B8 /* [Expo] Configure project */,
+				4265BB1B529B7C232C974DB2 /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				1D2947BDA67482B718D25069 /* [CP] Embed Pods Frameworks */,
+				3D1C81E7EC6A4B138953B285 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -221,10 +221,10 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				E1C2B49D20104170A0E4AC35 /* HandoTrial-Black.otf in Resources */,
-				E71F2DF43109492D8A00DE71 /* HandoTrial-Bold.otf in Resources */,
-				617B307FB261498A828A1DBB /* HandoTrial-Regular.otf in Resources */,
-				2D863AEB3E34501609B4C910 /* PrivacyInfo.xcprivacy in Resources */,
+				A247D4403233494FBFEE354B /* HandoTrial-Black.otf in Resources */,
+				FD95053964EB4E5FB493DBBB /* HandoTrial-Bold.otf in Resources */,
+				C23950C8E0C049708A5EEC8A /* HandoTrial-Regular.otf in Resources */,
+				A0E0B7B92283C2C11FADBDCA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +268,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1D2947BDA67482B718D25069 /* [CP] Embed Pods Frameworks */ = {
+		3D1C81E7EC6A4B138953B285 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -286,7 +286,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoostUp/Pods-BoostUp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		31EE0B41ACCAFA28D81090B8 /* [Expo] Configure project */ = {
+		4265BB1B529B7C232C974DB2 /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -399,7 +399,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				E4A9A262E1CF487F9082E795 /* noop-file.swift in Sources */,
+				9E1F461596A14AD28788BB1A /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
