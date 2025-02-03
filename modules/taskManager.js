@@ -11,35 +11,33 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
 
     let token
 
-    if (data.UIApplicationLaunchOptionsRemoteNotificationKey){
+    if (data.UIApplicationLaunchOptionsRemoteNotificationKey) {
         token = data.UIApplicationLaunchOptionsRemoteNotificationKey.body.token
     }
-    if (data.body){
+    if (data.body) {
         token = data.body.token
     }
 
-    const fetchAndDisplayNotifications = async () => {
-        const response = await fetch(`${url}/notifications/get-notifications/${token}`)
+    const response = await fetch(`${url}/notifications/get-notifications/${token}`)
 
-        const result = await response.json()
-    
-        if (result.notifications.length > 0){
-            for (let notification of result.notifications){
-                Notifications.scheduleNotificationAsync({
-                    content: {
-                      title: notification.title,
-                      body: notification.message,
-                    },
-                    trigger: null,
-                  });
-            }
+    const result = await response.json()
+
+    console.log("RESULT :", result)
+
+    if (result.notifications.length > 0) {
+        for (let notification of result.notifications) {
+            Notifications.scheduleNotificationAsync({
+                content: {
+                    title: notification.title,
+                    body: notification.message,
+                    sound: "default",
+                    priority: 'high',
+                    channelId: 'boost-up',
+                },
+                trigger: null,
+            });
         }
     }
-
-    // Délai en cas de coupure de réseau quand le portable se branche au wifi après s'être rallumé
-    setTimeout(()=> {
-        fetchAndDisplayNotifications()
-    }, 7000)
 
 });
 

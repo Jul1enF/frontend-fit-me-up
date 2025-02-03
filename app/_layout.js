@@ -25,6 +25,10 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import * as Notifications from 'expo-notifications';
 
+import {bgNotifTask} from "../modules/taskManager"
+
+bgNotifTask()
+
 
 
 const persistConfig = {
