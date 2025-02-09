@@ -184,12 +184,12 @@ export default function Redaction() {
 
     // Récupération de l'id de la vidéo Youtube grâce au lien
 
-    let video_id
+    let video_id = ""
 
     if (videoLink) {
         if (videoLink.includes("youtu.be/")) {
             video_id = videoLink.slice(17, 28)
-        } else {
+        } else if (videoLink !== ""){
             video_id = videoLink.slice(30, 41)
         }
     }

@@ -116,13 +116,22 @@ export default function News() {
 
 
                 // Tri pour les sous catégories
-                let sortedSubcategories = [{ name: "Toutes les news" }]
+                let sortedSubcategories = [{ name: "Toutes les news", count : 10000000 }]
 
                 newsArticles.map(e => {
-                    if (e.sub_title && !sortedSubcategories.some(j => j.name === e.sub_title)) {
-                        sortedSubcategories.push({ name: e.sub_title })
-                    }
+                    let itemPresence = false
+
+                    sortedSubcategories.map(j =>{
+                        if (j.name === e.sub_category){
+                            j.count++
+                            itemPresence = true
+                        }
+                    })
+
+                    !itemPresence && sortedSubcategories.push({ name: e.sub_category, count : 1 })
                 })
+
+                sortedSubcategories.sort((a, b)=> b.count - a.count)
                 setSubcategoriesList(sortedSubcategories)
                 setChosenSubcategory("Toutes les news")
             }

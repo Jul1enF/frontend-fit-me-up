@@ -18,9 +18,44 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
     if (data.body) {
         token = data.body.token
     }
+    if (data.data) {
+        const jsObject = JSON.parse(data.data.body)
+        token = jsObject.token
+    }
+
+    console.log("TOKEN :", token)
 
     let connected = false
     const dateFirstTryToConnect = new Date()
+
+    // const fetchNotif = async ()=>{
+    //     const response = await fetch(`${url}/notifications/get-notifications/${token}`)
+
+    //         const result = await response.json()
+
+    //         console.log("RESULT :", result)
+
+    //         if (result.notifications.length > 0) {
+    //             for (let notification of result.notifications) {
+    //                 Notifications.scheduleNotificationAsync({
+    //                     content: {
+    //                         title: notification.title,
+    //                         body: notification.message,
+    //                         sound: "default",
+    //                         priority: 'high',
+    //                         channelId: 'boost-up',
+    //                     },
+    //                     trigger: null,
+    //                 });
+    //             }
+    //         }
+    // }
+
+    // fetchNotif()
+
+    // setTimeout(()=>{
+    //     fetchNotif()
+    // }, 5000)
 
     do {
         const state = await NetInfo.fetch()

@@ -77,6 +77,7 @@ export default function RootLayout() {
 
         notificationListener.current = Notifications.addNotificationReceivedListener(notif => {
             setNotification(notifications => [...notifications, notif]);
+            console.log("NOTIF", notif)
         });
 
         responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
