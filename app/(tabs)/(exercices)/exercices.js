@@ -121,13 +121,13 @@ export default function Exercices() {
                     let itemPresence = false
 
                     sortedSubcategories.map(j =>{
-                        if (j.name === e.sub_category){
+                        if (j.name === e.sub_title){
                             j.count++
                             itemPresence = true
                         }
                     })
 
-                    !itemPresence && sortedSubcategories.push({ name: e.sub_category, count : 1 })
+                    !itemPresence && sortedSubcategories.push({ name: e.sub_title, count : 1 })
                 })
 
                 sortedSubcategories.sort((a, b)=> b.count - a.count)

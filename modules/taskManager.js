@@ -3,6 +3,8 @@ import * as TaskManager from 'expo-task-manager';
 import * as Notifications from 'expo-notifications';
 import NetInfo from '@react-native-community/netinfo'
 
+import { searchObjectKey } from './searchObjectKey';
+
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
 const BACKGROUND_NOTIFICATION_TASK = 'remote-notification';
@@ -10,18 +12,12 @@ const BACKGROUND_NOTIFICATION_TASK = 'remote-notification';
 TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, executionInfo }) => {
     console.log("DATA", data)
 
-    let token
-
-    if (data.UIApplicationLaunchOptionsRemoteNotificationKey) {
-        token = data.UIApplicationLaunchOptionsRemoteNotificationKey.body.token
-    }
-    if (data.body) {
-        token = data.body.token
-    }
-    if (data.data) {
-        const jsObject = JSON.parse(data.data.body)
-        token = jsObject.token
-    }
+    // if (data.data) {
+    //     const jsObject = JSON.parse(data.data.body)
+    //     token = jsObject.token
+    // }
+      
+    const token = searchObjectKey(data, "userbddtoken")
 
     console.log("TOKEN :", token)
 
