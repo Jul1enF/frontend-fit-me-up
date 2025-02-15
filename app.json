@@ -43,6 +43,7 @@
       [
         "expo-notifications",
         {
+          "icon": "./assets/logo-boost-up-splash.png",
           "enableBackgroundRemoteNotifications": true
         }
       ],

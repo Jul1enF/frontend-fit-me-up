@@ -1,7 +1,19 @@
 
 
 const searchObjectKey = (data, keyname) => {
-    let foundValue = "test"
+    let foundValue = ""
+
+    const testJSON = (text) => {
+        if (typeof text !== "string") {
+            return false;
+        }
+        try {
+            JSON.parse(text);
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
 
     const searchObjectKeyInArray = (array, keyname) => {
         for (let item of array) {
@@ -23,6 +35,9 @@ const searchObjectKey = (data, keyname) => {
             }
             else if (typeof object[key] === 'object') {
                 searchObjectKeyInObject(object[key], keyname)
+            } else if (testJSON(object[key])){
+                const jsObject = JSON.parse(object[key])
+                searchObjectKeyInObject(jsObject, keyname)
             }
         }
     }

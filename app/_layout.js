@@ -56,11 +56,22 @@ export default function RootLayout() {
     // Paramétrage des notifications reçues
 
     Notifications.setNotificationHandler({
-        handleNotification: async () => ({
-            shouldShowAlert: true,
-            shouldPlaySound: true,
-            shouldSetBadge: true,
-        }), 
+        handleNotification: async (notification) =>{
+            if (!notification.request.content.title){
+               return ({
+                    shouldShowAlert: false,
+                    shouldPlaySound: false,
+                    shouldSetBadge: false,
+                })
+            }else{
+                return ({
+                    shouldShowAlert: true,
+                    shouldPlaySound: true,
+                    shouldSetBadge: true,
+                }) 
+            }
+
+        }
     });
 
 

@@ -12,11 +12,6 @@ const BACKGROUND_NOTIFICATION_TASK = 'remote-notification';
 TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, executionInfo }) => {
     console.log("DATA", data)
 
-    // if (data.data) {
-    //     const jsObject = JSON.parse(data.data.body)
-    //     token = jsObject.token
-    // }
-      
     const token = searchObjectKey(data, "userbddtoken")
 
     console.log("TOKEN :", token)
