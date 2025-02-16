@@ -4,7 +4,7 @@ import * as Notifications from 'expo-notifications';
 import NetInfo from '@react-native-community/netinfo'
 
 import { searchObjectKey } from './searchObjectKey';
-
+import { AppState } from 'react-native';
 const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
 const BACKGROUND_NOTIFICATION_TASK = 'remote-notification';
@@ -48,14 +48,20 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
     //     fetchNotif()
     // }, 5000)
 
+    
+    console.log("APP STATE", AppState.currentState)
     do {
         const state = await NetInfo.fetch()
         if (state.isConnected) {
             connected = true
             console.log("Connected !!!")
-            const response = await fetch(`${url}/notifications/get-notifications/${token}`)
+            // const response = await fetch(`${url}/notifications/get-notifications/${token}`)
+            // const result = await response.json()
 
-            const result = await response.json()
+            // console.log("RESULT :", result)
+
+      
+            const result = {notifications : [{title : "test background task", message : "test taskmanager"}]}
 
             console.log("RESULT :", result)
 
@@ -85,16 +91,16 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
         }
     } while (connected !== true)
 
-
+        if (error){console.log("ERROR", error)}
     // Delete empty notification because of a bug in the expo-notifications library
 
-    Notifications.getPresentedNotificationsAsync().then(notifications => {
-        notifications.forEach(notification => {
-            if (notification.request.content.body == null && notification.request.content.title == null) {
-                Notifications.dismissNotificationAsync(notification.request.identifier);
-            }
-        });
-    });
+    // Notifications.getPresentedNotificationsAsync().then(notifications => {
+    //     notifications.forEach(notification => {
+    //         if (notification.request.content.body == null && notification.request.content.title == null) {
+    //             Notifications.dismissNotificationAsync(notification.request.identifier);
+    //         }
+    //     });
+    // });
 
 
 });
