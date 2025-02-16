@@ -46,6 +46,9 @@ const searchObjectKey = (data, keyname) => {
         searchObjectKeyInArray(data, keyname)
     } else if (typeof data === "object") {
         searchObjectKeyInObject(data, keyname)
+    } else if (testJSON(data)){
+        let dataInJs = JSON.parse(data)
+        searchObjectKeyInObject(dataInJs, keyname)
     }
 
     return foundValue

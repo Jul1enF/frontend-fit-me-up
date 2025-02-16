@@ -61,6 +61,7 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
 
             if (result.notifications.length > 0) {
                 for (let notification of result.notifications) {
+
                     Notifications.scheduleNotificationAsync({
                         content: {
                             title: notification.title,
@@ -68,6 +69,7 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
                             sound: "default",
                             priority: 'high',
                             channelId: 'boost-up',
+                            ttl: 604800,
                         },
                         trigger: null,
                     });
@@ -77,11 +79,23 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
             const actualTime = new Date()
             const connectionTime = (actualTime - dateFirstTryToConnect) / 1000
 
-            if (connectionTime > 600){
-                break ;
+            if (connectionTime > 600) {
+                break;
             }
         }
     } while (connected !== true)
+
+
+    // Delete empty notification because of a bug in the expo-notifications library
+
+    Notifications.getPresentedNotificationsAsync().then(notifications => {
+        notifications.forEach(notification => {
+            if (notification.request.content.body == null && notification.request.content.title == null) {
+                Notifications.dismissNotificationAsync(notification.request.identifier);
+            }
+        });
+    });
+
 
 });
 
