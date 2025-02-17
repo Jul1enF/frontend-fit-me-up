@@ -15,6 +15,7 @@
       "appleTeamId": "R8783NSXR8"
     },
     "android": {
+      "permissions" : ["android.permission.SCHEDULE_EXACT_ALARM", "android.permission.RECEIVE_BOOT_COMPLETED"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-boost-up1.png",
         "backgroundColor": "#63962e"

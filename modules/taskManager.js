@@ -18,6 +18,7 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
 
     let connected = false
     const dateFirstTryToConnect = new Date()
+    console.log("DATE", dateFirstTryToConnect)
 
     // const fetchNotif = async ()=>{
     //     const response = await fetch(`${url}/notifications/get-notifications/${token}`)
@@ -48,8 +49,22 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
     //     fetchNotif()
     // }, 5000)
 
+    Notifications.scheduleNotificationAsync({
+        content: {
+            title: "test data message",
+            body: "background notification / task manager",
+            sound: "default",
+            priority: 'high',
+            ttl: 604800,
+            autoDismiss : true,
+            interruptionLevel : "timeSensitive",
+        },
+        trigger: null,
+    });
+
     
     console.log("APP STATE", AppState.currentState)
+    return
     do {
         const state = await NetInfo.fetch()
         if (state.isConnected) {
@@ -74,8 +89,9 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
                             body: notification.message,
                             sound: "default",
                             priority: 'high',
-                            channelId: 'boost-up',
                             ttl: 604800,
+                            autoDismiss : true,
+                            interruptionLevel : "timeSensitive",
                         },
                         trigger: null,
                     });
