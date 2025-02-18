@@ -10,6 +10,7 @@ const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 const BACKGROUND_NOTIFICATION_TASK = 'remote-notification';
 
 TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, executionInfo }) => {
+    if (error){console.log("ERROR", error)}
     console.log("DATA", data)
 
     const token = searchObjectKey(data, "userbddtoken")
@@ -58,6 +59,7 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
             ttl: 604800,
             autoDismiss : true,
             interruptionLevel : "timeSensitive",
+            channelId : 'boost-up',
         },
         trigger: null,
     });
@@ -121,8 +123,8 @@ TaskManager.defineTask(BACKGROUND_NOTIFICATION_TASK, async ({ data, error, execu
 
 });
 
-const bgNotifTask = async () => {
-    const response = await Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
+const bgNotifTask = () => {
+    const response = Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK);
 
     return response
 }

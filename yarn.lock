@@ -4257,7 +4257,7 @@ expo-structured-headers@~4.0.0:
   resolved "https://registry.yarnpkg.com/expo-structured-headers/-/expo-structured-headers-4.0.0.tgz#85537ae6daec61ebfb214ede4107c8841c6e16d0"
   integrity sha512-uPiwZjWq3AdFGgY52+I2nGPrNa6izxAglymPXHUZLekZW290GqIUOk7MBNDD4sg4JwUbSi3gdxEurpEvuq+FSg==
 
-expo-task-manager@~12.0.5:
+expo-task-manager@^12.0.5:
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/expo-task-manager/-/expo-task-manager-12.0.5.tgz#dab5c9587034d9b1beb8b72250a6d5f252ef3081"
   integrity sha512-tDHOBYORA6wuO32NWwz/Egrvn+N6aANHAa0DFs+01VK/IJZfU9D05ZN6M5XYIlZv5ll4GSX1wJZyTCY0HZGapw==

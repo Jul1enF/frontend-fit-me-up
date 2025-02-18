@@ -23,10 +23,54 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import * as Notifications from 'expo-notifications';
 
-import {bgNotifTask} from "../modules/taskManager"
+// import {bgNotifTask} from "../modules/taskManager"
 
-bgNotifTask()
+// bgNotifTask()
+import { AppState, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { defineTask } from 'expo-task-manager';
 
+const BACKGROUND_NOTIFICATION_TASK = 'BACKGROUND-NOTIFICATION-TASK';
+
+defineTask(BACKGROUND_NOTIFICATION_TASK, ({ data, error, executionInfo }) => {
+  console.log(
+    `${Platform.OS} BACKGROUND-NOTIFICATION-TASK: App in ${AppState.currentState} state.`,
+  );
+
+  if (error) {
+    console.log(`${Platform.OS} BACKGROUND-NOTIFICATION-TASK: Error! ${JSON.stringify(error)}`);
+
+    return;
+  }
+
+  if (AppState.currentState.match(/inactive|background/) === null) {
+    console.log(
+      `${Platform.OS} BACKGROUND-NOTIFICATION-TASK: App not in background state, skipping task.`,
+    );
+
+    return;
+  }
+
+  console.log(
+    `${
+      Platform.OS
+    } BACKGROUND-NOTIFICATION-TASK: Received a notification in the background! ${JSON.stringify(
+      data,
+      null,
+      2,
+    )}`,
+  );
+});
+
+
+Notifications.registerTaskAsync(BACKGROUND_NOTIFICATION_TASK)
+  .then(() => {
+    console.log(
+      `${Platform.OS} Notifications.registerTaskAsync success: ${BACKGROUND_NOTIFICATION_TASK}`,
+    );
+  })
+  .catch((reason) => {
+    console.log(`${Platform.OS} Notifications registerTaskAsync failed: ${reason}`);
+  });
 
 
 
