@@ -21,7 +21,7 @@ async function registerForPushNotificationsAsync(userPushToken, userToken, newNo
     });
   }
 
-  // if (Device.isDevice) {
+  if (Device.isDevice) {
     let toggleNewNotifications = false
 
     if (!newNotifications) {
@@ -105,11 +105,11 @@ async function registerForPushNotificationsAsync(userPushToken, userToken, newNo
     } catch (e) {
       console.log(e);
     }
-  // }
-  // // Si sur emulator
-  // else {
-  //   return true
-  // }
+  }
+  // Si sur emulator
+  else {
+    return true
+  }
 }
 
 module.exports = { registerForPushNotificationsAsync }
