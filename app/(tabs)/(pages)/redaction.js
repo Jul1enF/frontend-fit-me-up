@@ -30,7 +30,7 @@ export default function Redaction() {
     useFocusEffect(useCallback(() => {
         resizingRef.current = false
         setResizing(false)
-    }, [resizing, resizingRef]))
+    }, []))
 
 
     // useEffect pour charger dans les états un article test
