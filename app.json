@@ -2,7 +2,7 @@
   "expo": {
     "name": "Boost-Up",
     "slug": "frontend-fit-me-up",
-    "description" : "Boost Up vous donne des conseils, des recettes et des exercices pour booster votre ligne !",
+    "description": "Boost Up vous donne des conseils, des recettes et des exercices pour booster votre ligne !",
     "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/logo-boost-up1.png",
@@ -15,7 +15,12 @@
       "appleTeamId": "R8783NSXR8"
     },
     "android": {
-      "permissions" : ["SCHEDULE_EXACT_ALARM", "RECEIVE_BOOT_COMPLETED", "NOTIFICATIONS"],
+      "edgeToEdgeEnabled": true,
+      "permissions": [
+        "SCHEDULE_EXACT_ALARM",
+        "RECEIVE_BOOT_COMPLETED",
+        "NOTIFICATIONS"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-boost-up1.png",
         "backgroundColor": "#63962e"
@@ -26,8 +31,8 @@
     },
     "web": {
       "favicon": "./assets/logo-boost-up1.png",
-      "bundler" : "metro", 
-      "output" : "static"
+      "bundler": "metro",
+      "output": "static"
     },
     "extra": {
       "eas": {
@@ -42,17 +47,33 @@
     "plugins": [
       "expo-router",
       [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          },
+          "android": {
+            "usesCleartextTraffic": true,
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "buildToolsVersion": "35.0.0"
+          }
+        }
+      ],
+      [
         "expo-notifications",
         {
           "enableBackgroundRemoteNotifications": true
         }
       ],
-      ["expo-splash-screen",
-      {
-        "backgroundColor": "#f9fff4",
-        "image": "./assets/logo-boost-up-splash.png",
-        "imageWidth" : 300
-      }],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#f9fff4",
+          "image": "./assets/logo-boost-up-splash.png",
+          "imageWidth": 300
+        }
+      ],
       [
         "expo-font",
         {
@@ -69,8 +90,8 @@
           "photosPermission": "L'application souhaite accéder à vos photos."
         }
       ],
-      "./plugins/androidPhoneOnly.js"
-
+      "./plugins/androidPhoneOnly.js",
+      "expo-web-browser"
     ]
   }
 }
