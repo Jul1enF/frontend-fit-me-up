@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     },
     header: {
         flex: 1,
-        paddingTop: RPH(4) - (statusHeight / 2),
+        paddingTop: RPH(5.5) - (statusHeight / 2),
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
@@ -254,22 +254,23 @@ const styles = StyleSheet.create({
         paddingLeft: RPW(4),
         paddingRight: RPW(4),
     },
+    // Bug Android car le textinput doit avoir une taille minimum pour bien s'afficher et prends donc ici toute la hauteur de searchInputContainer. Margin Bottom pour réhausser la ligne blanche du container.
     searchInputContainer: {
         borderBottomColor: "white",
         borderBottomWidth: 0.5,
         width: RPW(50),
-        paddingBottom: RPH(1),
         paddingRight: RPW(1),
-        marginTop: RPH(0.5),
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: "center",
+        marginBottom : Platform.OS === "android" ? RPH(1) : 0,
     },
     search: {
         color: "white",
         fontSize: RPH(2.3),
         fontWeight: "500",
         width: "90%",
+        minHeight : RPH(4)
     },
     modal: {
         alignItems: "flex-start",

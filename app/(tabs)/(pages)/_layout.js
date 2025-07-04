@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { RPH, RPW } from "../../../modules/dimensions"
-import { Header } from "@react-navigation/elements"
+import { Platform } from "react-native";
 
 export default function RootLayout() {
     return (
@@ -17,34 +17,22 @@ export default function RootLayout() {
                 title: "Accueil"
             }} />
             <Stack.Screen name="legal" options={{
-                headerShown: true,
+                headerShown: Platform.OS === "ios" ? true : false,
                 title: "CGU / Mentions Légales",
-                headerTintColor: 'black',
-                headerStyle:{
-                    backgroundColor : "red",
+                headerTintColor: 'white',
+                headerBackground: () => {
+                    return Platform.OS === "android" ? null : (
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={{ height: RPH(6) }}
+                    ></LinearGradient>
+                    )
                 },
-                headerTopInsetEnabled : true,
-                // headerStyle: {
-                //     height: 80,
-                // },
-                // header: ({ options }) => (
-                //     <Header
-                //         {...options}
-                //     />
-                // ),
-                // headerBackgroundContainerStyle : {height : 150, alignItems : "flex-start", justifyContent : "flex-start", padding : 0, margin : 0},
-                // headerStatusBarHeight : 0,
-                // headerBackground: () => (
-                //     <LinearGradient
-                //         colors={['#9dcb00', '#045400']}
-                //         start={{ x: 0, y: 0.5 }}
-                //         end={{ x: 1, y: 0.5 }}
-                //         style={{ height: RPH(6) }}
-                //     />
-                // ),
             }} />
             <Stack.Screen name="contact" options={{
-                headerShown: true,
+                headerShown: Platform.OS === "ios" ? true : false,
                 title: "Contact",
                 headerTintColor: 'white',
                 headerBackground: () => (
@@ -52,7 +40,7 @@ export default function RootLayout() {
                         colors={['#9dcb00', '#045400']}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
-                        style={{ height: 150 }}
+                        style={{ height: RPH(6) }}
                     ></LinearGradient>
                 ),
             }} />

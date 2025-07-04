@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     column1: {
         width: RPW(51),
-        maxHeight: RPH(17),
+        // maxHeight: RPH(17),
         minHeight: RPH(12.5),
         justifyContent: "space-evenly",
     },
