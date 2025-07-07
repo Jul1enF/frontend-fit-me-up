@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 10.2.1"
+    "version": ">= 10.2.1",
+    "appVersionSource": "local"
   },
   "build": {
     "development": {
@@ -21,6 +22,7 @@
     },
     "production": {
       "channel": "production",
+      "autoIncrement": false,
       "env": {
         "EXPO_PUBLIC_BACK_ADDRESS": "https://backend-fit-me-up.vercel.app",
         "EXPO_PUBLIC_IOS_GOOGLE_ID": "238853124519-d26n1c1sllvult10l6ur20jn1n91nres.apps.googleusercontent.com",
@@ -32,8 +34,8 @@
   },
   "submit": {
     "production": {
-      "ios" : {
-          "companyName" : "Kevfit"
+      "ios": {
+        "companyName": "Kevfit"
       },
       "android": {
         "serviceAccountKeyPath": "./fit-me-up-94720-ba9c93bdbf73.json",
