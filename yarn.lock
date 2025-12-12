@@ -1287,6 +1287,15 @@
     base64-js "^1.2.3"
     xmlbuilder "^15.1.1"
 
+"@expo/plist@^0.4.8":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@expo/plist/-/plist-0.4.8.tgz#e014511a4a5008cf2b832b91caa8e9f2704127cc"
+  integrity sha512-pfNtErGGzzRwHP+5+RqswzPDKkZrx+Cli0mzjQaus1ZWFsog5ibL+nVT3NcporW51o8ggnt7x813vtRbPiyOrQ==
+  dependencies:
+    "@xmldom/xmldom" "^0.8.8"
+    base64-js "^1.2.3"
+    xmlbuilder "^15.1.1"
+
 "@expo/plugin-help@5.1.23":
   version "5.1.23"
   resolved "https://registry.yarnpkg.com/@expo/plugin-help/-/plugin-help-5.1.23.tgz#36d82111ec6c0e9870a3f0856ae7536186624912"
