@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import Header from "../../components/Header";
 import { LinearGradient } from "expo-linear-gradient";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Dimensions, Platform, StatusBar } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 import { RPH, RPW, getNavigationHeight } from "../../modules/dimensions"
@@ -10,6 +11,14 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 
 export default function TabsLayout() {
+  // Offset bottom for the navigations bar (the ios ones are not well calculated)
+    const tabbarPaddingBottom = Platform.OS === "ios" ? useSafeAreaInsets().bottom / 2 : useSafeAreaInsets().bottom
+
+    const tabbarHeight = RPW(20)
+
+    const fullTabBarHeight = tabbarHeight + tabbarPaddingBottom
+
+    
   return (
     <Tabs
       screenOptions={({ route }) => ({
@@ -32,12 +41,12 @@ export default function TabsLayout() {
           else if (route.name === '(bookmarks)') {
             iconName = 'heart';
           }
-          return <MaterialCommunityIcons name={iconName} size={RPH(3.8)} color={color} />;
+          return <MaterialCommunityIcons name={iconName} size={RPW(8)} color={color} />;
         },
-        tabBarIconStyle : {width : "100%", height : RPH(4.8)},
+        tabBarIconStyle: { width: "100%", height: tabbarHeight / 2 },
         tabBarActiveTintColor: '#758174',
         tabBarInactiveTintColor: 'white',
-        tabBarLabelStyle: { fontSize: RPW(4.2), fontWeight : "500" },
+        tabBarLabelStyle: { fontSize: RPW(4.2), fontWeight : "500", height: tabbarHeight / 2 },
         tabBarBackground: () => (
           <LinearGradient
             colors={['#9dcb00', '#045400']}
@@ -46,7 +55,9 @@ export default function TabsLayout() {
             style={{ height: 150 }}
           ></LinearGradient>
         ),
-        tabBarStyle: { height: RPH(10.5), paddingBottom: RPH(2), paddingTop: RPH(0.5), width : RPW(100) },
+        tabBarStyle: { height: fullTabBarHeight, paddingBottom: tabbarPaddingBottom, width: "100%", justifyContent: "space-evenly" },
+        tabBarLabelPosition: "below-icon",
+
         tabBarHideOnKeyboard : Platform.OS === 'ios' ? true : false,
         // tabBarHideOnKeyboard: Platform.OS === 'android' ? true : false,
         header: (props) => <Header {...props} />,
