@@ -91,62 +91,69 @@ export default function UserInformations() {
     const registerRef = useRef(true)
 
     const finalRegisterPress = async () => {
-        if (registerRef.current == false) { return }
-        registerRef.current = false
+        try {
+
+            if (registerRef.current == false) { return }
+            registerRef.current = false
 
 
-        const response = await fetch(`${url}/userModifications/modify-user`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name,
-                firstname,
-                email,
-                oldPassword,
-                password,
-                coach,
-                jwtToken: user.token,
+            const response = await fetch(`${url}/userModifications/modify-user`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    firstname,
+                    email,
+                    oldPassword,
+                    password,
+                    coach,
+                    jwtToken: user.token,
+                })
             })
-        })
-        const data = await response.json()
+            const data = await response.json()
 
-        if (data.result) {
+            if (data.result) {
+                setModal1Visible(false)
+                dispatch(changeUserInfos({
+                    name,
+                    firstname,
+                    email,
+                    coach,
+                }))
+
+                setOldPassword("")
+                setPassword('')
+                setPassword2('')
+
+                registerRef.current = true
+
+                setError2("Modifications enregistrées !")
+                setTimeout(() => setError2(''), 4000)
+            }
+            else if (data.error) {
+                setModal1Visible(false)
+
+                registerRef.current = true
+
+                setError2(data.error)
+                setTimeout(() => setError2(''), 5000)
+            }
+            else {
+                setModal1Visible(false)
+
+                registerRef.current = true
+
+                setError2("Problème d'autorisation. Essayez en quittant l'application et en vous reconnectant.")
+                setTimeout(() => setError2(''), 5000)
+            }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
             setModal1Visible(false)
-            dispatch(changeUserInfos({
-                name,
-                firstname,
-                email,
-                coach,
-            }))
-
-            setOldPassword("")
-            setPassword('')
-            setPassword2('')
-
-            registerRef.current = true
-
-            setError2("Modifications enregistrées !")
+            setError2("Erreur : Problème de connexion")
             setTimeout(() => setError2(''), 4000)
-        }
-        else if (data.error) {
-            setModal1Visible(false)
-
             registerRef.current = true
-
-            setError2(data.error)
-            setTimeout(() => setError2(''), 5000)
-        }
-        else {
-            setModal1Visible(false)
-
-            registerRef.current = true
-
-            setError2("Problème d'autorisation. Essayez en quittant l'application et en vous reconnectant.")
-            setTimeout(() => setError2(''), 5000)
         }
     }
-
-
 
 
     // Fonction appelée en se désincrivant
@@ -154,30 +161,41 @@ export default function UserInformations() {
 
 
     const unsuscribePress = async () => {
-        if (unsuscribeRef.current = false) { return }
-        unsuscribeRef.current = false
+        try {
 
-        const response = await fetch(`${url}/userModifications/delete-user/${user.token}`, { method: 'DELETE' })
+            if (unsuscribeRef.current = false) { return }
+            unsuscribeRef.current = false
 
-        const data = await response.json()
+            const response = await fetch(`${url}/userModifications/delete-user/${user.token}`, { method: 'DELETE' })
 
-        if (!data.result && data.error) {
-            setError2(data.error)
-            setTimeout(() => setError2(''), 4000)
-            unsuscribeRef.current = true
-        }
-        else if (!data.result) {
-            setError2("Erreur : Merci de réessayez après vous être reconnecté ou de contacter l'Éditeur de l'application.")
-            setTimeout(() => setError2(''), 4000)
-            unsuscribeRef.current = true
-        }
-        else {
+            const data = await response.json()
+
+            if (!data.result && data.error) {
+                setModal2Visible(false)
+                setError2(data.error)
+                setTimeout(() => setError2(''), 4000)
+                unsuscribeRef.current = true
+            }
+            else if (!data.result) {
+                setModal2Visible(false)
+                setError2("Erreur : Merci de réessayez après vous être reconnecté ou de contacter l'Éditeur de l'application.")
+                setTimeout(() => setError2(''), 4000)
+                unsuscribeRef.current = true
+            }
+            else {
+                setModal2Visible(false)
+                dispatch(logout())
+                router.push(`/`)
+                unsuscribeRef.current = true
+            }
+
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
             setModal2Visible(false)
-            dispatch(logout())
-            router.push(`/`)
+            setError2("Erreur : Problème de connexion")
+            setTimeout(() => setError2(''), 4000)
             unsuscribeRef.current = true
         }
-
     }
 
 
@@ -251,7 +269,7 @@ export default function UserInformations() {
                 autoCapitalize='none'
                 placeholder="Email"
                 placeholderTextColor="#fbfff790"
-                >
+            >
             </TextInput>
 
 
@@ -266,7 +284,7 @@ export default function UserInformations() {
                 value={coach}
                 placeholder="Nom de votre coach (facultatif)"
                 placeholderTextColor="#fbfff790"
-                >
+            >
             </TextInput>
 
 

@@ -19,7 +19,7 @@ export default function Article(props) {
         <View style={styles.body}>
             <View style={styles.row}>
                 <View style={styles.column1}>
-                    <Text numberOfLines={4} style={styles.title}>{props.title}</Text>
+                    <Text style={styles.title}>{props.title}</Text>
                     {props.sub_title && <Text numberOfLines={3} style={styles.subTitle}>{props.sub_title}</Text>}
                     <Text style={styles.date}>Posté {lastingTime}</Text>
                 </View>

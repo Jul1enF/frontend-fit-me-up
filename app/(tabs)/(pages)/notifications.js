@@ -18,7 +18,7 @@ const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
 export default function Notifications() {
 
     const dispatch = useDispatch()
-    const user = useSelector((state)=>state.user.value)
+    const user = useSelector((state) => state.user.value)
     const cronsNotifications = useSelector((state) => state.cronsNotifications.value)
 
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
@@ -35,7 +35,7 @@ export default function Notifications() {
     const loadCronsNotifications = async () => {
         const response = await fetch(`${url}/notifications/get-crons-notifications`)
         const data = await response.json()
- 
+
         if (data.result) {
             dispatch(addCronsNotifications(data.cronsNotifications))
         }
@@ -52,15 +52,15 @@ export default function Notifications() {
 
     // Fonction appelée en cliquant sur le premier Poster et afficher la modal ou l'erreur
 
-    const [error, setError]=useState("")
+    const [error, setError] = useState("")
 
     const firstPostPress = async () => {
         await Keyboard.dismiss()
-        if (!title || !message){
+        if (!title || !message) {
             setError('Erreur : titre ou message manquant.')
             return
         }
-        else{
+        else {
             setModalVisible(true)
         }
     }
@@ -71,46 +71,55 @@ export default function Notifications() {
     const postRef = useRef(true)
 
     const finalPostPress = async () => {
+        try {
 
-        if (!postRef.current){ return }
-        postRef.current = false
+            if (!postRef.current) { return }
+            postRef.current = false
 
-        const response = await fetch(`${url}/notifications/send-notification`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title,
-                message,
-                jwtToken : user.token,
+            const response = await fetch(`${url}/notifications/send-notification`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title,
+                    message,
+                    jwtToken: user.token,
+                })
             })
-        })
-        const data = await response.json()
+            const data = await response.json()
 
-        if (data.result){
+            if (data.result) {
+                setModalVisible(false)
+                setTitle('')
+                setMessage('')
+
+                postRef.current = true
+
+                setError("Message posté !")
+                setTimeout(() => setError(''), 2000)
+            }
+            else if (data.error) {
+                setModalVisible(false)
+
+                postRef.current = true
+
+                setError(data.error)
+                setTimeout(() => setError(''), 3000)
+            }
+            else {
+                setModalVisible(false)
+
+                postRef.current = true
+
+                setError("Erreur lors de l'envoi de la notification. Essayez en vous reconnectant ou contactez le webmaster")
+                setTimeout(() => setError(''), 3000)
+            }
+
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
             setModalVisible(false)
-            setTitle('')
-            setMessage('')
-
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
             postRef.current = true
-
-            setError("Message posté !")
-            setTimeout(() => setError(''), 2000)
-        }
-        else if (data.error){
-            setModalVisible(false)
-            
-            postRef.current = true
-
-            setError(data.error)
-            setTimeout(() => setError(''), 3000)
-        }
-        else{
-            setModalVisible(false)
-            
-            postRef.current = true
-
-            setError("Erreur lors de l'envoi de la notification. Essayez en vous reconnectant ou contactez le webmaster")
-            setTimeout(() => setError(''), 3000)
         }
 
     }
@@ -125,136 +134,137 @@ export default function Notifications() {
     const refreshComponent = <RefreshControl refreshing={isRefreshing} colors={["#19290a"]} progressBackgroundColor={"white"} tintColor={"#19290a"} onRefresh={() => {
         setIsRefreshing(true)
         setTimeout(() => setIsRefreshing(false), 1000)
-        loadCronsNotifications() 
+        loadCronsNotifications()
     }} />
 
 
     // Composants au dessus de la FLatlist
 
     const topComponents = (
-            <View style={styles.topContainer}>
-                <Text style={styles.title}>Poster une notification :</Text>
-                <LinearGradient
-                    colors={['#9dcb00', '#045400']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientLine}
-                >
-                </LinearGradient>
-                <TextInput style={styles.input}
-                    onChangeText={(value) => {
-                        setTitle(value)
-                    }}
-                    value={title}
-                    placeholder="Titre"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={28}>
-                </TextInput>
-                <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
-                    onChangeText={(value) =>{
-                        setMessage(value)}}
-                    value={message}
-                    placeholder="Message"
-                    placeholderTextColor="#fbfff790"
-                    maxLength={144}
-                    multiline
-                    blurOnSubmit
-                    textAlignVertical='top'
-                >
-                </TextInput>
-                <View style={styles.btnContainer}>
-                    <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstPostPress()}>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.btnGradientContainer}
-                        >
-                            <Text style={styles.text1}>Poster</Text>
-                        </LinearGradient>
-                    </TouchableOpacity>
-                    <Text style={[{marginTop : 10, color : "red"},styles.modalText2, !error && {display : "none"}]}>{error}</Text>
-                </View>
-                
-                <Text style={styles.title}>Notifications programmées :</Text>
-                <LinearGradient
-                    colors={['#9dcb00', '#045400']}
-                    locations={[0.05, 1]}
-                    start={{ x: 0, y: 0.5 }}
-                    end={{ x: 1, y: 0.5 }}
-                    style={styles.gradientLine3}
-                >
-                </LinearGradient>
-                
-
-
-
-                <Modal
-                    isVisible={modalVisible}
-                    style={styles.modal}
-                    backdropColor="rgba(0,0,0,0.7)"
-                    animationIn="slideInDown"
-                    animationOut="slideOutUp"
-                    statusBarTranslucent={true}
-                    onBackButtonPress={() => setModalVisible(!modalVisible)}
-                    onBackdropPress={() => setModalVisible(!modalVisible)}
-                >
-                    <View style={styles.modalBody}>
-                        <Text style={styles.modalText}>Êtes vous sûr de vouloir poster cette notification ?</Text>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientLine2}
-                        >
-                        </LinearGradient>
-                        <View style={styles.row}>
-                            <Text style={styles.modalText2}>
-                                Titre :
-                            </Text>
-                            <Text style={styles.modalText3}>
-                                {title}
-                            </Text>
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.modalText2}>
-                                Message :
-                            </Text>
-                            <Text style={styles.modalText3}>
-                                {message}
-                            </Text>
-                        </View>
-                        <View style={styles.btnContainer2}>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText4}>Annuler</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalPostPress()}>
-                                <LinearGradient
-                                    colors={['#9dcb00', '#045400']}
-                                    locations={[0.05, 1]}
-                                    start={{ x: 0, y: 0.5 }}
-                                    end={{ x: 1, y: 0.5 }}
-                                    style={styles.btnGradientContainer}
-                                >
-                                    <Text style={styles.modalText4}>Poster</Text>
-                                </LinearGradient>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
-
+        <View style={styles.topContainer}>
+            <Text style={styles.title}>Poster une notification :</Text>
+            <LinearGradient
+                colors={['#9dcb00', '#045400']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientLine}
+            >
+            </LinearGradient>
+            <TextInput style={styles.input}
+                onChangeText={(value) => {
+                    setTitle(value)
+                }}
+                value={title}
+                placeholder="Titre"
+                placeholderTextColor="#fbfff790"
+                maxLength={28}>
+            </TextInput>
+            <TextInput style={[styles.input, { height: RPW(20), justifyContent: "flex-start" }]}
+                onChangeText={(value) => {
+                    setMessage(value)
+                }}
+                value={message}
+                placeholder="Message"
+                placeholderTextColor="#fbfff790"
+                maxLength={144}
+                multiline
+                blurOnSubmit
+                textAlignVertical='top'
+            >
+            </TextInput>
+            <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => firstPostPress()}>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.btnGradientContainer}
+                    >
+                        <Text style={styles.text1}>Poster</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+                <Text style={[{ marginTop: 10, color: "red" }, styles.modalText2, !error && { display: "none" }]}>{error}</Text>
             </View>
+
+            <Text style={styles.title}>Notifications programmées :</Text>
+            <LinearGradient
+                colors={['#9dcb00', '#045400']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.gradientLine3}
+            >
+            </LinearGradient>
+
+
+
+
+            <Modal
+                isVisible={modalVisible}
+                style={styles.modal}
+                backdropColor="rgba(0,0,0,0.7)"
+                animationIn="slideInDown"
+                animationOut="slideOutUp"
+                statusBarTranslucent={true}
+                onBackButtonPress={() => setModalVisible(!modalVisible)}
+                onBackdropPress={() => setModalVisible(!modalVisible)}
+            >
+                <View style={styles.modalBody}>
+                    <Text style={styles.modalText}>Êtes vous sûr de vouloir poster cette notification ?</Text>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientLine2}
+                    >
+                    </LinearGradient>
+                    <View style={styles.row}>
+                        <Text style={styles.modalText2}>
+                            Titre :
+                        </Text>
+                        <Text style={styles.modalText3}>
+                            {title}
+                        </Text>
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={styles.modalText2}>
+                            Message :
+                        </Text>
+                        <Text style={styles.modalText3}>
+                            {message}
+                        </Text>
+                    </View>
+                    <View style={styles.btnContainer2}>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => setModalVisible(false)}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.modalText4}>Annuler</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnTouchable} activeOpacity={0.8} onPress={() => finalPostPress()}>
+                            <LinearGradient
+                                colors={['#9dcb00', '#045400']}
+                                locations={[0.05, 1]}
+                                start={{ x: 0, y: 0.5 }}
+                                end={{ x: 1, y: 0.5 }}
+                                style={styles.btnGradientContainer}
+                            >
+                                <Text style={styles.modalText4}>Poster</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+        </View>
 
     )
 
@@ -263,20 +273,20 @@ export default function Notifications() {
 
     // Composants / Bouton à afficher en bas de la flatlist
 
-    const bottomComponents =  <View style={styles.btnContainer3}>
-    <TouchableOpacity style={styles.btnTouchable2} activeOpacity={0.8} onPress={() => router.push("/cron-notification-page/new")}>
-        <LinearGradient
-            colors={['#9dcb00', '#045400']}
-            locations={[0.05, 1]}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            style={styles.btnGradientContainer2}
-        >
-            <Text style={styles.text2}>Ajouter une notification</Text>
-            <Text style={styles.text2}>programmée</Text>
-        </LinearGradient>
-    </TouchableOpacity>
-</View>
+    const bottomComponents = <View style={styles.btnContainer3}>
+        <TouchableOpacity style={styles.btnTouchable2} activeOpacity={0.8} onPress={() => router.push("/cron-notification-page/new")}>
+            <LinearGradient
+                colors={['#9dcb00', '#045400']}
+                locations={[0.05, 1]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
+                style={styles.btnGradientContainer2}
+            >
+                <Text style={styles.text2}>Ajouter une notification</Text>
+                <Text style={styles.text2}>programmée</Text>
+            </LinearGradient>
+        </TouchableOpacity>
+    </View>
 
 
 
@@ -289,7 +299,7 @@ export default function Notifications() {
             refreshControl={refreshComponent}
             keyboardShouldPersistTaps="handled"
             renderItem={({ item, index }) => {
-                if(cronsNotifications.length>0) {return <CronNotification {...item} number={index + 1} />}
+                if (cronsNotifications.length > 0) { return <CronNotification {...item} number={index + 1} /> }
             }}
             contentContainerStyle={{ alignItems: 'center' }}
             style={{ flex: 1, backgroundColor: "#f9fff4" }}
@@ -309,7 +319,7 @@ const styles = StyleSheet.create({
         paddingRight: RPW(3),
         paddingTop: RPW(6),
         marginBottom: 9,
-        justifyContent : "flex-start"
+        justifyContent: "flex-start"
     },
     title: {
         color: "#19290a",
@@ -324,7 +334,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         borderRadius: 5,
         marginBottom: 15,
         paddingLeft: 8,
@@ -373,13 +383,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: "center",
         justifyContent: "center",
-   
+
     },
     text2: {
         color: "white",
         fontSize: RPW(5.4),
         fontWeight: "600",
-        textAlign : "center"
+        textAlign: "center"
     },
     modal: {
         alignItems: "center"
@@ -399,7 +409,7 @@ const styles = StyleSheet.create({
     },
     modalText: {
         color: "#19290a",
-        marginBottom : RPH(3),
+        marginBottom: RPH(3),
         fontSize: RPW(6),
         fontWeight: "600",
         textAlign: "center",
@@ -410,13 +420,13 @@ const styles = StyleSheet.create({
     gradientLine2: {
         width: "90%",
         height: 4,
-        marginBottom : RPH(3),
+        marginBottom: RPH(3),
     },
     row: {
         flexDirection: "row",
         justifyContent: "flex-start",
         width: "100%",
-        marginBottom : RPH(1.5),
+        marginBottom: RPH(1.5),
     },
     modalText2: {
         color: "#19290a",
@@ -441,7 +451,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         width: "100%",
-        marginTop : RPH(3),
+        marginTop: RPH(3),
     },
-    
+
 })

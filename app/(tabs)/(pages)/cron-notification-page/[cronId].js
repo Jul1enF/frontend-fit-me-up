@@ -125,138 +125,144 @@ export default function CronNotificationPage() {
     const registerRef = useRef(true)
 
     const registerPress = async () => {
+        try {
+            // Vérification ques les inputs sont bien renseignés ou au bon format
+            if (!title || !message) {
+                setError("Erreur : Titre ou Message manquant !")
+                setTimeout(() => setError(''), 3000)
+                return
+            }
+            if (!hour || !minute) {
+                setError("Erreur : Horaire incomplet !")
+                setTimeout(() => setError(''), 3000)
+                return
+            }
 
-        // Vérification ques les inputs sont bien renseignés ou au bon format
-        if (!title || !message) {
-            setError("Erreur : Titre ou Message manquant !")
-            setTimeout(() => setError(''), 3000)
-            return
-        }
-        if (!hour || !minute) {
-            setError("Erreur : Horaire incomplet !")
-            setTimeout(() => setError(''), 3000)
-            return
-        }
+            if (hour < 0 || hour > 23 || isNaN(hour) || minute < 0 || minute > 59 || isNaN(minute)) {
+                setError("Erreur : format de l'heure incorrect !")
+                setTimeout(() => setError(''), 3000)
+                return
+            }
+            if (daysSelected.length == 0) {
+                setError("Erreur : aucun jour sélectionné !")
+                setTimeout(() => setError(''), 3000)
+                return
+            }
+            if (monthsSelected.length == 0) {
+                setError("Erreur : aucun mois sélectionné !")
+                setTimeout(() => setError(''), 3000)
+                return
+            }
 
-        if (hour < 0 || hour > 23 || isNaN(hour) || minute < 0 || minute > 59 || isNaN(minute)) {
-            setError("Erreur : format de l'heure incorrect !")
-            setTimeout(() => setError(''), 3000)
-            return
-        }
-        if (daysSelected.length == 0) {
-            setError("Erreur : aucun jour sélectionné !")
-            setTimeout(() => setError(''), 3000)
-            return
-        }
-        if (monthsSelected.length == 0) {
-            setError("Erreur : aucun mois sélectionné !")
-            setTimeout(() => setError(''), 3000)
-            return
-        }
+            // Vérification qu'il n'y a pas de jours sélectionné pour des mois où ils n'existent pas
 
-        // Vérification qu'il n'y a pas de jours sélectionné pour des mois où ils n'existent pas
+            if (daysSelected.includes(31) && monthsSelected.some(e => e == 2 || e == 4 || e == 6 || e == 9 || e == 11)) {
+                setError("Erreur : certain mois sélectionnés n'ont pas 31 jours !")
+                setTimeout(() => setError(''), 5000)
+                return
+            }
 
-        if (daysSelected.includes(31) && monthsSelected.some(e => e == 2 || e == 4 || e == 6 || e == 9 || e == 11)) {
-            setError("Erreur : certain mois sélectionnés n'ont pas 31 jours !")
-            setTimeout(() => setError(''), 5000)
-            return
-        }
+            if (monthsSelected.includes(2) && daysSelected.some(e => e == 29 || e == 30)) {
+                setError("Erreur : certain jours sélectionnés n'existent pas en Février")
+                setTimeout(() => setError(''), 5000)
+                return
+            }
 
-        if (monthsSelected.includes(2) && daysSelected.some(e => e == 29 || e == 30)) {
-            setError("Erreur : certain jours sélectionnés n'existent pas en Février")
-            setTimeout(() => setError(''), 5000)
-            return
-        }
+            // Mise au bon format des jours, des mois et de l'heure
 
-        // Mise au bon format des jours, des mois et de l'heure
+            let day = daysSelected.sort((a, b) => a - b)
 
-        let day = daysSelected.sort((a, b) => a - b)
+            let month = monthsSelected.sort((a, b) => a - b)
 
-        let month = monthsSelected.sort((a, b) => a - b)
+            const finalHour = [Number(hour)]
+            const finalMinute = [Number(minute)]
 
-        const finalHour = [Number(hour)]
-        const finalMinute = [Number(minute)]
-
-        if (!registerRef.current) { return }
-        registerRef.current = false
+            if (!registerRef.current) { return }
+            registerRef.current = false
 
 
-        // Si enregistrement d'une nouvelle cron notif
+            // Si enregistrement d'une nouvelle cron notif
 
-        if (cronId == "new") {
-            const response = await fetch(`${url}/notifications/register-cron-notification`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    notification_title: title,
-                    notification_message: message,
-                    is_active: isActive,
-                    minute: finalMinute,
-                    hour: finalHour,
-                    day,
-                    month,
-                    jwtToken: user.token,
+            if (cronId == "new") {
+                const response = await fetch(`${url}/notifications/register-cron-notification`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        notification_title: title,
+                        notification_message: message,
+                        is_active: isActive,
+                        minute: finalMinute,
+                        hour: finalHour,
+                        day,
+                        month,
+                        jwtToken: user.token,
+                    })
                 })
-            })
 
-            const data = await response.json()
+                const data = await response.json()
 
-            if (!data.result && data.error) {
-                setError(data.error)
-                setTimeout(() => setError(''), 6000)
-                registerRef.current = true
+                if (!data.result && data.error) {
+                    setError(data.error)
+                    setTimeout(() => setError(''), 6000)
+                    registerRef.current = true
+                }
+                else if (!data.result) {
+                    setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
+                    setTimeout(() => setError(''), 6000)
+                    registerRef.current = true
+                }
+                else {
+                    dispatch(addOneCronNotification(data.cronSavedAgain))
+
+                    router.back('/notifications')
+                    registerRef.current = true
+                }
             }
-            else if (!data.result) {
-                setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-                setTimeout(() => setError(''), 6000)
-                registerRef.current = true
-            }
+
+            // Si modification d'une cron notif
+
             else {
-                dispatch(addOneCronNotification(data.cronSavedAgain))
-
-                router.back('/notifications')
-                registerRef.current = true
-            }
-        }
-
-        // Si modification d'une cron notif
-
-        else {
-            const response = await fetch(`${url}/notifications/modify-cron-notification`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    notification_title: title,
-                    notification_message: message,
-                    is_active: isActive,
-                    minute: finalMinute,
-                    hour: finalHour,
-                    day,
-                    month,
-                    _id: originalCronNotif._id,
-                    cron_id: originalCronNotif.cron_id,
-                    jwtToken: user.token,
+                const response = await fetch(`${url}/notifications/modify-cron-notification`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        notification_title: title,
+                        notification_message: message,
+                        is_active: isActive,
+                        minute: finalMinute,
+                        hour: finalHour,
+                        day,
+                        month,
+                        _id: originalCronNotif._id,
+                        cron_id: originalCronNotif.cron_id,
+                        jwtToken: user.token,
+                    })
                 })
-            })
 
-            const data = await response.json()
+                const data = await response.json()
 
-            if (!data.result && data.error) {
-                setError(data.error)
-                setTimeout(() => setError(''), 6000)
-                registerRef.current = true
-            }
-            else if (!data.result) {
-                setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-                setTimeout(() => setError(''), 6000)
-                registerRef.current = true
-            }
-            else {
-                dispatch(modifyCronNotification(data.cronSaved))
+                if (!data.result && data.error) {
+                    setError(data.error)
+                    setTimeout(() => setError(''), 6000)
+                    registerRef.current = true
+                }
+                else if (!data.result) {
+                    setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
+                    setTimeout(() => setError(''), 6000)
+                    registerRef.current = true
+                }
+                else {
+                    dispatch(modifyCronNotification(data.cronSaved))
 
-                router.back('/notifications')
-                registerRef.current = true
+                    router.back('/notifications')
+                    registerRef.current = true
+                }
             }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
+            registerRef.current = true
         }
     }
 
@@ -267,28 +273,35 @@ export default function CronNotificationPage() {
     const pressRef = useRef(true)
 
     const deletePress = async () => {
+        try {
 
-        if (pressRef.current == false) { return }
-        pressRef.current = false
+            if (pressRef.current == false) { return }
+            pressRef.current = false
 
-        const response = await fetch(`${url}/notifications/delete-cron-notification/${originalCronNotif.cron_id}/${user.token}`, { method: 'DELETE' })
+            const response = await fetch(`${url}/notifications/delete-cron-notification/${originalCronNotif.cron_id}/${user.token}`, { method: 'DELETE' })
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if (!data.result && data.error) {
-            setError(data.error)
-            setTimeout(() => setError(''), 5000)
-            pressRef.current = true
-        }
-        else if (!data.result) {
-            setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-            setTimeout(() => setError(''), 5000)
-            pressRef.current = true
-        }
-        else {
-            dispatch(deleteCronNotification(originalCronNotif._id))
+            if (!data.result && data.error) {
+                setError(data.error)
+                setTimeout(() => setError(''), 5000)
+                pressRef.current = true
+            }
+            else if (!data.result) {
+                setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
+                setTimeout(() => setError(''), 5000)
+                pressRef.current = true
+            }
+            else {
+                dispatch(deleteCronNotification(originalCronNotif._id))
 
-            router.back('/notifications')
+                router.back('/notifications')
+                pressRef.current = true
+            }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
             pressRef.current = true
         }
     }

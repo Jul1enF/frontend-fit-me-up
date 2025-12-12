@@ -40,57 +40,66 @@ export default function Signup(props) {
     const registerRef = useRef(true)
 
     const registerClick = async () => {
-        Keyboard.dismiss()
+        try {
 
-        const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+            Keyboard.dismiss()
 
-        if (!firstname || !name || !email || !password || !password2 ) {
-            setError("Merci de remplir tous les champs ci dessus !")
-        }
-        else if (password !== password2) {
-            setError("Erreur de confirmation du mot de passe !")
-        }
-        else if (!regexMail.test(email)) {
-            setError("Adresse mail non valide !")
-        }
-        else {
-            // Désactivation du bouton en cas de temps d'attente pour éviter double click / double post 
-            if (!registerRef.current) { return }
-            registerRef.current = false
+            const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
-            const response = await fetch(`${url}/users/signup`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name,
-                    firstname,
-                    email,
-                    password,
-                    coach,
-                })
-            })
-            const data = await response.json()
-
-            if (!data.result) {
-                setError(data.error)
-                registerRef.current = true
+            if (!firstname || !name || !email || !password || !password2) {
+                setError("Merci de remplir tous les champs ci dessus !")
+            }
+            else if (password !== password2) {
+                setError("Erreur de confirmation du mot de passe !")
+            }
+            else if (!regexMail.test(email)) {
+                setError("Adresse mail non valide !")
             }
             else {
-                dispatch(login({
-                    firstname: data.firstname,
-                    name: data.name,
-                    email: data.email,
-                    token: data.jwtToken,
-                    is_admin: data.is_admin,
-                    coach,
-                    push_token: "",
-                    bookmarks: [],
-                    new_notifications : data.new_notifications,
-                }))
-                props.closeModal2()
-                router.push("/home")
-                registerRef.current = true
+                // Désactivation du bouton en cas de temps d'attente pour éviter double click / double post 
+                if (!registerRef.current) { return }
+                registerRef.current = false
+
+                const response = await fetch(`${url}/users/signup`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        firstname,
+                        email,
+                        password,
+                        coach,
+                    })
+                })
+                const data = await response.json()
+
+                if (!data.result) {
+                    setError(data.error)
+                    setTimeout(() => setError(''), 4000)
+                    registerRef.current = true
+                }
+                else {
+                    dispatch(login({
+                        firstname: data.firstname,
+                        name: data.name,
+                        email: data.email,
+                        token: data.jwtToken,
+                        is_admin: data.is_admin,
+                        coach,
+                        push_token: "",
+                        bookmarks: [],
+                        new_notifications: data.new_notifications,
+                    }))
+                    props.closeModal2()
+                    router.push("/home")
+                    registerRef.current = true
+                }
             }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
+            registerRef.current = true
         }
     }
 
@@ -99,9 +108,11 @@ export default function Signup(props) {
         <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }} >
 
             <KeyboardAwareScrollView
-                style={{  width: RPW(85),
-                    height: RPH(80), backgroundColor: "rgba(0,0,0,0)", }}
-                contentContainerStyle={[styles.contentBody, Platform.OS === "android" && {marginTop : RPH(2)}]}
+                style={{
+                    width: RPW(85),
+                    height: RPH(80), backgroundColor: "rgba(0,0,0,0)",
+                }}
+                contentContainerStyle={[styles.contentBody, Platform.OS === "android" && { marginTop: RPH(2) }]}
                 bottomOffset={Platform.OS === 'ios' ? RPH(16) : RPH(14)}
                 keyboardShouldPersistTaps={'handled'}
             >
@@ -130,7 +141,7 @@ export default function Signup(props) {
                         }}
                         value={firstname}
                         placeholder='Prénom'
-                     placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(-16))}
                         onBlur={() => setOffsetKeyboard(0)}>
                     </TextInput>
@@ -150,7 +161,7 @@ export default function Signup(props) {
                         }}
                         value={name}
                         placeholder='Nom'
-                     placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(-16))}
                         onBlur={() => setOffsetKeyboard(0)}>
                     </TextInput>
@@ -170,7 +181,7 @@ export default function Signup(props) {
                         }}
                         value={email}
                         placeholder='Email'
-                       placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         keyboardType='email-address'
                         autoCapitalize='none'
                         onFocus={() => setOffsetKeyboard(RPH(-2))}
@@ -192,7 +203,7 @@ export default function Signup(props) {
                         }}
                         value={password}
                         placeholder='Mot de passe'
-                       placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         secureTextEntry={!passwordVisible}
                         onFocus={() => setOffsetKeyboard(-RPH(2))}
                         onBlur={() => setOffsetKeyboard(0)} >
@@ -216,7 +227,7 @@ export default function Signup(props) {
                         }}
                         value={password2}
                         placeholder='Confirmation mot de passe'
-                       placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         secureTextEntry={!password2Visible}
                         onFocus={() => setOffsetKeyboard(RPH(23))}
                         onBlur={() => setOffsetKeyboard(0)} >
@@ -240,7 +251,7 @@ export default function Signup(props) {
                         }}
                         value={coach}
                         placeholder="Nom de votre coach (facultatif)"
-                       placeholderTextColor="#fbfff790"
+                        placeholderTextColor="#fbfff790"
                         onFocus={() => setOffsetKeyboard(RPH(30))}
                         onBlur={() => setOffsetKeyboard(0)}
                     >
@@ -270,10 +281,10 @@ export default function Signup(props) {
 
 
             </KeyboardAwareScrollView>
-            
+
         </View>
 
-        </>
+    </>
     )
 
 }

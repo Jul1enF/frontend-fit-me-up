@@ -35,6 +35,8 @@ export default function Signin(props) {
     const connectRef = useRef(true)
 
     const connectClick = async () => {
+        try {
+
         Keyboard.dismiss()
 
         const regexMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
@@ -58,6 +60,7 @@ export default function Signin(props) {
 
             if (!data.result) {
                 setError(data.error)
+                setTimeout(() => setError(''), 4000)
                 connectRef.current = true
             }
             else {
@@ -67,16 +70,22 @@ export default function Signin(props) {
                     email: data.email,
                     token: data.jwtToken,
                     is_admin: data.is_admin,
-                    coach : data.coach,
+                    coach: data.coach,
                     push_token: data.push_token,
                     bookmarks: data.bookmarks,
-                    new_notifications : data.new_notifications,
+                    new_notifications: data.new_notifications,
                 }))
                 connectRef.current = true
                 props.closeModal1()
                 router.push("/home")
 
             }
+        }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
+            connectRef.current = true
         }
     }
 

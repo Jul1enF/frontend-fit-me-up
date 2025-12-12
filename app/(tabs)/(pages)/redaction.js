@@ -89,7 +89,7 @@ export default function Redaction() {
 
 
 
-    
+
     // Fonction appelée en cliquant sur Annuler recadrage pour reseter les états et refs
 
     const cancelResizingPress = () => {
@@ -189,7 +189,7 @@ export default function Redaction() {
     if (videoLink) {
         if (videoLink.includes("youtu.be/")) {
             video_id = videoLink.slice(17, 28)
-        } else if (videoLink !== ""){
+        } else if (videoLink !== "") {
             video_id = videoLink.slice(30, 41)
         }
     }
@@ -271,95 +271,101 @@ export default function Redaction() {
     const publishRef = useRef(true)
 
     const publishPress = async () => {
-
-        if (!title || !category) {
-            setError('Erreur : titre et catégorie obligatoires.')
-            setTimeout(() => setError(''), 4000)
-            return
-        }
-
-        if (!pictureUri && !videoLink) {
-            setError('Erreur : merci de mettre une photo OU un lien youtube.')
-            setTimeout(() => setError(''), 4000)
-            return
-        }
-
-        if (!publishRef.current) { return }
-        publishRef.current = false
-
-
-        // Mise en forme des inputs pour leur envoi
-        const _id = testArticle.length > 0 ? testArticle[0]._id : "testArticleId"
-
-        const date = testArticle.length > 0 ? testArticle[0].createdAt : new Date()
-        const uri = pictureUri
-
-        let localPic
-
-        if (!pictureUri || pictureUri.includes('https')) {
-            localPic = false
-        }
-        else {
-            localPic = true
-        }
-
-        const formData = new FormData()
-  
-        uri && formData.append('articlePicture', {
-            uri,
-            name: 'photo.jpg',
-            type: 'image/jpeg',
-        })
-
-        // Encodage en jwt pour obtenir un string à passer en param, garder des types booléens etc... et gérer les cas où les inputs n'ont pas été remplis
-
-        const articleData = JWT.encode({
-            title,
-            sub_title: subTitle,
-            text,
-            author,
-            video_id,
-            category,
-            date,
-            _id,
-            jwtToken: user.token,
-            localPic,
-            img_link: pictureUri,
-            img_public_id: imgPublicId,
-            img_margin_top: imgMarginTop,
-            img_margin_left: imgMarginLeft,
-            img_zoom: imgZoom,
-        }, jwtKey)
-
-        const response = await fetch(`${url}/articles/save-article/${articleData}`, {
-            method: 'POST',
-            body: formData,
-        })
-
-        const data = await response.json()
-
-        if (data.result) {
-            if (data.articleSaved){
-                category == "home" && dispatch(deleteHomeContent())
-                dispatch(addOneArticle(data.articleSaved))
-            }
-            if (data.articleModified){
-                dispatch(modifyArticle(data.articleModified))
+        try {
+            if (!title || !category) {
+                setError('Erreur : titre et catégorie obligatoires.')
+                setTimeout(() => setError(''), 4000)
+                return
             }
 
-            router.push(`/${category}`)
-            cancelPress()
-            publishRef.current = true
-        }
-        else if (data.error) {
-            setError(data.error)
-            publishRef.current = true
+            if (!pictureUri && !videoLink) {
+                setError('Erreur : merci de mettre une photo OU un lien youtube.')
+                setTimeout(() => setError(''), 4000)
+                return
+            }
+
+            if (!publishRef.current) { return }
+            publishRef.current = false
+
+
+            // Mise en forme des inputs pour leur envoi
+            const _id = testArticle.length > 0 ? testArticle[0]._id : "testArticleId"
+
+            const date = testArticle.length > 0 ? testArticle[0].createdAt : new Date()
+            const uri = pictureUri
+
+            let localPic
+
+            if (!pictureUri || pictureUri.includes('https')) {
+                localPic = false
+            }
+            else {
+                localPic = true
+            }
+
+            const formData = new FormData()
+
+            uri && formData.append('articlePicture', {
+                uri,
+                name: 'photo.jpg',
+                type: 'image/jpeg',
+            })
+
+            // Encodage en jwt pour obtenir un string à passer en param, garder des types booléens etc... et gérer les cas où les inputs n'ont pas été remplis
+
+            const articleData = JWT.encode({
+                title,
+                sub_title: subTitle,
+                text,
+                author,
+                video_id,
+                category,
+                date,
+                _id,
+                jwtToken: user.token,
+                localPic,
+                img_link: pictureUri,
+                img_public_id: imgPublicId,
+                img_margin_top: imgMarginTop,
+                img_margin_left: imgMarginLeft,
+                img_zoom: imgZoom,
+            }, jwtKey)
+
+            const response = await fetch(`${url}/articles/save-article/${articleData}`, {
+                method: 'POST',
+                body: formData,
+            })
+
+            const data = await response.json()
+
+            if (data.result) {
+                if (data.articleSaved) {
+                    category == "home" && dispatch(deleteHomeContent())
+                    dispatch(addOneArticle(data.articleSaved))
+                }
+                if (data.articleModified) {
+                    dispatch(modifyArticle(data.articleModified))
+                }
+
+                router.push(`/${category}`)
+                cancelPress()
+                publishRef.current = true
+            }
+            else if (data.error) {
+                setError(data.error)
+                publishRef.current = true
+                setTimeout(() => setError(''), 4000)
+            }
+            else {
+                setError("Problème de connexion, merci de voir avec le webmaster")
+                publishRef.current = true
+                setTimeout(() => setError(''), 4000)
+            }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
             setTimeout(() => setError(''), 4000)
-        }
-        else {
-            setError("Problème de connexion, merci de voir avec le webmaster")
             publishRef.current = true
-            setTimeout(() => setError(''), 4000)
         }
     }
 
@@ -368,215 +374,215 @@ export default function Redaction() {
     return (
         <>
             <KeyboardAwareScrollView
-            style={{ flex: 1, backgroundColor: "#f9fff4" }}
-            contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
-            scrollEnabled={scrollable}
-            bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
-        >
+                style={{ flex: 1, backgroundColor: "#f9fff4" }}
+                contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }}
+                scrollEnabled={scrollable}
+                bottomOffset={Platform.OS === 'ios' ? RPH(7) : RPH(2)}
+            >
 
-            {/* <KeyboardAvoidingView
+                {/* <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.body} keyboardVerticalOffset={RPH(14.5)}  >
                 <ScrollView style={{ flex: 1 }} contentContainerStyle={{ alignItems: "center", paddingTop: RPH(2), paddingBottom: RPH(2) }} scrollEnabled={scrollable} > */}
 
-                    <StatusBar translucent={true} barStyle="light" />
-                    <TextInput style={styles.smallInput}
-                        placeholder="Titre de l'article"
-                        onChangeText={(e) => setTitle(e)}
-                          placeholderTextColor="#fbfff790"
-                        value={title}>
-                    </TextInput>
-                    <TextInput multiline={true}
-                        textAlignVertical="top"
-                        style={styles.mediumInput}
-                        placeholder="Sous-Catégorie/Sous-Titre de l'article"
-                        onChangeText={(e) => setSubTitle(e)}
-                        value={subTitle}
-                          placeholderTextColor="#fbfff790"
-                        blurOnSubmit={true}>
-                    </TextInput>
-                    <TextInput multiline={true}
-                        textAlignVertical="top"
-                        style={styles.largeInput}
-                        placeholder="Texte de l'article"
-                        onChangeText={(e) => setText(e)}
-                        value={text}
-                          placeholderTextColor="#fbfff790"
-                        returnKeyType='next'>
-                    </TextInput>
-                    <TextInput style={styles.smallInput}
-                        placeholder="Auteur"
-                        onChangeText={(e) => setAuthor(e)}
-                          placeholderTextColor="#fbfff790"
-                        value={author}>
-                    </TextInput>
-                    <TextInput style={[styles.smallInput, { marginBottom: 30 }]}
-                        placeholder="Lien de la vidéo Youtube"
-                        onChangeText={(e) => setVideoLink(e)}
-                        value={videoLink}
-                        autoCapitalize="none"
-                          placeholderTextColor="#fbfff790"
-                    >
-                    </TextInput>
+                <StatusBar translucent={true} barStyle="light" />
+                <TextInput style={styles.smallInput}
+                    placeholder="Titre de l'article"
+                    onChangeText={(e) => setTitle(e)}
+                    placeholderTextColor="#fbfff790"
+                    value={title}>
+                </TextInput>
+                <TextInput multiline={true}
+                    textAlignVertical="top"
+                    style={styles.mediumInput}
+                    placeholder="Sous-Catégorie/Sous-Titre de l'article"
+                    onChangeText={(e) => setSubTitle(e)}
+                    value={subTitle}
+                    placeholderTextColor="#fbfff790"
+                    blurOnSubmit={true}>
+                </TextInput>
+                <TextInput multiline={true}
+                    textAlignVertical="top"
+                    style={styles.largeInput}
+                    placeholder="Texte de l'article"
+                    onChangeText={(e) => setText(e)}
+                    value={text}
+                    placeholderTextColor="#fbfff790"
+                    returnKeyType='next'>
+                </TextInput>
+                <TextInput style={styles.smallInput}
+                    placeholder="Auteur"
+                    onChangeText={(e) => setAuthor(e)}
+                    placeholderTextColor="#fbfff790"
+                    value={author}>
+                </TextInput>
+                <TextInput style={[styles.smallInput, { marginBottom: 30 }]}
+                    placeholder="Lien de la vidéo Youtube"
+                    onChangeText={(e) => setVideoLink(e)}
+                    value={videoLink}
+                    autoCapitalize="none"
+                    placeholderTextColor="#fbfff790"
+                >
+                </TextInput>
 
 
 
-                    <View style={[styles.row3, { marginBottom: 13 }]}>
-                        <View style={styles.underline}>
-                            <Text style={styles.categoryText1}>Catégorie :</Text>
-                        </View>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn1}
-                        >
-                            <TouchableOpacity style={[styles.btn, category === "news" && { backgroundColor: "transparent" }]} onPress={() => setCategory("news")}>
-                                <Text style={[styles.categoryText2, category !== "news" && { color: "#19290a" }]}>News</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn1}
-                        >
-                            <TouchableOpacity style={[styles.btn, category === "recipes" && { backgroundColor: "transparent" }]} onPress={() => setCategory("recipes")}>
-                                <Text style={[styles.categoryText2, category !== "recipes" && { color: "#19290a" }]}>Recette</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
+                <View style={[styles.row3, { marginBottom: 13 }]}>
+                    <View style={styles.underline}>
+                        <Text style={styles.categoryText1}>Catégorie :</Text>
                     </View>
-                    <View style={styles.row3}>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn1}
-                        >
-                            <TouchableOpacity style={[styles.btn, category === "exercices" && { backgroundColor: "transparent" }]} onPress={() => setCategory("exercices")}>
-                                <Text style={[styles.categoryText2, category !== "exercices" && { color: "#19290a" }]}>Exercice</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn1}
-                        >
-                            <TouchableOpacity style={[styles.btn, category === "home" && { backgroundColor: "transparent" }]} onPress={() => setCategory("home")}>
-                                <Text style={[styles.categoryText2, category !== "home" && { color: "#19290a" }]}>Accueil</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                    </View>
-
-
                     <LinearGradient
                         colors={['#9dcb00', '#045400']}
                         locations={[0.05, 1]}
                         start={{ x: 0, y: 0.5 }}
                         end={{ x: 1, y: 0.5 }}
-                        style={styles.gradientBtn2}
+                        style={styles.gradientBtn1}
                     >
-                        <TouchableOpacity style={styles.btn2} onPress={() => choosePicture()}>
-                            <Text style={styles.btnText}>Choisir une image</Text>
+                        <TouchableOpacity style={[styles.btn, category === "news" && { backgroundColor: "transparent" }]} onPress={() => setCategory("news")}>
+                            <Text style={[styles.categoryText2, category !== "news" && { color: "#19290a" }]}>News</Text>
                         </TouchableOpacity>
                     </LinearGradient>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn1}
+                    >
+                        <TouchableOpacity style={[styles.btn, category === "recipes" && { backgroundColor: "transparent" }]} onPress={() => setCategory("recipes")}>
+                            <Text style={[styles.categoryText2, category !== "recipes" && { color: "#19290a" }]}>Recette</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
+                <View style={styles.row3}>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn1}
+                    >
+                        <TouchableOpacity style={[styles.btn, category === "exercices" && { backgroundColor: "transparent" }]} onPress={() => setCategory("exercices")}>
+                            <Text style={[styles.categoryText2, category !== "exercices" && { color: "#19290a" }]}>Exercice</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn1}
+                    >
+                        <TouchableOpacity style={[styles.btn, category === "home" && { backgroundColor: "transparent" }]} onPress={() => setCategory("home")}>
+                            <Text style={[styles.categoryText2, category !== "home" && { color: "#19290a" }]}>Accueil</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
 
 
-                    <View style={[styles.imgContainer, resizing && { borderColor: "#b60050" }]} {...panResponder.panHandlers} >
-                        {pictureUri &&
-                            <Image
-                                style={[styles.image, {
-                                    width: RPW(95 * imgZoom),
-                                    marginTop: RPW(imgMarginTop * 0.95),
-                                    marginLeft: RPW(imgMarginLeft * 0.95)
-                                }]}
-                                source={{ uri: pictureUri }}
-                            />
-                        }
-                    </View>
-
-                    <View style={styles.row}>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn4}
-                        >
-                            <TouchableOpacity style={resizing ? styles.btn2 : styles.btn3} onPress={() => {
-                                resizingRef.current = !resizingRef.current
-                                resizing && setScrollable(true)
-                                setResizing(!resizing)
-                            }}>
-                                <Text style={[styles.categoryText2, !resizing && { color: "#19290a" }]}> Recadrer l'image</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn4}
-                        >
-                            <TouchableOpacity style={styles.btn3} onPress={() => {
-                                cancelResizingPress()
-                                setPictureUri('')
-                            }}>
-                                <Text style={styles.btn2Text}> Enlever l'image</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                    </View>
+                <LinearGradient
+                    colors={['#9dcb00', '#045400']}
+                    locations={[0.05, 1]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    style={styles.gradientBtn2}
+                >
+                    <TouchableOpacity style={styles.btn2} onPress={() => choosePicture()}>
+                        <Text style={styles.btnText}>Choisir une image</Text>
+                    </TouchableOpacity>
+                </LinearGradient>
 
 
-                    <View style={styles.row}>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn3}
-                        >
-                            <TouchableOpacity style={styles.btn2} onPress={() => testPress()}>
-                                <Text style={styles.btnText}>Tester</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn3}
-                        >
-                            <TouchableOpacity style={styles.btn2} onPress={() => publishPress()}>
-                                <Text style={styles.btnText}>Publier</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                        <LinearGradient
-                            colors={['#9dcb00', '#045400']}
-                            locations={[0.05, 1]}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
-                            style={styles.gradientBtn3}
-                        >
-                            <TouchableOpacity style={styles.btn2} onPress={() => cancelPress()}>
-                                <Text style={styles.btnText}>Annuler</Text>
-                            </TouchableOpacity>
-                        </LinearGradient>
-                    </View>
+                <View style={[styles.imgContainer, resizing && { borderColor: "#b60050" }]} {...panResponder.panHandlers} >
+                    {pictureUri &&
+                        <Image
+                            style={[styles.image, {
+                                width: RPW(95 * imgZoom),
+                                marginTop: RPW(imgMarginTop * 0.95),
+                                marginLeft: RPW(imgMarginLeft * 0.95)
+                            }]}
+                            source={{ uri: pictureUri }}
+                        />
+                    }
+                </View>
+
+                <View style={styles.row}>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn4}
+                    >
+                        <TouchableOpacity style={resizing ? styles.btn2 : styles.btn3} onPress={() => {
+                            resizingRef.current = !resizingRef.current
+                            resizing && setScrollable(true)
+                            setResizing(!resizing)
+                        }}>
+                            <Text style={[styles.categoryText2, !resizing && { color: "#19290a" }]}> Recadrer l'image</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn4}
+                    >
+                        <TouchableOpacity style={styles.btn3} onPress={() => {
+                            cancelResizingPress()
+                            setPictureUri('')
+                        }}>
+                            <Text style={styles.btn2Text}> Enlever l'image</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
+
+
+                <View style={styles.row}>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn3}
+                    >
+                        <TouchableOpacity style={styles.btn2} onPress={() => testPress()}>
+                            <Text style={styles.btnText}>Tester</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn3}
+                    >
+                        <TouchableOpacity style={styles.btn2} onPress={() => publishPress()}>
+                            <Text style={styles.btnText}>Publier</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                    <LinearGradient
+                        colors={['#9dcb00', '#045400']}
+                        locations={[0.05, 1]}
+                        start={{ x: 0, y: 0.5 }}
+                        end={{ x: 1, y: 0.5 }}
+                        style={styles.gradientBtn3}
+                    >
+                        <TouchableOpacity style={styles.btn2} onPress={() => cancelPress()}>
+                            <Text style={styles.btnText}>Annuler</Text>
+                        </TouchableOpacity>
+                    </LinearGradient>
+                </View>
 
 
 
-                    <Text style={{ color: 'red' }}>{error}</Text>
+                <Text style={{ color: 'red' }}>{error}</Text>
 
                 {/* </ScrollView>
             </KeyboardAvoidingView> */}
 
             </KeyboardAwareScrollView>
-        {Platform.OS === "ios" && <KeyboardToolbar doneText="Fermer" style={{height : 100, backgroundColor : "green"}}/>}
+            {Platform.OS === "ios" && <KeyboardToolbar doneText="Fermer" style={{ height: 100, backgroundColor: "green" }} />}
         </>
     )
 }
@@ -589,7 +595,7 @@ const styles = StyleSheet.create({
     },
     smallInput: {
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         width: RPW(90),
         height: 45,
         borderRadius: RPW(2.5),
@@ -599,7 +605,7 @@ const styles = StyleSheet.create({
     },
     mediumInput: {
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         width: RPW(90),
         height: 85,
         borderRadius: RPW(3),
@@ -609,7 +615,7 @@ const styles = StyleSheet.create({
     },
     largeInput: {
         backgroundColor: "#2e6017",
-        color : "white",
+        color: "white",
         width: RPW(90),
         height: 145,
         borderRadius: RPW(3),
@@ -640,7 +646,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "white",
         borderBottomWidth: 1.5,
         marginRight: RPW(7),
-        paddingBottom : 5
+        paddingBottom: 5
     },
     categoryText2: {
         color: "white",

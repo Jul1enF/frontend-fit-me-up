@@ -103,10 +103,10 @@ const styles = StyleSheet.create({
         resizeMode: "contain",
     },
     textContainer: {
-        paddingLeft: RPW(3),
+        paddingLeft: RPW(1.5),
         paddingTop: RPW(3),
-        paddingRight: RPW(3),
-        maxHeight: 160,
+        paddingRight: RPW(1.5),
+        // maxHeight: 160,
         overflow: "hidden",
         marginBottom: 12,
     },
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
         fontSize: RPW(6.3),
         fontWeight: "450",
         marginBottom: 12,
+        textAlign : "center"
     },
     gradientLine: {
         width: "90%",

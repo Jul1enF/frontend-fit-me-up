@@ -22,34 +22,42 @@ export default function User(props) {
     const allowedRef = useRef(true)
 
     const allowedPress = async () => {
-        if (!allowedRef.current) { return }
-        allowedRef.current = false
+        try {
 
-        const response = await fetch(`${url}/userModifications/toggle-allowed`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                jwtToken: props.jwtToken,
-                _id: props._id
+            if (!allowedRef.current) { return }
+            allowedRef.current = false
+
+            const response = await fetch(`${url}/userModifications/toggle-allowed`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    jwtToken: props.jwtToken,
+                    _id: props._id
+                })
             })
-        })
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if (!data.result && data.error) {
-            setError(data.error)
-            setTimeout(() => setError(''), 6000)
-            allowedRef.current = true
-        }
-        else if (!data.result) {
-            setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-            setTimeout(() => setError(''), 6000)
-            allowedRef.current = true
-        }
-        else {
-            props.toggleAllowed(props._id)
+            if (!data.result && data.error) {
+                setError(data.error)
+                setTimeout(() => setError(''), 6000)
+                allowedRef.current = true
+            }
+            else if (!data.result) {
+                setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
+                setTimeout(() => setError(''), 6000)
+                allowedRef.current = true
+            }
+            else {
+                props.toggleAllowed(props._id)
 
-            setModal1Visible(false)
+                setModal1Visible(false)
+                allowedRef.current = true
+            }
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
             allowedRef.current = true
         }
     }
@@ -62,34 +70,42 @@ export default function User(props) {
     const adminRef = useRef(true)
 
     const adminPress = async () => {
-        if (!adminRef.current) { return }
-        adminRef.current = false
+        try {
+            if (!adminRef.current) { return }
+            adminRef.current = false
 
-        const response = await fetch(`${url}/userModifications/toggle-admin`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                jwtToken: props.jwtToken,
-                _id: props._id
+            const response = await fetch(`${url}/userModifications/toggle-admin`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    jwtToken: props.jwtToken,
+                    _id: props._id
+                })
             })
-        })
 
-        const data = await response.json()
+            const data = await response.json()
 
-        if (!data.result && data.error) {
-            setError(data.error)
-            setTimeout(() => setError(''), 6000)
-            adminRef.current = true
-        }
-        else if (!data.result) {
-            setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
-            setTimeout(() => setError(''), 6000)
-            adminRef.current = true
-        }
-        else {
-            props.toggleAdmin(props._id)
+            if (!data.result && data.error) {
+                setError(data.error)
+                setTimeout(() => setError(''), 6000)
+                adminRef.current = true
+            }
+            else if (!data.result) {
+                setError("Erreur lors de la suppression. Merci de réessayer ou de contacter le webmaster.")
+                setTimeout(() => setError(''), 6000)
+                adminRef.current = true
+            }
+            else {
+                props.toggleAdmin(props._id)
 
-            setModal2Visible(false)
+                setModal2Visible(false)
+                adminRef.current = true
+            }
+
+        } catch (err) {
+            console.log("FETCH ERROR :", err)
+            setError("Erreur : Problème de connexion")
+            setTimeout(() => setError(''), 4000)
             adminRef.current = true
         }
     }
