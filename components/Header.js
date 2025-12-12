@@ -9,9 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../reducers/user";
 import { router, usePathname } from "expo-router";
 import { RPH, RPW } from "../modules/dimensions"
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 const statusHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0
+const headerHeight = RPH(14)
+const searchContainerHeight = RPH(6)
 
 export default function Header() {
 
@@ -21,20 +24,10 @@ export default function Header() {
     const url = process.env.EXPO_PUBLIC_BACK_ADDRESS
 
 
-    // useEffect et variables pour ajuster la taille de la modale si l'on est sur la page d'un article
+    const tabbarPaddingBottom = Platform.OS === "ios" ? useSafeAreaInsets().bottom / 2 : useSafeAreaInsets().bottom
+    const tabbarHeight = RPW(20)
+    const fullTabBarHeight = tabbarHeight + tabbarPaddingBottom
 
-    const pathName = usePathname()
-
-    const [articlePage, setArticlePage] = useState(false)
-
-    useEffect(() => {
-        if (pathName.includes('-article') || pathName.includes('notification-page')) {
-            setArticlePage(true)
-        }
-        else {
-            setArticlePage(false)
-        }
-    }, [pathName])
 
 
     // États pour l'affichage et l'enregistrement de la recherche
@@ -157,7 +150,7 @@ export default function Header() {
                 onBackButtonPress={() => setMenuVisible(!menuVisible)}
                 onBackdropPress={() => setMenuVisible(!menuVisible)}
             >
-                <View style={!articlePage ? styles.modalBody : styles.modalBody2}>
+                <View style={[styles.modalBody, {height : RPH(100) - headerHeight - fullTabBarHeight}]}>
                     <TouchableOpacity style={styles.linkContainer} activeOpacity={0.6} onPress={() => {
                         setMenuVisible(false)
                         router.navigate('/home')
@@ -200,7 +193,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     body: {
-        height: RPH(14),
+        height: headerHeight,
         width: RPW(100),
     },
     header: {
@@ -245,8 +238,8 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         position: "absolute",
-        top: RPH(14) - statusHeight,
-        height: RPH(6),
+        top: headerHeight - statusHeight,
+        height: searchContainerHeight,
         width: RPW(100),
         flexDirection: "row",
         alignItems: "center",
@@ -278,18 +271,10 @@ const styles = StyleSheet.create({
         margin: 0,
     },
     modalBody: {
-        height: RPH(75.6),
         width: RPW(80),
         backgroundColor: "#e6eedd",
         position: "absolute",
-        top: RPH(13.9) - statusHeight,
-    },
-    modalBody2: {
-        height: RPH(69.5),
-        width: RPW(80),
-        backgroundColor: "#e6eedd",
-        position: "absolute",
-        top: RPH(20) - statusHeight,
+        top: headerHeight - statusHeight,
     },
     linkContainer: {
         height: RPH(11.5),
